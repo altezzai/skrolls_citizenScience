@@ -1,23 +1,42 @@
 .asideNav {
-  position: fixed;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  padding-block: 60px;
+  margin-left: var(--side-margin);
+}
+.navPanel.bottom {
+  height: 120px;
 }
 
 .navPanel {
-  height: 300px;
-  width: 200px;
-  margin-top: 60px;
-  margin-left: 50px;
+  width: 240px;
+  /* margin-top: 60px;
+  margin-left: 50px; */
   border-radius: 20px;
   background-color: #ffffff;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 28px 3px rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: 0px 0px 28px 3px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 0px 0px 28px 3px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
+.navPanel .navPiece:first-child {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+.navPanel .navPiece:last-child {
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
 .navPiece {
   width: 100%;
-  height: 78px;
+  height: 70px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -27,8 +46,8 @@
 }
 
 .navPiece.active {
-  background-color: #ffeae9;
-  border-left: 2px solid #f36760;
+  background-color: var(--color-secondary);
+  border-left: 2px solid var(--color-primary);
   border-top: 1px solid rgba(198, 198, 198, 0.25);
   border-bottom: 1px solid rgba(198, 198, 198, 0.25);
 }
@@ -36,19 +55,7 @@
 .navPiece h1 {
   font-size: 15px;
   padding-left: 20px;
-}
-
-.navPanelBottom {
-  height: 120px;
-  width: 200px;
-  margin-top: 100px;
-  margin-left: 50px;
-  border-radius: 20px;
-  background-color: white;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+  font-weight: 500;
 }
 
 .bottomBorder {

@@ -6,7 +6,11 @@ function App() {
   return (
     <>
       <Header />
-      <NavPanel />
+      <div className="main-container">
+        <NavPanel />
+        <div className="body">THIS IS BODY</div>
+        <div className="info-panel">THIS IS INFO PANEL</div>
+      </div>
     </>
   );
 }

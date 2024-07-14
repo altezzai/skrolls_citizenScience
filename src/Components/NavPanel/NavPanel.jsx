@@ -50,7 +50,7 @@ export const NavPanel = () => {
           <h1>Notifications</h1>
         </a>
       </div>
-      <div className="navPanelBottom">
+      <div className="navPanel bottom">
         <a
           className={`navPiece bottomBorder ${
             activeIndex === 5 ? "active" : ""

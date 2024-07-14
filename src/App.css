@@ -21,13 +21,36 @@
   --darkGrey: rgb(81, 81, 81);
   --containerMargin: 70px;
   --navbarHeight: 70px;
+  --headerHeight: 86px;
+  --color-primary: #f36760;
+  --color-secondary: #ffeae9;
+  --side-margin:80px;
 }
 
 #root {
-  height: 100%;
+  min-height: 100vh;
 }
 
 body {
   overflow-x: hidden;
   background-color: #f3f3f3;
+}
+
+.main-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: calc(100vh - var(--headerHeight));
+}
+
+.main-container .body,
+.main-container .info-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.main-container .info-panel{
+  margin-right: var(--side-margin);
 }
