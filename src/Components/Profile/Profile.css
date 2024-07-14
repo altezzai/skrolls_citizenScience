@@ -1,0 +1,219 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(243, 243, 243, 1);
+  margin-top: 50px;
+  gap: 15px;
+  width: 100%;
+}
+
+.profile-photo {
+  height: 116px;
+  width: 116px;
+  border-radius: 50%;
+  position: relative;
+}
+.online {
+  border-radius: 50%;
+  background: rgba(243, 103, 96, 1);
+  width: 18px;
+  height: 18px;
+  gap: 0px;
+  border: 3px 0px 0px 0px;
+  border: 3px solid rgba(255, 255, 255, 1);
+  position: absolute;
+  top: 77%;
+  right: 10%;
+  z-index: 10;
+}
+
+.profile-photo img {
+  height: 116px;
+  width: 116px;
+  border-radius: 50%;
+}
+
+.name {
+  display: flex;
+  flex-direction: column;
+  font-family: Inter;
+  font-size: 23px;
+}
+
+.person-name {
+  font-weight: 600;
+  line-height: 27.84px;
+  text-align: center;
+  color: rgba(0, 0, 0, 1);
+}
+
+.username {
+  font-weight: 400;
+  line-height: 27.84px;
+  text-align: center;
+  color: rgba(155, 155, 155, 1);
+}
+
+.follows {
+  font-family: Inter;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 29.05px;
+  text-align: left;
+  color: rgba(0, 0, 0, 1);
+  display: flex;
+  gap: 20px;
+}
+
+.following {
+  position: relative;
+  padding-right: 20px;
+}
+
+.following::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 16px;
+  background-color: rgba(210, 210, 210, 1);
+}
+
+.description {
+  width: 612px;
+  height: 100%;
+  gap: 0px;
+  opacity: 0px;
+  font-family: Inter;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 21.78px;
+  text-align: justified;
+  color: rgba(60, 60, 60, 1);
+}
+
+.read-or-hide {
+  cursor: pointer;
+}
+
+.skills {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.more {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 18.15px;
+  text-align: left;
+  color: rgba(119, 105, 104, 1);
+  cursor: pointer;
+}
+
+.social {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.social-media {
+  display: flex;
+  gap: 20px;
+  position: relative;
+  padding-right: 20px;
+}
+.social-media::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 16px;
+  background-color: rgba(210, 210, 210, 1);
+}
+.socialmedias {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  gap: 0px;
+  border: 1px 0px 0px 0px;
+  opacity: 0px;
+  border-radius: 50%;
+  border: 1px solid rgba(202, 202, 202, 1);
+  cursor: pointer;
+}
+.social-media img {
+  width: 30px;
+  height: 30px;
+}
+.twitter img {
+  width: 20px;
+  height: 20px;
+}
+.dots img {
+  width: 20px;
+  height: 20px;
+}
+.web-link {
+  border: 1px solid rgba(202, 202, 202, 1);
+  background: rgba(0, 0, 0, 1);
+  width: 234px;
+  height: 36px;
+  gap: 15px;
+  border: 1px 0px 0px 0px;
+  opacity: 0px;
+  cursor: pointer;
+}
+.web-link a {
+  text-decoration: none;
+  font-family: Inter;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 18.15px;
+  text-align: left;
+  color: rgba(255, 255, 255, 1);
+}
+.web-link img {
+  width: 30px;
+  height: 25px;
+  filter: invert();
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 70px;
+}
+.follow {
+  font-size: 23px;
+  font-weight: 600;
+  line-height: 27.84px;
+  width: 228ppx;
+  height: 58px;
+  padding: 15px 61px 15px 61px;
+  background: rgba(0, 0, 0, 1);
+  color: rgba(255, 255, 255, 1);
+  border: none;
+  cursor: pointer;
+}
+.message {
+  font-size: 23px;
+  font-weight: 600;
+  line-height: 27.84px;
+  width: 228ppx;
+  height: 58px;
+  padding: 15px 61px 15px 61px;
+  border: 1px solid rgba(0, 0, 0, 1);
+  cursor: pointer;
+}

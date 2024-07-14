@@ -1,0 +1,27 @@
+.profile-nav-container {
+  display: flex;
+  justify-content: start;
+  width: 100%;
+  gap: 10px;
+  box-shadow: inset 0px -2px 0px 0px rgba(229, 229, 229, 1);
+  padding-top: 20px;
+  margin-bottom: 10px;
+  font-family: Inter;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 18.15px;
+}
+.profile-navs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  cursor: pointer;
+  color: rgba(119, 105, 104, 1);
+}
+.profile-navs.active {
+  color: rgba(20, 20, 20, 1);
+  border-bottom: 2px solid rgba(1, 1, 1, 1);
+}

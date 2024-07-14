@@ -1,6 +1,6 @@
 import React from "react";
 import icon from "../../assets/icon.png";
-import search from '../../assets/search.png'
+import search from "../../assets/search.svg";
 import './Header.css';
 
 const Header = () => {

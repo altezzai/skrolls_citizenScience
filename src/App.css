@@ -24,7 +24,7 @@
   --headerHeight: 86px;
   --color-primary: #f36760;
   --color-secondary: #ffeae9;
-  --side-margin:80px;
+  --side-margin: 80px;
 }
 
 #root {
@@ -43,14 +43,30 @@ body {
   height: calc(100vh - var(--headerHeight));
 }
 
-.main-container .body,
+.main-container .center-container,
 .main-container .info-panel {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: flex-start;
 }
 
-.main-container .info-panel{
+.main-container .center-container {
+  overflow-y: scroll;
+  height: 100%;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.center-container::-webkit-scrollbar {
+  display: none;
+}
+
+.main-container .info-panel {
   margin-right: var(--side-margin);
+}
+
+.btn {
+  border-radius: 27.93px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

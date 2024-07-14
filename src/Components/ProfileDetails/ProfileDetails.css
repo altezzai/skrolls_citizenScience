@@ -1,0 +1,78 @@
+.profile-details {
+  margin-bottom: 70px;
+}
+.personal-details-container {
+  width: 100%;
+  padding-inline: 20px;
+}
+.personal-details-container .personal-detail-box:last-child {
+  border: none;
+}
+.personal-detail-box {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(198, 198, 198, 0.25);
+}
+.per-box {
+  display: flex;
+  flex-direction: column;
+  /* padding-right: 100px; */
+  width: 230px;
+  margin-bottom: 5px;
+  padding-top: 15px;
+}
+.detail-label {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14.52px;
+  text-align: left;
+  color: rgba(84, 84, 84, 1);
+  padding-bottom: 5px;
+}
+.detail-value {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 14.52px;
+  text-align: left;
+  color: rgba(11, 11, 11, 1);
+}
+
+.edu-table {
+  padding-block: 10px;
+  width: 100%;
+}
+
+.edu-table thead tr {
+  text-align: left;
+  padding-bottom: 20px;
+}
+
+.edu-table thead tr th {
+  padding-top: 5px;
+  padding-bottom: 10px;
+}
+
+.edu-table tbody tr td {
+  padding-top: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(198, 198, 198, 0.25);
+}
+
+.edu-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.edu-table tbody tr {
+  text-align: left;
+}
+
+.interest{
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 20px;
+    padding-bottom: 5px;
+    width: 100%;
+    gap: 10px;
+}
