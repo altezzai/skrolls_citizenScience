@@ -8,10 +8,9 @@ const NewPost = () => {
     <div className="newpost">
       <div className="post-profile">
         <img src={photo} alt="" />
-      </div>
-
-      <div className="input-sec">
-        <input type="text" placeholder="What is new. Rafsal?" name="" id="" />
+        <div className="input-sec">
+          <input type="text" placeholder="What is new. Rafsal?" name="" id="" />
+        </div>
       </div>
 
       <div className="postbtn-container">
