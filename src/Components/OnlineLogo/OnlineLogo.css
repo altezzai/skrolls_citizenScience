@@ -1,0 +1,21 @@
+.onlinelogo {
+  position: relative;
+}
+
+.iconLogo {
+  height: 16px;
+  width: 16px;
+}
+
+.flag {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  background-color: var(--color-primary);
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+

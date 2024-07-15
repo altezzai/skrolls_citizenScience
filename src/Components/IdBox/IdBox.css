@@ -1,0 +1,42 @@
+.idBox {
+  width: 100%;
+  margin-top: 10px;
+  padding: 20px 20px 20px 0px;
+  border-radius: 27px;
+  background-color: #ffffff;
+  border: 1px solid #ececec;
+}
+
+.other {
+  border-left: 5px solid var(--color-primary);
+  margin-bottom: 20px;
+}
+.other span {
+  padding-left: 15px;
+  font-size: 17px;
+  font-weight: 600;
+}
+.idlinks {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+
+  padding-left: 20px;
+  padding-bottom: 10px;
+}
+
+.idlinks h5 {
+  border-left: 1px solid #d2d2d2;
+  margin-left: 15px;
+  overflow: hidden;
+  padding-left: 15px;
+  color: #545454;
+  font-weight: 500;
+}
+
+.inlogo {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+}

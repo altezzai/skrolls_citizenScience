@@ -1,0 +1,67 @@
+.followersBox {
+  width: 100%;
+  margin-top: 10px;
+  padding: 20px;
+  border-radius: 27px;
+  background-color: #ffffff;
+  border: 1px solid #ececec;
+}
+
+.followersBox span {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.followerlist {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.userdetls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.userpic {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+.userName {
+  display: flex;
+  flex-direction: column;
+  margin-right: auto;
+  margin-left: 10px;
+}
+
+.userName h4:first-of-type {
+  font-weight: 500;
+  color: #000000;
+}
+
+.uname {
+  font-weight: 400;
+  color: #9b9b9b;
+}
+
+.followbtn {
+  width: 80px;
+  height: 35px;
+  background-color: #000000;
+  border-radius: 28.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  cursor: pointer;
+}
+
+.followbtn h4 {
+  color: #ffffff;
+  font-weight: 600;
+}
