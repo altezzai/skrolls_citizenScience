@@ -6,7 +6,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-inline: calc(var(--side-margin) + 79px);
+  padding-inline: calc(var(--side-margin) + 74px);
 }
 
 .icon {

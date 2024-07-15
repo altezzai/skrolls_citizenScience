@@ -1,6 +1,7 @@
 import React from "react";
 import "./NavPanel.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 import { Link } from "react-router-dom";
 import { OnlineLogo } from "../OnlineLogo/OnlineLogo";
@@ -15,6 +16,21 @@ import profile from "../../assets/profile.png";
 
 export const NavPanel = () => {
   const [activeIndex, setActiveIndex] = useState(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    switch(location.pathname){
+      case "/": setActiveIndex(0);break;
+      case "/messages": setActiveIndex(1);break;
+      case "/groups": setActiveIndex(2);break;
+      case "/communities": setActiveIndex(3);break;
+      case "/notifications": setActiveIndex(4);break;
+      case "/profile": setActiveIndex(5);break;
+      case "/settings": setActiveIndex(6);break;
+    }
+    if (location.pathname == "/") setActiveIndex(0);
+  },[]);
+  // else if ((location.pathname = "/profile")) setActiveIndex(5);
 
   const handleClick = (index) => {
     setActiveIndex(index);
