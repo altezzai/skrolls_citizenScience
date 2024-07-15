@@ -40,11 +40,11 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  /* justify-content: left; */
+  justify-content: flex-start;
   padding: 20px 35px;
   position: relative;
   text-decoration: none;
-  color:black;
+  color: black;
 }
 
 .navPiece.active {
@@ -58,7 +58,6 @@
   font-size: 15px;
   padding-left: 20px;
   font-weight: 500;
-  
 }
 
 .bottomBorder {
@@ -73,4 +72,10 @@
   right: 15%;
   height: 1px;
   background-color: rgba(198, 198, 198, 0.25);
+}
+
+.profileLogo {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
 }

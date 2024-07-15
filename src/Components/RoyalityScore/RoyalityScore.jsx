@@ -1,5 +1,6 @@
 import React from "react";
 import "./RoyalityScore.css";
+import info from "../../assets/info.svg";
 
 export const RoyalityScore = () => {
   return (
@@ -8,7 +9,7 @@ export const RoyalityScore = () => {
         <ul className="list">
           <li className="listIcon ">
             <h1>Royality Score</h1>
-            <h1>info</h1>
+            <img src={info} className="infologo" />
           </li>
           <li className="score leftBorder">
             <span>384</span>

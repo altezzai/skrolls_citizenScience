@@ -23,7 +23,7 @@
   justify-content: flex-start;
 
   padding-left: 20px;
-  padding-bottom: 5px;
+  padding-bottom: 10px;
 }
 
 .idlinks h5 {
@@ -33,4 +33,10 @@
   padding-left: 15px;
   color: #545454;
   font-weight: 500;
+}
+
+.inlogo {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
 }

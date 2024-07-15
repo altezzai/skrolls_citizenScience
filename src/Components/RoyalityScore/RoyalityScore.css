@@ -101,3 +101,9 @@
   background-color: #ececec;
   flex: 1;
 }
+
+.infologo {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}

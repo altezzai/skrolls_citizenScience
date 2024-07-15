@@ -1,5 +1,6 @@
 import React from "react";
 import "./IdBox.css";
+import internet from "../../assets/internet.svg";
 
 export const IdBox = () => {
   return (
@@ -8,22 +9,22 @@ export const IdBox = () => {
         <span>Other id's</span>
       </div>
       <div className="idlinks">
-        <span>$</span>
+        <img src={internet} className="inlogo" />
 
         <h5>www.mywebsite.com</h5>
       </div>
       <div className="idlinks">
-        <span>$</span>
+        <img src={internet} className="inlogo" />
 
         <h5>www.mywebsite.com</h5>
       </div>
       <div className="idlinks">
-        <span>$</span>
+        <img src={internet} className="inlogo" />
 
         <h5>www.mywebsite.com</h5>
       </div>
       <div className="idlinks">
-        <span>$</span>
+        <img src={internet} className="inlogo" />
 
         <h5>www.mywebsite.com</h5>
       </div>
