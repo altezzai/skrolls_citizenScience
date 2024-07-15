@@ -1,0 +1,101 @@
+.royalityPanel {
+  /* position: fixed; */
+  /* top: 110px;
+  right: 50px; */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.royality {
+  height: 248px;
+  width: 300px;
+  /* margin-top: 30px;
+  margin-right: 50px; */
+  border-radius: 20px;
+  background-color: #ffffff;
+  /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); */
+}
+
+.list {
+  margin-top: 10px;
+  list-style-type: none;
+
+  padding: 10px 20px 10px 0px;
+}
+
+.listIcon {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 20px;
+}
+
+.listIcon h1 {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.score {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 18px;
+  /* padding: 18px 0px 0px 0px; */
+  /* border-left: 5px solid #f36760; */
+}
+
+.score span {
+  font-size: 45px;
+  padding-bottom: 0px;
+  font-weight: 400;
+}
+
+.score h5 {
+  color: #636363;
+  margin-bottom: 20px;
+  font-weight: 600;
+  line-height: 0.01;
+}
+
+.leftBorder {
+  position: relative;
+}
+
+.leftBorder::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8%;
+  bottom: 30%;
+  width: 5px;
+  background-color: #f36760;
+}
+
+.citation {
+  padding-left: 20px;
+  color: #888888;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 5px;
+  /* position: relative; */
+}
+.citation h4 {
+  font-weight: 500;
+}
+.citation h4:first-of-type {
+  padding-right: 5px;
+  white-space: nowrap;
+}
+.second {
+  padding-left: 5px;
+  color: black;
+}
+
+.line {
+  margin-top: 14px;
+  height: 1px;
+  width: 100%;
+  background-color: #d0d0d0;
+  flex: 1;
+}

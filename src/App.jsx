@@ -1,6 +1,8 @@
 import "./App.css";
 import Header from "./Components/Header/Header";
 import { NavPanel } from "./Components/NavPanel/NavPanel";
+import { RoyalityScore } from "./Components/RoyalityScore/RoyalityScore";
+import { RoyalityScore } from "./Components/IdBox/IdBox";
 import ProfileContainer from "./Pages/ProfileContainer";
 import { Route, Routes } from "react-router-dom";
 import Profile from "./Components/Profile/Profile";
@@ -30,7 +32,10 @@ function App() {
             }
           />
         </Routes>
-        <div className="info-panel">THIS IS INFO PANEL</div>
+        <div className="info-panel">
+          <RoyalityScore />
+          <IdBox />
+        </div>
       </div>
     </>
   );
