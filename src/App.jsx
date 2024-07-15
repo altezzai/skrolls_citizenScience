@@ -1,11 +1,9 @@
 import "./App.css";
 import Header from "./Components/Header/Header";
 import { NavPanel } from "./Components/NavPanel/NavPanel";
+import Home from "./Pages/Home";
 import ProfileContainer from "./Pages/ProfileContainer";
 import { Route, Routes } from "react-router-dom";
-import Profile from "./Components/Profile/Profile";
-import ProfileNavContainer from "./Components/ProfileNavContainer/ProfileNavContainer";
-import ProfileDetails from "./Components/ProfileDetails/ProfileDetails";
 
 function App() {
   return (
@@ -16,15 +14,16 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<div className="center-container">THIS IS HOME</div>}
+            element={
+              <div className="center-container">
+                <Home />
+              </div>
+            }
           />
           <Route
             path="/profile"
             element={
               <div className="center-container">
-                {/* <Profile />
-                <ProfileNavContainer />
-                <ProfileDetails /> */}
                 <ProfileContainer />
               </div>
             }
