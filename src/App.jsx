@@ -3,6 +3,7 @@ import Header from "./Components/Header/Header";
 import { NavPanel } from "./Components/NavPanel/NavPanel";
 import { RoyalityScore } from "./Components/RoyalityScore/RoyalityScore";
 import { IdBox } from "./Components/IdBox/IdBox";
+import { Followers } from "./Components/Followers/Followers";
 import ProfileContainer from "./Pages/ProfileContainer";
 import { Route, Routes } from "react-router-dom";
 // import Profile from "./Components/Profile/Profile";
@@ -35,6 +36,7 @@ function App() {
         <div className="info-panel">
           <RoyalityScore />
           <IdBox />
+          <Followers />
         </div>
       </div>
     </>
