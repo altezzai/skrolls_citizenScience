@@ -16,13 +16,13 @@
   /* margin-top: 60px;
   margin-left: 50px; */
   border-radius: 20px;
-  background-color: #ffffff;
+  background-color: white;
   box-shadow: 0px 0px 28px 3px rgba(0, 0, 0, 0.05);
   -webkit-box-shadow: 0px 0px 28px 3px rgba(0, 0, 0, 0.05);
   -moz-box-shadow: 0px 0px 28px 3px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .navPanel .navPiece:first-child {
@@ -35,47 +35,69 @@
 }
 
 .navPiece {
-  width: 100%;
+  /* width: 100%; */
   height: 70px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  padding: 20px 35px;
+  /* justify-content: left; */
+  padding: 0 35px;
   position: relative;
   text-decoration: none;
   color: black;
+  gap:10px
 }
 
 .navPiece.active {
+  --border: 1px solid rgba(198, 198, 198, 0.25);
   background-color: var(--color-secondary);
-  border-left: 2px solid var(--color-primary);
-  border-top: 1px solid rgba(198, 198, 198, 0.25);
-  border-bottom: 1px solid rgba(198, 198, 198, 0.25);
+  /* border-left: 2px solid var(--color-primary); */
+  /* border-top: var(--border);
+  border-bottom: var(--border); */
+  box-shadow: -2px 0 0 0 red;
+  box-sizing: content-box;
+}
+.navPiece.active h1 {
+  width: 100%;
 }
 
 .navPiece h1 {
   font-size: 15px;
-  padding-left: 20px;
   font-weight: 500;
+  width: 100%;
+  height: 100%;
+  float: center;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(198, 198, 198, 0.25);
+  border-top: 1px solid rgba(198, 198, 198, 0.25);
 }
 
-.bottomBorder {
+.navPanel .navPiece:last-child h1 {
+  border-bottom: none;
+}
+.navPanel .navPiece:first-child h1 {
+  border-top: none;
+}
+.profileLogo {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+/* .navPiece.active h1,
+.navPanel .navPiece:has(+ .navPiece.active) h1  */
+
+/* .bottomBorder {
   position: relative;
 }
 
 .bottomBorder::after {
   content: "";
   position: absolute;
-  bottom: 0;
+  top: 0;
   left: 15%;
   right: 15%;
-  height: 1px;
+  height: 2px;
   background-color: rgba(198, 198, 198, 0.25);
-}
-
-.profileLogo {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-}
+} */
