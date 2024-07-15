@@ -4,12 +4,15 @@
   width: 100%;
   gap: 10px;
   box-shadow: inset 0px -2px 0px 0px rgba(229, 229, 229, 1);
-  padding-top: 20px;
-  margin-bottom: 10px;
+  padding-top: 30px;
+  margin-bottom: 35px;
   font-family: Inter;
   font-size: 15px;
   font-weight: 600;
   line-height: 18.15px;
+  position: sticky;
+  top:0;
+  background-color: var(--color-bg-grey);
 }
 .profile-navs {
   display: flex;

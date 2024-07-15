@@ -1,6 +1,7 @@
 import "./App.css";
 import Header from "./Components/Header/Header";
 import { NavPanel } from "./Components/NavPanel/NavPanel";
+import Home from "./Pages/Home";
 import { RoyalityScore } from "./Components/RoyalityScore/RoyalityScore";
 import { IdBox } from "./Components/IdBox/IdBox";
 import { Followers } from "./Components/Followers/Followers";
@@ -19,15 +20,16 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<div className="center-container">THIS IS HOME</div>}
+            element={
+              <div className="center-container">
+                <Home />
+              </div>
+            }
           />
           <Route
             path="/profile"
             element={
               <div className="center-container">
-                {/* <Profile />
-                <ProfileNavContainer />
-                <ProfileDetails /> */}
                 <ProfileContainer />
               </div>
             }
