@@ -1,11 +1,14 @@
 import "./App.css";
 import Header from "./Components/Header/Header";
 import { NavPanel } from "./Components/NavPanel/NavPanel";
+import { RoyalityScore } from "./Components/RoyalityScore/RoyalityScore";
+import { IdBox } from "./Components/IdBox/IdBox";
+import { Followers } from "./Components/Followers/Followers";
 import ProfileContainer from "./Pages/ProfileContainer";
 import { Route, Routes } from "react-router-dom";
-import Profile from "./Components/Profile/Profile";
-import ProfileNavContainer from "./Components/ProfileNavContainer/ProfileNavContainer";
-import ProfileDetails from "./Components/ProfileDetails/ProfileDetails";
+// import Profile from "./Components/Profile/Profile";
+// import ProfileNavContainer from "./Components/ProfileNavContainer/ProfileNavContainer";
+// import ProfileDetails from "./Components/ProfileDetails/ProfileDetails";
 
 function App() {
   return (
@@ -30,7 +33,11 @@ function App() {
             }
           />
         </Routes>
-        <div className="info-panel">THIS IS INFO PANEL</div>
+        <div className="info-panel">
+          <RoyalityScore />
+          <IdBox />
+          <Followers />
+        </div>
       </div>
     </>
   );
