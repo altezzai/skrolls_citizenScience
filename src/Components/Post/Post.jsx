@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Post.css";
 
 import photo from "../../assets/profile.png";
@@ -12,6 +12,25 @@ import internet from "../../assets/internet.svg";
 import translate from "../../assets/translate.svg";
 
 const Post = () => {
+  const [likeCount, setLikeCount] = useState(200);
+  const [liked, setLiked] = useState(false);
+
+  const handleIconClick = (message) => {
+    console.log(message);
+  };
+
+  const handleLikeClick = () => {
+    if (liked) {
+      setLikeCount(likeCount - 1);
+      setLiked(false);
+      handleIconClick("Unliked");
+    } else {
+      setLikeCount(likeCount + 1);
+      setLiked(true);
+      handleIconClick("Liked");
+    }
+  };
+
   return (
     <div className="post">
       <div className="post-profile">
@@ -47,12 +66,12 @@ const Post = () => {
         </div>
         <div className="post-icons">
           <div className="icon-section">
-            <div className="icon">
+            <div className="icon" onClick={handleLikeClick}>
               <img src={love} alt="" />
-              200
+              {likeCount}
             </div>
 
-            <div className="icon">
+            <div className="icon" onClick={() => handleIconClick("message")}>
               <img src={msg} alt="" />
               56
             </div>
