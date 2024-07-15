@@ -1,0 +1,23 @@
+.postbutton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 48px;
+  padding: 13px 10px;
+  gap: 5px;
+  border-radius: 12px;
+  background: rgba(243, 103, 96, 1);
+  display: flex;
+  color: rgba(255, 255, 255, 1);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 21.78px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.postbutton img {
+  width: 23px;
+  filter: invert();
+}
