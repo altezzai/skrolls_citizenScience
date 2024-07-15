@@ -7,7 +7,7 @@
   padding: 13px 10px;
   gap: 5px;
   border-radius: 12px;
-  background: rgba(243, 103, 96, 1);
+  background: var(--color-primary);
   display: flex;
   color: rgba(255, 255, 255, 1);
   font-size: 18px;
