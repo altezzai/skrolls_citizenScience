@@ -1,7 +1,6 @@
 import React from "react";
 import Profile from "../Components/Profile/Profile";
 import ProfileNavContainer from "../Components/ProfileNavContainer/ProfileNavContainer";
-import "./ProfileContainer.css";
 import ProfileDetails from "../Components/ProfileDetails/ProfileDetails";
 
 const ProfileContainer = () => {
