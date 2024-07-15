@@ -7,15 +7,11 @@ import ProfileDetails from "../Components/ProfileDetails/ProfileDetails";
 const ProfileContainer = () => {
   return (
     <div className="Profile-container">
-      <div className="profile-box">
-        <Profile />
-      </div>
-      <div className="ProfileNavContainer-box">
-        <ProfileNavContainer />
-      </div>
-      <div className="profile-details-box">
-        <ProfileDetails />
-      </div>
+      <Profile />
+
+      <ProfileNavContainer />
+
+      <ProfileDetails />
     </div>
   );
 };

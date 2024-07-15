@@ -43,6 +43,8 @@
   /* justify-content: left; */
   padding: 20px 35px;
   position: relative;
+  text-decoration: none;
+  color:black;
 }
 
 .navPiece.active {
@@ -56,6 +58,7 @@
   font-size: 15px;
   padding-left: 20px;
   font-weight: 500;
+  
 }
 
 .bottomBorder {

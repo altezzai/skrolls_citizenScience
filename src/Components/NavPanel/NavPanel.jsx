@@ -2,6 +2,8 @@ import React from "react";
 import "./NavPanel.css";
 import { useState } from "react";
 
+import { Link } from "react-router-dom";
+
 export const NavPanel = () => {
   const [activeIndex, setActiveIndex] = useState(null);
 
@@ -11,14 +13,15 @@ export const NavPanel = () => {
   return (
     <div className="asideNav">
       <div className="navPanel">
-        <a
+        <Link
+          to="/"
           className={`navPiece bottomBorder ${
             activeIndex === 0 ? "active" : ""
           }`}
           onClick={() => handleClick(0)}
         >
           <h1>Home</h1>
-        </a>
+        </Link>
         <a
           className={`navPiece bottomBorder ${
             activeIndex === 1 ? "active" : ""
@@ -51,14 +54,15 @@ export const NavPanel = () => {
         </a>
       </div>
       <div className="navPanel bottom">
-        <a
+        <Link
+          to="/profile"
           className={`navPiece bottomBorder ${
             activeIndex === 5 ? "active" : ""
           }`}
           onClick={() => handleClick(5)}
         >
           <h1>Profile</h1>
-        </a>
+        </Link>
         <a
           className={`navPiece ${activeIndex === 6 ? "active" : ""}`}
           onClick={() => handleClick(6)}
