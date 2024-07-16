@@ -2,11 +2,11 @@ import React from "react";
 import "./PostButton.css";
 import pencil from "../../assets/pencil.svg";
 
-const PostButton = () => {
+const PostButton = ({children}) => {
   return (
     <div className="postbutton">
       <img src={pencil} alt="" />
-      Post it!
+     {children}
     </div>
   );
 };
