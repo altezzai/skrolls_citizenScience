@@ -11,6 +11,7 @@ const AddPost = ({ show, handleClose }) => {
   const [imagePreviews, setImagePreviews] = useState([]);
   const [videoPreviews, setVideoPreviews] = useState([]);
   const [documentPreviews, setDocumentPreviews] = useState([]);
+  const [postContent, setPostContent] = useState("");
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
@@ -53,20 +54,32 @@ const AddPost = ({ show, handleClose }) => {
     setDocumentPreviews((prevPreviews) => prevPreviews.filter((_, i) => i !== index));
   };
 
+  const resetForm = () => {
+    setImagePreviews([]);
+    setVideoPreviews([]);
+    setDocumentPreviews([]);
+    setPostContent("");
+  };
+
+  const handleModalClose = () => {
+    resetForm();
+    handleClose();
+  };
+
   const isFileUploaded =
     imagePreviews.length > 0 ||
     videoPreviews.length > 0 ||
     documentPreviews.length > 0;
 
   return (
-    <div className={`addpost ${show ? "show" : ""}`} onClick={handleClose}>
+    <div className={`addpost ${show ? "show" : ""}`} onClick={handleModalClose}>
       <div
         className="addpost-content"
         onClick={(e) => {
           e.stopPropagation();
         }}
       >
-        <span className="close" onClick={handleClose}>
+        <span className="close" onClick={handleModalClose}>
           &times;
         </span>
         <div className="postman-details">
@@ -79,8 +92,10 @@ const AddPost = ({ show, handleClose }) => {
         <textarea
           name=""
           id=""
-          placeholder="What is new. Rafsal?"
+          placeholder="What is new, Rafsal?"
           style={{ height: isFileUploaded ? "150px" : "250px" }}
+          value={postContent}
+          onChange={(e) => setPostContent(e.target.value)}
         ></textarea>
         <div className="add-media" style={{ display: isFileUploaded ? "none" : "flex" }}>
           <label htmlFor="imgfile" className="icon-post">
