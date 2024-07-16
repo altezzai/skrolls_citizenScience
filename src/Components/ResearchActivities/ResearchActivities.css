@@ -1,0 +1,40 @@
+.activitybox {
+  background-color: white;
+  width: 100%;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.activitypart {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.actname {
+  font-size: 13px;
+  font-weight: 600;
+  color: #141414;
+}
+
+.docpart {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #f9fafb;
+  border-radius: 6px;
+  padding: 5px;
+  width: 120px;
+  height: 188px;
+}
+.docimg {
+  border-radius: 6px;
+  object-fit: cover;
+  width: 100%;
+  height: 144px;
+}

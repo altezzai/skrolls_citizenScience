@@ -8,7 +8,7 @@ export const RoyalityScore = () => {
       <div className="royality">
         <ul className="list">
           <li className="listIcon ">
-            <h1>Royality Score</h1>
+            <h1>Royalty Score</h1>
             <img src={info} className="infologo" />
           </li>
           <li className="score leftBorder">

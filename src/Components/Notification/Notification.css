@@ -1,0 +1,50 @@
+.notification {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 15px 20px 20px;
+  border-bottom: 1px solid rgb(198, 198, 198, 0.25);
+}
+
+.notification:last-child {
+  border-bottom: none;
+}
+
+.notifdetls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.userName {
+  color: var(--color-primary);
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.notiftext {
+  color: #323232;
+  font-size: 15px;
+  font-weight: 500;
+  margin-left: 10px;
+}
+
+.dot {
+  border-radius: 50%;
+  height: 6px;
+  width: 6px;
+  background-color: #6b6b6b;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.duration {
+  color: #6b6b6b;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.notifimg {
+  height: 55px;
+  width: 75px;
+  border-radius: 10px;
+}

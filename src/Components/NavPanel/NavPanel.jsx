@@ -19,17 +19,31 @@ export const NavPanel = () => {
   const location = useLocation();
 
   useEffect(() => {
-    switch(location.pathname){
-      case "/": setActiveIndex(0);break;
-      case "/messages": setActiveIndex(1);break;
-      case "/groups": setActiveIndex(2);break;
-      case "/communities": setActiveIndex(3);break;
-      case "/notifications": setActiveIndex(4);break;
-      case "/profile": setActiveIndex(5);break;
-      case "/settings": setActiveIndex(6);break;
+    switch (location.pathname) {
+      case "/":
+        setActiveIndex(0);
+        break;
+      case "/messages":
+        setActiveIndex(1);
+        break;
+      case "/groups":
+        setActiveIndex(2);
+        break;
+      case "/communities":
+        setActiveIndex(3);
+        break;
+      case "/notifications":
+        setActiveIndex(4);
+        break;
+      case "/profile":
+        setActiveIndex(5);
+        break;
+      case "/settings":
+        setActiveIndex(6);
+        break;
     }
     if (location.pathname == "/") setActiveIndex(0);
-  },[]);
+  }, []);
   // else if ((location.pathname = "/profile")) setActiveIndex(5);
 
   const handleClick = (index) => {
@@ -79,14 +93,15 @@ export const NavPanel = () => {
 
           <h1>Communities</h1>
         </a>
-        <a
+        <Link
+          to="/notifications"
           className={`navPiece ${activeIndex === 4 ? "active" : ""}`}
           onClick={() => handleClick(4)}
         >
           <OnlineLogo icon={notification} flag={true} />
 
           <h1>Notifications</h1>
-        </a>
+        </Link>
       </div>
       <div className="navPanel bottom">
         <Link

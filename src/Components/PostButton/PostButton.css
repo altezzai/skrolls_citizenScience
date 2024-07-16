@@ -19,5 +19,9 @@
 
 .postbutton img {
   width: 23px;
-  filter: invert();
+}
+
+.postbutton span {
+  font-size: 11px;
+  font-weight: 600;
 }

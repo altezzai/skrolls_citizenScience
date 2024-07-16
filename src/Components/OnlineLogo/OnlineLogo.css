@@ -2,11 +2,6 @@
   position: relative;
 }
 
-.iconLogo {
-  height: 16px;
-  width: 16px;
-}
-
 .flag {
   width: 7px;
   height: 7px;
@@ -17,5 +12,3 @@
   right: 0;
   top: 0;
 }
-
-

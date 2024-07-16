@@ -52,6 +52,8 @@ body {
 }
 
 .main-container .center-container {
+  margin-inline: 50px;
+  flex-grow: 1;
   overflow-y: scroll;
   height: 100%;
   -ms-overflow-style: none;
