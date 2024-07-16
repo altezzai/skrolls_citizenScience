@@ -51,7 +51,7 @@
 .post .post-details .post-extra {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 20px;
   font-family: Inter;
   font-size: 20px;
   font-weight: 600;
@@ -68,6 +68,9 @@
   background: #f5f5f6;
   gap: 10px;
   cursor: pointer;
+}
+.post .post-details .post-extra .post-link a{
+  color: #776968;
 }
 .post .post-details .post-img {
   width: 90%;

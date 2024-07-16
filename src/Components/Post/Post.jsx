@@ -54,7 +54,7 @@ const Post = () => {
         <div className="post-extra">
           <div className="post-link btn">
             <img src={internet} alt="" />
-            http://rsg.ms/3426e12
+            <a href="">http://rsg.ms/3426e12</a>
           </div>
           <div className="post-link btn">
             <img src={translate} alt="" />
