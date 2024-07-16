@@ -4,15 +4,16 @@ import docimage from "../../assets/profile.png";
 import PostButton from "../PostButton/PostButton";
 import download from "../../assets/download.svg";
 import verified from "../../assets/verified.svg";
+import { Contributors } from "../Contributors/Contributors";
 
 export const ResearchActivities = () => {
   return (
     <div className="activitybox">
       <div className="activitypart">
-        <span className="actname">
+        <a className="actname">
           Late blight of potato: From the great Irish potato famine to the
           genomic era - An overview
-        </span>
+        </a>
         <div className="about">
           <a href="#" className="classif">
             Hellenic Plant Protection Journal
@@ -22,8 +23,9 @@ export const ResearchActivities = () => {
           </a>
           <span>01 Jan 2022</span>
         </div>
+        <Contributors />
         <div className="source">
-          <img src={verified}  />
+          <img src={verified} />
           <span>Source:</span>
           <span>Crossref</span>
         </div>

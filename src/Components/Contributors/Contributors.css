@@ -1,0 +1,22 @@
+.contributor {
+  display: flex;
+  align-items: center;
+}
+.uname {
+  margin-left: 5px;
+
+  font-size: 12px;
+  font-weight: 500;
+  color: #545454;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.smalldot {
+  border-radius: 50%;
+  width: 3px;
+  height: 3px;
+  background-color: #d9d9d9;
+  margin-right: 10px;
+  margin-left: 10px;
+}
