@@ -3,7 +3,7 @@
   width: 100%;
   border-radius: 14px;
   display: flex;
-  align-items: center;
+
   justify-content: space-between;
 
   padding: 20px;
@@ -12,13 +12,16 @@
 
 .activitypart {
   display: flex;
-  align-items: center;
+
   flex-direction: column;
+  justify-content: flex-start;
+  width: 55%;
 }
 .actname {
   font-size: 13px;
   font-weight: 600;
   color: #141414;
+  line-height: 18px;
 }
 
 .docpart {
@@ -37,4 +40,67 @@
   object-fit: cover;
   width: 100%;
   height: 144px;
+}
+
+.about {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 20px;
+}
+
+.classif {
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
+  font-size: 10px;
+  font-weight: 500;
+  padding: 5px;
+  text-decoration: none;
+  line-height: 10px;
+  cursor: none;
+  border: 1px solid var(--color-secondary);
+  margin-right: 5px;
+}
+
+.article {
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  font-size: 10px;
+  font-weight: 500;
+  padding: 5px;
+  text-decoration: none;
+  line-height: 10px;
+  cursor: none;
+  margin-right: 5px;
+}
+
+.about span {
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 10px;
+  color: #545454;
+}
+
+.source {
+  display: flex;
+  margin-top: 40px;
+}
+
+.source img {
+  width: 15px;
+  border: 2px solid white;
+  margin-right: 5px;
+}
+
+.source span:first-of-type {
+  font-size: 15px;
+  font-weight: 600;
+  color: #141414;
+  margin-right: 5px;
+}
+
+.source span {
+  font-size: 15px;
+  font-weight: 600;
+  color: #545454;
 }
