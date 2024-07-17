@@ -2,7 +2,7 @@ import "./App.css";
 import Header from "./Components/Header/Header";
 import { NavPanel } from "./Components/NavPanel/NavPanel";
 import Home from "./Pages/Home";
-import { RoyalityScore } from "./Components/RoyalityScore/RoyalityScore";
+import { RoyaltyScore } from "./Components/RoyaltyScore/RoyaltyScore";
 import { IdBox } from "./Components/IdBox/IdBox";
 import { Followers } from "./Components/Followers/Followers";
 import ProfileContainer from "./Pages/ProfileContainer";
@@ -37,7 +37,7 @@ function App() {
           />
         </Routes>
         <div className="info-panel">
-          <RoyalityScore />
+          <RoyaltyScore />
           <IdBox />
           <Followers />
         </div>

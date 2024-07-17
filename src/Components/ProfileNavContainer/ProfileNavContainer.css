@@ -2,6 +2,10 @@
   width: 100%;
 }
 
+.profile-nav-container .underborder{
+  border-bottom: 1px solid rgb(224, 224, 224);
+}
+
 .test span {
   bottom: -4px;
 }

@@ -10,6 +10,12 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    colors: {
+      bggrey: "#f3f3f3",
+      primary: "#f36760;",
+      secondary: "#ffeae9;",
+      grey: "#999",
+    },
     extend: {},
   },
   darkMode: "class",

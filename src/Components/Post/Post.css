@@ -8,6 +8,12 @@
   padding-block: 25px;
   margin-bottom: 20px;
 }
+
+.post .post-profile{
+  flex-shrink:0;
+  align-self: start;
+}
+
 .post .post-details {
   padding-right: 50px;
 }

@@ -27,7 +27,7 @@
   --color-primary: #f36760;
   --color-secondary: #ffeae9;
   --side-margin: 50px;
-  --color-bg-grey: rgba(243, 243, 243, 1);
+  --color-bg-grey: #f3f3f3;
 }
 
 #root {
@@ -56,7 +56,8 @@ body {
 .main-container .center-container {
   overflow-y: scroll;
   height: 100%;
-  width: 700px;
+  width: 100%;
+  margin-inline: 40px;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }

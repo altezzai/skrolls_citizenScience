@@ -17,7 +17,7 @@ const ProfileNavContainer = () => {
           selectedKey={selected}
           onSelectionChange={setSelected}
           variant="underlined"
-          className="border-b-2"
+          className="underborder sticky top-0 bg-bggrey"
         >
           <Tab key="profile" title="Profile" className="test">
             <ProfileDetails />

@@ -1,14 +1,13 @@
 import React from "react";
-import "./RoyalityScore.css";
+import "./RoyaltyScore.css";
 import info from "../../assets/info.svg";
 
-export const RoyalityScore = () => {
+export const RoyaltyScore = () => {
   return (
-    <div className="royalityPanel">
-      <div className="royality">
+      <div className="royaltyPanel">
         <ul className="list">
           <li className="listIcon ">
-            <h1>Royality Score</h1>
+            <h1>Royalty Score</h1>
             <img src={info} className="infologo" />
           </li>
           <li className="score leftBorder">
@@ -37,6 +36,5 @@ export const RoyalityScore = () => {
           </li>
         </ul>
       </div>
-    </div>
   );
 };
