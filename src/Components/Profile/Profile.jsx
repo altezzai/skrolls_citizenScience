@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import photo from "../../assets/profile.png";
 import "./Profile.css";
 import ReadMore from "../ReadMore/ReadMore";
@@ -8,8 +8,15 @@ import twitter from "../../assets/x.svg";
 import more from "../../assets/more.svg";
 import link from "../../assets/link.svg";
 import SkillBtn from "../SkillBtn/SkillBtn";
+import FollowList from "../FollowList/FollowList";
 
 const Profile = () => {
+  const [showFollow, setShowFollow] = useState(false);
+
+  const handleShowFollow = () => {
+    setShowFollow(true);
+  };
+
   return (
     <div className="profile">
       <div className="profile-photo">
@@ -23,9 +30,15 @@ const Profile = () => {
       </div>
 
       <div className="follows">
-        <div className="following">200 following</div>
-        <div className="followers">20k followers</div>
+        <div className="following" onClick={handleShowFollow}>
+          200 following
+        </div>
+        <div className="followers" onClick={handleShowFollow}>
+          20k followers
+        </div>
       </div>
+
+      <FollowList show={showFollow} setShowFollow={setShowFollow}></FollowList>
 
       <div className="description">
         <ReadMore sliceLength={135}>
