@@ -7,6 +7,7 @@ import { IdBox } from "./Components/IdBox/IdBox";
 import { Followers } from "./Components/Followers/Followers";
 import ProfileContainer from "./Pages/ProfileContainer";
 import { Route, Routes } from "react-router-dom";
+
 // import Profile from "./Components/Profile/Profile";
 // import ProfileNavContainer from "./Components/ProfileNavContainer/ProfileNavContainer";
 // import ProfileDetails from "./Components/ProfileDetails/ProfileDetails";
