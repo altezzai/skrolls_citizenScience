@@ -1,29 +1,37 @@
-import React, { useState } from 'react';
-import './ProfileNavContainer.css';
+import React, { useState } from "react";
+import "./ProfileNavContainer.css";
+import ProfileDetails from "../ProfileDetails/ProfileDetails";
+
+import { Tabs, Tab } from "@nextui-org/tabs";
+import Home from "../../Pages/Home";
+import Profile from "../Profile/Profile";
 
 const ProfileNavContainer = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const handleClick = (index) => {
-    setActiveIndex(index);
-  };
-
-  const navItems = ["Profile", "Post", "Research Activities"];
+  const [selected, setSelected] = useState("photos");
 
   return (
-    <div className='profile-nav-container'>
-      {navItems.map((item, index) => (
-        <div
-          key={index}
-          className={`profile-navs ${activeIndex === index ? 'active' : ''}`}
-          onClick={() => handleClick(index)}
+    <div className="profile-nav-container">
+      <div className="flex w-full flex-col">
+        <Tabs
+          aria-label="Options"
+          selectedKey={selected}
+          onSelectionChange={setSelected}
+          variant="underlined"
+          className="border-b-2"
         >
-          {item}
-        </div>
-      ))}
+          <Tab key="profile" title="Profile" className="test">
+            <ProfileDetails />
+          </Tab>
+          <Tab key="post" title="Post" className="test">
+            <div>POST SECTION</div>
+          </Tab>
+          <Tab key="Research" title="Research Activities" className="test">
+            <div>RESEARCH SECTION</div>
+          </Tab>
+        </Tabs>
+      </div>
     </div>
   );
-}
+};
 
 export default ProfileNavContainer;
-

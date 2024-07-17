@@ -10,7 +10,7 @@ const ProfileContainer = () => {
 
       <ProfileNavContainer />
 
-      <ProfileDetails />
+      
     </div>
   );
 };
