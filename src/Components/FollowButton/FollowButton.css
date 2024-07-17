@@ -1,0 +1,14 @@
+.follow-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #000000;
+  border-radius: 28px;
+  padding-inline: 20px;
+  height: 40px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24.2px;
+  cursor: pointer;
+  width: 100%;
+}
