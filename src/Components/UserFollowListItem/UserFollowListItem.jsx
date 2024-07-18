@@ -35,7 +35,9 @@ const UserFollowListItem = () => {
             setFollow={setFollow}
             openPopup={openPopup}
           />
-          {showPopup && <UnfollowPopup closePopup={closePopup} setFollow={setFollow}/>}
+          {showPopup && (
+            <UnfollowPopup closePopup={closePopup} setFollow={setFollow} />
+          )}
         </div>
       </div>
     </div>

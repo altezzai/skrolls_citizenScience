@@ -47,7 +47,7 @@ function App() {
         <div className="info-panel">
           <RoyaltyScore />
           <IdBox />
-          <Followers />
+          <Followers title={"Followers"} followbtnflag={true} />
         </div>
       </div>
     </>
