@@ -8,7 +8,7 @@ import Profile from "../Profile/Profile";
 import { ResearchActivities } from "../ResearchActivities/ResearchActivities";
 
 const ProfileNavContainer = () => {
-  const [selected, setSelected] = useState("photos");
+  const [selected, setSelected] = useState("profile");
 
   return (
     <div className="profile-nav-container">
