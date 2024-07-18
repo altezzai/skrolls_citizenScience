@@ -8,6 +8,7 @@
 
   padding: 20px 20px 10px 20px;
   margin-top: 20px;
+  flex-wrap: wrap;
 }
 
 .activitypart {
@@ -86,7 +87,8 @@
 
 .source {
   display: flex;
-  margin-top: 40px;
+  margin-top: 30px;
+  margin-bottom: 10px;
 }
 
 .source img {
@@ -106,4 +108,83 @@
   font-size: 15px;
   font-weight: 600;
   color: #545454;
+}
+
+.contrib {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-height: 135px;
+  max-width: 420px;
+}
+
+.contrib div {
+  margin: 10px;
+}
+
+.contribtitle {
+  width: 180px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 0px 8px 0px;
+  border-bottom: 1px solid rgb(198, 198, 198, 0.25);
+}
+
+.imagename {
+  display: flex;
+  align-items: center;
+}
+
+.pname {
+  margin-left: 5px;
+
+  font-size: 12px;
+  font-weight: 500;
+  color: #545454;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.tabdetails {
+  margin-top: 5px;
+  width: 100%;
+  background-color: #f9fafb;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.itemsinfo {
+  display: flex;
+  align-items: center;
+}
+
+.tableview {
+  width: 100%;
+}
+
+.tableview td {
+  padding: 10px;
+  width: 50%;
+  border-bottom: 1px solid rgb(198, 198, 198, 0.25);
+}
+.tableview tbody tr:last-child td {
+  border-bottom: none;
+}
+.labelname {
+  font-size: 13px;
+  font-weight: 600;
+  color: #141414;
+}
+
+.urllink {
+  color: var(--color-primary);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.infodata {
+  font-size: 13px;
+  color: #545454;
+  font-weight: 500;
 }
