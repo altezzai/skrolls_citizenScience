@@ -5,8 +5,9 @@ import PostButton from "../PostButton/PostButton";
 import download from "../../assets/download.svg";
 import verified from "../../assets/verified.svg";
 import { Contributors } from "../Contributors/Contributors";
-import { ProfilePhoto } from "../Profilephoto/ProfilePhoto";
+
 import profile from "../../assets/profile.png";
+import { PhotowithName } from "../PhotowithName/PhotowithName";
 
 export const ResearchActivities = () => {
   const [detailsVisible, setDetailsVisible] = useState(false);
@@ -14,6 +15,14 @@ export const ResearchActivities = () => {
   const handleActnameClick = () => {
     setDetailsVisible(!detailsVisible);
   };
+  const ContributorsList = [
+    "Anurag T K",
+    "Ishaque",
+    "Aswin K",
+    "Farhathulla",
+    "Rafsal",
+    "Akshay Bose",
+  ];
   return (
     <div className="activitybox" onClick={handleActnameClick}>
       <div className="activitypart">
@@ -46,22 +55,13 @@ export const ResearchActivities = () => {
               <span>Contributors</span>
             </div>
             <div className="contrib">
-              <div className="imagename">
-                <ProfilePhoto img={profile} size={"24px"} />
-                <a className="pname">A. Majeed</a>
-              </div>
-              <div className="imagename">
-                <ProfilePhoto img={profile} size={"24px"} />
-                <a className="pname">A. Majeed</a>
-              </div>
-              <div className="imagename">
-                <ProfilePhoto img={profile} size={"24px"} />
-                <a className="pname">A. Majeed</a>
-              </div>
-              <div className="imagename">
-                <ProfilePhoto img={profile} size={"24px"} />
-                <a className="pname">A. Majeed</a>
-              </div>
+              <PhotowithName profile={profile} name={ContributorsList[0]} />
+
+              <PhotowithName profile={profile} name={ContributorsList[1]} />
+
+              <PhotowithName profile={profile} name={ContributorsList[2]} />
+
+              <PhotowithName profile={profile} name={ContributorsList[3]} />
             </div>
           </div>
         )}

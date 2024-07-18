@@ -3,6 +3,7 @@ import "./Contributors.css";
 import { ProfilePhoto } from "../Profilephoto/ProfilePhoto";
 import profile from "../../assets/profile.png";
 import { Photogroup } from "../Photogroup/Photogroup";
+import { PhotowithName } from "../PhotowithName/PhotowithName";
 
 export const Contributors = () => {
   const ContributorsList = [
@@ -19,60 +20,57 @@ export const Contributors = () => {
       case 1:
         return (
           <div>
-            <ProfilePhoto img={profile} size={"24px"} />
-            <a className="uname">{ContributorsList[0]}</a>
+            <PhotowithName profile={profile} name={ContributorsList[0]} />
           </div>
         );
       case 2:
         return (
           <>
-            <ProfilePhoto img={profile} size={"24px"} />
-            <a className="uname">{ContributorsList[0]}</a>
+            <PhotowithName profile={profile} name={ContributorsList[0]} />
+
             <div className="smalldot"></div>
-            <ProfilePhoto img={profile} size={"24px"} />
-            <a className="uname">{ContributorsList[1]}</a>
+            <PhotowithName profile={profile} name={ContributorsList[1]} />
           </>
         );
       case 3:
         return (
           <>
-            <ProfilePhoto img={profile} size={"24px"} />
-            <a className="uname">{ContributorsList[0]}</a>
+            <PhotowithName profile={profile} name={ContributorsList[0]} />
+
             <div className="smalldot"></div>
-            <ProfilePhoto img={profile} size={"24px"} />
-            <a className="uname">{ContributorsList[1]}</a>
+            <PhotowithName profile={profile} name={ContributorsList[1]} />
+
             <div className="smalldot"></div>
-            <ProfilePhoto img={profile} size={"24px"} />
-            <a className="uname">{ContributorsList[2]}</a>
+            <PhotowithName profile={profile} name={ContributorsList[2]} />
           </>
         );
       case 4:
         return (
           <>
-            <ProfilePhoto img={profile} size={"24px"} />
-            <a className="uname">{ContributorsList[0]}</a>
+            <PhotowithName profile={profile} name={ContributorsList[0]} />
+
             <div className="smalldot"></div>
             <ProfilePhoto img={profile} size={"24px"} />
-            <a className="uname">{ContributorsList[1]}</a>
+            <PhotowithName profile={profile} name={ContributorsList[1]} />
+
             <div className="smalldot"></div>
-            <ProfilePhoto img={profile} size={"24px"} />
-            <a className="uname">{ContributorsList[2]}</a>
+            <PhotowithName profile={profile} name={ContributorsList[2]} />
+
             <div className="smalldot"></div>
-            <ProfilePhoto img={profile} size={"24px"} />
-            <a className="uname">{ContributorsList[3]}</a>
+            <PhotowithName profile={profile} name={ContributorsList[3]} />
           </>
         );
       case 5:
         return (
           <>
-            <ProfilePhoto img={profile} size={"24px"} />
-            <a className="uname">{ContributorsList[0]}</a>
+            <PhotowithName profile={profile} name={ContributorsList[0]} />
+
             <div className="smalldot"></div>
-            <ProfilePhoto img={profile} size={"24px"} />
-            <a className="uname">{ContributorsList[1]}</a>
+            <PhotowithName profile={profile} name={ContributorsList[1]} />
+
             <div className="smalldot"></div>
-            <ProfilePhoto img={profile} size={"24px"} />
-            <a className="uname">{ContributorsList[2]}</a>
+            <PhotowithName profile={profile} name={ContributorsList[2]} />
+
             <div className="smalldot"></div>
             <Photogroup image1={profile} image2={profile} flag={false} />
             <span className="uname">
@@ -84,14 +82,14 @@ export const Contributors = () => {
       default:
         return (
           <>
-            <ProfilePhoto img={profile} size={"24px"} />
-            <a className="uname">{ContributorsList[0]}</a>
+            <PhotowithName profile={profile} name={ContributorsList[0]} />
+
             <div className="smalldot"></div>
-            <ProfilePhoto img={profile} size={"24px"} />
-            <a className="uname">{ContributorsList[1]}</a>
+            <PhotowithName profile={profile} name={ContributorsList[1]} />
+
             <div className="smalldot"></div>
-            <ProfilePhoto img={profile} size={"24px"} />
-            <a className="uname">{ContributorsList[2]}</a>
+            <PhotowithName profile={profile} name={ContributorsList[2]} />
+
             <div className="smalldot"></div>
             <Photogroup image1={profile} image2={profile} image3={profile} />
             <span className="uname">

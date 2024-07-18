@@ -2,15 +2,7 @@
   display: flex;
   align-items: center;
 }
-.uname {
-  margin-left: 5px;
 
-  font-size: 12px;
-  font-weight: 500;
-  color: #545454;
-  text-decoration: none;
-  cursor: pointer;
-}
 
 .smalldot {
   border-radius: 50%;
