@@ -1,0 +1,31 @@
+.photogroup {
+  position: relative;
+}
+
+.rearimg {
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  border: 1px solid white;
+  margin-left: 16px;
+}
+
+.middleimg {
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  border: 1px solid white;
+  position: absolute;
+  top: 0;
+  right: 8px;
+}
+
+.frontimg {
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  border: 1px solid white;
+  position: absolute;
+  top: 0;
+  right: 16px;
+}

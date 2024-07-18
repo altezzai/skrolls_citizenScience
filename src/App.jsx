@@ -7,7 +7,7 @@ import { IdBox } from "./Components/IdBox/IdBox";
 import { Followers } from "./Components/Followers/Followers";
 import ProfileContainer from "./Pages/ProfileContainer";
 import { Route, Routes } from "react-router-dom";
-
+import NotificationPage from "./Pages/NotificationPage";
 // import Profile from "./Components/Profile/Profile";
 // import ProfileNavContainer from "./Components/ProfileNavContainer/ProfileNavContainer";
 // import ProfileDetails from "./Components/ProfileDetails/ProfileDetails";
@@ -32,6 +32,14 @@ function App() {
             element={
               <div className="center-container">
                 <ProfileContainer />
+              </div>
+            }
+          />
+          <Route
+            path="/notifications"
+            element={
+              <div className="center-container">
+                <NotificationPage />
               </div>
             }
           />

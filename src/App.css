@@ -54,6 +54,8 @@ body {
 }
 
 .main-container .center-container {
+  margin-inline: 50px;
+  flex-grow: 1;
   overflow-y: scroll;
   height: 100%;
   width: 100%;
@@ -67,7 +69,7 @@ body {
 
 .main-container .info-panel {
   margin-right: var(--side-margin);
-  width: 300px;
+  width: 340px;
   height: 100%;
   overflow-y: scroll;
   -ms-overflow-style: none;
