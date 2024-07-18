@@ -15,9 +15,9 @@ export const ResearchActivities = () => {
     setDetailsVisible(!detailsVisible);
   };
   return (
-    <div className="activitybox">
+    <div className="activitybox" onClick={handleActnameClick}>
       <div className="activitypart">
-        <a className="actname" onClick={handleActnameClick}>
+        <a className="actname" href="#">
           Late blight of potato: From the great Irish potato famine to the
           genomic era - An overview
         </a>
