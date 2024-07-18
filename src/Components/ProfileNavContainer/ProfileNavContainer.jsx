@@ -7,7 +7,7 @@ import Home from "../../Pages/Home";
 import Profile from "../Profile/Profile";
 
 const ProfileNavContainer = () => {
-  const [selected, setSelected] = useState("photos");
+  const [selected, setSelected] = useState("profile");
 
   return (
     <div className="profile-nav-container">
