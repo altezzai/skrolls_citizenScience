@@ -24,7 +24,7 @@ const NewPost = () => {
       <div className="input-sec" onClick={handlePostClick}>
         What is new. Rafsal?
         <div className="postbtn-container">
-          <PostButton>Add Post!</PostButton>
+          <PostButton text={"Add Post!"} />
         </div>
       </div>
 
