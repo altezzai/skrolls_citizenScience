@@ -30,7 +30,7 @@ export const RoyaltyScore = () => {
             <h4 className="second">07</h4>
           </li>
           <li className="citation">
-            <h4>Download</h4>
+            <h4>Download</sadfasdh4>
          sadf  <div classadfsadfasdsName="line"></div>
             <h4 className="second">13</h4>
           </li>
