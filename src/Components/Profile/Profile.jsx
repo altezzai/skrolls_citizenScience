@@ -12,8 +12,10 @@ import FollowList from "../FollowList/FollowList";
 
 const Profile = () => {
   const [showFollow, setShowFollow] = useState(false);
+  const [selected, setSelected] = useState("following");
 
-  const handleShowFollow = () => {
+  const handleShowFollow = (sel) => {
+    setSelected(sel ? "followers" : "following");
     setShowFollow(true);
   };
 
@@ -30,15 +32,19 @@ const Profile = () => {
       </div>
 
       <div className="follows">
-        <div className="following" onClick={handleShowFollow}>
+        <div className="following" onClick={() => handleShowFollow(false)}>
           200 following
         </div>
-        <div className="followers" onClick={handleShowFollow}>
+        <div className="followers" onClick={() => handleShowFollow(true)}>
           20k followers
         </div>
       </div>
 
-      <FollowList show={showFollow} setShowFollow={setShowFollow}></FollowList>
+      <FollowList
+        show={showFollow}
+        setShowFollow={setShowFollow}
+        defaultTab={selected}
+      ></FollowList>
 
       <div className="description">
         <ReadMore sliceLength={135}>
