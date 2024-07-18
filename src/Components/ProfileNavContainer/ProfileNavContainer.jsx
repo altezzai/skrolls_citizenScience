@@ -5,6 +5,7 @@ import ProfileDetails from "../ProfileDetails/ProfileDetails";
 import { Tabs, Tab } from "@nextui-org/tabs";
 import Home from "../../Pages/Home";
 import Profile from "../Profile/Profile";
+import { ResearchActivities } from "../ResearchActivities/ResearchActivities";
 
 const ProfileNavContainer = () => {
   const [selected, setSelected] = useState("photos");
@@ -26,7 +27,11 @@ const ProfileNavContainer = () => {
             <div>POST SECTION</div>
           </Tab>
           <Tab key="Research" title="Research Activities" className="test">
-            <div>RESEARCH SECTION</div>
+            <ResearchActivities />
+            <ResearchActivities />
+            <ResearchActivities />
+            <ResearchActivities />
+            <ResearchActivities />
           </Tab>
         </Tabs>
       </div>

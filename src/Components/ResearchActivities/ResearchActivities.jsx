@@ -73,7 +73,9 @@ export const ResearchActivities = () => {
           text={"Download"}
           radius={"6px"}
           height={"25px"}
+          iconHeight="15px"
           flag={true}
+          textsize="11px"
         />
       </div>
       {detailsVisible && (

@@ -14,7 +14,6 @@ const NotificationPage = () => {
         <span>Notifications</span>
         <OnlineLogo icon={settings} size="25px" />
       </div>
-      <ResearchActivities />
 
       <div className="dateorder">
         <span className="day">Today</span>

@@ -39,19 +39,28 @@ const AddPost = ({ show, handleClose }) => {
   const handleDocumentChange = (e) => {
     const files = Array.from(e.target.files);
     const newDocumentPreviews = files.map((file) => file.name);
-    setDocumentPreviews((prevPreviews) => [...prevPreviews, ...newDocumentPreviews]);
+    setDocumentPreviews((prevPreviews) => [
+      ...prevPreviews,
+      ...newDocumentPreviews,
+    ]);
   };
 
   const removeImagePreview = (index) => {
-    setImagePreviews((prevPreviews) => prevPreviews.filter((_, i) => i !== index));
+    setImagePreviews((prevPreviews) =>
+      prevPreviews.filter((_, i) => i !== index)
+    );
   };
 
   const removeVideoPreview = (index) => {
-    setVideoPreviews((prevPreviews) => prevPreviews.filter((_, i) => i !== index));
+    setVideoPreviews((prevPreviews) =>
+      prevPreviews.filter((_, i) => i !== index)
+    );
   };
 
   const removeDocumentPreview = (index) => {
-    setDocumentPreviews((prevPreviews) => prevPreviews.filter((_, i) => i !== index));
+    setDocumentPreviews((prevPreviews) =>
+      prevPreviews.filter((_, i) => i !== index)
+    );
   };
 
   const resetForm = () => {
@@ -97,7 +106,10 @@ const AddPost = ({ show, handleClose }) => {
           value={postContent}
           onChange={(e) => setPostContent(e.target.value)}
         ></textarea>
-        <div className="add-media" style={{ display: isFileUploaded ? "none" : "flex" }}>
+        <div
+          className="add-media"
+          style={{ display: isFileUploaded ? "none" : "flex" }}
+        >
           <label htmlFor="imgfile" className="icon-post">
             <img src={imageico} alt="" />
             <span>Image</span>
@@ -136,23 +148,46 @@ const AddPost = ({ show, handleClose }) => {
         <div className="preview-container">
           {imagePreviews.map((preview, index) => (
             <div className="thumbnail-container" key={index}>
-              <img src={preview} alt={`Image Preview ${index}`} className="thumbnail" />
-              <span className="close-thumbnail" onClick={() => removeImagePreview(index)}>&times;</span>
+              <img
+                src={preview}
+                alt={`Image Preview ${index}`}
+                className="thumbnail"
+              />
+              <span
+                className="close-thumbnail"
+                onClick={() => removeImagePreview(index)}
+              >
+                &times;
+              </span>
             </div>
           ))}
           {videoPreviews.map((preview, index) => (
             <div className="thumbnail-container" key={index}>
               <video src={preview} controls className="thumbnail" />
-              <span className="close-thumbnail" onClick={() => removeVideoPreview(index)}>&times;</span>
+              <span
+                className="close-thumbnail"
+                onClick={() => removeVideoPreview(index)}
+              >
+                &times;
+              </span>
             </div>
           ))}
           {documentPreviews.map((preview, index) => (
             <div className="thumbnail-container document-thumbnail" key={index}>
               {preview}
-              <span className="close-thumbnail" onClick={() => removeDocumentPreview(index)}>&times;</span>
+              <span
+                className="close-thumbnail"
+                onClick={() => removeDocumentPreview(index)}
+              >
+                &times;
+              </span>
             </div>
           ))}
-          <label htmlFor="uploadfile" className="upload" style={{ display: isFileUploaded ? "flex" : "none" }}>
+          <label
+            htmlFor="uploadfile"
+            className="upload"
+            style={{ display: isFileUploaded ? "flex" : "none" }}
+          >
             <img src={uploadfile} alt="Add more files" />
             <input
               type="file"
@@ -175,7 +210,7 @@ const AddPost = ({ show, handleClose }) => {
           </label>
         </div>
 
-        <PostButton>Post it!</PostButton>
+        <PostButton text={"Post it!"} />
       </div>
     </div>
   );
