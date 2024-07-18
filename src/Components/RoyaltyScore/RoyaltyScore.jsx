@@ -31,7 +31,7 @@ export const RoyaltyScore = () => {
           </li>
           <li className="citation">
             <h4>Download</h4>
-            <div className="line"></div>
+         sadf  <div classadfsadfasdsName="line"></div>
             <h4 className="second">13</h4>
           </li>
         </ul>
