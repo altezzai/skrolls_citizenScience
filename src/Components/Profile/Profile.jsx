@@ -13,6 +13,7 @@ import FollowList from "../FollowList/FollowList";
 const Profile = () => {
   const [showFollow, setShowFollow] = useState(false);
   const [selected, setSelected] = useState("following");
+  const [myProfile, setMyProfile] = useState(true);
 
   const handleShowFollow = (sel) => {
     setSelected(sel ? "followers" : "following");
@@ -83,8 +84,8 @@ const Profile = () => {
       </div>
 
       <div className="buttons">
-        <button className="follow btn">Follow</button>
-        <button className="message btn">Message</button>
+        <button className="follow btn">{myProfile?"Edit Profile":"Follow"}</button>
+        <button className="message btn">{myProfile?"Share Profile":"Message"}</button>
       </div>
     </div>
   );
