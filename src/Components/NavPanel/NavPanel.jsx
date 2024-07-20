@@ -51,32 +51,34 @@ export const NavPanel = () => {
   };
 
   return (
-    <div className="asideNav">
-      <div className="navPanel">
+    <div className={`asideNav ${activeIndex === 1 ? "msgNav" : ""}`}>
+      <div className={`navPanel ${activeIndex === 1 ? "msgpanel" : ""}`}>
         <Link
           to="/"
           className={`navPiece bottomBorder ${
             activeIndex === 0 ? "active" : ""
-          }`}
+          } ${activeIndex === 1 ? "navPieceMsg" : ""}`}
           onClick={() => handleClick(0)}
         >
           <OnlineLogo icon={home} flag={true} />
+
           <h1>Home</h1>
         </Link>
-        <a
+        <Link
+          to="/messages"
           className={`navPiece bottomBorder ${
-            activeIndex === 1 ? "active" : ""
+            activeIndex === 1 ? "active navPieceMsg" : ""
           }`}
           onClick={() => handleClick(1)}
         >
           <OnlineLogo icon={messages} flag={true} />
 
           <h1>Messages</h1>
-        </a>
+        </Link>
         <a
           className={`navPiece bottomBorder ${
             activeIndex === 2 ? "active" : ""
-          }`}
+          } ${activeIndex === 1 ? "navPieceMsg" : ""}`}
           onClick={() => handleClick(2)}
         >
           <OnlineLogo icon={groups} />
@@ -86,7 +88,7 @@ export const NavPanel = () => {
         <a
           className={`navPiece bottomBorder ${
             activeIndex === 3 ? "active" : ""
-          }`}
+          } ${activeIndex === 1 ? "navPieceMsg" : ""}`}
           onClick={() => handleClick(3)}
         >
           <OnlineLogo icon={community} />
@@ -95,7 +97,9 @@ export const NavPanel = () => {
         </a>
         <Link
           to="/notifications"
-          className={`navPiece ${activeIndex === 4 ? "active" : ""}`}
+          className={`navPiece ${activeIndex === 4 ? "active" : ""} ${
+            activeIndex === 1 ? "navPieceMsg" : ""
+          }`}
           onClick={() => handleClick(4)}
         >
           <OnlineLogo icon={notification} flag={true} />
@@ -103,12 +107,14 @@ export const NavPanel = () => {
           <h1>Notifications</h1>
         </Link>
       </div>
-      <div className="navPanel bottom">
+      <div
+        className={`navPanel bottom ${activeIndex === 1 ? "msgpanel" : ""} `}
+      >
         <Link
           to="/profile"
           className={`navPiece bottomBorder ${
             activeIndex === 5 ? "active" : ""
-          }`}
+          } ${activeIndex === 1 ? "navPieceMsg" : ""}`}
           onClick={() => handleClick(5)}
         >
           <img src={profile} className="profileLogo" />
@@ -116,7 +122,9 @@ export const NavPanel = () => {
           <h1>Profile</h1>
         </Link>
         <a
-          className={`navPiece ${activeIndex === 6 ? "active" : ""}`}
+          className={`navPiece ${activeIndex === 6 ? "active" : ""} ${
+            activeIndex === 1 ? "navPieceMsg" : ""
+          }`}
           onClick={() => handleClick(6)}
         >
           <OnlineLogo icon={settings} />

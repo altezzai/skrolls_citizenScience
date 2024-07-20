@@ -7,10 +7,18 @@
   padding-block: 60px;
   margin-left: var(--side-margin);
 }
+.msgNav {
+  margin-left: 10px;
+}
+/* .hide-label {
+  display: none;
+} */
 .navPanel.bottom {
   height: 120px;
 }
-
+.homelabel{
+  display: flex;
+}
 .navPanel {
   width: 240px;
   /* margin-top: 60px;
@@ -23,6 +31,9 @@
   display: flex;
   flex-direction: column;
   /* overflow: hidden; */
+}
+.msgpanel {
+  width: 60px;
 }
 
 .navPanel .navPiece:first-child {
@@ -48,6 +59,11 @@
   gap: 10px;
 }
 
+.navPieceMsg{
+  padding: 0;
+  justify-content: center;
+}
+
 .navPiece.active {
   background-color: var(--color-secondary);
   box-shadow: -2px 0 0 0 var(--color-primary);
@@ -67,7 +83,9 @@
   border-bottom: 1px solid var(--color-bg-muted);
   border-top: 1px solid var(--color-bg-muted);
 }
-
+.navPieceMsg h1{
+  display: none;
+}
 .navPanel .navPiece:last-child h1 {
   border-bottom: none;
 }
