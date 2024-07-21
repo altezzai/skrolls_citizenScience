@@ -1,11 +1,15 @@
 import React, { useRef } from "react";
 import icon from "../../assets/icon.png";
 import search from "../../assets/search.svg";
-import { Link } from "react-router-dom";
+import skrolls from "../../assets/skrolls.png";
+import { Link, useLocation } from "react-router-dom";
 import "./Header.css";
+
 
 const Header = () => {
   const inputRef = useRef(null);
+  const location = useLocation();
+  const inMessage = location.pathname.includes("/messages")
 
   const handleSearchClick = () => {
     if (inputRef.current) {
@@ -14,13 +18,16 @@ const Header = () => {
   };
 
   return (
-    <div className="header">
+    <div className={`header ${ inMessage ? "msg-header": ""}`}>
       <Link to="/">
-        <div className="icon">
+        <div className={`${ inMessage ? "hide-icon": "icon"}`}>
           <img src={icon} alt="icon" />
         </div>
+        <div className={`${ inMessage ? "msg-icon": "hide-icon"}`}>
+          <img src={skrolls} alt="icon" />
+        </div>
       </Link>
-      <div className="search-box">
+      <div className={`search-box ${ inMessage ? "msg-search-box": ""}`}>
         <img
           src={search}
           alt="search"
