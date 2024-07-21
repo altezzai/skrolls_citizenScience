@@ -2,7 +2,6 @@ import React from "react";
 import "./Followers.css";
 import photo from "../../assets/profile.png";
 import FollowButton from "../FollowButton/FollowButton";
-import { useLocation } from "react-router-dom";
 
 export const Followers = ({
   title,
@@ -10,11 +9,8 @@ export const Followers = ({
   followbtnflag = false,
   countflag = false,
 }) => {
-  const location = useLocation();
-  const inMessagePage = location.pathname.includes("/messages");
-
   return (
-    <div className={`${inMessagePage? "hide-followersBox": "followersBox"}`}>
+    <div className="followersBox">
       <div className="titlespace">
         <span>{title}</span>
         {countflag ? <div className="countcircle">12</div> : undefined}
