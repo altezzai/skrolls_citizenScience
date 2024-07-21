@@ -11,6 +11,9 @@
   background-color: var(--color-bg-secondary);
   border: 1px solid var(--color-border-muted);
 }
+.hide-royaltyPanel{
+  display: none;
+}
 
 .list {
   /* margin-top: 10px; */

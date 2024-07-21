@@ -5,11 +5,10 @@ import skrolls from "../../assets/skrolls.png";
 import { Link, useLocation } from "react-router-dom";
 import "./Header.css";
 
-
 const Header = () => {
   const inputRef = useRef(null);
   const location = useLocation();
-  const inMessage = location.pathname.includes("/messages")
+  const inMessagePage = location.pathname.includes("/messages");
 
   const handleSearchClick = () => {
     if (inputRef.current) {
@@ -18,16 +17,16 @@ const Header = () => {
   };
 
   return (
-    <div className={`header ${ inMessage ? "msg-header": ""}`}>
+    <div className={`header ${inMessagePage ? "msg-header" : ""}`}>
       <Link to="/">
-        <div className={`${ inMessage ? "hide-icon": "icon"}`}>
+        <div className={`${inMessagePage ? "hide-icon" : "icon"}`}>
           <img src={icon} alt="icon" />
         </div>
-        <div className={`${ inMessage ? "msg-icon": "hide-icon"}`}>
+        <div className={`${inMessagePage ? "msg-icon" : "hide-icon"}`}>
           <img src={skrolls} alt="icon" />
         </div>
       </Link>
-      <div className={`search-box ${ inMessage ? "msg-search-box": ""}`}>
+      <div className={`search-box ${inMessagePage ? "msg-search-box" : ""}`}>
         <img
           src={search}
           alt="search"
