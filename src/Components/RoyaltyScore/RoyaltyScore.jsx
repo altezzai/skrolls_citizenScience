@@ -1,14 +1,10 @@
 import React from "react";
 import "./RoyaltyScore.css";
 import info from "../../assets/info.svg";
-import { useLocation } from "react-router-dom";
 
 export const RoyaltyScore = () => {
-  const location = useLocation();
-  const inMessagePage = location.pathname.includes("/messages");
-
   return (
-    <div className={`royaltyPanel ${inMessagePage ? "hide-royaltyPanel" : ""}`}>
+    <div className="royaltyPanel">
       <ul className="list">
         <li className="listIcon ">
           <h1>Royalty Score</h1>

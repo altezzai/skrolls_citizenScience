@@ -1,14 +1,10 @@
 import React from "react";
 import "./IdBox.css";
 import internet from "../../assets/internet.svg";
-import { useLocation } from "react-router-dom";
 
 export const IdBox = () => {
-  const location = useLocation();
-  const inMessagePage = location.pathname.includes("/messages");
-
   return (
-    <div className={`${inMessagePage? "hide-idBox": "idBox"}`}>
+    <div className="idBox">
       <div className="other">
         <span>Other id's</span>
       </div>
