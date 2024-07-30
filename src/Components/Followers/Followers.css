@@ -3,8 +3,8 @@
   margin-top: 10px;
   padding: 20px 20px 10px 20px;
   border-radius: 27px;
-  background-color: #ffffff;
-  border: 1px solid #ececec;
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-muted);
 }
 
 .titlespace {
@@ -19,12 +19,12 @@
 }
 
 .countcircle {
-  background-color: #bababa;
+  background-color: var(--color-text-muted);
   border-radius: 50%;
-  border: 2px solid white;
+  border: 2px solid var(--color-bg-secondary);
   height: 20px;
   width: 20px;
-  color: #ffffff;
+  color: var(--color-bg-secondary);
   font-size: 10px;
   display: flex;
   align-items: center;
@@ -59,12 +59,13 @@
 
 .userName h4:first-of-type {
   font-weight: 500;
-  color: #000000;
+  color: var(--color-text-primary);
 }
 
-.uname {
+.userName .uname {
   font-weight: 400;
-  color: #9b9b9b;
+  color: var(--color-text-secondary);
+  margin-left: 0;
 }
 
 .viewmore {
@@ -76,6 +77,6 @@
 .viewmore a {
   font-size: 14px;
   font-weight: 500;
-  color: black;
-  border-bottom: 1px solid black;
+  color: var(--color-text-primary);
+  border-bottom: 1px solid var(--color-text-primary);
 }

@@ -1,5 +1,5 @@
 .activitybox {
-  background-color: white;
+  background-color: var(--color-bg-secondary);
   width: 100%;
   border-radius: 14px;
   display: flex;
@@ -21,7 +21,7 @@
 .actname {
   font-size: 13px;
   font-weight: 600;
-  color: #141414;
+  color: var(--color-text-primary);
   line-height: 18px;
   text-decoration: none;
   cursor: pointer;
@@ -32,7 +32,7 @@
   align-items: center;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #f9fafb;
+  background-color: var(--color-bg-secondary);
   border-radius: 6px;
   padding: 5px;
   width: 120px;
@@ -82,7 +82,7 @@
   font-size: 10px;
   font-weight: 500;
   line-height: 10px;
-  color: #545454;
+  color: var(--color-text-secondary);
 }
 
 .source {
@@ -93,21 +93,20 @@
 
 .source img {
   width: 15px;
-  border: 2px solid white;
   margin-right: 5px;
 }
 
 .source span:first-of-type {
   font-size: 15px;
   font-weight: 600;
-  color: #141414;
+  color: var(--color-text-primary);
   margin-right: 5px;
 }
 
 .source span {
   font-size: 15px;
   font-weight: 600;
-  color: #545454;
+  color: var(--color-text-secondary);
 }
 
 .contrib {
@@ -127,13 +126,13 @@
   font-size: 13px;
   font-weight: 600;
   padding: 10px 0px 8px 0px;
-  border-bottom: 1px solid rgb(198, 198, 198, 0.25);
+  border-bottom: 1px solid var(--color-border-muted);
 }
 
 .tabdetails {
   margin-top: 5px;
   width: 100%;
-  background-color: #f9fafb;
+  background-color: var(--color-bg-muted);
   border-radius: 12px;
   padding: 10px;
 }
@@ -150,7 +149,7 @@
 .tableview td {
   padding: 10px;
   width: 50%;
-  border-bottom: 1px solid rgb(198, 198, 198, 0.25);
+  border-bottom: 1px solid var(--color-border-muted);
 }
 .tableview tbody tr:last-child td {
   border-bottom: none;
@@ -158,7 +157,7 @@
 .labelname {
   font-size: 13px;
   font-weight: 600;
-  color: #141414;
+  color: var(--color-text-primary);
 }
 
 .urllink {
@@ -170,6 +169,6 @@
 
 .infodata {
   font-size: 13px;
-  color: #545454;
+  color: var(--color-text-secondary);
   font-weight: 500;
 }

@@ -8,8 +8,8 @@
   padding-block: 10px;
   width: 100%;
   border-radius: 27px;
-  background-color: #ffffff;
-  border: 1px solid #ececec;
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-muted);
 }
 
 .list {
@@ -55,7 +55,7 @@
 }
 
 .score h5 {
-  color: #636363;
+  color: var(--color-text-secondary);
   margin-bottom: 20px;
   font-weight: 600;
   line-height: 0.01;
@@ -63,7 +63,7 @@
 
 .citation {
   padding-inline: 20px;
-  color: #888888;
+  color: var(--color-text-secondary);
   display: flex;
   justify-content: space-between;
   padding-bottom: 5px;
@@ -77,14 +77,14 @@
 }
 .second {
   padding-left: 5px;
-  color: black;
+  color: var(--color-text-primary);
 }
 
 .line {
   margin-top: 14px;
   height: 1px;
   width: 100%;
-  background-color: #ececec;
+  background-color: var(--color-border-muted);
   flex: 1;
 }
 

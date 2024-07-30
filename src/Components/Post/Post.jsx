@@ -40,7 +40,7 @@ const Post = () => {
       <div className="post-details">
         <div className="poster-details">
           <div className="poster-name">Manu P</div>
-          <div className="posted-date dot">.</div>
+          <div className="posted-date dot"></div>
           <div className="posted-date"> April 17</div>
         </div>
         <div className="post-content">

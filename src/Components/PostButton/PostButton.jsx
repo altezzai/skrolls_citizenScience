@@ -20,7 +20,7 @@ const PostButton = ({
       {flag ? (
         <span
           style={{
-            borderLeft: "1px solid #ffffff",
+            borderLeft: "1px solid var(--color-bg-secondary)",
             paddingLeft: "8px",
             marginLeft: "2px",
             lineHeight: "13px",

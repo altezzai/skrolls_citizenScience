@@ -12,11 +12,7 @@ const ReadMore = ({ children, sliceLength }) => {
     <p className="text">
       {isReadMore ? text.slice(0, sliceLength) : text}
       {text.length > sliceLength && (
-        <span
-          onClick={toggleReadMore}
-          className="read-or-hide"
-          style={{ color: "rgba(243, 103, 96, 1)" }}
-        >
+        <span onClick={toggleReadMore} className="read-or-hide">
           {isReadMore ? " more..." : " less"}
         </span>
       )}

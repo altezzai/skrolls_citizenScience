@@ -6,7 +6,7 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: var(--color-bg-transarent-muted);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   z-index: 10;
@@ -20,16 +20,14 @@
   left: 50%;
   transform: translateX(-50%);
   width: 50%;
-  /* padding: 20px; */
   padding-top: 0;
   border-radius: 18px;
-  background: #ffffff;
-  border: 1px solid #bbbbbb;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-primary);
   width: 35%;
   height: 550px;
   display: flex;
   flex-direction: column;
-  /* overflow-y: scroll; */
   overflow: hidden;
 }
 /* .follow-list-header {
@@ -47,11 +45,11 @@
   border-radius: 0 0 18px 18px;
   overflow: hidden;
 } */
-.head{
-font-size: 20px;
-font-weight: 600;
+.head {
+  font-size: 20px;
+  font-weight: 600;
 }
-.follow-list-content .py-3{
+.follow-list-content .py-3 {
   overflow-y: scroll;
   overflow-x: hidden;
 }

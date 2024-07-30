@@ -18,16 +18,30 @@
 }
 
 :root {
-  --tableBorderRadius: 10px;
-  --borderGrey: rgb(163, 163, 163);
-  --darkGrey: rgb(81, 81, 81);
-  --containerMargin: 70px;
-  --navbarHeight: 70px;
-  --headerHeight: 86px;
   --color-primary: #f36760;
   --color-secondary: #ffeae9;
+
+  --color-bg-primary: #f3f3f3;
+  --color-bg-secondary: #ffffff;
+  --color-bg-muted: #f5f5f6;
+  --color-bg-muted-transparent: #e7e7e740;
+  --color-bg-transparent: #000000b8;
+  --color-bg-transparent-muted: #00000066;
+
+  --color-textarea: #f6f6ff;
+
+  --color-border-primary: #a3a3a3;
+  --color-border-muted: #dddddd;
+
+  --color-text-primary: #000000;
+  --color-text-secondary: #6c757d;
+  --color-text-muted: #c6c6c6;
+  --color-text-hard:#3c3c3c;
+
+  --color-shadow:rgba(0, 0, 0, 0.05);
+
+  --headerHeight: 86px;
   --side-margin: 50px;
-  --color-bg-grey: #f3f3f3;
 }
 
 #root {
@@ -36,7 +50,7 @@
 
 body {
   overflow-x: hidden;
-  background-color: #f3f3f3;
+  background-color: var(--color-bg-primary);
 }
 
 .main-container {

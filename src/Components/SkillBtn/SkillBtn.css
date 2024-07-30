@@ -1,7 +1,7 @@
 .skill {
-  border: 1px solid rgba(221, 221, 221, 1);
+  border: 1px solid var(--color-border-muted);
   height: 36px;
-  background: rgba(231, 231, 231, 0.25);
+  background: var(--color-bg-muted-transparent);
   padding-left: 25px;
   padding-right: 25px;
   cursor: pointer;
@@ -9,5 +9,5 @@
   font-weight: 600;
   line-height: 18.15px;
   text-align: left;
-  color: rgba(119, 105, 104, 1);
+  color: var(--color-text-secondary);
 }

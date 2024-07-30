@@ -5,10 +5,9 @@
 
 .uname {
   margin-left: 5px;
-
   font-size: 12px;
   font-weight: 500;
-  color: #545454;
+  color: var(--color-text-secondary);
   text-decoration: none;
   cursor: pointer;
 }

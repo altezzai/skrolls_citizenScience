@@ -1,14 +1,14 @@
 .userfollow {
   display: flex;
   align-items: center;
-  background: #ffffff;
+  background: var(--color-bg-secondary);
   margin-block: 20px;
 }
-.userfollow .userfollow-detail{
-display: flex;
-justify-content: space-between;
-align-items: center;
-width: 100%;
+.userfollow .userfollow-detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 .userfollow .userfollow-detail .user-details .user-name {
   font-size: 20px;
@@ -19,9 +19,9 @@ width: 100%;
   font-size: 18px;
   font-weight: 400;
   line-height: 24.2px;
-  color: #9b9b9b;
+  color: var(--color-text-secondary);
 }
-.userfollow .userfollow-detail .followbtn-container{
-    margin-right: 10px;
-    width: 150px;
+.userfollow .userfollow-detail .followbtn-container {
+  margin-right: 10px;
+  width: 150px;
 }
