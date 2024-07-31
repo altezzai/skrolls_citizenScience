@@ -1,0 +1,28 @@
+
+.messagebox-head {
+  background: var(--color-bg-secondary);
+}
+
+.message-input-box {
+  background: var(--color-bg-secondary);
+}
+
+.messagebox-msg-area{
+    scrollbar-width: none;
+}
+
+.message-type {
+  font-size: 1.125rem;
+  padding: 10px;
+  outline: none;
+  border: none;
+  width: 900px;
+  resize: none;
+  scrollbar-width: none;
+  height: 50px;
+}
+
+.message-type::placeholder {
+  font-size: 1.125rem;
+  color: var(--color-text-secondary);
+}
