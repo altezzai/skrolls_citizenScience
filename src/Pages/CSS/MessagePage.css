@@ -1,16 +1,14 @@
 .msgpage {
   display: flex;
   width: 100%;
+  /* background: gray; */
+  overflow: hidden;
 }
 .usermsglist-container {
   min-width: 300px;
   width: 25%;
-  height: 100vh;
 }
 .chatbox-container {
-  width: 71%;
-  height: 100vh;
-  position: absolute;
-  top: 0;
-  right: 0;
+  width: 75%;
+  /* background: #9e5b5b; */
 }
