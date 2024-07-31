@@ -1,0 +1,29 @@
+.usermsglist-item {
+  border-radius: 20px; 
+}
+.clickedmsg {
+  background-color: var(--color-secondary);
+}
+
+.user-name {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.user-final-msg {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+}
+
+.last-msg-time {
+  color: var(--color-text-secondary);
+}
+
+.unseen-msg-count {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-bg-secondary);
+}
