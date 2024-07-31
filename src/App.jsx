@@ -6,7 +6,7 @@ import { RoyaltyScore } from "./Components/RoyaltyScore/RoyaltyScore";
 import { IdBox } from "./Components/IdBox/IdBox";
 import { Followers } from "./Components/Followers/Followers";
 import ProfileContainer from "./Pages/ProfileContainer";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import NotificationPage from "./Pages/NotificationPage";
 import MessagePage from "./Pages/MessagePage";
 // import Profile from "./Components/Profile/Profile";
@@ -14,6 +14,8 @@ import MessagePage from "./Pages/MessagePage";
 // import ProfileDetails from "./Components/ProfileDetails/ProfileDetails";
 
 function App() {
+  const location = useLocation();
+  const inMessagePage = location.pathname.includes("/messages");
   return (
     <>
       <Header />
@@ -31,7 +33,7 @@ function App() {
           <Route
             path="/messages"
             element={
-              <div className="center-container">
+              <div className="messagePage-container">
                 <MessagePage />
               </div>
             }
@@ -53,7 +55,7 @@ function App() {
             }
           />
         </Routes>
-        <div className="info-panel">
+        <div className={`${inMessagePage ? "hide-info-panel": "info-panel"}`}>
           <RoyaltyScore />
           <IdBox />
           <Followers title={"Followers"} followbtnflag={true} />
