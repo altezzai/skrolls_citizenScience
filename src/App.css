@@ -59,6 +59,18 @@ body {
   justify-content: space-between;
   height: calc(100vh - var(--headerHeight));
 }
+.main-container .messagePage-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-grow: 1;
+  overflow-y: scroll;
+  height: 100%;
+  width: 100%;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  margin-left: 10px;
+}
 
 .main-container .center-container,
 .main-container .info-panel {
@@ -90,6 +102,9 @@ body {
   scrollbar-width: none;
   padding-top: 40px;
   flex-shrink: 0;
+}
+.main-container .hide-info-panel{
+  display: none;
 }
 
 .btn {
