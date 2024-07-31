@@ -7,6 +7,7 @@ export const ProfilePhoto = ({ img, size }) => {
       src={img}
       className="photocircle"
       style={{ height: size, width: size }}
+      draggable="false"
     />
   );
 };

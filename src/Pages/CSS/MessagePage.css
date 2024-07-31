@@ -1,0 +1,17 @@
+.msgpage{
+display: flex;
+width: 100%;
+position: absolute;
+}
+.usermsglist-container{
+min-width: 300px;
+width: 25%;
+height: 100vh;
+}
+.chatbox-container{
+background-color: rgb(225, 131, 131);
+width: 75%;
+position: relative;
+top: 0;
+margin-top: -60px;
+}
