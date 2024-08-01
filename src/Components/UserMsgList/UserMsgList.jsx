@@ -56,7 +56,7 @@ const UserMsgList = () => {
   ];
 
   return (
-    <div className="user-msg-list">
+    <div className="user-msg-list w-full h-full overflow-y-scroll scrollbar-hide">
       {users.map((user, index) => (
         <UserMsgListItem
           key={index}

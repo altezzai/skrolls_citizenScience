@@ -21,9 +21,9 @@ const UserMsgListItem = ({ user, isActive, onClick }) => {
         </div>
       </div>
 
-      <div className="user-msg-status flex flex-col items-center gap-2 min-w-12">
+      <div className="user-msg-status flex flex-col gap-2 min-w-12">
         <div className="last-msg-time text-xs">{user.time}</div>
-        <div className="unseen-msg-count text-xs flex items-center justify-center leading-none">
+        <div className="unseen-msg-count rounded-full text-xs flex items-center justify-center leading-none px-1 h-4 min-w-4">
           {user.count}
         </div>
       </div>

@@ -1,0 +1,32 @@
+.message-bubble {
+  max-width: 70%;
+  padding: 10px;
+  border-radius: 15px;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.sent {
+  padding-right: 20px;
+  align-self: flex-end;
+  background-color: var(--color-primary);
+  color: var(--color-bg-secondary);
+  /* text-align: right; */
+}
+
+.received {
+  padding-left: 20px;
+  align-self: flex-start;
+  background-color: var(--color-secondary);
+  /* text-align: left; */
+}
+
+.received .message-time {
+  font-size: 0.6rem;
+  color: var(--color-text-secondary);
+}
+
+.sent .message-time {
+  font-size: 0.6rem;
+  color: var(--color-border-muted);
+}
