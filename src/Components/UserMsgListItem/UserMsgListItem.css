@@ -6,24 +6,25 @@
 }
 
 .user-name {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 500;
 }
 
 .user-final-msg {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 400;
   color: var(--color-text-secondary);
 }
 
 .last-msg-time {
+  font-size: 0.6rem;
   color: var(--color-text-secondary);
 }
 
 .unseen-msg-count {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
+  /* width: 100%; */
+  width: fit-content;
+  font-size: 0.6rem;
   background: var(--color-primary);
   color: var(--color-bg-secondary);
 }

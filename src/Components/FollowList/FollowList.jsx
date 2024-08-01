@@ -30,7 +30,7 @@ const FollowList = ({ show, setShowFollow, defaultTab }) => {
           selectedKey={selected}
           onSelectionChange={setSelected}
           variant="underlined"
-          className="sticky top-0 bg-white w-full justify-center flex items-center border-b-2 border-bggrey pt-4"
+          className="sticky top-0 bg-white w-full justify-center flex items-center border-b-2 border-bg-primary pt-4"
         >
           <Tab key="followers" title="Followers" className="test head px-4">
             <UserFollowListItem />
