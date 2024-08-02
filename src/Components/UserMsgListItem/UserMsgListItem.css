@@ -1,6 +1,9 @@
 .usermsglist-item {
   border-radius: 20px; 
 }
+.usermsglist-item:hover{
+  background-color: #fff8f8; 
+}
 .clickedmsg {
   background-color: var(--color-secondary);
 }

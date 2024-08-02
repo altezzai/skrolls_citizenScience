@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./MessageBox.css";
-// import photo from "../../assets/profile.png";
-// import more from "../../assets/vertical_dots.svg";
+
+import photo from "../../assets/profile.png";
+import more from "../../assets/vertical_dots.svg";
 import attach from "../../assets/attach.svg";
 import send from "../../assets/send.svg";
 import smily from "../../assets/smily.svg";
-// import { ProfilePhoto } from "../Profilephoto/ProfilePhoto";
+import { ProfilePhoto } from "../Profilephoto/ProfilePhoto";
 import EmojiPicker from "emoji-picker-react";
 import MessageBubble from "../MessageBubble/MessageBubble";
 import sampleMessage from "../../data/message.json";
@@ -71,6 +72,19 @@ const MessageBox = () => {
 
   return (
     <div className="messagebox h-full flex flex-col relative">
+      <div className="messagebox-head flex justify-between items-center h-16 px-5 py-2 select-none">
+        <div className="messagebox-user flex items-center gap-3 text-lg font-medium">
+          <ProfilePhoto img={photo} size={"3rem"} />
+          Manuprasad
+        </div>
+        <img
+          className="w-7 cursor-pointer"
+          src={more}
+          alt="More options"
+          draggable="false"
+        />
+      </div>
+
       <div
         className="messagebox-msg-area h-full overflow-y-scroll px-4 py-2 flex flex-col gap-2"
         ref={messageBoxRef}
@@ -85,7 +99,7 @@ const MessageBox = () => {
         ))}
       </div>
 
-      <div className="message-input-box rounded-2xl min-h-20 max-h-40 flex items-center justify-self-end w-full gap-3 px-5 absolute bottom-0">
+      <div className="message-input-box rounded-2xl h-16 flex items-center justify-self-end w-full gap-3 px-5 absolute bottom-0">
         <div
           className="attachment-container relative rounded-full p-2 transition-all ease-in-out delay-0"
           ref={emojiPickerRef}

@@ -10,9 +10,9 @@
 .msgNav {
   margin-left: 10px;
 }
-/* .hide-label {
-  display: none;
-} */
+.msg-icon {
+  background: var(--color-bg-secondary);
+}
 .navPanel.bottom {
   height: 120px;
 }

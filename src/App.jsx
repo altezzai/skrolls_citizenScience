@@ -19,7 +19,7 @@ function App() {
   return (
     <>
       <Header />
-      <div className="main-container">
+      <div className={`main-container ${inMessagePage ? "height-set" : ""}`}>
         <NavPanel />
         <Routes>
           <Route
