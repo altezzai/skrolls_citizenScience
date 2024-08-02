@@ -36,9 +36,9 @@
   --color-text-primary: #000000;
   --color-text-secondary: #6c757d;
   --color-text-muted: #c6c6c6;
-  --color-text-hard:#3c3c3c;
+  --color-text-hard: #3c3c3c;
 
-  --color-shadow:rgba(0, 0, 0, 0.05);
+  --color-shadow: rgba(0, 0, 0, 0.05);
 
   --headerHeight: 80px;
   --side-margin: 50px;
@@ -59,7 +59,10 @@ body {
   justify-content: space-between;
   height: calc(100vh - var(--headerHeight));
 }
-.main-container .messagePage-container{
+.height-set {
+  height: 100vh;
+}
+.main-container .messagePage-container {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -103,7 +106,7 @@ body {
   padding-top: 40px;
   flex-shrink: 0;
 }
-.main-container .hide-info-panel{
+.main-container .hide-info-panel {
   display: none;
 }
 

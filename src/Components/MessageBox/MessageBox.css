@@ -1,4 +1,6 @@
-
+.messagebox-head {
+  background: var(--color-bg-secondary);
+}
 
 .message-input-box {
   background: var(--color-bg-secondary);
@@ -6,7 +8,7 @@
 }
 
 .messagebox-msg-area{
-  height: calc(100vh - var(--headerHeight) - 5rem);
+  height: calc(100vh - 8rem);
     scrollbar-width: none;
 }
 
@@ -22,4 +24,3 @@
 .attachment-container:hover{
   background: var(--color-secondary);
 }
-

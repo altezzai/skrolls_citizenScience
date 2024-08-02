@@ -13,10 +13,12 @@ import groups from "../../assets/groups.svg";
 import community from "../../assets/community.svg";
 import settings from "../../assets/settings.svg";
 import profile from "../../assets/profile.png";
+import skrolls from "../../assets/skrolls.png";
 
 export const NavPanel = () => {
   const [activeIndex, setActiveIndex] = useState(null);
   const location = useLocation();
+  const inMessagePage = location.pathname.includes("/messages");
 
   useEffect(() => {
     switch (location.pathname) {
@@ -52,6 +54,15 @@ export const NavPanel = () => {
 
   return (
     <div className={`asideNav ${activeIndex === 1 ? "msgNav" : ""}`}>
+      <Link
+        to="/"
+        className={`${
+          inMessagePage ? "msg-icon flex py-1 -mt-10 rounded-lg" : "hidden"
+        }`}
+      >
+        <img src={skrolls} alt="icon" />
+      </Link>
+
       <div className={`navPanel ${activeIndex === 1 ? "msgpanel" : ""}`}>
         <Link
           to="/"
