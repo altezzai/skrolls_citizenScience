@@ -7,6 +7,9 @@
 .clickedmsg {
   background-color: var(--color-secondary);
 }
+.clickedmsg:hover {
+  background-color: #fddfdf;
+}
 
 .user-name {
   font-size: 1rem;
