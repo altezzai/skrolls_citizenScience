@@ -10,6 +10,7 @@ import { ProfilePhoto } from "../Profilephoto/ProfilePhoto";
 import EmojiPicker from "emoji-picker-react";
 import MessageBubble from "../MessageBubble/MessageBubble";
 import sampleMessage from "../../data/message.json";
+import { groupMessagesByDate } from "../../utils/groupMessagesByDate";
 
 const MessageBox = () => {
   const [open, setOpen] = useState(false);
@@ -70,6 +71,8 @@ const MessageBox = () => {
     }
   }, [messages]);
 
+  const groupedMessages = groupMessagesByDate(messages);
+
   return (
     <div className="messagebox h-full flex flex-col relative">
       <div className="messagebox-head flex justify-between items-center h-16 px-5 py-2 select-none">
@@ -89,13 +92,20 @@ const MessageBox = () => {
         className="messagebox-msg-area h-full overflow-y-scroll px-4 py-2 flex flex-col gap-2"
         ref={messageBoxRef}
       >
-        {messages.map((message) => (
-          <MessageBubble
-            key={message.id}
-            message={message.text}
-            isSentByMe={message.sentByMe}
-            timestamp={message.timestamp}
-          />
+        {Object.keys(groupedMessages).map((date) => (
+          <div key={date}>
+            <div className="date-header text-center text-xs text-gray-600 my-2">
+              {date}
+            </div>
+            {groupedMessages[date].map((message) => (
+              <MessageBubble
+                key={message.id}
+                message={message.text}
+                isSentByMe={message.sentByMe}
+                timestamp={message.timestamp}
+              />
+            ))}
+          </div>
         ))}
       </div>
 

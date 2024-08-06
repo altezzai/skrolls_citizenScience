@@ -6,6 +6,7 @@
   flex-direction: column;
   padding-block: 60px;
   margin-left: var(--side-margin);
+  transition: all 0.2s ease-in-out;
 }
 .msgNav {
   margin-left: 10px;

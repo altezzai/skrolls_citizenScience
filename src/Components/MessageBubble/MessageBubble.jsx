@@ -17,13 +17,19 @@ const MessageBubble = ({ message, isSentByMe, timestamp }) => {
 
   return (
     <div
-      className={`message-bubble ${
-        isSentByMe ? "sent" : "received"
-      } p-2 rounded-lg mb-2 max-w-xs`}
+      className={` w-full flex ${
+        isSentByMe ? " justify-end " : "justify-start"
+      }`}
     >
-      <div className="message-text">{formattedMessage}</div>
-      <div className="message-time text-gray-500 mt-1 text-right">
-        {formattedTime}
+      <div
+        className={`message-bubble ${
+          isSentByMe ? "sent" : "received"
+        } p-2 rounded-lg mb-2 max-w-xs`}
+      >
+        <div className="message-text">{formattedMessage}</div>
+        <div className="message-time text-gray-500 mt-1 text-right">
+          {formattedTime}
+        </div>
       </div>
     </div>
   );

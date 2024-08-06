@@ -24,3 +24,7 @@
 .attachment-container:hover{
   background: var(--color-secondary);
 }
+
+.date-header{
+  color: var(--color-text-secondary);
+}

@@ -7,6 +7,11 @@
   justify-content: space-between;
   align-items: center;
   padding-inline: calc(var(--side-margin) + 74px);
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0px 0px 28px 3px var(--color-shadow);
+  -webkit-box-shadow: 0px 0px 28px 3px var(--color-shadow);
+  -moz-box-shadow: 0px 0px 28px 3px var(--color-shadow);
+  /* z-index: 100; */
 }
 
 .msg-header {
