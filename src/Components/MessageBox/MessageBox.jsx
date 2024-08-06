@@ -6,21 +6,35 @@ import more from "../../assets/vertical_dots.svg";
 import attach from "../../assets/attach.svg";
 import send from "../../assets/send.svg";
 import smily from "../../assets/smily.svg";
+import upload from "../../assets/upload.svg";
+
 import { ProfilePhoto } from "../Profilephoto/ProfilePhoto";
 import EmojiPicker from "emoji-picker-react";
 import MessageBubble from "../MessageBubble/MessageBubble";
 import sampleMessage from "../../data/message.json";
 import { groupMessagesByDate } from "../../utils/groupMessagesByDate";
+import useClickOutside from "../../hooks/useClickOutside";
 
 const MessageBox = () => {
   const [open, setOpen] = useState(false);
+  const [openAttach, setOpenAttach] = useState(false);
   const [inputStr, setInputStr] = useState("");
   const [messages, setMessages] = useState(sampleMessage);
-  const emojiPickerRef = useRef(null);
+  // const emojiPickerRef = useRef(null);
   const messageBoxRef = useRef(null);
+  const emojiPickerRef = useClickOutside(open, () => {
+    setOpen(false);
+  });
+  const attachmentRef = useClickOutside(openAttach, () => {
+    setOpenAttach(false);
+  });
 
   const handleEmojiPicker = () => {
     setOpen(!open);
+  };
+
+  const handleAttachment = () => {
+    setOpenAttach(!openAttach);
   };
 
   const onEmojiClick = (emojiObject) => {
@@ -48,22 +62,6 @@ const MessageBox = () => {
       handleSendMessage();
     }
   };
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        emojiPickerRef.current &&
-        !emojiPickerRef.current.contains(event.target)
-      ) {
-        setOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
 
   useEffect(() => {
     if (messageBoxRef.current) {
@@ -111,30 +109,57 @@ const MessageBox = () => {
 
       <div className="message-input-box rounded-2xl h-16 flex items-center justify-self-end w-full gap-3 px-5 absolute bottom-0">
         <div
-          className="attachment-container relative rounded-full p-2 transition-all ease-in-out delay-0"
+          className="attachment-container relative rounded-full p-2 transition-all ease-in-out delay-0 cursor-pointer "
           ref={emojiPickerRef}
+          onClick={handleEmojiPicker}
         >
           <img
-            className="w-6 cursor-pointer select-none"
+            className="w-6 select-none"
             src={smily}
             alt="Emoji"
-            onClick={handleEmojiPicker}
             draggable="false"
           />
           {open && (
-            <div className="absolute bottom-full left-0 mb-2">
+            <div
+              className="absolute bottom-full left-0 mb-2"
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
               <EmojiPicker onEmojiClick={onEmojiClick} />
             </div>
           )}
         </div>
 
-        <div className="attachment-container rounded-full p-2 transition-all ease-in-out delay-0">
+        <div
+          className="attachment-container cursor-pointer rounded-full p-2 transition-all ease-in-out delay-0 outline-2"
+          onClick={handleAttachment}
+          ref={attachmentRef}
+        >
           <img
             src={attach}
-            className="w-6 cursor-pointer select-none"
+            className="w-6 select-none"
             draggable="false"
             alt="Attach"
           />
+
+          {openAttach && (
+            <div
+              className="attachment-box absolute bottom-full left-0 p-2 h-24 rounded-t-3xl "
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
+              <label
+                htmlFor="uploadfile"
+                className="attachment-inner flex flex-row h-full w-full items-center rounded-t-3xl p-6  gap-2 border-dashed border-black cursor-pointer"
+              >
+                <img src={upload} className=" w-8" alt="upload button" />
+                <span className=" text-sm">upload an attachment</span>
+              </label>
+              <input type="file" id="uploadfile" multiple className=" hidden" />
+            </div>
+          )}
         </div>
 
         <textarea
@@ -146,7 +171,7 @@ const MessageBox = () => {
           rows={3}
         />
         <div
-          className="cursor-pointer transition-all ease-in-out delay-0 attachment-container px-6 py-3"
+          className="cursor-pointer transition-all ease-in-out delay-0 attachment-container px-6 py-3 rounded-lg"
           onClick={handleSendMessage}
         >
           <img

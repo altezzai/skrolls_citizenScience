@@ -7,7 +7,7 @@ const MessagePage = () => {
   return (
     <div className='msgpage'>
       <div className="usermsglist-container"><UserMsgList/></div>
-      <div className="chatbox-container">
+      <div className="chatbox-container max-md:hidden ">
         <MessageBox />
       </div>
     </div>
