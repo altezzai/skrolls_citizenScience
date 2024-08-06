@@ -79,30 +79,16 @@ body {
 }
 
 .main-container .center-container {
-  margin-inline: 50px;
+  /* margin-inline: 50px; */
   flex-grow: 1;
   overflow-y: scroll;
   height: 100%;
   width: 100%;
-  margin-inline: 40px;
+  /* margin-inline: 40px; */
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
 .center-container::-webkit-scrollbar {
-  display: none;
-}
-
-.main-container .info-panel {
-  margin-right: var(--side-margin);
-  width: 340px;
-  height: 100%;
-  overflow-y: scroll;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  padding-top: 40px;
-  flex-shrink: 0;
-}
-.main-container .hide-info-panel {
   display: none;
 }
 

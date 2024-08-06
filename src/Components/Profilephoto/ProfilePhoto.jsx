@@ -1,11 +1,10 @@
 import React from "react";
-import "./ProfilePhoto.css";
 
 export const ProfilePhoto = ({ img, size }) => {
   return (
     <img
       src={img}
-      className="photocircle"
+      className=" rounded-full select-none"
       style={{ height: size, width: size }}
       draggable="false"
     />

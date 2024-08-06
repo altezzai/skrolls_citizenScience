@@ -10,6 +10,7 @@ import send from "../../assets/send.svg";
 import save from "../../assets/save.svg";
 import internet from "../../assets/internet.svg";
 import translate from "../../assets/translate.svg";
+import { ProfilePhoto } from "../Profilephoto/ProfilePhoto";
 
 const Post = () => {
   const [likeCount, setLikeCount] = useState(200);
@@ -33,14 +34,12 @@ const Post = () => {
 
   return (
     <div className="post">
-      <div className="post-profile">
-        <img src={photo} alt="" />
-      </div>
+      <ProfilePhoto img={photo} size={"3rem"} />
 
       <div className="post-details">
         <div className="poster-details">
           <div className="poster-name">Manu P</div>
-          <div className="posted-date dot"></div>
+          <div className="posted-date dot">.</div>
           <div className="posted-date"> April 17</div>
         </div>
         <div className="post-content">
@@ -62,7 +61,7 @@ const Post = () => {
           </div>
         </div>
         <div className="post-img">
-          <img src={image} alt="" />
+          <img src={image} alt="post image" />
         </div>
         <div className="post-icons">
           <div className="icon-section">

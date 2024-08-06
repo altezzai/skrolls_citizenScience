@@ -3,6 +3,7 @@ import "./NewPost.css";
 import photo from "../../assets/profile.png";
 import PostButton from "../PostButton/PostButton";
 import AddPost from "../AddPost/AddPost";
+import { ProfilePhoto } from "../Profilephoto/ProfilePhoto";
 
 const NewPost = () => {
   const [showAddPost, setShowAddPost] = useState(false);
@@ -17,9 +18,10 @@ const NewPost = () => {
 
   return (
     <div className="newpost">
-      <div className="post-profile">
+      {/* <div className="post-profile">
         <img src={photo} alt="" />
-      </div>
+      </div> */}
+      <ProfilePhoto img={photo} size={"3rem"} />
 
       <div className="input-sec" onClick={handlePostClick}>
         What is new. Rafsal?

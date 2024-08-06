@@ -33,7 +33,7 @@ export const NavPanel = () => {
 
   const navClasses = useMemo(() => {
     return {
-      aside: `asideNav ${activeIndex === 1 ? "msgNav" : ""}`,
+      aside: `asideNav h-full ml-12 max-xl:ml-2 flex items-center justify-between flex-col py-14 ${activeIndex === 1 ? "msgNav" : ""}`,
       panel: `navPanel ${activeIndex === 1 ? "msgpanel" : ""}`,
       piece: (index) => `navPiece ${index < 5 ? "bottomBorder" : ""} ${
         activeIndex === index ? "active" : ""

@@ -18,7 +18,7 @@ const Header = () => {
   };
 
   return (
-    <div className={`header ${inMessagePage ? "msg-header" : ""}`}>
+    <div className={`header px-20 max-md:px-6 ${inMessagePage ? "msg-header" : ""}`}>
       <Link to="/" className="flex">
         <img className="w-24 h-12" src={icon} alt="icon" />
       </Link>

@@ -26,7 +26,7 @@ function App() {
             <Route
               path="/"
               element={
-                <div className="center-container">
+                <div className="center-container mx-12 max-xl:mx-3">
                   <Home />
                 </div>
               }
@@ -42,7 +42,7 @@ function App() {
             <Route
               path="/profile"
               element={
-                <div className="center-container">
+                <div className="center-container mx-12 max-xl:mx-3">
                   <ProfileContainer />
                 </div>
               }
@@ -50,7 +50,7 @@ function App() {
             <Route
               path="/notifications"
               element={
-                <div className="center-container">
+                <div className="center-container mx-12 max-xl:mx-3">
                   <NotificationPage />
                 </div>
               }
@@ -58,7 +58,11 @@ function App() {
           </Routes>
         </Suspense>
 
-        <div className={`${inMessagePage ? "hide-info-panel" : "info-panel"}`}>
+        <div
+          className={`${
+            inMessagePage ? " hidden" : "info-panel mr-12  max-xl:mr-2 w-80 h-full overflow-y-scroll scrollbar-hide pt-10 shrink-0 "
+          }`}
+        >
           <RoyaltyScore />
           <IdBox />
           <Followers title={"Followers"} followbtnflag={true} />
