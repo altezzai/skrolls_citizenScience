@@ -1,12 +1,18 @@
 .post {
+  /* background: var(--color-bg-secondary); */
+  /* width: 100%; */
+  /* border-radius: 20px 20px 20px 20px; */
+  /* display: flex;
+  flex-direction: row; */
+  /* padding: 25px 20px; */
+  /* margin-bottom: 20px; */
+  /* gap: 10px; */
+}
+.back-bgcolor{
   background: var(--color-bg-secondary);
-  width: 100%;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: row;
-  padding: 25px 20px;
-  margin-bottom: 20px;
-  gap: 10px;
+}
+.back-bgcolor:hover{
+  background: #fbf6f6
 }
 
 .post .post-profile {
