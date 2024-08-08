@@ -21,7 +21,7 @@
   display: flex;
 }
 .navPanel {
-  width: 240px;
+  /* width: 240px; */
   /* margin-top: 60px;
   margin-left: 50px; */
   border-radius: 20px;
@@ -54,6 +54,7 @@
   align-items: center;
   /* justify-content: left; */
   padding: 0 35px;
+  justify-content: center;
   position: relative;
   text-decoration: none;
   color: var(--color-text-primary);

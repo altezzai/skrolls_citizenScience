@@ -27,29 +27,38 @@ export const NavPanel = () => {
   const inMessagePage = location.pathname.includes("/messages");
 
   useEffect(() => {
-    const index = navItems.findIndex(item => item.path === location.pathname);
+    const index = navItems.findIndex((item) => item.path === location.pathname);
     setActiveIndex(index !== -1 ? index : 0);
   }, [location.pathname]);
 
   const navClasses = useMemo(() => {
     return {
-      aside: `asideNav h-full ml-12 max-xl:ml-2 flex items-center justify-between flex-col py-14 ${activeIndex === 1 ? "msgNav" : ""}`,
-      panel: `navPanel ${activeIndex === 1 ? "msgpanel" : ""}`,
-      piece: (index) => `navPiece ${index < 5 ? "bottomBorder" : ""} ${
-        activeIndex === index ? "active" : ""
-      } ${activeIndex === 1 ? "navPieceMsg" : ""}`,
+      // aside: `asideNav h-full ml-12 max-xl:ml-2 flex items-center justify-between flex-col py-14 max-xl:shrink ${activeIndex === 1 ? "msgNav" : ""}`,
+      // panel: `navPanel ${activeIndex === 1 ? "msgpanel" : ""}`,
+      piece: (index) =>
+        `navPiece ${index < 5 ? "bottomBorder" : ""} ${
+          activeIndex === index ? "active" : ""
+        } ${activeIndex === 1 ? "navPieceMsg" : ""}`,
     };
   }, [activeIndex]);
 
   return (
-    <div className={navClasses.aside}>
+    <div
+      className={`asideNav h-full ml-12 max-xl:ml-2 flex items-center justify-between flex-col py-14  ${
+        activeIndex === 1 ? "msgNav" : ""
+      }`}
+    >
       {inMessagePage && (
         <Link to="/" className="msg-icon flex py-1 -mt-10 rounded-lg">
           <img src={skrolls} alt="Skrolls icon" />
         </Link>
       )}
 
-      <div className={navClasses.panel}>
+      <div
+        className={`navPanel w-60 max-xl:w-40 ${
+          activeIndex === 1 ? "msgpanel" : ""
+        }`}
+      >
         {navItems.slice(0, 5).map((item, index) => (
           <NavItem
             key={item.path}
@@ -62,7 +71,11 @@ export const NavPanel = () => {
         ))}
       </div>
 
-      <div className={`navPanel bottom ${activeIndex === 1 ? "msgpanel" : ""}`}>
+      <div
+        className={`navPanel bottom w-60 max-xl:w-40 ${
+          activeIndex === 1 ? "msgpanel" : ""
+        }`}
+      >
         {navItems.slice(5).map((item, index) => (
           <NavItem
             key={item.path}
@@ -78,8 +91,17 @@ export const NavPanel = () => {
   );
 };
 
-const NavItem = ({ path, label, icon, index, isProfile, activeIndex, navClasses, setActiveIndex }) => {
-  const Component = path ? Link : 'a';
+const NavItem = ({
+  path,
+  label,
+  icon,
+  index,
+  isProfile,
+  activeIndex,
+  navClasses,
+  setActiveIndex,
+}) => {
+  const Component = path ? Link : "a";
   const props = path ? { to: path } : {};
 
   return (

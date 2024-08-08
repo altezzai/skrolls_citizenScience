@@ -7,6 +7,8 @@ import video from "../../assets/video.svg";
 import doc from "../../assets/document.svg";
 import uploadfile from "../../assets/upload_doc.svg";
 
+import { ProfilePhoto } from "../Profilephoto/ProfilePhoto";
+
 const AddPost = ({ show, handleClose }) => {
   const [imagePreviews, setImagePreviews] = useState([]);
   const [videoPreviews, setVideoPreviews] = useState([]);
@@ -91,10 +93,8 @@ const AddPost = ({ show, handleClose }) => {
         <span className="close" onClick={handleModalClose}>
           &times;
         </span>
-        <div className="postman-details">
-          <div className="post-profile">
-            <img src={photo} alt="" />
-          </div>
+        <div className="postman-details gap-3">
+        <ProfilePhoto img={photo} size={"2.5rem"} />
           <div className="my-name">Manu P</div>
         </div>
 

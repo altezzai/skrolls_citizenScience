@@ -176,7 +176,7 @@ const MessageBox = () => {
         >
           <img
             src={send}
-            className="w-8 select-none"
+            className=" w-8 select-none"
             draggable="false"
             alt="Send"
           />

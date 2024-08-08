@@ -12,6 +12,7 @@ const Home = lazy(() => import("./Pages/Home"));
 const ProfileContainer = lazy(() => import("./Pages/ProfileContainer"));
 const NotificationPage = lazy(() => import("./Pages/NotificationPage"));
 import MessagePage from "./Pages/MessagePage";
+import { PostPage } from "./Pages/PostPage";
 
 function App() {
   const location = useLocation();
@@ -28,6 +29,14 @@ function App() {
               element={
                 <div className="center-container mx-12 max-xl:mx-3">
                   <Home />
+                </div>
+              }
+            />
+            <Route
+              path="/post"
+              element={
+                <div className="center-container mx-12 max-xl:mx-3">
+                  <PostPage />
                 </div>
               }
             />
@@ -60,8 +69,11 @@ function App() {
 
         <div
           className={`${
-            inMessagePage ? " hidden" : "info-panel mr-12  max-xl:mr-2 w-80 h-full overflow-y-scroll scrollbar-hide pt-10 shrink-0 "
+            inMessagePage
+              ? " hidden"
+              : "info-panel mr-12  max-xl:mr-2 w-80 h-full overflow-y-scroll scrollbar-hide pt-10 shrink-0 max-xl:shrink max-xl:min-w-60"
           }`}
+          style={{ scrollbarWidth: "none" }}
         >
           <RoyaltyScore />
           <IdBox />
