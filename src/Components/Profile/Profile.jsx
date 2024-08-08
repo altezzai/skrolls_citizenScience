@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import photo from "../../assets/profile.png";
 import "./Profile.css";
 import ReadMore from "../ReadMore/ReadMore";
@@ -8,16 +8,19 @@ import twitter from "../../assets/x.svg";
 import more from "../../assets/more.svg";
 import link from "../../assets/link.svg";
 import SkillBtn from "../SkillBtn/SkillBtn";
-import FollowList from "../FollowList/FollowList";
+// import FollowList from "../FollowList/FollowList";
+const FollowList = lazy(() => import("../FollowList/FollowList"));
+import { useModal } from "../../context/ModalContext";
+import { modals } from "../../data/constants";
 
 const Profile = () => {
-  const [showFollow, setShowFollow] = useState(false);
-  const [selected, setSelected] = useState("following");
+  const { openModal, isModalOpen } = useModal();
+  const [selected, setSelected] = useState("followers");
   const [myProfile, setMyProfile] = useState(true);
 
-  const handleShowFollow = (sel) => {
-    setSelected(sel ? "followers" : "following");
-    setShowFollow(true);
+  const handleShowFollow = (selected) => {
+    setSelected(selected);
+    openModal(modals.FOLLOW_LIST);
   };
 
   return (
@@ -33,19 +36,24 @@ const Profile = () => {
       </div>
 
       <div className="follows">
-        <div className="following" onClick={() => handleShowFollow(false)}>
+        <div
+          className="following"
+          onClick={() => handleShowFollow("following")}
+        >
           200 following
         </div>
-        <div className="followers" onClick={() => handleShowFollow(true)}>
+        <div
+          className="followers"
+          onClick={() => handleShowFollow("followers")}
+        >
           20k followers
         </div>
       </div>
-
-      <FollowList
-        show={showFollow}
-        setShowFollow={setShowFollow}
-        defaultTab={selected}
-      ></FollowList>
+      <Suspense fallback={<div>Loading...</div>}>
+        {isModalOpen(modals.FOLLOW_LIST) && (
+          <FollowList defaultActiveTab={selected}></FollowList>
+        )}
+      </Suspense>
 
       <div className="description">
         <ReadMore sliceLength={135}>
@@ -84,8 +92,12 @@ const Profile = () => {
       </div>
 
       <div className="buttons">
-        <button className="follow btn">{myProfile?"Edit Profile":"Follow"}</button>
-        <button className="message btn">{myProfile?"Share Profile":"Message"}</button>
+        <button className="follow btn">
+          {myProfile ? "Edit Profile" : "Follow"}
+        </button>
+        <button className="message btn">
+          {myProfile ? "Share Profile" : "Message"}
+        </button>
       </div>
     </div>
   );

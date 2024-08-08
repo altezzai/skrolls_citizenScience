@@ -4,41 +4,43 @@ import photo from "../../assets/profile.png";
 import FollowButton from "../FollowButton/FollowButton";
 import UnfollowPopup from "../UnfollowPopup/UnfollowPopup";
 
-const UserFollowListItem = () => {
-  const [follow, setFollow] = useState(false);
-  const [showPopup, setShowPopup] = useState(false);
+const UserFollowListItem = ({ user, confirmUnfollow = false }) => {
+  const [following, setFollowing] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openPopup = () => {
-    setShowPopup(true);
-  };
-
-  const closePopup = () => {
-    setShowPopup(false);
+  const handleClick = () => {
+    if (following) {
+      if (confirmUnfollow) setIsModalOpen(true);
+      else setFollowing(false);
+    } else {
+      setFollowing(true);
+    }
   };
 
   const handleUnfollow = () => {
-    setFollow(true);
+    setFollowing(false);
+    setIsModalOpen(false);
   };
+
   return (
-    <div className="userfollow">
-      <div className="post-profile" style={{ width: "50px" }}>
-        <img src={photo} alt="" style={{ width: "50px" }} />
+    <div className="flex gap-16 my-3 first:mt-0 mx-4">
+      <div className="flex gap-2">
+        <img src={photo} alt="" className=" w-10 h-10 rounded-full" />
+        <div className="">
+          <div className="text-md font-medium">{user.name}</div>
+          <div className="text-sm text-text-secondary">@{user.username}</div>
+        </div>
       </div>
-      <div className="userfollow-detail">
-        <div className="user-details">
-          <div className="user-name">Manuprasad</div>
-          <div className="userid">@manu</div>
-        </div>
-        <div className="followbtn-container" onClick={handleUnfollow}>
-          <FollowButton
-            follow={follow}
-            setFollow={setFollow}
-            openPopup={openPopup}
+      <div className="">
+        <FollowButton follow={following} onClick={handleClick} />
+        {isModalOpen && (
+          <UnfollowPopup
+            setFollowing={setFollowing}
+            onUnfollow={handleUnfollow}
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
           />
-          {showPopup && (
-            <UnfollowPopup closePopup={closePopup} setFollow={setFollow} />
-          )}
-        </div>
+        )}
       </div>
     </div>
   );

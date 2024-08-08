@@ -85,9 +85,9 @@ const ProfileDetails = () => {
 
       <DetailBox heading={"Skill"}>
         <div className="interest">
-        <SkillBtn> Artificial Intelligence</SkillBtn>
-        <SkillBtn> Designing</SkillBtn>
-        <SkillBtn> Designing</SkillBtn>
+          <SkillBtn> Artificial Intelligence</SkillBtn>
+          <SkillBtn> Designing</SkillBtn>
+          <SkillBtn> Designing</SkillBtn>
         </div>
       </DetailBox>
     </div>

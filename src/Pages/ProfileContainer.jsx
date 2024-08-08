@@ -1,6 +1,6 @@
 import React from "react";
 import Profile from "../Components/Profile/Profile";
-import ProfileNavContainer from "../Components/ProfileNavContainer/ProfileNavContainer";
+import ProfileNavContainer1 from "../Components/ProfileNavContainer/ProfileNavContainer1";
 import ProfileDetails from "../Components/ProfileDetails/ProfileDetails";
 
 const ProfileContainer = () => {
@@ -8,9 +8,7 @@ const ProfileContainer = () => {
     <div className="Profile-container">
       <Profile />
 
-      <ProfileNavContainer />
-
-      
+      <ProfileNavContainer1 />
     </div>
   );
 };

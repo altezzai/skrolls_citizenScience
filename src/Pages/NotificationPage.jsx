@@ -5,7 +5,7 @@ import profilePic from "../../src/assets/profile.png";
 import settings from "../../src/assets/settings-gray.svg";
 import "./CSS/NotificationPage.css";
 import { OnlineLogo } from "../Components/OnlineLogo/OnlineLogo";
-import { ResearchActivities } from "../Components/ResearchActivities/ResearchActivities";
+import ResearchActivities from "../Components/ResearchActivities/ResearchActivities";
 
 const NotificationPage = () => {
   return (
@@ -15,7 +15,7 @@ const NotificationPage = () => {
         <OnlineLogo icon={settings} size="25px" />
       </div>
 
-      <div className="dateorder">
+      <div className="dateorder bg-pri ">
         <span className="day">Today</span>
         <div className="notifbox">
           <Notification

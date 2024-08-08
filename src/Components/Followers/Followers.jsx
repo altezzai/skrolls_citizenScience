@@ -2,6 +2,7 @@ import React from "react";
 import "./Followers.css";
 import photo from "../../assets/profile.png";
 import FollowButton from "../FollowButton/FollowButton";
+import UserFollowListItem from "../UserFollowListItem/UserFollowListItem";
 
 export const Followers = ({
   title,
@@ -15,106 +16,18 @@ export const Followers = ({
         <span>{title}</span>
         {countflag ? <div className="countcircle">12</div> : undefined}
       </div>
-      <div className="followerlist">
-        <div className="userdetls">
-          <img src={photo} className="userpic" />
-          <div className="userName">
-            <h4>Manuprasad</h4>
-            <h4 className="uname">@manu</h4>
-          </div>
-          {followbtnflag ? (
-            <FollowButton
-              follow={false}
-              height="30px"
-              width="90px"
-              fontSize="16px"
-            />
-          ) : undefined}
-          {unfollowbtnflag ? (
-            <FollowButton
-              follow={true}
-              height="30px"
-              width="90px"
-              fontSize="16px"
-            />
-          ) : undefined}
-        </div>
-      </div>
-      <div className="followerlist">
+
+      {/* <div className="followerlist">
         <div className="userdetls">
           <img src={photo} className="userpic"></img>
           <div className="userName">
             <h4>Manuprasad</h4>
             <h4 className="uname">@manu</h4>
           </div>
-          {followbtnflag ? (
-            <FollowButton
-              follow={false}
-              height="30px"
-              width="90px"
-              fontSize="16px"
-            />
-          ) : undefined}
-          {unfollowbtnflag ? (
-            <FollowButton
-              follow={true}
-              height="30px"
-              width="90px"
-              fontSize="16px"
-            />
-          ) : undefined}
+          <FollowButton follow={true} />
         </div>
-      </div>
-      <div className="followerlist">
-        <div className="userdetls">
-          <img src={photo} className="userpic"></img>
-          <div className="userName">
-            <h4>Manuprasad</h4>
-            <h4 className="uname">@manu</h4>
-          </div>
-          {followbtnflag ? (
-            <FollowButton
-              follow={false}
-              height="30px"
-              width="90px"
-              fontSize="16px"
-            />
-          ) : undefined}
-          {unfollowbtnflag ? (
-            <FollowButton
-              follow={true}
-              height="30px"
-              width="90px"
-              fontSize="16px"
-            />
-          ) : undefined}
-        </div>
-      </div>
-      <div className="followerlist">
-        <div className="userdetls">
-          <img src={photo} className="userpic"></img>
-          <div className="userName">
-            <h4>Manuprasad</h4>
-            <h4 className="uname">@manu</h4>
-          </div>
-          {followbtnflag ? (
-            <FollowButton
-              follow={false}
-              height="30px"
-              width="90px"
-              fontSize="16px"
-            />
-          ) : undefined}
-          {unfollowbtnflag ? (
-            <FollowButton
-              follow={true}
-              height="30px"
-              width="90px"
-              fontSize="16px"
-            />
-          ) : undefined}
-        </div>
-      </div>
+      </div> */}
+      <UserFollowListItem user={{ name: "Manuprasad", username: "manu" }} />
       <div className="viewmore">
         <a href="">View more</a>
       </div>

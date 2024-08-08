@@ -1,30 +1,17 @@
 import React from "react";
 import "./FollowButton.css";
+import clsx from "clsx";
 
-const FollowButton = ({
-  follow,
-  setFollow,
-  openPopup,
-  height = "40px",
-  width = "100%",
-  fontSize = "18px",
-}) => {
-  const backgroundColor = follow ? "white" : "black";
-  const color = follow ? "black" : "white";
-
-  const handleFollowClick = () => {
-    if (follow) {
-      openPopup();
-    } else {
-      setFollow(true);
-    }
-  };
-
+const FollowButton = ({ follow, onClick, className }) => {
   return (
     <div
-      className="follow-btn"
-      style={{ backgroundColor, color, height, width, fontSize }}
-      onClick={handleFollowClick}
+      className={clsx(
+        " px-4 py-1 rounded-full w-28 text-center  cursor-pointer border-[1px] border-black select-none",
+        { "bg-black text-white hover:bg-gray-600": !follow },
+        { "bg-white text-black hover:bg-gray-200": follow },
+        className
+      )}
+      onClick={onClick}
     >
       {follow ? "Following" : "Follow"}
     </div>

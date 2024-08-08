@@ -9,9 +9,6 @@ import ProfileContainer from "./Pages/ProfileContainer";
 import { Route, Routes, useLocation } from "react-router-dom";
 import NotificationPage from "./Pages/NotificationPage";
 import MessagePage from "./Pages/MessagePage";
-// import Profile from "./Components/Profile/Profile";
-// import ProfileNavContainer from "./Components/ProfileNavContainer/ProfileNavContainer";
-// import ProfileDetails from "./Components/ProfileDetails/ProfileDetails";
 
 function App() {
   const location = useLocation();
@@ -55,7 +52,7 @@ function App() {
             }
           />
         </Routes>
-        <div className={`${inMessagePage ? "hide-info-panel": "info-panel"}`}>
+        <div className={`${inMessagePage ? "hide-info-panel" : "info-panel"}`}>
           <RoyaltyScore />
           <IdBox />
           <Followers title={"Followers"} followbtnflag={true} />

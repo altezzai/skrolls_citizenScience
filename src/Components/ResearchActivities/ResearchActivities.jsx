@@ -9,7 +9,7 @@ import { Contributors } from "../Contributors/Contributors";
 import profile from "../../assets/profile.png";
 import { PhotowithName } from "../PhotowithName/PhotowithName";
 
-export const ResearchActivities = () => {
+const ResearchActivities = () => {
   const [detailsVisible, setDetailsVisible] = useState(false);
 
   const handleActnameClick = () => {
@@ -117,3 +117,5 @@ export const ResearchActivities = () => {
     </div>
   );
 };
+
+export default ResearchActivities;

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./ProfileNavContainer.css";
 import ProfileDetails from "../ProfileDetails/ProfileDetails";
 
-import { Tabs, Tab } from "@nextui-org/tabs";
 import Home from "../../Pages/Home";
 import Profile from "../Profile/Profile";
 import { ResearchActivities } from "../ResearchActivities/ResearchActivities";
