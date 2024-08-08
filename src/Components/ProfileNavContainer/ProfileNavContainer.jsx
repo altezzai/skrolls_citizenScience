@@ -1,39 +1,50 @@
-import React, { useState } from "react";
-import "./ProfileNavContainer.css";
-import ProfileDetails from "../ProfileDetails/ProfileDetails";
+import React, { lazy, useState } from "react";
+import TabContent from "../Tabs/TabContent";
+import TabButtons from "../Tabs/TabButtons";
 
-import Home from "../../Pages/Home";
-import Profile from "../Profile/Profile";
-import { ResearchActivities } from "../ResearchActivities/ResearchActivities";
+const ProfileDetails = lazy(() => import("../ProfileDetails/ProfileDetails"));
+const ResearchActivities = lazy(() =>
+  import("../ResearchActivities/ResearchActivities")
+);
 
 const ProfileNavContainer = () => {
-  const [selected, setSelected] = useState("profile");
+  const tabs = [
+    {
+      id: "profile",
+      label: "Profile",
+      content: (
+        <div className="mt-4">
+          <ProfileDetails />
+        </div>
+      ),
+    },
+    {
+      id: "post",
+      label: "Post",
+      content: <div className="mt-4">POST SECTION</div>,
+    },
+    {
+      id: "research",
+      label: "Research Activities",
+      content: (
+        <div className="mt-4">
+          <ResearchActivities />
+        </div>
+      ),
+    },
+  ];
+
+  const [activeTab, setActiveTab] = useState("profile" || tabs[0].id);
 
   return (
-    <div className="profile-nav-container">
-      <div className="flex w-full flex-col">
-        {/* <Tabs
-          aria-label="Options"
-          selectedKey={selected}
-          onSelectionChange={setSelected}
-          variant="underlined"
-          className="underborder sticky top-0 bg-bg-primary"
-        >
-          <Tab key="profile" title="Profile" className="test">
-            <ProfileDetails />
-          </Tab>
-          <Tab key="post" title="Post" className="test">
-            <div>POST SECTION</div>
-          </Tab>
-          <Tab key="Research" title="Research Activities" className="test">
-            <ResearchActivities />
-            <ResearchActivities />
-            <ResearchActivities />
-            <ResearchActivities />
-            <ResearchActivities />
-          </Tab>
-        </Tabs> */}
-      </div>
+    <div className="tab-container">
+      <TabButtons
+        tabs={tabs}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        className="w-min"
+      />
+      <TabContent tabs={tabs} activeTab={activeTab} />
     </div>
   );
 };

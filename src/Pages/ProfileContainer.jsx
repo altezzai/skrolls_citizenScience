@@ -1,14 +1,13 @@
 import React from "react";
 import Profile from "../Components/Profile/Profile";
-import ProfileNavContainer1 from "../Components/ProfileNavContainer/ProfileNavContainer1";
-import ProfileDetails from "../Components/ProfileDetails/ProfileDetails";
+import ProfileNavContainer from "../Components/ProfileNavContainer/ProfileNavContainer";
 
 const ProfileContainer = () => {
   return (
     <div className="Profile-container">
       <Profile />
 
-      <ProfileNavContainer1 />
+      <ProfileNavContainer />
     </div>
   );
 };

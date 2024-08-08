@@ -1,7 +1,11 @@
-import React, { useState, useEffect, useMemo } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React from "react";
 import "./NavPanel.css";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
+import { Link } from "react-router-dom";
 import { OnlineLogo } from "../OnlineLogo/OnlineLogo";
+
 import home from "../../assets/home.svg";
 import messages from "../../assets/messages.svg";
 import notification from "../../assets/notification.svg";
@@ -11,111 +15,134 @@ import settings from "../../assets/settings.svg";
 import profile from "../../assets/profile.png";
 import skrolls from "../../assets/skrolls.png";
 
-const navItems = [
-  { path: "/", label: "Home", icon: home },
-  { path: "/messages", label: "Messages", icon: messages },
-  { path: "/groups", label: "Groups", icon: groups },
-  { path: "/communities", label: "Communities", icon: community },
-  { path: "/notifications", label: "Notifications", icon: notification },
-  { path: "/profile", label: "Profile", icon: profile, isProfile: true },
-  { path: "/settings", label: "Settings", icon: settings },
-];
-
 export const NavPanel = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(null);
   const location = useLocation();
   const inMessagePage = location.pathname.includes("/messages");
 
   useEffect(() => {
-    const index = navItems.findIndex((item) => item.path === location.pathname);
-    setActiveIndex(index !== -1 ? index : 0);
-  }, [location.pathname]);
+    switch (location.pathname) {
+      case "/":
+        setActiveIndex(0);
+        break;
+      case "/messages":
+        setActiveIndex(1);
+        break;
+      case "/groups":
+        setActiveIndex(2);
+        break;
+      case "/communities":
+        setActiveIndex(3);
+        break;
+      case "/notifications":
+        setActiveIndex(4);
+        break;
+      case "/profile":
+        setActiveIndex(5);
+        break;
+      case "/settings":
+        setActiveIndex(6);
+        break;
+    }
+    if (location.pathname == "/") setActiveIndex(0);
+  }, []);
+  // else if ((location.pathname = "/profile")) setActiveIndex(5);
 
-  const navClasses = useMemo(() => {
-    return {
-      // aside: `asideNav h-full ml-12 max-xl:ml-2 flex items-center justify-between flex-col py-14 max-xl:shrink ${activeIndex === 1 ? "msgNav" : ""}`,
-      // panel: `navPanel ${activeIndex === 1 ? "msgpanel" : ""}`,
-      piece: (index) =>
-        `navPiece ${index < 5 ? "bottomBorder" : ""} ${
-          activeIndex === index ? "active" : ""
-        } ${activeIndex === 1 ? "navPieceMsg" : ""}`,
-    };
-  }, [activeIndex]);
+  const handleClick = (index) => {
+    setActiveIndex(index);
+  };
 
   return (
-    <div
-      className={`asideNav h-full ml-12 max-xl:ml-2 flex items-center justify-between flex-col py-14  ${
-        activeIndex === 1 ? "msgNav" : ""
-      }`}
-    >
-      {inMessagePage && (
-        <Link to="/" className="msg-icon flex py-1 -mt-10 rounded-lg">
-          <img src={skrolls} alt="Skrolls icon" />
+    <div className={`asideNav ${activeIndex === 1 ? "msgNav" : ""}`}>
+      <Link
+        to="/"
+        className={`${
+          inMessagePage ? "msg-icon flex py-1 -mt-10 rounded-lg" : "hidden"
+        }`}
+      >
+        <img src={skrolls} alt="icon" />
+      </Link>
+
+      <div className={`navPanel ${activeIndex === 1 ? "msgpanel" : ""}`}>
+        <Link
+          to="/"
+          className={`navPiece bottomBorder ${
+            activeIndex === 0 ? "active" : ""
+          } ${activeIndex === 1 ? "navPieceMsg" : ""}`}
+          onClick={() => handleClick(0)}
+        >
+          <OnlineLogo icon={home} flag={true} />
+
+          <h1>Home</h1>
         </Link>
-      )}
+        <Link
+          to="/messages"
+          className={`navPiece bottomBorder ${
+            activeIndex === 1 ? "active navPieceMsg" : ""
+          }`}
+          onClick={() => handleClick(1)}
+        >
+          <OnlineLogo icon={messages} flag={true} />
 
-      <div
-        className={`navPanel w-60 max-xl:w-40 ${
-          activeIndex === 1 ? "msgpanel" : ""
-        }`}
-      >
-        {navItems.slice(0, 5).map((item, index) => (
-          <NavItem
-            key={item.path}
-            {...item}
-            index={index}
-            activeIndex={activeIndex}
-            navClasses={navClasses}
-            setActiveIndex={setActiveIndex}
-          />
-        ))}
+          <h1>Messages</h1>
+        </Link>
+        <a
+          className={`navPiece bottomBorder ${
+            activeIndex === 2 ? "active" : ""
+          } ${activeIndex === 1 ? "navPieceMsg" : ""}`}
+          onClick={() => handleClick(2)}
+        >
+          <OnlineLogo icon={groups} />
+
+          <h1>Groups</h1>
+        </a>
+        <a
+          className={`navPiece bottomBorder ${
+            activeIndex === 3 ? "active" : ""
+          } ${activeIndex === 1 ? "navPieceMsg" : ""}`}
+          onClick={() => handleClick(3)}
+        >
+          <OnlineLogo icon={community} />
+
+          <h1>Communities</h1>
+        </a>
+        <Link
+          to="/notifications"
+          className={`navPiece ${activeIndex === 4 ? "active" : ""} ${
+            activeIndex === 1 ? "navPieceMsg" : ""
+          }`}
+          onClick={() => handleClick(4)}
+        >
+          <OnlineLogo icon={notification} flag={true} />
+
+          <h1>Notifications</h1>
+        </Link>
       </div>
-
       <div
-        className={`navPanel bottom w-60 max-xl:w-40 ${
-          activeIndex === 1 ? "msgpanel" : ""
-        }`}
+        className={`navPanel bottom ${activeIndex === 1 ? "msgpanel" : ""} `}
       >
-        {navItems.slice(5).map((item, index) => (
-          <NavItem
-            key={item.path}
-            {...item}
-            index={index + 5}
-            activeIndex={activeIndex}
-            navClasses={navClasses}
-            setActiveIndex={setActiveIndex}
-          />
-        ))}
+        <Link
+          to="/profile"
+          className={`navPiece bottomBorder ${
+            activeIndex === 5 ? "active" : ""
+          } ${activeIndex === 1 ? "navPieceMsg" : ""}`}
+          onClick={() => handleClick(5)}
+        >
+          <img src={profile} className="profileLogo" />
+
+          <h1>Profile</h1>
+        </Link>
+        <a
+          className={`navPiece ${activeIndex === 6 ? "active" : ""} ${
+            activeIndex === 1 ? "navPieceMsg" : ""
+          }`}
+          onClick={() => handleClick(6)}
+        >
+          <OnlineLogo icon={settings} />
+
+          <h1>Settings</h1>
+        </a>
       </div>
     </div>
-  );
-};
-
-const NavItem = ({
-  path,
-  label,
-  icon,
-  index,
-  isProfile,
-  activeIndex,
-  navClasses,
-  setActiveIndex,
-}) => {
-  const Component = path ? Link : "a";
-  const props = path ? { to: path } : {};
-
-  return (
-    <Component
-      {...props}
-      className={navClasses.piece(index)}
-      onClick={() => setActiveIndex(index)}
-    >
-      {isProfile ? (
-        <img src={icon} className="profileLogo" alt={label} />
-      ) : (
-        <OnlineLogo icon={icon} flag={index < 2 || index === 4} />
-      )}
-      <h1>{label}</h1>
-    </Component>
   );
 };

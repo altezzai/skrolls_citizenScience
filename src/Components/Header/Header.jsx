@@ -4,8 +4,6 @@ import { Link, useLocation } from "react-router-dom";
 import icon from "../../assets/icon.png";
 import search from "../../assets/search.svg";
 
-import "./Header.css";
-
 const Header = () => {
   const inputRef = useRef(null);
   const location = useLocation();
