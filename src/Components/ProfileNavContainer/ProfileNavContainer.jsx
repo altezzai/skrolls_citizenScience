@@ -12,7 +12,7 @@ const ProfileNavContainer = () => {
   return (
     <div className="profile-nav-container">
       <div className="flex w-full flex-col">
-        <Tabs
+        {/* <Tabs
           aria-label="Options"
           selectedKey={selected}
           onSelectionChange={setSelected}
@@ -32,7 +32,7 @@ const ProfileNavContainer = () => {
             <ResearchActivities />
             <ResearchActivities />
           </Tab>
-        </Tabs>
+        </Tabs> */}
       </div>
     </div>
   );
