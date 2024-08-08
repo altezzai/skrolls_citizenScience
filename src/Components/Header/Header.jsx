@@ -18,19 +18,30 @@ const Header = () => {
   };
 
   return (
-    <div className={`header px-20 max-md:px-6 ${inMessagePage ? "msg-header" : ""}`}>
+    <div
+      className={`flex justify-between items-center w-full select-none px-20 max-md:px-6 bg-bg-secondary h-20  ${
+        inMessagePage && " hidden"
+      }`}
+    >
       <Link to="/" className="flex">
-        <img className="w-24 h-12" src={icon} alt="icon" />
+        <img className="w-24 h-12" src={icon} alt="icon" draggable="false" />
       </Link>
 
-      <div className="search-box">
+      <div className="flex py-2 px-4 bg-textarea mx-4 my-4 rounded-3xl gap-3">
         <img
           src={search}
           alt="search"
+          className="w-7 cursor-pointer"
           onClick={handleSearchClick}
           style={{ cursor: "pointer" }}
+          draggable="false"
         />
-        <input type="text" placeholder="Search" ref={inputRef} />
+        <input
+          type="text"
+          placeholder="Search"
+          ref={inputRef}
+          className="outline-none  bg-textarea placeholder:text-sm"
+        />
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import "./UserMsgList.css";
+
 import UserMsgListItem from "../UserMsgListItem/UserMsgListItem";
 import search from "../../assets/search.svg";
 
@@ -65,17 +65,22 @@ const UserMsgList = () => {
 
   return (
     <>
-      <div className="search-box py-3 px-5">
+      <div className="flex py-2 px-4 bg-textarea mx-4 my-4 rounded-3xl gap-3">
         <img
           src={search}
           alt="search"
+          className="w-7 cursor-pointer"
           onClick={handleSearchClick}
-          style={{ cursor: "pointer" }}
         />
-        <input type="text" placeholder="Search" ref={inputRef} />
+        <input
+          type="text"
+          placeholder="Search"
+          className="outline-none  bg-textarea"
+          ref={inputRef}
+        />
       </div>
-      
-      <div className="user-msg-list w-full h-full overflow-y-scroll scrollbar-hide">
+
+      <div className="w-full h-full overflow-y-scroll rounded-t-2xl bg-bg-secondary" style={{scrollbarWidth: "none"}}>
         {users.map((user, index) => (
           <UserMsgListItem
             key={index}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./NewPost.css";
+
 import photo from "../../assets/profile.png";
 import PostButton from "../PostButton/PostButton";
 import AddPost from "../AddPost/AddPost";
@@ -17,15 +17,13 @@ const NewPost = () => {
   };
 
   return (
-    <div className="newpost">
-      {/* <div className="post-profile">
-        <img src={photo} alt="" />
-      </div> */}
+    <div className="flex items-center w-full my-4 rounded-2xl py-3 px-4 gap-5 bg-bg-secondary">
+
       <ProfilePhoto img={photo} size={"3rem"} />
 
-      <div className="input-sec" onClick={handlePostClick}>
+      <div className="flex items-center justify-between w-full text-xl text-text-muted cursor-pointer" onClick={handlePostClick}>
         What is new. Rafsal?
-        <div className="postbtn-container">
+        <div className="px-2">
           <PostButton text={"Add Post!"} />
         </div>
       </div>

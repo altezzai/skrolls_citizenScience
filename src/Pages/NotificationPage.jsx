@@ -5,7 +5,6 @@ import profilePic from "../../src/assets/profile.png";
 import settings from "../../src/assets/settings-gray.svg";
 import "./CSS/NotificationPage.css";
 import { OnlineLogo } from "../Components/OnlineLogo/OnlineLogo";
-import ResearchActivities from "../Components/ResearchActivities/ResearchActivities";
 
 const NotificationPage = () => {
   return (
