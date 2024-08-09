@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 import { LikeIcon } from "../../assets/component/LikeIcon";
 
-export const Heart = ({className, textclr}) => {
+export const Heart = ({ className, textclr }) => {
   const [likeCount, setLikeCount] = useState(200);
   const [liked, setLiked] = useState(false);
 
@@ -18,17 +18,13 @@ export const Heart = ({className, textclr}) => {
   };
 
   return (
-    <div className="flex items-center gap-1 select-none">
+    <div className="flex items-center gap-1 select-none cursor-pointer">
       <div onClick={handleLikeClick}>
         <LikeIcon
-          className={clsx(
-            "hover:text-red-500 rounded-full cursor-pointer",
-            className,
-            {
-              "fill-red-500 text-red-500": liked,
-              textclr: !liked,
-            }
-          )}
+          className={clsx("hover:text-red-500 rounded-full ", className, {
+            "fill-red-500 text-red-500": liked,
+            textclr: !liked,
+          })}
         />
       </div>
       {likeCount}
