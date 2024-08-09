@@ -18,7 +18,7 @@ export const Heart = ({ className, textclr }) => {
   };
 
   return (
-    <div className="flex select-none items-center gap-1">
+    <div className="flex items-center gap-1 select-none cursor-pointer">
       <div onClick={handleLikeClick}>
         <LikeIcon
           className={cn(

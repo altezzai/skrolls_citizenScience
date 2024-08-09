@@ -25,7 +25,7 @@ const Post = () => {
       {inPostPage && (
         <Link
           to="/"
-          className="back-bgcolor flex h-12 select-none items-center gap-2 rounded-t-2xl border-b-2 px-6 text-base font-medium"
+          className="flex gap-2 h-12 items-center border-b-2 rounded-t-2xl text-base px-6 font-medium select-none bg-bg-secondary hover:bg-slate-50"
         >
           <img src={back} className="w-4" alt="previous" draggable="false" />
           Back
@@ -33,23 +33,27 @@ const Post = () => {
       )}
 
       <div
-        className={cn(
-          'post flex w-full gap-3 rounded-2xl bg-bg-secondary px-5 py-6',
+        className={clsx(
+          "post flex w-full px-5 py-6 rounded-2xl bg-bg-secondary gap-3",
           {
             'mb-2 rounded-t-none': inPostPage,
             'mb-5': !inPostPage,
           }
         )}
       >
-        <ProfilePhoto img={photo} size={'3rem'} />
+        <ProfilePhoto img={photo} size={"2.6rem"} />
 
-        <div className="post-details">
-          <div className="poster-details">
-            <div className="poster-name">Manu P</div>
-            <div className="posted-date dot"></div>
-            <div className="posted-date"> April 17</div>
+        <div className="pr-3">
+          <div className="flex gap-3 items-center select-none">
+            <div className="text-text-primary text-xl font-bold">Manu P</div>
+            <div className="rounded-full text-text-muted text-xl flex items-center  pb-2">
+              .
+            </div>
+            <div className="text-[0.9rem] font-bold text-text-muted">
+              April 17
+            </div>
           </div>
-          <div className="post-content">
+          <div className="text-lg font-normal">
             🚀 Excited to dive into the world of computer science! 💻 Just
             started my journey as a CS student, and I'm already fascinated by
             the endless possibilities of coding. From unraveling algorithms to
@@ -57,43 +61,78 @@ const Post = () => {
             wait to see where this path takes me! #CSStudent #CodingAdventure
             #TechJourney 🌐✨:
           </div>
-          <div className="post-extra">
-            <div className="post-link btn">
-              <img src={internet} alt="" />
-              <a href="">http://rsg.ms/3426e12</a>
+          <div className="flex flex-wrap gap-5 text-sm font-semibold text-text-secondary my-4">
+            <div className="px-4 bg-bg-muted gap-2 flex py-2 rounded-full cursor-pointer">
+              <img
+                src={internet}
+                className="w-5"
+                alt="internet link"
+                draggable="false"
+              />
+              <Link to="http://altezzai.com">http://rsg.ms/3426e12</Link>
             </div>
-            <div className="post-link btn">
-              <img src={translate} alt="" />
+            <div className="px-4 bg-bg-muted gap-2 flex py-2 rounded-full cursor-pointer">
+              <img
+                src={translate}
+                className="w-5"
+                alt="translation"
+                draggable="false"
+              />
               See Translation
             </div>
           </div>
-          <div className="post-img">
-            <img src={image} alt="post image" />
+          <div className="w-full rounded-2xl mb-3">
+            <img
+              src={image}
+              alt="post"
+              className="w-11/12 rounded-2xl max-h-[600px]"
+              draggable="false"
+            />
           </div>
-          <div className="post-icons">
-            <div className="icon-section">
+          <div className="flex justify-between w-11/12">
+            <div className="flex gap-6">
               <Heart
-                className={'h-8 w-8 p-1 hover:bg-red-50'}
-                textclr={'text-black'}
+                className={"w-8 h-8 p-1 hover:bg-red-50"}
+                textclr={"text-black"}
               />
 
-              <Link to="/post" className="icon">
-                <img src={comment_icon} alt="comment" draggable="false" />
+              <Link
+                to="/post"
+                className="flex items-center justify-center gap-1 cursor-pointer "
+              >
+                <div className="rounded-full  hover:bg-red-50 p-1">
+                <img
+                  src={msg}
+                  alt="comment "
+                  className="w-6"
+                  draggable="false"
+                />
+                </div>
                 56
               </Link>
             </div>
-            <div className="icon-section">
-              <div className="icon">
-                <img src={view} alt="view icon" draggable="false" />
+            <div className="flex gap-6">
+              <div className="flex items-center gap-2 cursor-pointer">
+                <img
+                  src={view}
+                  alt="view icon"
+                  className="w-6"
+                  draggable="false"
+                />
                 270
               </div>
-              <div className="icon">
-                <img src={send} alt="send message" draggable="false" />
+              <div className="flex items-center gap-2 cursor-pointer">
+                <img
+                  src={send}
+                  alt="send message"
+                  className="w-6"
+                  draggable="false"
+                />
               </div>
-              <div className="icon">
+              <div className="flex items-center gap-2 cursor-pointer">
                 <img
                   src={save}
-                  className="save-icon"
+                  className="w-8"
                   alt="save message"
                   draggable="false"
                 />
