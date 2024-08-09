@@ -4,7 +4,11 @@ import photo from "../../assets/profile.png";
 import FollowButton from "../FollowButton/FollowButton";
 import UnfollowPopup from "../UnfollowPopup/UnfollowPopup";
 
-const UserFollowListItem = ({ user, confirmUnfollow = false }) => {
+const UserFollowListItem = ({
+  user,
+  confirmUnfollow = false,
+  btnClassName,
+}) => {
   const [following, setFollowing] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -23,7 +27,7 @@ const UserFollowListItem = ({ user, confirmUnfollow = false }) => {
   };
 
   return (
-    <div className="flex gap-16 my-3 first:mt-0 mx-4">
+    <div className="flex gap-16 my-3 first:mt-0">
       <div className="flex gap-2">
         <img src={photo} alt="" className=" w-10 h-10 rounded-full" />
         <div className="">
@@ -31,8 +35,12 @@ const UserFollowListItem = ({ user, confirmUnfollow = false }) => {
           <div className="text-sm text-text-secondary">@{user.username}</div>
         </div>
       </div>
-      <div className="">
-        <FollowButton follow={following} onClick={handleClick} />
+      <div className="max-lg:hidden">
+        <FollowButton
+          follow={following}
+          onClick={handleClick}
+          className={btnClassName}
+        />
         {isModalOpen && (
           <UnfollowPopup
             setFollowing={setFollowing}

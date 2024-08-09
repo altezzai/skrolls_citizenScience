@@ -1,10 +1,10 @@
 import React from "react";
 import "./Post.css";
-import clsx from "clsx";
+import { cn } from "../../utils/utils";
 
 import photo from "../../assets/profile.png";
 import image from "../../assets/post-img.png";
-import msg from "../../assets/message.svg";
+import comment_icon from "../../assets/comments.svg";
 import view from "../../assets/view.svg";
 import send from "../../assets/send.svg";
 import save from "../../assets/save.svg";
@@ -33,7 +33,7 @@ const Post = () => {
       )}
 
       <div
-        className={clsx(
+        className={cn(
           "post flex w-full px-5 py-6 rounded-2xl bg-bg-secondary gap-3 ",
           {
             "rounded-t-none  mb-2": inPostPage,
@@ -72,10 +72,13 @@ const Post = () => {
           </div>
           <div className="post-icons">
             <div className="icon-section">
-              <Heart className={"w-8 h-8 p-1 hover:bg-red-50"} textclr={"text-black"}/>
+              <Heart
+                className={"w-8 h-8 p-1 hover:bg-red-50"}
+                textclr={"text-black"}
+              />
 
               <Link to="/post" className="icon">
-                <img src={msg} alt="comment" draggable="false" />
+                <img src={comment_icon} alt="comment" draggable="false" />
                 56
               </Link>
             </div>

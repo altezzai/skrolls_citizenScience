@@ -1,17 +1,20 @@
 import React from "react";
 import { Notification } from "../Components/Notification/Notification";
-import postpic from "../../src/assets/post-img.png";
-import profilePic from "../../src/assets/profile.png";
-import settings from "../../src/assets/settings-gray.svg";
+import postpic from "../assets/post-img.png";
+import profilePic from "../assets/profile.png";
 import "./CSS/NotificationPage.css";
-import { OnlineLogo } from "../Components/OnlineLogo/OnlineLogo";
+
+import IconBadge from "../Components/IconBadge/IconBadge";
+import settings_icon from "../assets/settings-gray.svg";
 
 const NotificationPage = () => {
   return (
     <div className="notifpage">
       <div className="titlenotif">
         <span>Notifications</span>
-        <OnlineLogo icon={settings} size="25px" />
+        <IconBadge>
+          <img src={settings_icon} alt="settings" className="w-7 h-7 cursor-pointer p-1 hover:bg-secondary"/>
+        </IconBadge>
       </div>
 
       <div className="dateorder bg-pri ">

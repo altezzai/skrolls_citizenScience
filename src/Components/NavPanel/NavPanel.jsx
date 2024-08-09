@@ -1,147 +1,109 @@
 import React from "react";
 import "./NavPanel.css";
-import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-
 import { Link } from "react-router-dom";
-import { OnlineLogo } from "../OnlineLogo/OnlineLogo";
 
-import home from "../../assets/home.svg";
-import messages from "../../assets/messages.svg";
-import notification from "../../assets/notification.svg";
-import groups from "../../assets/groups.svg";
-import community from "../../assets/community.svg";
-import settings from "../../assets/settings.svg";
-import profile from "../../assets/profile.png";
-import skrolls from "../../assets/skrolls.png";
+import skrolls_logo from "../../assets/skrolls.png";
+import NavPanelItem from "./NavPanelItem";
+
+// Icons
+import home_icon from "../../assets/home.svg";
+import messages_icon from "../../assets/messages.svg";
+import notification_icon from "../../assets/notification.svg";
+import groups_icon from "../../assets/groups.svg";
+import communities_icon from "../../assets/community.svg";
+import settings_icon from "../../assets/settings.svg";
+import profile_icon from "../../assets/profile.png";
+import IconBadge from "../IconBadge/IconBadge";
 
 export const NavPanel = () => {
-  const [activeIndex, setActiveIndex] = useState(null);
   const location = useLocation();
   const inMessagePage = location.pathname.includes("/messages");
 
-  useEffect(() => {
-    switch (location.pathname) {
-      case "/":
-        setActiveIndex(0);
-        break;
-      case "/messages":
-        setActiveIndex(1);
-        break;
-      case "/groups":
-        setActiveIndex(2);
-        break;
-      case "/communities":
-        setActiveIndex(3);
-        break;
-      case "/notifications":
-        setActiveIndex(4);
-        break;
-      case "/profile":
-        setActiveIndex(5);
-        break;
-      case "/settings":
-        setActiveIndex(6);
-        break;
-    }
-    if (location.pathname == "/") setActiveIndex(0);
-  }, []);
-  // else if ((location.pathname = "/profile")) setActiveIndex(5);
-
-  const handleClick = (index) => {
-    setActiveIndex(index);
-  };
-
   return (
-    <div className={`asideNav ${activeIndex === 1 ? "msgNav" : ""}`}>
+    <div className="asideNav">
       <Link
         to="/"
         className={`${
           inMessagePage ? "msg-icon flex py-1 -mt-10 rounded-lg" : "hidden"
         }`}
       >
-        <img src={skrolls} alt="icon" />
+        <img src={skrolls_logo} alt="icon" />
       </Link>
 
-      <div className={`navPanel ${activeIndex === 1 ? "msgpanel" : ""}`}>
-        <Link
-          to="/"
-          className={`navPiece bottomBorder ${
-            activeIndex === 0 ? "active" : ""
-          } ${activeIndex === 1 ? "navPieceMsg" : ""}`}
-          onClick={() => handleClick(0)}
-        >
-          <OnlineLogo icon={home} flag={true} />
+      <div className="navPanel">
+        <NavPanelItem link="/" isSelected={location.pathname === "/"}>
+          <IconBadge>
+            <img src={home_icon} alt="home" />
+          </IconBadge>
+          Home
+        </NavPanelItem>
 
-          <h1>Home</h1>
-        </Link>
-        <Link
-          to="/messages"
-          className={`navPiece bottomBorder ${
-            activeIndex === 1 ? "active navPieceMsg" : ""
-          }`}
-          onClick={() => handleClick(1)}
+        <NavPanelItem
+          link="/messages"
+          isSelected={location.pathname === "/messages"}
         >
-          <OnlineLogo icon={messages} flag={true} />
+          <IconBadge>
+            <img src={messages_icon} alt="messages" className="px-[1px]"/>
+          </IconBadge>
+          Messages
+        </NavPanelItem>
 
-          <h1>Messages</h1>
-        </Link>
-        <a
-          className={`navPiece bottomBorder ${
-            activeIndex === 2 ? "active" : ""
-          } ${activeIndex === 1 ? "navPieceMsg" : ""}`}
-          onClick={() => handleClick(2)}
+        <NavPanelItem
+          link="/groups"
+          isSelected={location.pathname === "/groups"}
         >
-          <OnlineLogo icon={groups} />
+          <IconBadge>
+            <img src={groups_icon} alt="groups" />
+          </IconBadge>
+          Groups
+        </NavPanelItem>
 
-          <h1>Groups</h1>
-        </a>
-        <a
-          className={`navPiece bottomBorder ${
-            activeIndex === 3 ? "active" : ""
-          } ${activeIndex === 1 ? "navPieceMsg" : ""}`}
-          onClick={() => handleClick(3)}
+        <NavPanelItem
+          link="/communities"
+          isSelected={location.pathname === "/communities"}
         >
-          <OnlineLogo icon={community} />
+          <IconBadge>
+            <img src={communities_icon} alt="communities" />
+          </IconBadge>
+          Communities
+        </NavPanelItem>
 
-          <h1>Communities</h1>
-        </a>
-        <Link
-          to="/notifications"
-          className={`navPiece ${activeIndex === 4 ? "active" : ""} ${
-            activeIndex === 1 ? "navPieceMsg" : ""
-          }`}
-          onClick={() => handleClick(4)}
+        <NavPanelItem
+          link="/notifications"
+          isSelected={location.pathname === "/notifications"}
         >
-          <OnlineLogo icon={notification} flag={true} />
-
-          <h1>Notifications</h1>
-        </Link>
+          <IconBadge>
+            <img src={notification_icon} alt="notifications" />
+          </IconBadge>
+          Notifications
+        </NavPanelItem>
       </div>
-      <div
-        className={`navPanel bottom ${activeIndex === 1 ? "msgpanel" : ""} `}
-      >
-        <Link
-          to="/profile"
-          className={`navPiece bottomBorder ${
-            activeIndex === 5 ? "active" : ""
-          } ${activeIndex === 1 ? "navPieceMsg" : ""}`}
-          onClick={() => handleClick(5)}
-        >
-          <img src={profile} className="profileLogo" />
 
-          <h1>Profile</h1>
-        </Link>
-        <a
-          className={`navPiece ${activeIndex === 6 ? "active" : ""} ${
-            activeIndex === 1 ? "navPieceMsg" : ""
-          }`}
-          onClick={() => handleClick(6)}
+      <div className="navPanel">
+        <NavPanelItem
+          link="/profile"
+          isSelected={location.pathname === "/profile"}
         >
-          <OnlineLogo icon={settings} />
+          <IconBadge>
+            <img
+              src={profile_icon}
+              alt="profile"
+              className="rounded-full w-[22px] h-[22px]"
+            />
+          </IconBadge>
+          Profile
+        </NavPanelItem>
 
-          <h1>Settings</h1>
-        </a>
+        <NavPanelItem
+          link="/settings"
+          isSelected={location.pathname === "/settings"}
+        >
+          <IconBadge>
+            <img src={settings_icon} alt="settings" />
+          </IconBadge>
+          Settings
+        </NavPanelItem>
       </div>
     </div>
   );
