@@ -1,6 +1,4 @@
-// MessageBubble.js
-import React from 'react';
-import './MessageBubble.css';
+import React from "react";
 
 const MessageBubble = ({ message, isSentByMe, timestamp }) => {
   const formattedTime = new Date(timestamp).toLocaleTimeString([], {
@@ -17,15 +15,24 @@ const MessageBubble = ({ message, isSentByMe, timestamp }) => {
 
   return (
     <div
-      className={`flex w-full ${isSentByMe ? 'justify-end' : 'justify-start'}`}
+      className={`w-full flex ${
+        isSentByMe ? " justify-end " : "justify-start"
+      }`}
     >
       <div
-        className={`message-bubble ${
-          isSentByMe ? 'sent' : 'received'
-        } mb-2 max-w-xs rounded-lg p-2`}
+        className={`p-2 rounded-lg mb-2 ${
+          isSentByMe
+            ? "pr-5 bg-primary text-bg-secondary self-end"
+            : "pl-5 bg-secondary self-start"
+        } `}
       >
         <div className="message-text">{formattedMessage}</div>
-        <div className="message-time mt-1 text-right text-gray-500">
+
+        <div
+          className={`text-[0.6rem] text-right pt-1 ${
+            isSentByMe ? "text-border-muted" : "text-text-secondary"
+          }`}
+        >
           {formattedTime}
         </div>
       </div>

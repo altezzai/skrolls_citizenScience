@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './MessageBox.css';
 
 import photo from '../../assets/profile.png';
 import more from '../../assets/vertical_dots.svg';
@@ -72,9 +71,9 @@ const MessageBox = () => {
   const groupedMessages = groupMessagesByDate(messages);
 
   return (
-    <div className="messagebox relative flex h-full flex-col">
-      <div className="messagebox-head flex h-16 select-none items-center justify-between px-5 py-2">
-        <div className="messagebox-user flex items-center gap-3 text-lg font-medium">
+    <div className="flex h-full flex-col">
+      <div className="flex h-16 select-none items-center justify-between bg-bg-secondary px-5 py-2">
+        <div className="flex items-center gap-3 text-lg font-medium">
           <ProfilePhoto img={photo} size={'3rem'} />
           Manuprasad
         </div>
@@ -87,12 +86,13 @@ const MessageBox = () => {
       </div>
 
       <div
-        className="messagebox-msg-area flex h-full flex-col gap-2 overflow-y-scroll px-4 py-2"
+        className="flex h-full flex-col gap-2 overflow-y-scroll px-4 py-2"
         ref={messageBoxRef}
+        style={{ scrollbarWidth: 'none' }}
       >
         {Object.keys(groupedMessages).map((date) => (
           <div key={date}>
-            <div className="date-header my-2 text-center text-xs text-gray-600">
+            <div className="my-2 text-center text-xs text-text-secondary">
               {date}
             </div>
             {groupedMessages[date].map((message) => (
@@ -107,9 +107,9 @@ const MessageBox = () => {
         ))}
       </div>
 
-      <div className="message-input-box absolute bottom-0 flex h-16 w-full items-center gap-3 justify-self-end rounded-2xl px-5">
+      <div className="relative flex h-16 w-full items-center gap-3 justify-self-end rounded-2xl border-4 border-bg-primary bg-bg-secondary px-5">
         <div
-          className="attachment-container relative cursor-pointer rounded-full p-2 transition-all delay-0 ease-in-out"
+          className="relative cursor-pointer rounded-full p-2 transition-all delay-0 ease-in-out hover:bg-secondary"
           ref={emojiPickerRef}
           onClick={handleEmojiPicker}
         >
@@ -132,7 +132,7 @@ const MessageBox = () => {
         </div>
 
         <div
-          className="attachment-container cursor-pointer rounded-full p-2 outline-2 transition-all delay-0 ease-in-out"
+          className="cursor-pointer rounded-full p-2 outline-2 transition-all delay-0 ease-in-out hover:bg-secondary"
           onClick={handleAttachment}
           ref={attachmentRef}
         >
@@ -145,14 +145,14 @@ const MessageBox = () => {
 
           {openAttach && (
             <div
-              className="attachment-box absolute bottom-full left-0 h-24 rounded-t-3xl p-2"
+              className="absolute bottom-full left-5 h-24 rounded-t-3xl bg-bg-secondary p-2"
               onClick={(e) => {
                 e.stopPropagation();
               }}
             >
               <label
                 htmlFor="uploadfile"
-                className="attachment-inner flex h-full w-full cursor-pointer flex-row items-center gap-2 rounded-t-3xl border-dashed border-black p-6"
+                className="flex h-full w-full cursor-pointer flex-row items-center gap-2 rounded-t-3xl border-2 border-dashed border-border-primary bg-bg-primary p-6 text-text-hard"
               >
                 <img src={upload} className="w-8" alt="upload button" />
                 <span className="text-sm">upload an attachment</span>
@@ -163,11 +163,12 @@ const MessageBox = () => {
         </div>
 
         <textarea
-          className="message-type h-12 w-full select-none resize-none p-3 text-base outline-none"
+          className="h-12 w-full select-none resize-none p-3 text-base text-text-secondary outline-none placeholder:text-base"
           placeholder="Your Message!"
           value={inputStr}
           onChange={(e) => setInputStr(e.target.value)}
           onKeyDown={handleKeyDown}
+          style={{ scrollbarWidth: 'none' }}
           rows={3}
         />
         <div
