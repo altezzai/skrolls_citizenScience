@@ -23,8 +23,8 @@ export const Comments = () => {
   return (
     <>
       <div
-        className={`mb-2 flex gap-2 rounded-xl bg-bg-secondary px-5 py-3 ${
-          reply && 'mb-0 rounded-b-none'
+        className={`bg-bg-secondary flex  px-5 py-3 gap-2 rounded-xl ${
+          reply ? "mb-0 rounded-b-none" : "mb-2"
         }`}
       >
         <ProfilePhoto img={photo} size={'2rem'} />
@@ -62,7 +62,14 @@ export const Comments = () => {
                 }}
               />
             </div>
-            6 reply
+            <div
+              className="cursor-pointer"
+              onClick={() => {
+                handleReply();
+              }}
+            >
+              6 reply
+            </div>
           </div>
         </div>
       </div>
@@ -88,7 +95,7 @@ export const Comments = () => {
                 />
               </div>
 
-              <div className="py-4 text-base font-normal">
+              <div className="py-3 text-base font-normal">
                 Okay thats all information I need to know
               </div>
 
@@ -130,7 +137,7 @@ export const Comments = () => {
                 />
               </div>
 
-              <div className="py-4 text-base font-normal">
+              <div className="py-3 text-base font-normal">
                 Okay thats all information I need to know
               </div>
 
@@ -161,7 +168,7 @@ export const Comments = () => {
                 placeholder="Enter your reply"
                 ref={inputRef}
               />
-              <div className="flex select-none items-center rounded-md bg-primary px-4 py-1">
+              <div className=" flex items-center py-1 px-4 rounded-md bg-primary select-none hover:bg-red-500 cursor-pointer transition-all duration-100">
                 <img
                   src={send}
                   className="w-6"

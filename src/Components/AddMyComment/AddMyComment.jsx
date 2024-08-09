@@ -13,7 +13,7 @@ export const AddMyComment = () => {
         placeholder="Enter your Comment"
         className="w-full outline-none"
       />
-      <div className="flex select-none items-center rounded-md bg-primary px-5 py-2">
+      <div className=" flex items-center py-2 px-5 rounded-md bg-primary select-none hover:bg-red-500 cursor-pointer transition-all duration-100">
         <img src={send} className="w-6" alt="send button" draggable="false" />
       </div>
     </div>
