@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './MessageBox.css';
+import React, { useState, useEffect, useRef } from "react";
 
 import photo from '../../assets/profile.png';
 import more from '../../assets/vertical_dots.svg';
@@ -72,10 +71,10 @@ const MessageBox = () => {
   const groupedMessages = groupMessagesByDate(messages);
 
   return (
-    <div className="messagebox relative flex h-full flex-col">
-      <div className="messagebox-head flex h-16 select-none items-center justify-between px-5 py-2">
-        <div className="messagebox-user flex items-center gap-3 text-lg font-medium">
-          <ProfilePhoto img={photo} size={'3rem'} />
+    <div className="h-full flex flex-col ">
+      <div className="flex justify-between items-center h-16 px-5 py-2 select-none bg-bg-secondary ">
+        <div className="flex items-center gap-3 text-lg font-medium">
+          <ProfilePhoto img={photo} size={"3rem"} />
           Manuprasad
         </div>
         <img
@@ -87,12 +86,13 @@ const MessageBox = () => {
       </div>
 
       <div
-        className="messagebox-msg-area flex h-full flex-col gap-2 overflow-y-scroll px-4 py-2"
+        className="h-full overflow-y-scroll px-4 py-2 flex flex-col gap-2"
         ref={messageBoxRef}
+        style={{ scrollbarWidth: "none" }}
       >
         {Object.keys(groupedMessages).map((date) => (
           <div key={date}>
-            <div className="date-header my-2 text-center text-xs text-gray-600">
+            <div className="text-text-secondary text-center text-xs  my-2">
               {date}
             </div>
             {groupedMessages[date].map((message) => (
@@ -107,9 +107,9 @@ const MessageBox = () => {
         ))}
       </div>
 
-      <div className="message-input-box absolute bottom-0 flex h-16 w-full items-center gap-3 justify-self-end rounded-2xl px-5">
+      <div className="relative rounded-2xl h-16 flex items-center justify-self-end w-full gap-3 px-5 bg-bg-secondary border-4 border-bg-primary">
         <div
-          className="attachment-container relative cursor-pointer rounded-full p-2 transition-all delay-0 ease-in-out"
+          className="relative rounded-full p-2 transition-all ease-in-out delay-0 cursor-pointer hover:bg-secondary"
           ref={emojiPickerRef}
           onClick={handleEmojiPicker}
         >
@@ -132,7 +132,7 @@ const MessageBox = () => {
         </div>
 
         <div
-          className="attachment-container cursor-pointer rounded-full p-2 outline-2 transition-all delay-0 ease-in-out"
+          className="cursor-pointer rounded-full p-2 transition-all ease-in-out delay-0 outline-2  hover:bg-secondary "
           onClick={handleAttachment}
           ref={attachmentRef}
         >
@@ -145,14 +145,14 @@ const MessageBox = () => {
 
           {openAttach && (
             <div
-              className="attachment-box absolute bottom-full left-0 h-24 rounded-t-3xl p-2"
+              className="absolute bottom-full left-5 p-2 h-24 rounded-t-3xl bg-bg-secondary"
               onClick={(e) => {
                 e.stopPropagation();
               }}
             >
               <label
                 htmlFor="uploadfile"
-                className="attachment-inner flex h-full w-full cursor-pointer flex-row items-center gap-2 rounded-t-3xl border-dashed border-black p-6"
+                className="bg-bg-primary border-2 border-border-primary flex flex-row h-full w-full items-center rounded-t-3xl p-6  gap-2 border-dashed cursor-pointer text-text-hard"
               >
                 <img src={upload} className="w-8" alt="upload button" />
                 <span className="text-sm">upload an attachment</span>
@@ -163,11 +163,12 @@ const MessageBox = () => {
         </div>
 
         <textarea
-          className="message-type h-12 w-full select-none resize-none p-3 text-base outline-none"
+          className="select-none w-full resize-none outline-none p-3 h-12 text-base placeholder:text-base text-text-secondary"
           placeholder="Your Message!"
           value={inputStr}
           onChange={(e) => setInputStr(e.target.value)}
           onKeyDown={handleKeyDown}
+          style={{ scrollbarWidth: "none" }}
           rows={3}
         />
         <div
