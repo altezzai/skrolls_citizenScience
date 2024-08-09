@@ -16,7 +16,7 @@
 .navPanel.bottom {
   height: 120px;
 }
-.homelabel{
+.homelabel {
   display: flex;
 }
 .navPanel {
@@ -59,7 +59,7 @@
   gap: 10px;
 }
 
-.navPieceMsg{
+.navPieceMsg {
   padding: 0;
   justify-content: center;
 }
@@ -83,7 +83,7 @@
   border-bottom: 1px solid var(--color-bg-muted);
   border-top: 1px solid var(--color-bg-muted);
 }
-.navPieceMsg h1{
+.navPieceMsg h1 {
   display: none;
 }
 .navPanel .navPiece:last-child h1 {

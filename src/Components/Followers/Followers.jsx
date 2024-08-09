@@ -27,7 +27,7 @@ export const Followers = ({
           <FollowButton follow={true} />
         </div>
       </div> */}
-      <UserFollowListItem user={{ name: "Manuprasad", username: "manu" }} />
+      <UserFollowListItem user={{ name: "Manuprasad", username: "manu" }} btnClassName={"w-fit"} />
       <div className="viewmore">
         <a href="">View more</a>
       </div>

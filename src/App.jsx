@@ -11,6 +11,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 const Home = lazy(() => import("./Pages/Home"));
 const ProfileContainer = lazy(() => import("./Pages/ProfileContainer"));
 const NotificationPage = lazy(() => import("./Pages/NotificationPage"));
+const Communities = lazy(() => import("./Pages/Communities"));
 import MessagePage from "./Pages/MessagePage";
 import { PostPage } from "./Pages/PostPage";
 
@@ -64,6 +65,15 @@ function App() {
                 </div>
               }
             />
+            <Route
+              path="/communities"
+              element={
+                <div className="center-container mx-12 max-xl:mx-3">
+                  <Communities />
+                </div>
+              }
+            />
+            <Route path="/groups" element={<div>groups</div>} />
           </Routes>
         </Suspense>
 

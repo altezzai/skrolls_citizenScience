@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import { cn } from "../../utils/utils";
 import React from "react";
 
 const TabButton = ({ id, label, active, onClick }) => (
@@ -22,10 +22,7 @@ const TabButton = ({ id, label, active, onClick }) => (
 const TabButtons = ({ tabs, activeTab, setActiveTab, className }) => (
   <div className="border-b pt-1 mb-1 border-gray-200 dark:border-gray-700">
     <ul
-      className={clsx(
-        "flex -mb-px text-sm font-medium text-center ",
-        className
-      )}
+      className={cn("flex -mb-px text-sm font-medium text-center ", className)}
       role="tablist"
     >
       {tabs.map((tab) => (

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import clsx from "clsx";
+import { cn } from "../../utils/utils";
 
 import { LikeIcon } from "../../assets/component/LikeIcon";
 
-export const Heart = ({className, textclr}) => {
+export const Heart = ({ className, textclr }) => {
   const [likeCount, setLikeCount] = useState(200);
   const [liked, setLiked] = useState(false);
 
@@ -21,7 +21,7 @@ export const Heart = ({className, textclr}) => {
     <div className="flex items-center gap-1 select-none">
       <div onClick={handleLikeClick}>
         <LikeIcon
-          className={clsx(
+          className={cn(
             "hover:text-red-500 rounded-full cursor-pointer",
             className,
             {
