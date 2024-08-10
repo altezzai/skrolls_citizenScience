@@ -10,48 +10,4 @@ const modals = {
   FOLLOW_LIST: "follow_list_modal",
 };
 
-const PUBLIC_NAV_ITEMS = {
-  top: [
-    {
-      label: "Home",
-      link: "/",
-      icon: home_icon,
-    },
-    {
-      label: "Messages",
-      link: "/messages",
-      icon: messages_icon,
-      notify: true,
-    },
-    {
-      label: "Groups",
-      link: "/groups",
-      icon: groups_icon,
-    },
-    {
-      label: "Communities",
-      link: "/communities",
-      icon: communities_icon,
-    },
-    {
-      label: "Notifications",
-      link: "/notifications",
-      icon: notification_icon,
-      notify: true,
-    },
-  ],
-  bottom: [
-    {
-      label: "Profile",
-      link: "/profile",
-      icon: profile_icon,
-    },
-    {
-      label: "Settings",
-      link: "/settings",
-      icon: settings_icon,
-    },
-  ],
-};
-
-export { modals, PUBLIC_NAV_ITEMS };
+export { modals };
