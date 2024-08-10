@@ -2,10 +2,11 @@ import React from "react";
 import "./NavPanel.css";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { cn } from "../../utils/utils";
 
-import skrolls_logo from "../../assets/skrolls.png";
 import NavPanelItem from "./NavPanelItem";
 
+import skrolls_logo from "../../assets/skrolls.png";
 // Icons
 import home_icon from "../../assets/home.svg";
 import messages_icon from "../../assets/messages.svg";
@@ -21,67 +22,81 @@ export const NavPanel = () => {
   const inMessagePage = location.pathname.includes("/messages");
 
   return (
-    <div className="asideNav">
+    <div
+      className={cn(
+        "h-full flex flex-col items-center justify-between py-14 ml-12 transition-margin",
+        { "pt-[136px] ml-3": inMessagePage }
+      )}
+    >
       <Link
         to="/"
-        className={`${
-          inMessagePage ? "msg-icon flex py-1 -mt-10 rounded-lg" : "hidden"
-        }`}
+        className={cn("bg-bg-secondary flex py-1 top-3 rounded-lg absolute", {
+          hidden: !inMessagePage,
+        })}
       >
         <img src={skrolls_logo} alt="icon" />
       </Link>
 
-      <div className="navPanel">
-        <NavPanelItem link="/" isSelected={location.pathname === "/"}>
+      <div className="bg-bg-secondary rounded-2xl">
+        <NavPanelItem
+          className="rounded-t-2xl"
+          link="/"
+          isSelected={location.pathname === "/"}
+        >
           <IconBadge>
             <img src={home_icon} alt="home" />
           </IconBadge>
-          Home
+          {!inMessagePage && <span>Home</span>}
         </NavPanelItem>
 
         <NavPanelItem
+          className=""
           link="/messages"
           isSelected={location.pathname === "/messages"}
         >
           <IconBadge>
-            <img src={messages_icon} alt="messages" className="px-[1px]"/>
+            <img src={messages_icon} alt="messages" className="px-[1px]" />
           </IconBadge>
-          Messages
+          {!inMessagePage && <span>Messages</span>}
         </NavPanelItem>
 
         <NavPanelItem
+          className=""
           link="/groups"
           isSelected={location.pathname === "/groups"}
         >
           <IconBadge>
             <img src={groups_icon} alt="groups" />
           </IconBadge>
-          Groups
+          {!inMessagePage && <span>Groups</span>}
         </NavPanelItem>
 
         <NavPanelItem
+          className=""
           link="/communities"
           isSelected={location.pathname === "/communities"}
         >
           <IconBadge>
             <img src={communities_icon} alt="communities" />
           </IconBadge>
-          Communities
+          {!inMessagePage && <span>Communities</span>}
         </NavPanelItem>
 
         <NavPanelItem
+          className="rounded-b-2xl"
           link="/notifications"
           isSelected={location.pathname === "/notifications"}
         >
-          <IconBadge>
+          <IconBadge className="">
             <img src={notification_icon} alt="notifications" />
           </IconBadge>
-          Notifications
+          {!inMessagePage && <span>Notification</span>}
         </NavPanelItem>
       </div>
 
-      <div className="navPanel">
+      <div className="bg-bg-secondary rounded-2xl">
         <NavPanelItem
+          className="rounded-t-2xl"
           link="/profile"
           isSelected={location.pathname === "/profile"}
         >
@@ -92,17 +107,18 @@ export const NavPanel = () => {
               className="rounded-full w-[22px] h-[22px]"
             />
           </IconBadge>
-          Profile
+          {!inMessagePage && <span>Profile</span>}
         </NavPanelItem>
 
         <NavPanelItem
+          className="rounded-b-2xl"
           link="/settings"
           isSelected={location.pathname === "/settings"}
         >
           <IconBadge>
             <img src={settings_icon} alt="settings" />
           </IconBadge>
-          Settings
+          {!inMessagePage && <span>Settings</span>}
         </NavPanelItem>
       </div>
     </div>

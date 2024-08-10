@@ -1,9 +1,13 @@
+import React from "react";
 import { cn } from "../../utils/utils";
 
-const IconBadge = ({ children, flag = false, notifyCount = 0 }) => {
+const IconBadge = ({ children, flag = false, notifyCount = 0, className }) => {
+  const childrenWithProps = React.Children.map(children, (child) =>
+    React.cloneElement(child, { draggable: false })
+  );
   return (
-    <div className="relative">
-      {children}
+    <div className={cn("relative grid place-items-center", className)}>
+      {childrenWithProps}
       {flag && (
         <div
           className={cn(
