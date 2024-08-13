@@ -11,11 +11,13 @@
   },
   "dependencies": {
     "clsx": "^2.1.1",
+    "copy-to-clipboard": "^3.3.3",
     "emoji-picker-react": "^4.11.1",
     "framer-motion": "^11.3.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.24.1",
+    "styled-components": "^6.1.12",
     "tailwind-merge": "^2.4.0"
   },
   "devDependencies": {
