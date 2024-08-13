@@ -10,7 +10,7 @@ import { SettingsItem } from "../Components/SettingsItem/SettingsItem";
 
 export const Settings = () => {
   return (
-    <div className="py-4">
+    <div className="py-4 select-none">
       <div className="flex w-full items-center justify-center relative text-xl text-text-secondary font-medium">
         Settings
         <div className="absolute right-0">
