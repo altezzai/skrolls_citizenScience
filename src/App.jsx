@@ -13,6 +13,7 @@ const ProfileContainer = lazy(() => import("./Pages/ProfileContainer"));
 const NotificationPage = lazy(() => import("./Pages/NotificationPage"));
 import MessagePage from "./Pages/MessagePage";
 import { PostPage } from "./Pages/PostPage";
+import { Settings } from "./Pages/Settings";
 
 function App() {
   const location = useLocation();
@@ -61,6 +62,14 @@ function App() {
               element={
                 <div className="center-container mx-12 max-xl:mx-3">
                   <NotificationPage />
+                </div>
+              }
+            />
+            <Route
+              path="/settings"
+              element={
+                <div className="center-container mx-12 max-xl:mx-3">
+                  <Settings />
                 </div>
               }
             />
