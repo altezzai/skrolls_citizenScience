@@ -27,7 +27,7 @@ const UserFollowListItem = ({
   };
 
   return (
-    <div className="my-3 flex gap-16 first:mt-0">
+    <div className="flex gap-16 items-center justify-between">
       <div className="flex gap-2">
         <img src={photo} alt="" className="h-10 w-10 rounded-full" />
         <div className="">
