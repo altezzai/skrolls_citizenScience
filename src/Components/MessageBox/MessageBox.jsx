@@ -1,24 +1,24 @@
-import React, { useState, useEffect, useRef } from "react";
-import "./MessageBox.css";
+import React, { useState, useEffect, useRef } from 'react';
+import './MessageBox.css';
 
-import photo from "../../assets/profile.png";
-import more from "../../assets/vertical_dots.svg";
-import attach from "../../assets/attach.svg";
-import send from "../../assets/send.svg";
-import smily from "../../assets/smily.svg";
-import upload from "../../assets/upload.svg";
+import photo from '../../assets/profile.png';
+import more from '../../assets/vertical_dots.svg';
+import attach from '../../assets/attach.svg';
+import send from '../../assets/send.svg';
+import smily from '../../assets/smily.svg';
+import upload from '../../assets/upload.svg';
 
-import { ProfilePhoto } from "../Profilephoto/ProfilePhoto";
-import EmojiPicker from "emoji-picker-react";
-import MessageBubble from "../MessageBubble/MessageBubble";
-import sampleMessage from "../../data/message.json";
-import { groupMessagesByDate } from "../../utils/groupMessagesByDate";
-import useClickOutside from "../../hooks/useClickOutside";
+import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';
+import EmojiPicker from 'emoji-picker-react';
+import MessageBubble from '../MessageBubble/MessageBubble';
+import sampleMessage from '../../data/message.json';
+import { groupMessagesByDate } from '../../utils/groupMessagesByDate';
+import useClickOutside from '../../hooks/useClickOutside';
 
 const MessageBox = () => {
   const [open, setOpen] = useState(false);
   const [openAttach, setOpenAttach] = useState(false);
-  const [inputStr, setInputStr] = useState("");
+  const [inputStr, setInputStr] = useState('');
   const [messages, setMessages] = useState(sampleMessage);
   // const emojiPickerRef = useRef(null);
   const messageBoxRef = useRef(null);
@@ -43,21 +43,21 @@ const MessageBox = () => {
   };
 
   const handleSendMessage = () => {
-    if (inputStr.trim() !== "") {
+    if (inputStr.trim() !== '') {
       const newMessage = {
         id: messages.length + 1,
         text: inputStr,
         sentByMe: true,
         timestamp: new Date().toISOString(),
-        sender: "Me",
+        sender: 'Me',
       };
       setMessages((prevMessages) => [...prevMessages, newMessage]);
-      setInputStr(""); // Clear the input after sending
+      setInputStr(''); // Clear the input after sending
     }
   };
 
   const handleKeyDown = (event) => {
-    if (event.key === "Enter" && !event.shiftKey) {
+    if (event.key === 'Enter' && !event.shiftKey) {
       event.preventDefault();
       handleSendMessage();
     }
@@ -72,10 +72,10 @@ const MessageBox = () => {
   const groupedMessages = groupMessagesByDate(messages);
 
   return (
-    <div className="messagebox h-full flex flex-col relative">
-      <div className="messagebox-head flex justify-between items-center h-16 px-5 py-2 select-none">
+    <div className="messagebox relative flex h-full flex-col">
+      <div className="messagebox-head flex h-16 select-none items-center justify-between px-5 py-2">
         <div className="messagebox-user flex items-center gap-3 text-lg font-medium">
-          <ProfilePhoto img={photo} size={"3rem"} />
+          <ProfilePhoto img={photo} size={'3rem'} />
           Manuprasad
         </div>
         <img
@@ -87,12 +87,12 @@ const MessageBox = () => {
       </div>
 
       <div
-        className="messagebox-msg-area h-full overflow-y-scroll px-4 py-2 flex flex-col gap-2"
+        className="messagebox-msg-area flex h-full flex-col gap-2 overflow-y-scroll px-4 py-2"
         ref={messageBoxRef}
       >
         {Object.keys(groupedMessages).map((date) => (
           <div key={date}>
-            <div className="date-header text-center text-xs text-gray-600 my-2">
+            <div className="date-header my-2 text-center text-xs text-gray-600">
               {date}
             </div>
             {groupedMessages[date].map((message) => (
@@ -107,9 +107,9 @@ const MessageBox = () => {
         ))}
       </div>
 
-      <div className="message-input-box rounded-2xl h-16 flex items-center justify-self-end w-full gap-3 px-5 absolute bottom-0">
+      <div className="message-input-box absolute bottom-0 flex h-16 w-full items-center gap-3 justify-self-end rounded-2xl px-5">
         <div
-          className="attachment-container relative rounded-full p-2 transition-all ease-in-out delay-0 cursor-pointer "
+          className="attachment-container relative cursor-pointer rounded-full p-2 transition-all delay-0 ease-in-out"
           ref={emojiPickerRef}
           onClick={handleEmojiPicker}
         >
@@ -132,7 +132,7 @@ const MessageBox = () => {
         </div>
 
         <div
-          className="attachment-container cursor-pointer rounded-full p-2 transition-all ease-in-out delay-0 outline-2"
+          className="attachment-container cursor-pointer rounded-full p-2 outline-2 transition-all delay-0 ease-in-out"
           onClick={handleAttachment}
           ref={attachmentRef}
         >
@@ -145,25 +145,25 @@ const MessageBox = () => {
 
           {openAttach && (
             <div
-              className="attachment-box absolute bottom-full left-0 p-2 h-24 rounded-t-3xl "
+              className="attachment-box absolute bottom-full left-0 h-24 rounded-t-3xl p-2"
               onClick={(e) => {
                 e.stopPropagation();
               }}
             >
               <label
                 htmlFor="uploadfile"
-                className="attachment-inner flex flex-row h-full w-full items-center rounded-t-3xl p-6  gap-2 border-dashed border-black cursor-pointer"
+                className="attachment-inner flex h-full w-full cursor-pointer flex-row items-center gap-2 rounded-t-3xl border-dashed border-black p-6"
               >
-                <img src={upload} className=" w-8" alt="upload button" />
-                <span className=" text-sm">upload an attachment</span>
+                <img src={upload} className="w-8" alt="upload button" />
+                <span className="text-sm">upload an attachment</span>
               </label>
-              <input type="file" id="uploadfile" multiple className=" hidden" />
+              <input type="file" id="uploadfile" multiple className="hidden" />
             </div>
           )}
         </div>
 
         <textarea
-          className="message-type select-none w-full resize-none outline-none p-3 h-12 text-base"
+          className="message-type h-12 w-full select-none resize-none p-3 text-base outline-none"
           placeholder="Your Message!"
           value={inputStr}
           onChange={(e) => setInputStr(e.target.value)}
@@ -171,12 +171,12 @@ const MessageBox = () => {
           rows={3}
         />
         <div
-          className="cursor-pointer transition-all ease-in-out delay-0 attachment-container px-6 py-3 rounded-lg"
+          className="attachment-container cursor-pointer rounded-lg px-6 py-3 transition-all delay-0 ease-in-out"
           onClick={handleSendMessage}
         >
           <img
             src={send}
-            className=" w-8 select-none"
+            className="w-8 select-none"
             draggable="false"
             alt="Send"
           />

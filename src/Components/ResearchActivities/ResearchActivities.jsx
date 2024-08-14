@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import "./ResearchActivities.css";
-import docimage from "../../assets/profile.png";
-import PostButton from "../PostButton/PostButton";
-import download from "../../assets/download.svg";
-import verified from "../../assets/verified.svg";
-import { Contributors } from "../Contributors/Contributors";
+import React, { useState } from 'react';
+import './ResearchActivities.css';
+import docimage from '../../assets/profile.png';
+import PostButton from '../PostButton/PostButton';
+import download from '../../assets/download.svg';
+import verified from '../../assets/verified.svg';
+import { Contributors } from '../Contributors/Contributors';
 
-import profile from "../../assets/profile.png";
-import { PhotowithName } from "../PhotowithName/PhotowithName";
+import profile from '../../assets/profile.png';
+import { PhotowithName } from '../PhotowithName/PhotowithName';
 
 const ResearchActivities = () => {
   const [detailsVisible, setDetailsVisible] = useState(false);
@@ -16,12 +16,12 @@ const ResearchActivities = () => {
     setDetailsVisible(!detailsVisible);
   };
   const ContributorsList = [
-    "Anurag T K",
-    "Ishaque",
-    "Aswin K",
-    "Farhathulla",
-    "Rafsal",
-    "Akshay Bose",
+    'Anurag T K',
+    'Ishaque',
+    'Aswin K',
+    'Farhathulla',
+    'Rafsal',
+    'Akshay Bose',
   ];
   return (
     <div className="activitybox" onClick={handleActnameClick}>
@@ -70,9 +70,9 @@ const ResearchActivities = () => {
         <img src={docimage} className="docimg" />
         <PostButton
           image={download}
-          text={"Download"}
-          radius={"6px"}
-          height={"25px"}
+          text={'Download'}
+          radius={'6px'}
+          height={'25px'}
           iconHeight="15px"
           flag={true}
           textsize="11px"

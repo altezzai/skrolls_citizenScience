@@ -1,12 +1,12 @@
-import { cn } from "../../utils/utils";
-import React from "react";
+import { cn } from '../../utils/utils';
+import React from 'react';
 
 const TabButton = ({ id, label, active, onClick }) => (
   <button
-    className={`inline-block px-3 py-2 rounded-t-lg text-nowrap ${
+    className={`inline-block text-nowrap rounded-t-lg px-3 py-2 ${
       active
-        ? "text-black border-b-2 border-black dark:text-white dark:border-white"
-        : "hover:text-gray-700 text-gray-500 hover:border-gray-300 dark:hover:text-gray-300"
+        ? 'border-b-2 border-black text-black dark:border-white dark:text-white'
+        : 'text-gray-500 hover:border-gray-300 hover:text-gray-700 dark:hover:text-gray-300'
     }`}
     id={`${id}-tab`}
     type="button"
@@ -20,9 +20,9 @@ const TabButton = ({ id, label, active, onClick }) => (
 );
 
 const TabButtons = ({ tabs, activeTab, setActiveTab, className }) => (
-  <div className="border-b pt-1 mb-1 border-gray-200 dark:border-gray-700">
+  <div className="mb-1 border-b border-gray-200 pt-1 dark:border-gray-700">
     <ul
-      className={cn("flex -mb-px text-sm font-medium text-center ", className)}
+      className={cn('-mb-px flex text-center text-sm font-medium', className)}
       role="tablist"
     >
       {tabs.map((tab) => (

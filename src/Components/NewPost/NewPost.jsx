@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import photo from "../../assets/profile.png";
-import PostButton from "../PostButton/PostButton";
-import AddPost from "../AddPost/AddPost";
-import { ProfilePhoto } from "../Profilephoto/ProfilePhoto";
+import photo from '../../assets/profile.png';
+import PostButton from '../PostButton/PostButton';
+import AddPost from '../AddPost/AddPost';
+import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';
 
 const NewPost = () => {
   const [showAddPost, setShowAddPost] = useState(false);
@@ -17,14 +17,16 @@ const NewPost = () => {
   };
 
   return (
-    <div className="flex items-center w-full my-4 rounded-2xl py-3 px-4 gap-5 bg-bg-secondary">
+    <div className="my-4 flex w-full items-center gap-5 rounded-2xl bg-bg-secondary px-4 py-3">
+      <ProfilePhoto img={photo} size={'3rem'} />
 
-      <ProfilePhoto img={photo} size={"3rem"} />
-
-      <div className="flex items-center justify-between w-full text-xl text-text-muted cursor-pointer" onClick={handlePostClick}>
+      <div
+        className="flex w-full cursor-pointer items-center justify-between text-xl text-text-muted"
+        onClick={handlePostClick}
+      >
         What is new. Rafsal?
         <div className="px-2">
-          <PostButton text={"Add Post!"} />
+          <PostButton text={'Add Post!'} />
         </div>
       </div>
 

@@ -1,27 +1,27 @@
-import "./App.css";
-import { lazy, Suspense } from "react";
+import './App.css';
+import { lazy, Suspense } from 'react';
 
-import Header from "./Components/Header/Header";
-import { NavPanel } from "./Components/NavPanel/NavPanel";
-import { RoyaltyScore } from "./Components/RoyaltyScore/RoyaltyScore";
-import { IdBox } from "./Components/IdBox/IdBox";
-import { Followers } from "./Components/Followers/Followers";
-import { Route, Routes, useLocation } from "react-router-dom";
+import Header from './Components/Header/Header';
+import { NavPanel } from './Components/NavPanel/NavPanel';
+import { RoyaltyScore } from './Components/RoyaltyScore/RoyaltyScore';
+import { IdBox } from './Components/IdBox/IdBox';
+import { Followers } from './Components/Followers/Followers';
+import { Route, Routes, useLocation } from 'react-router-dom';
 
-const Home = lazy(() => import("./Pages/Home"));
-const ProfileContainer = lazy(() => import("./Pages/ProfileContainer"));
-const NotificationPage = lazy(() => import("./Pages/NotificationPage"));
-const Communities = lazy(() => import("./Pages/Communities"));
-import MessagePage from "./Pages/MessagePage";
-import { PostPage } from "./Pages/PostPage";
+const Home = lazy(() => import('./Pages/Home'));
+const ProfileContainer = lazy(() => import('./Pages/ProfileContainer'));
+const NotificationPage = lazy(() => import('./Pages/NotificationPage'));
+const Communities = lazy(() => import('./Pages/Communities'));
+import MessagePage from './Pages/MessagePage';
+import { PostPage } from './Pages/PostPage';
 
 function App() {
   const location = useLocation();
-  const inMessagePage = location.pathname.includes("/messages");
+  const inMessagePage = location.pathname.includes('/messages');
   return (
     <>
       <Header />
-      <div className={`main-container ${inMessagePage ? "height-set" : ""}`}>
+      <div className={`main-container ${inMessagePage ? 'height-set' : ''}`}>
         <NavPanel />
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
@@ -80,14 +80,14 @@ function App() {
         <div
           className={`${
             inMessagePage
-              ? " hidden"
-              : "info-panel mr-12  max-xl:mr-2 w-80 h-full overflow-y-scroll scrollbar-hide pt-10 shrink-0 max-xl:shrink max-xl:min-w-60"
+              ? 'hidden'
+              : 'info-panel scrollbar-hide mr-12 h-full w-80 shrink-0 overflow-y-scroll pt-10 max-xl:mr-2 max-xl:min-w-60 max-xl:shrink'
           }`}
-          style={{ scrollbarWidth: "none" }}
+          style={{ scrollbarWidth: 'none' }}
         >
           <RoyaltyScore />
           <IdBox />
-          <Followers title={"Followers"} followbtnflag={true} />
+          <Followers title={'Followers'} followbtnflag={true} />
         </div>
       </div>
     </>

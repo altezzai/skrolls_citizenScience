@@ -1,8 +1,8 @@
-import React from "react";
-import "./Followers.css";
-import photo from "../../assets/profile.png";
-import FollowButton from "../FollowButton/FollowButton";
-import UserFollowListItem from "../UserFollowListItem/UserFollowListItem";
+import React from 'react';
+import './Followers.css';
+import photo from '../../assets/profile.png';
+import FollowButton from '../FollowButton/FollowButton';
+import UserFollowListItem from '../UserFollowListItem/UserFollowListItem';
 
 export const Followers = ({
   title,
@@ -27,7 +27,10 @@ export const Followers = ({
           <FollowButton follow={true} />
         </div>
       </div> */}
-      <UserFollowListItem user={{ name: "Manuprasad", username: "manu" }} btnClassName={"w-fit"} />
+      <UserFollowListItem
+        user={{ name: 'Manuprasad', username: 'manu' }}
+        btnClassName={'w-fit'}
+      />
       <div className="viewmore">
         <a href="">View more</a>
       </div>

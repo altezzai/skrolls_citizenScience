@@ -1,12 +1,12 @@
-import React from "react";
-import "./RoyaltyScore.css";
-import info from "../../assets/info.svg";
+import React from 'react';
+import './RoyaltyScore.css';
+import info from '../../assets/info.svg';
 
 export const RoyaltyScore = () => {
   return (
     <div className="royaltyPanel">
       <ul className="list">
-        <li className="listIcon ">
+        <li className="listIcon">
           <h1>Royalty Score</h1>
           <img src={info} className="infologo" />
         </li>

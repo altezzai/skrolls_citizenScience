@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext } from 'react';
 // import { modals as modalName } from '@/data/constants';
 
 const ModalContext = createContext();

@@ -1,12 +1,12 @@
-import React, { lazy, useState } from "react";
-import TabButtons from "../Tabs/TabButtons";
-import TabContent from "../Tabs/TabContent";
-import { modals } from "../../data/constants.js";
-import useClickOutside from "../../hooks/useClickOutside.js";
-import { useModal } from "../../context/ModalContext.jsx";
+import React, { lazy, useState } from 'react';
+import TabButtons from '../Tabs/TabButtons';
+import TabContent from '../Tabs/TabContent';
+import { modals } from '../../data/constants.js';
+import useClickOutside from '../../hooks/useClickOutside.js';
+import { useModal } from '../../context/ModalContext.jsx';
 
-const UserFollowListItem = lazy(() =>
-  import("../UserFollowListItem/UserFollowListItem")
+const UserFollowListItem = lazy(
+  () => import('../UserFollowListItem/UserFollowListItem')
 );
 
 const FollowList = ({ defaultActiveTab }) => {
@@ -16,11 +16,11 @@ const FollowList = ({ defaultActiveTab }) => {
     closeModal(modals.FOLLOW_LIST);
   });
   const renderUserList = (count) => (
-    <div className="overflow-y-scroll h-[500px] p-4 pr-0">
+    <div className="h-[500px] overflow-y-scroll p-4 pr-0">
       {[...Array(count)].map((_, index) => (
         <UserFollowListItem
           key={index}
-          user={{ name: "Manuprasad", username: "manu" }}
+          user={{ name: 'Manuprasad', username: 'manu' }}
           confirmUnfollow={true}
         />
       ))}
@@ -28,13 +28,13 @@ const FollowList = ({ defaultActiveTab }) => {
   );
   const tabs = [
     {
-      id: "followers",
-      label: "Followers",
+      id: 'followers',
+      label: 'Followers',
       content: renderUserList(3),
     },
     {
-      id: "following",
-      label: "Following",
+      id: 'following',
+      label: 'Following',
       content: renderUserList(5),
     },
   ];
@@ -45,7 +45,7 @@ const FollowList = ({ defaultActiveTab }) => {
 
   return (
     <div
-      className="z-50 absolute bg-white  rounded-2xl overflow-hidden"
+      className="absolute z-50 overflow-hidden rounded-2xl bg-white"
       ref={followListRef}
     >
       <TabButtons

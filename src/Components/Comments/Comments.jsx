@@ -1,21 +1,18 @@
-import React, { useRef, useState } from "react";
-import { ProfilePhoto } from "../Profilephoto/ProfilePhoto";
+import React, { useRef, useState } from 'react';
+import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';
 
-import photo from "../../assets/profile.png";
-import more from "../../assets/vertical_dots.svg";
-import love from "../../assets/love_gray.svg";
-import reply_icon from "../../assets/reply.svg";
-import send from "../../assets/send_white.svg";
-import { Heart } from "../ui/Heart";
+import photo from '../../assets/profile.png';
+import more from '../../assets/vertical_dots.svg';
+import reply_icon from '../../assets/reply.svg';
+import send from '../../assets/send_white.svg';
+import { Heart } from '../ui/Heart';
 
 export const Comments = () => {
   const [reply, setReply] = useState(false);
   const inputRef = useRef(null);
 
-  //reply to comments open and close toggle
   const handleReply = () => {
     setReply(!reply);
-    // Use setTimeout to ensure the input is rendered before focusing
     setTimeout(() => {
       if (inputRef.current) {
         inputRef.current.focus();
@@ -26,17 +23,17 @@ export const Comments = () => {
   return (
     <>
       <div
-        className={`bg-bg-secondary flex mb-2 px-5 py-3 gap-2 rounded-xl ${
-          reply && "mb-0 rounded-b-none"
+        className={`mb-2 flex gap-2 rounded-xl bg-bg-secondary px-5 py-3 ${
+          reply && 'mb-0 rounded-b-none'
         }`}
       >
-        <ProfilePhoto img={photo} size={"2rem"} />
+        <ProfilePhoto img={photo} size={'2rem'} />
 
-        <div className="flex flex-col w-full">
+        <div className="flex w-full flex-col">
           <div className="flex justify-between">
             <div className="flex gap-6">
-              <div className=" font-medium text-lg">rafsal</div>
-              <div className=" font-normal text-base text-text-muted select-none">
+              <div className="text-lg font-medium">rafsal</div>
+              <div className="select-none text-base font-normal text-text-muted">
                 5h ago
               </div>
             </div>
@@ -52,9 +49,9 @@ export const Comments = () => {
             Okay thats all information I need to know
           </div>
 
-          <div className="flex justify-between items-center text-text-secondary text-sm select-none">
-            <div className="flex gap-8 items-center">
-              <Heart className={"w-5 h-5"} textclr={"text-text-secondary"} />
+          <div className="flex select-none items-center justify-between text-sm text-text-secondary">
+            <div className="flex items-center gap-8">
+              <Heart className={'h-5 w-5'} textclr={'text-text-secondary'} />
               <img
                 src={reply_icon}
                 className="w-5 cursor-pointer"
@@ -71,15 +68,15 @@ export const Comments = () => {
       </div>
 
       {reply && (
-        <div className="flex bg-textarea w-full pl-10 flex-col mb-2 rounded-b-xl">
-          <div className="flex bg-textarea w-full px-5 py-3 gap-2 border-l-2">
-            <ProfilePhoto img={photo} size={"2rem"} />
+        <div className="mb-2 flex w-full flex-col rounded-b-xl bg-textarea pl-10">
+          <div className="flex w-full gap-2 border-l-2 bg-textarea px-5 py-3">
+            <ProfilePhoto img={photo} size={'2rem'} />
 
-            <div className="flex flex-col w-full">
+            <div className="flex w-full flex-col">
               <div className="flex justify-between">
                 <div className="flex gap-6">
-                  <div className=" font-medium text-lg">rafsal</div>
-                  <div className=" font-normal text-base text-text-muted select-none">
+                  <div className="text-lg font-medium">rafsal</div>
+                  <div className="select-none text-base font-normal text-text-muted">
                     5h ago
                   </div>
                 </div>
@@ -95,11 +92,11 @@ export const Comments = () => {
                 Okay thats all information I need to know
               </div>
 
-              <div className="flex justify-between items-center text-text-secondary text-sm select-none">
-                <div className="flex gap-8 items-center">
+              <div className="flex select-none items-center justify-between text-sm text-text-secondary">
+                <div className="flex items-center gap-8">
                   <Heart
-                    className={"w-5 h-5"}
-                    textclr={"text-text-secondary"}
+                    className={'h-5 w-5'}
+                    textclr={'text-text-secondary'}
                   />
 
                   <img
@@ -114,14 +111,14 @@ export const Comments = () => {
             </div>
           </div>
 
-          <div className="flex bg-textarea w-full px-5 py-3 gap-2 border-l-2">
-            <ProfilePhoto img={photo} size={"2rem"} />
+          <div className="flex w-full gap-2 border-l-2 bg-textarea px-5 py-3">
+            <ProfilePhoto img={photo} size={'2rem'} />
 
-            <div className="flex flex-col w-full">
+            <div className="flex w-full flex-col">
               <div className="flex justify-between">
                 <div className="flex gap-6">
-                  <div className=" font-medium text-lg">rafsal</div>
-                  <div className=" font-normal text-base text-text-muted select-none">
+                  <div className="text-lg font-medium">rafsal</div>
+                  <div className="select-none text-base font-normal text-text-muted">
                     5h ago
                   </div>
                 </div>
@@ -137,11 +134,11 @@ export const Comments = () => {
                 Okay thats all information I need to know
               </div>
 
-              <div className="flex justify-between items-center text-text-secondary text-sm select-none">
-                <div className="flex gap-8 items-center">
+              <div className="flex select-none items-center justify-between text-sm text-text-secondary">
+                <div className="flex items-center gap-8">
                   <Heart
-                    className={"w-5 h-5"}
-                    textclr={"text-text-secondary"}
+                    className={'h-5 w-5'}
+                    textclr={'text-text-secondary'}
                   />
                   <img
                     src={reply_icon}
@@ -155,16 +152,16 @@ export const Comments = () => {
             </div>
           </div>
 
-          <div className="flex w-full gap-5 items-center mb-2 -ml-4">
-            <ProfilePhoto img={photo} size={"2rem"} />
-            <div className="flex bg-bg-secondary p-2 w-full rounded-lg">
+          <div className="-ml-4 mb-2 flex w-full items-center gap-5">
+            <ProfilePhoto img={photo} size={'2rem'} />
+            <div className="flex w-full rounded-lg bg-bg-secondary p-2">
               <input
                 type="text"
-                className="w-full pl-3 outline-none placeholder:"
+                className="placeholder: w-full pl-3 outline-none"
                 placeholder="Enter your reply"
                 ref={inputRef}
               />
-              <div className=" flex items-center py-1 px-4 rounded-md bg-primary select-none">
+              <div className="flex select-none items-center rounded-md bg-primary px-4 py-1">
                 <img
                   src={send}
                   className="w-6"

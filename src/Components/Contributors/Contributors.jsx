@@ -1,104 +1,45 @@
-import React from "react";
-import "./Contributors.css";
-import { ProfilePhoto } from "../Profilephoto/ProfilePhoto";
-import profile from "../../assets/profile.png";
-import { Photogroup } from "../Photogroup/Photogroup";
-import { PhotowithName } from "../PhotowithName/PhotowithName";
+import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';
+import profile from '../../assets/profile.png';
+import { Photogroup } from '../Photogroup/Photogroup';
+import { PhotowithName } from '../PhotowithName/PhotowithName';
+import Dot from '../ui/Dot';
 
 export const Contributors = () => {
   const ContributorsList = [
-    "Anurag T K",
-    "Ishaque",
-    "Aswin K",
-    "Farhathulla",
-    "Rafsal",
-    "Akshay Bose",
+    'Anurag T K',
+    'Ishaque',
+    'Aswin K',
+    'Farhathulla',
+    'Rafsal',
+    'Akshay Bose',
   ];
 
+  const renderContributor = (name, index) => (
+    <>
+      {index > 0 && <Dot />}
+      <PhotowithName profile={profile} name={name} />
+    </>
+  );
+
+  const renderOthers = (count) => (
+    <>
+      <Dot />
+      <Photogroup images={[profile, profile, profile]} />
+      <span className="uname">+ {count} Others</span>
+    </>
+  );
+
   const displayContributors = () => {
-    switch (ContributorsList.length) {
-      case 1:
-        return (
-          <div>
-            <PhotowithName profile={profile} name={ContributorsList[0]} />
-          </div>
-        );
-      case 2:
-        return (
-          <>
-            <PhotowithName profile={profile} name={ContributorsList[0]} />
+    const count = ContributorsList.length;
+    const visibleCount = Math.min(count, count === 4 ? 4 : 3);
 
-            <div className="smalldot"></div>
-            <PhotowithName profile={profile} name={ContributorsList[1]} />
-          </>
-        );
-      case 3:
-        return (
-          <>
-            <PhotowithName profile={profile} name={ContributorsList[0]} />
-
-            <div className="smalldot"></div>
-            <PhotowithName profile={profile} name={ContributorsList[1]} />
-
-            <div className="smalldot"></div>
-            <PhotowithName profile={profile} name={ContributorsList[2]} />
-          </>
-        );
-      case 4:
-        return (
-          <>
-            <PhotowithName profile={profile} name={ContributorsList[0]} />
-
-            <div className="smalldot"></div>
-            <ProfilePhoto img={profile} size={"24px"} />
-            <PhotowithName profile={profile} name={ContributorsList[1]} />
-
-            <div className="smalldot"></div>
-            <PhotowithName profile={profile} name={ContributorsList[2]} />
-
-            <div className="smalldot"></div>
-            <PhotowithName profile={profile} name={ContributorsList[3]} />
-          </>
-        );
-      case 5:
-        return (
-          <>
-            <PhotowithName profile={profile} name={ContributorsList[0]} />
-
-            <div className="smalldot"></div>
-            <PhotowithName profile={profile} name={ContributorsList[1]} />
-
-            <div className="smalldot"></div>
-            <PhotowithName profile={profile} name={ContributorsList[2]} />
-
-            <div className="smalldot"></div>
-            <Photogroup image1={profile} image2={profile} flag={false} />
-            <span className="uname">
-              + {ContributorsList.length - 3} Others
-            </span>
-          </>
-        );
-
-      default:
-        return (
-          <>
-            <PhotowithName profile={profile} name={ContributorsList[0]} />
-
-            <div className="smalldot"></div>
-            <PhotowithName profile={profile} name={ContributorsList[1]} />
-
-            <div className="smalldot"></div>
-            <PhotowithName profile={profile} name={ContributorsList[2]} />
-
-            <div className="smalldot"></div>
-            <Photogroup image1={profile} image2={profile} image3={profile} />
-            <span className="uname">
-              + {ContributorsList.length - 3} Others
-            </span>
-          </>
-        );
-    }
+    return (
+      <>
+        {ContributorsList.slice(0, visibleCount).map(renderContributor)}
+        {count > 4 && renderOthers(count - 3)}
+      </>
+    );
   };
 
-  return <div className="contributor">{displayContributors()}</div>;
+  return <div className="flex items-center">{displayContributors()}</div>;
 };

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { cn } from "../../utils/utils";
+import React, { useState } from 'react';
+import { cn } from '../../utils/utils';
 
-import { LikeIcon } from "../../assets/component/LikeIcon";
+import { LikeIcon } from '../../assets/component/LikeIcon';
 
 export const Heart = ({ className, textclr }) => {
   const [likeCount, setLikeCount] = useState(200);
@@ -18,14 +18,14 @@ export const Heart = ({ className, textclr }) => {
   };
 
   return (
-    <div className="flex items-center gap-1 select-none">
+    <div className="flex select-none items-center gap-1">
       <div onClick={handleLikeClick}>
         <LikeIcon
           className={cn(
-            "hover:text-red-500 rounded-full cursor-pointer",
+            'cursor-pointer rounded-full hover:text-red-500',
             className,
             {
-              "fill-red-500 text-red-500": liked,
+              'fill-red-500 text-red-500': liked,
               textclr: !liked,
             }
           )}

@@ -1,12 +1,12 @@
-import React from "react";
-import "./ProfileDetails.css";
-import DetailBox from "../DetailBox/DetailBox";
-import SkillBtn from "../SkillBtn/SkillBtn";
+import React from 'react';
+import './ProfileDetails.css';
+import DetailBox from '../DetailBox/DetailBox';
+import SkillBtn from '../SkillBtn/SkillBtn';
 
 const ProfileDetails = () => {
   return (
     <div className="profile-details">
-      <DetailBox heading={"Personal Details"}>
+      <DetailBox heading={'Personal Details'}>
         <div className="personal-details-container">
           <div className="personal-detail-box">
             <div className="per-box">
@@ -31,7 +31,7 @@ const ProfileDetails = () => {
         </div>
       </DetailBox>
 
-      <DetailBox heading={"Professional Details"}>
+      <DetailBox heading={'Professional Details'}>
         <div className="personal-details-container">
           <div className="personal-detail-box">
             <div className="per-box">
@@ -46,7 +46,7 @@ const ProfileDetails = () => {
         </div>
       </DetailBox>
 
-      <DetailBox heading={"Education"}>
+      <DetailBox heading={'Education'}>
         <div className="personal-details-container">
           <table className="edu-table">
             <thead>
@@ -75,7 +75,7 @@ const ProfileDetails = () => {
         </div>
       </DetailBox>
 
-      <DetailBox heading={"Interest"}>
+      <DetailBox heading={'Interest'}>
         <div className="interest">
           <SkillBtn> Machine Learning</SkillBtn>
           <SkillBtn> Artificial Intelligence</SkillBtn>
@@ -83,7 +83,7 @@ const ProfileDetails = () => {
         </div>
       </DetailBox>
 
-      <DetailBox heading={"Skill"}>
+      <DetailBox heading={'Skill'}>
         <div className="interest">
           <SkillBtn> Artificial Intelligence</SkillBtn>
           <SkillBtn> Designing</SkillBtn>
