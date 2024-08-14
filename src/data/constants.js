@@ -7,7 +7,9 @@ import settings_icon from '../assets/settings.svg';
 import profile_icon from '../assets/profile.png';
 
 const modals = {
-  FOLLOW_LIST: 'follow_list_modal',
+  FOLLOW_LIST: "follow_list_modal",
+  SHARE_MODAL: "share_modal",
+  UNFOLLOW_POPUP: "unfollow_popup",
 };
 
 export { modals };

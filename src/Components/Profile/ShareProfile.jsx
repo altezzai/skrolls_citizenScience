@@ -6,8 +6,15 @@ import mail from "../../assets/mail.svg";
 import twitter from "../../assets/twitter.svg";
 import insta from "../../assets/insta.svg";
 import copy from "copy-to-clipboard";
+import useClickOutside from "../../hooks/useClickOutside";
+import { useModal } from "../../context/ModalContext";
+import { modals } from "../../data/constants";
 
 export const ShareProfile = () => {
+  const { isModalOpen, closeModal } = useModal();
+  const shareModalRef = useClickOutside(isModalOpen(modals.SHARE_MODAL), () =>
+    closeModal(modals.SHARE_MODAL)
+  );
   const [copyText, setCopyText] = useState("http://hereIamYouSeeMeNow");
 
   const handleCopyText = (e) => {
@@ -19,7 +26,10 @@ export const ShareProfile = () => {
   };
 
   return (
-    <div className="bg-bg-secondary flex flex-col rounded-2xl p-3 gap-3">
+    <div
+      ref={shareModalRef}
+      className="bg-bg-secondary flex flex-col rounded-2xl p-3 gap-3 absolute z-50"
+    >
       <div className="text-sm font-medium select-none">Share</div>
 
       <div className="flex gap-6 items-end text-xs pb-1 select-none">

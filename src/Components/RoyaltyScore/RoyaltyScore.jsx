@@ -15,6 +15,11 @@ export const RoyaltyScore = () => {
           <h5>Score</h5>
         </li>
         <li className="citation">
+          <h4>Altmetrics</h4>
+          <div className="line"></div>
+          <h4 className="second">1013</h4>
+        </li>
+        <li className="citation">
           <h4>Citations</h4>
           <div className="line"></div>
           <h4 className="second">22</h4>

@@ -9,9 +9,10 @@ import more from '../../assets/more.svg';
 import link from '../../assets/link.svg';
 import SkillBtn from '../SkillBtn/SkillBtn';
 // import FollowList from "../FollowList/FollowList";
-const FollowList = lazy(() => import('../FollowList/FollowList'));
-import { useModal } from '../../context/ModalContext';
-import { modals } from '../../data/constants';
+const FollowList = lazy(() => import("../FollowList/FollowList"));
+import { useModal } from "../../context/ModalContext";
+import { modals } from "../../data/constants";
+import { ShareProfile } from "./ShareProfile";
 
 const Profile = () => {
   const { openModal, isModalOpen } = useModal();
@@ -49,6 +50,7 @@ const Profile = () => {
           20k followers
         </div>
       </div>
+
       <Suspense fallback={<div>Loading...</div>}>
         {isModalOpen(modals.FOLLOW_LIST) && (
           <FollowList defaultActiveTab={selected}></FollowList>
@@ -91,14 +93,27 @@ const Profile = () => {
         </div>
       </div>
 
-      <div className="buttons">
-        <button className="follow btn">
-          {myProfile ? 'Edit Profile' : 'Follow'}
+      <div className="flex gap-5">
+        <button className="w-36 py-2 text-sm text-bg-secondary bg-text-primary font-semibold cursor-pointer select-none rounded-full border-2 border-solid hover:bg-slate-950">
+          {myProfile ? "Edit Profile" : "Follow"}
         </button>
-        <button className="message btn">
-          {myProfile ? 'Share Profile' : 'Message'}
-        </button>
+
+        {myProfile ? (
+          <button
+            onClick={() => {
+              openModal(modals.SHARE_MODAL);
+            }}
+            className="w-36 py-2 text-sm text-text-primary font-semibold cursor-pointer select-none rounded-full border-2 border-solid border-black hover:bg-gray-200"
+          >
+            Share Profile
+          </button>
+        ) : (
+          <button className="w-36 py-2 text-sm text-text-primary font-semibold cursor-pointer select-none rounded-full border-2 border-solid border-black">
+            Message{" "}
+          </button>
+        )}
       </div>
+      {isModalOpen(modals.SHARE_MODAL) && <ShareProfile />}
     </div>
   );
 };
