@@ -1,47 +1,45 @@
-import React from "react";
-import "./NavPanel.css";
-import { useLocation } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { cn } from "../../utils/utils";
+import { useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { cn } from '../../utils/utils';
 
-import NavPanelItem from "./NavPanelItem";
+import NavPanelItem from './NavPanelItem';
 
-import skrolls_logo from "../../assets/skrolls.png";
+import skrolls_logo from '../../assets/skrolls.png';
 // Icons
-import home_icon from "../../assets/home.svg";
-import messages_icon from "../../assets/messages.svg";
-import notification_icon from "../../assets/notification.svg";
-import groups_icon from "../../assets/groups.svg";
-import communities_icon from "../../assets/community.svg";
-import settings_icon from "../../assets/settings.svg";
-import profile_icon from "../../assets/profile.png";
-import IconBadge from "../IconBadge/IconBadge";
+import home_icon from '../../assets/home.svg';
+import messages_icon from '../../assets/messages.svg';
+import notification_icon from '../../assets/notification.svg';
+import groups_icon from '../../assets/groups.svg';
+import communities_icon from '../../assets/community.svg';
+import settings_icon from '../../assets/settings.svg';
+import profile_icon from '../../assets/profile.png';
+import IconBadge from '../IconBadge/IconBadge';
 
 export const NavPanel = () => {
   const location = useLocation();
-  const inMessagePage = location.pathname.includes("/messages");
+  const inMessagePage = location.pathname.includes('/messages');
 
   return (
     <div
       className={cn(
-        "h-full flex flex-col items-center justify-between py-14 ml-12 transition-margin",
-        { "pt-[136px] ml-3": inMessagePage }
+        'ml-12 flex h-full flex-col items-center justify-between py-14 transition-margin',
+        { 'ml-3 pt-[136px]': inMessagePage }
       )}
     >
       <Link
         to="/"
-        className={cn("bg-bg-secondary flex py-1 top-3 rounded-lg absolute", {
+        className={cn('absolute top-3 flex rounded-lg bg-bg-secondary py-1', {
           hidden: !inMessagePage,
         })}
       >
         <img src={skrolls_logo} alt="icon" />
       </Link>
 
-      <div className="bg-bg-secondary rounded-2xl">
+      <div className="rounded-2xl bg-bg-secondary">
         <NavPanelItem
           className="rounded-t-2xl"
           link="/"
-          isSelected={location.pathname === "/"}
+          isSelected={location.pathname === '/'}
         >
           <IconBadge>
             <img src={home_icon} alt="home" />
@@ -52,7 +50,7 @@ export const NavPanel = () => {
         <NavPanelItem
           className=""
           link="/messages"
-          isSelected={location.pathname === "/messages"}
+          isSelected={location.pathname === '/messages'}
         >
           <IconBadge>
             <img src={messages_icon} alt="messages" className="px-[1px]" />
@@ -63,7 +61,7 @@ export const NavPanel = () => {
         <NavPanelItem
           className=""
           link="/groups"
-          isSelected={location.pathname === "/groups"}
+          isSelected={location.pathname === '/groups'}
         >
           <IconBadge>
             <img src={groups_icon} alt="groups" />
@@ -74,7 +72,7 @@ export const NavPanel = () => {
         <NavPanelItem
           className=""
           link="/communities"
-          isSelected={location.pathname === "/communities"}
+          isSelected={location.pathname === '/communities'}
         >
           <IconBadge>
             <img src={communities_icon} alt="communities" />
@@ -85,7 +83,7 @@ export const NavPanel = () => {
         <NavPanelItem
           className="rounded-b-2xl"
           link="/notifications"
-          isSelected={location.pathname === "/notifications"}
+          isSelected={location.pathname === '/notifications'}
         >
           <IconBadge className="">
             <img src={notification_icon} alt="notifications" />
@@ -94,17 +92,17 @@ export const NavPanel = () => {
         </NavPanelItem>
       </div>
 
-      <div className="bg-bg-secondary rounded-2xl">
+      <div className="rounded-2xl bg-bg-secondary">
         <NavPanelItem
           className="rounded-t-2xl"
           link="/profile"
-          isSelected={location.pathname === "/profile"}
+          isSelected={location.pathname === '/profile'}
         >
           <IconBadge>
             <img
               src={profile_icon}
               alt="profile"
-              className="rounded-full w-[22px] h-[22px]"
+              className="h-[22px] w-[22px] rounded-full"
             />
           </IconBadge>
           {!inMessagePage && <span>Profile</span>}
@@ -113,7 +111,7 @@ export const NavPanel = () => {
         <NavPanelItem
           className="rounded-b-2xl"
           link="/settings"
-          isSelected={location.pathname === "/settings"}
+          isSelected={location.pathname === '/settings'}
         >
           <IconBadge>
             <img src={settings_icon} alt="settings" />

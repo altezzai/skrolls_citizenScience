@@ -17,9 +17,9 @@ export const groupMessagesByDate = (messages) => {
     let dateKey = formatDate(messageDate);
 
     if (messageDate.toDateString() === today.toDateString()) {
-      dateKey = "Today";
+      dateKey = 'Today';
     } else if (messageDate.toDateString() === yesterday.toDateString()) {
-      dateKey = "Yesterday";
+      dateKey = 'Yesterday';
     }
 
     if (!groups[dateKey]) {

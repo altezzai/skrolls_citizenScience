@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import "./AddPost.css";
-import PostButton from "../PostButton/PostButton";
-import photo from "../../assets/profile.png";
-import imageico from "../../assets/img.svg";
-import video from "../../assets/video.svg";
-import doc from "../../assets/document.svg";
-import uploadfile from "../../assets/upload_doc.svg";
+import React, { useState } from 'react';
+import './AddPost.css';
+import PostButton from '../PostButton/PostButton';
+import photo from '../../assets/profile.png';
+import imageico from '../../assets/img.svg';
+import video from '../../assets/video.svg';
+import doc from '../../assets/document.svg';
+import uploadfile from '../../assets/upload_doc.svg';
 
-import { ProfilePhoto } from "../Profilephoto/ProfilePhoto";
+import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';
 
 const AddPost = ({ show, handleClose }) => {
   const [imagePreviews, setImagePreviews] = useState([]);
   const [videoPreviews, setVideoPreviews] = useState([]);
   const [documentPreviews, setDocumentPreviews] = useState([]);
-  const [postContent, setPostContent] = useState("");
+  const [postContent, setPostContent] = useState('');
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
@@ -69,7 +69,7 @@ const AddPost = ({ show, handleClose }) => {
     setImagePreviews([]);
     setVideoPreviews([]);
     setDocumentPreviews([]);
-    setPostContent("");
+    setPostContent('');
   };
 
   const handleModalClose = () => {
@@ -83,7 +83,7 @@ const AddPost = ({ show, handleClose }) => {
     documentPreviews.length > 0;
 
   return (
-    <div className={`addpost ${show ? "show" : ""}`} onClick={handleModalClose}>
+    <div className={`addpost ${show ? 'show' : ''}`} onClick={handleModalClose}>
       <div
         className="addpost-content"
         onClick={(e) => {
@@ -94,7 +94,7 @@ const AddPost = ({ show, handleClose }) => {
           &times;
         </span>
         <div className="postman-details gap-3">
-        <ProfilePhoto img={photo} size={"2.5rem"} />
+          <ProfilePhoto img={photo} size={'2.5rem'} />
           <div className="my-name">Manu P</div>
         </div>
 
@@ -102,13 +102,13 @@ const AddPost = ({ show, handleClose }) => {
           name=""
           id=""
           placeholder="What is new, Rafsal?"
-          style={{ height: isFileUploaded ? "150px" : "250px" }}
+          style={{ height: isFileUploaded ? '150px' : '250px' }}
           value={postContent}
           onChange={(e) => setPostContent(e.target.value)}
         ></textarea>
         <div
           className="add-media"
-          style={{ display: isFileUploaded ? "none" : "flex" }}
+          style={{ display: isFileUploaded ? 'none' : 'flex' }}
         >
           <label htmlFor="imgfile" className="icon-post">
             <img src={imageico} alt="" />
@@ -186,20 +186,20 @@ const AddPost = ({ show, handleClose }) => {
           <label
             htmlFor="uploadfile"
             className="upload"
-            style={{ display: isFileUploaded ? "flex" : "none" }}
+            style={{ display: isFileUploaded ? 'flex' : 'none' }}
           >
             <img src={uploadfile} alt="Add more files" />
             <input
               type="file"
               id="uploadfile"
               multiple
-              style={{ display: "none" }}
+              style={{ display: 'none' }}
               onChange={(e) => {
                 const files = Array.from(e.target.files);
                 files.forEach((file) => {
-                  if (file.type.startsWith("image/")) {
+                  if (file.type.startsWith('image/')) {
                     handleImageChange(e);
-                  } else if (file.type.startsWith("video/")) {
+                  } else if (file.type.startsWith('video/')) {
                     handleVideoChange(e);
                   } else {
                     handleDocumentChange(e);
@@ -210,7 +210,7 @@ const AddPost = ({ show, handleClose }) => {
           </label>
         </div>
 
-        <PostButton text={"Post it!"} />
+        <PostButton text={'Post it!'} />
       </div>
     </div>
   );

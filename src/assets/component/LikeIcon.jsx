@@ -1,4 +1,3 @@
-
 export const LikeIcon = ({ className }) => {
   return (
     <svg

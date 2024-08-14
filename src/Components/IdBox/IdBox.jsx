@@ -1,6 +1,6 @@
-import React from "react";
-import "./IdBox.css";
-import internet from "../../assets/internet.svg";
+import React from 'react';
+import './IdBox.css';
+import internet from '../../assets/internet.svg';
 
 export const IdBox = () => {
   return (

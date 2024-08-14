@@ -1,13 +1,26 @@
-import React from "react";
-import "./Photogroup.css";
-import profile from "../../assets/profile.png";
+import { cn } from '../../utils/utils';
 
-export const Photogroup = ({ image1, image2, image3, flag = true }) => {
+export const Photogroup = ({ images }) => {
+  const width = Math.max(24, images.length * 15) + 'px';
+
   return (
-    <div className="photogroup">
-      <img src={profile} className="rearimg" />
-      <img src={profile} className="middleimg" />
-      {flag ? <img src={profile} className="frontimg" /> : undefined}
+    <div className="relative" style={{ width }}>
+      {images.map((img, index) => {
+        const offset = 12 * index;
+        return (
+          <img
+            key={index}
+            style={{ left: `${offset}px` }}
+            src={img}
+            className={cn(
+              `top-0 h-6 w-6 rounded-full border-2 border-border-muted`,
+              {
+                absolute: index > 0,
+              }
+            )}
+          />
+        );
+      })}
     </div>
   );
 };

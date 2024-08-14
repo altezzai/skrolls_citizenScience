@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
 export const ProfilePhoto = ({ img, size }) => {
   return (
     <img
       src={img}
-      className=" rounded-full select-none"
+      className="select-none rounded-full"
       style={{ height: size, width: size }}
       draggable="false"
     />

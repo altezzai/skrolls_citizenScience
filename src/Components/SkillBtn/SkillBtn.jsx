@@ -1,12 +1,8 @@
 import React from 'react';
-import './SkillBtn.css'
+import './SkillBtn.css';
 
-const SkillBtn = ({children}) => {
-  return (
-    <div className='skill btn'>
-      {children}
-    </div>
-  )
-}
+const SkillBtn = ({ children }) => {
+  return <div className="skill btn">{children}</div>;
+};
 
-export default SkillBtn
+export default SkillBtn;

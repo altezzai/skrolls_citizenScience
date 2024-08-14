@@ -1,6 +1,6 @@
-import React from "react";
-import NewPost from "../Components/NewPost/NewPost";
-import Post from "../Components/Post/Post";
+import React from 'react';
+import NewPost from '../Components/NewPost/NewPost';
+import Post from '../Components/Post/Post';
 
 const Home = () => {
   return (

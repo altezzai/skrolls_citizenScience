@@ -1,17 +1,17 @@
-import React, { lazy, useState } from "react";
-import TabContent from "../Tabs/TabContent";
-import TabButtons from "../Tabs/TabButtons";
+import React, { lazy, useState } from 'react';
+import TabContent from '../Tabs/TabContent';
+import TabButtons from '../Tabs/TabButtons';
 
-const ProfileDetails = lazy(() => import("../ProfileDetails/ProfileDetails"));
-const ResearchActivities = lazy(() =>
-  import("../ResearchActivities/ResearchActivities")
+const ProfileDetails = lazy(() => import('../ProfileDetails/ProfileDetails'));
+const ResearchActivities = lazy(
+  () => import('../ResearchActivities/ResearchActivities')
 );
 
 const ProfileNavContainer = () => {
   const tabs = [
     {
-      id: "profile",
-      label: "Profile",
+      id: 'profile',
+      label: 'Profile',
       content: (
         <div className="mt-4">
           <ProfileDetails />
@@ -19,13 +19,13 @@ const ProfileNavContainer = () => {
       ),
     },
     {
-      id: "post",
-      label: "Post",
+      id: 'post',
+      label: 'Post',
       content: <div className="mt-4">POST SECTION</div>,
     },
     {
-      id: "research",
-      label: "Research Activities",
+      id: 'research',
+      label: 'Research Activities',
       content: (
         <div className="mt-4">
           <ResearchActivities />
@@ -34,7 +34,7 @@ const ProfileNavContainer = () => {
     },
   ];
 
-  const [activeTab, setActiveTab] = useState("profile" || tabs[0].id);
+  const [activeTab, setActiveTab] = useState('profile' || tabs[0].id);
 
   return (
     <div className="tab-container">
