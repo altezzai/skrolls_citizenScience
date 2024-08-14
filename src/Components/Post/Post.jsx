@@ -1,5 +1,4 @@
 import React from 'react';
-import './Post.css';
 import { cn } from '../../utils/utils';
 
 import photo from '../../assets/profile.png';
@@ -12,11 +11,12 @@ import back from '../../assets/previous.svg';
 import internet from '../../assets/internet.svg';
 import translate from '../../assets/translate.svg';
 
-import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';
-import { Link, useLocation } from 'react-router-dom';
-import { Heart } from '../ui/Heart';
+import { ProfilePhoto } from "../Profilephoto/ProfilePhoto";
+import { Link, useLocation } from "react-router-dom";
+import { Heart } from "../ui/Heart";
+import { LikedList } from "./LikedList";
 
-const Post = () => {
+const Post = ({ id }) => {
   const location = useLocation();
   const inPostPage = location.pathname.includes('/post');
 
@@ -95,6 +95,7 @@ const Post = () => {
               <Heart
                 className={"w-8 h-8 p-1 hover:bg-red-50"}
                 textclr={"text-black"}
+                id={id}
               />
 
               <Link
@@ -102,12 +103,12 @@ const Post = () => {
                 className="flex items-center justify-center gap-1 cursor-pointer "
               >
                 <div className="rounded-full  hover:bg-red-50 p-1">
-                <img
-                  src={msg}
-                  alt="comment "
-                  className="w-6"
-                  draggable="false"
-                />
+                  <img
+                    src={msg}
+                    alt="comment "
+                    className="w-6"
+                    draggable="false"
+                  />
                 </div>
                 56
               </Link>
