@@ -7,23 +7,26 @@ import send from '../../assets/send.svg';
 import smily from '../../assets/smily.svg';
 import upload from '../../assets/upload.svg';
 
-import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';
-import EmojiPicker from 'emoji-picker-react';
-import MessageBubble from '../MessageBubble/MessageBubble';
-import sampleMessage from '../../data/message.json';
-import { groupMessagesByDate } from '../../utils/groupMessagesByDate';
-import useClickOutside from '../../hooks/useClickOutside';
+import { ProfilePhoto } from "../Profilephoto/ProfilePhoto";
+import EmojiPicker from "emoji-picker-react";
+import MessageBubble from "./MessageBubble";
+import sampleMessage from "../../data/image_send";
+import { groupMessagesByDate } from "../../utils/groupMessagesByDate";
+import useClickOutside from "../../hooks/useClickOutside";
 
 const MessageBox = () => {
   const [open, setOpen] = useState(false);
   const [openAttach, setOpenAttach] = useState(false);
   const [inputStr, setInputStr] = useState('');
   const [messages, setMessages] = useState(sampleMessage);
-  // const emojiPickerRef = useRef(null);
   const messageBoxRef = useRef(null);
+
+  // Hook to close emoji picker when clicking outside
   const emojiPickerRef = useClickOutside(open, () => {
     setOpen(false);
   });
+
+  // Hook to close attachment options when clicking outside
   const attachmentRef = useClickOutside(openAttach, () => {
     setOpenAttach(false);
   });
@@ -41,17 +44,38 @@ const MessageBox = () => {
     setInputStr((prevInput) => prevInput + emojiObject.emoji);
   };
 
-  const handleSendMessage = () => {
-    if (inputStr.trim() !== '') {
+  const handleSendMessage = (type = "text", content = inputStr) => {
+    if (content.trim() !== "") {
       const newMessage = {
         id: messages.length + 1,
-        text: inputStr,
+        type: type,
+        content: content,
         sentByMe: true,
         timestamp: new Date().toISOString(),
         sender: 'Me',
       };
       setMessages((prevMessages) => [...prevMessages, newMessage]);
-      setInputStr(''); // Clear the input after sending
+      setInputStr(""); // Clear the input after sending
+    }
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const fileType = file.type.startsWith("image/")
+          ? "image"
+          : file.type.startsWith("video/")
+          ? "video"
+          : "file";
+        handleSendMessage(fileType, {
+          name: file.name,
+          data: reader.result,
+          type: file.type,
+        });
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -98,7 +122,8 @@ const MessageBox = () => {
             {groupedMessages[date].map((message) => (
               <MessageBubble
                 key={message.id}
-                message={message.text}
+                message={message.content}
+                type={message.type}
                 isSentByMe={message.sentByMe}
                 timestamp={message.timestamp}
               />
@@ -107,7 +132,7 @@ const MessageBox = () => {
         ))}
       </div>
 
-      <div className="relative rounded-2xl h-16 flex items-center justify-self-end w-full gap-3 px-5 bg-bg-secondary border-4 border-bg-primary">
+      <div className="relative rounded-2xl h-16 flex items-center justify-self-end w-full gap-3 px-5 bg-bg-secondary border-4 border-bg-primary py-1">
         <div
           className="relative rounded-full p-2 transition-all ease-in-out delay-0 cursor-pointer hover:bg-secondary"
           ref={emojiPickerRef}
@@ -132,7 +157,7 @@ const MessageBox = () => {
         </div>
 
         <div
-          className="cursor-pointer rounded-full p-2 transition-all ease-in-out delay-0 outline-2  hover:bg-secondary "
+          className="cursor-pointer rounded-full p-2 transition-all ease-in-out delay-0 outline-2  hover:bg-secondary"
           onClick={handleAttachment}
           ref={attachmentRef}
         >
@@ -157,7 +182,13 @@ const MessageBox = () => {
                 <img src={upload} className="w-8" alt="upload button" />
                 <span className="text-sm">upload an attachment</span>
               </label>
-              <input type="file" id="uploadfile" multiple className="hidden" />
+              <input
+                type="file"
+                id="uploadfile"
+                multiple
+                className=" hidden"
+                onChange={handleFileChange}
+              />
             </div>
           )}
         </div>
@@ -172,11 +203,12 @@ const MessageBox = () => {
           rows={3}
         />
         <div
-          className="attachment-container cursor-pointer rounded-lg px-6 py-3 transition-all delay-0 ease-in-out"
-          onClick={handleSendMessage}
+          className="cursor-pointer transition-all ease-in-out delay-0 px-5 py-2 rounded-lg hover:bg-secondary"
+          onClick={() => handleSendMessage("text", inputStr)}
         >
           <img
             src={send}
+            className="w-8 select-none"
             className="w-8 select-none"
             draggable="false"
             alt="Send"
