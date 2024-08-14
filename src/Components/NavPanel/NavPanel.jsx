@@ -132,7 +132,7 @@ export const NavPanel = () => {
 
           <h1>Profile</h1>
         </Link>
-        <a
+        <Link to="/settings"
           className={`navPiece ${activeIndex === 6 ? "active" : ""} ${
             activeIndex === 1 ? "navPieceMsg" : ""
           }`}
@@ -141,7 +141,7 @@ export const NavPanel = () => {
           <OnlineLogo icon={settings} />
 
           <h1>Settings</h1>
-        </a>
+        </Link>
       </div>
     </div>
   );
