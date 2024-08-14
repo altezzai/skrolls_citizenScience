@@ -24,7 +24,7 @@ const Post = ({ id }) => {
       {inPostPage && (
         <Link
           to="/"
-          className="flex gap-2 h-12 items-center border-b-2 rounded-t-2xl text-base px-6 font-medium select-none bg-bg-secondary hover:bg-slate-50"
+          className="flex h-12 select-none items-center gap-2 rounded-t-2xl border-b-2 bg-bg-secondary px-6 text-base font-medium hover:bg-slate-50"
         >
           <img src={back} className="w-4" alt="previous" draggable="false" />
           Back
@@ -32,20 +32,20 @@ const Post = ({ id }) => {
       )}
 
       <div
-        className={clsx(
-          "post flex w-full px-5 py-6 rounded-2xl bg-bg-secondary gap-3",
+        className={cn(
+          'post flex w-full gap-3 rounded-2xl bg-bg-secondary px-5 py-6',
           {
             'mb-2 rounded-t-none': inPostPage,
             'mb-5': !inPostPage,
           }
         )}
       >
-        <ProfilePhoto img={photo} size={"2.6rem"} />
+        <ProfilePhoto img={photo} size={'2.6rem'} />
 
         <div className="pr-3">
-          <div className="flex gap-3 items-center select-none">
-            <div className="text-text-primary text-xl font-bold">Manu P</div>
-            <div className="rounded-full text-text-muted text-xl flex items-center  pb-2">
+          <div className="flex select-none items-center gap-3">
+            <div className="text-xl font-bold text-text-primary">Manu P</div>
+            <div className="flex items-center rounded-full pb-2 text-xl text-text-muted">
               .
             </div>
             <div className="text-[0.9rem] font-bold text-text-muted">
@@ -60,8 +60,8 @@ const Post = ({ id }) => {
             wait to see where this path takes me! #CSStudent #CodingAdventure
             #TechJourney 🌐✨:
           </div>
-          <div className="flex flex-wrap gap-5 text-sm font-semibold text-text-secondary my-4">
-            <div className="px-4 bg-bg-muted gap-2 flex py-2 rounded-full cursor-pointer">
+          <div className="my-4 flex flex-wrap gap-5 text-sm font-semibold text-text-secondary">
+            <div className="flex cursor-pointer gap-2 rounded-full bg-bg-muted px-4 py-2">
               <img
                 src={internet}
                 className="w-5"
@@ -70,7 +70,7 @@ const Post = ({ id }) => {
               />
               <Link to="http://altezzai.com">http://rsg.ms/3426e12</Link>
             </div>
-            <div className="px-4 bg-bg-muted gap-2 flex py-2 rounded-full cursor-pointer">
+            <div className="flex cursor-pointer gap-2 rounded-full bg-bg-muted px-4 py-2">
               <img
                 src={translate}
                 className="w-5"
@@ -80,29 +80,29 @@ const Post = ({ id }) => {
               See Translation
             </div>
           </div>
-          <div className="w-full rounded-2xl mb-3">
+          <div className="mb-3 w-full rounded-2xl">
             <img
               src={image}
               alt="post"
-              className="w-11/12 rounded-2xl max-h-[600px]"
+              className="max-h-[600px] w-11/12 rounded-2xl"
               draggable="false"
             />
           </div>
-          <div className="flex justify-between w-11/12">
+          <div className="flex w-11/12 justify-between">
             <div className="flex gap-6">
               <Heart
-                className={"w-8 h-8 p-1 hover:bg-red-50"}
-                textclr={"text-black"}
+                className={'h-8 w-8 p-1 hover:bg-red-50'}
+                textclr={'text-black'}
                 id={id}
               />
 
               <Link
                 to="/post"
-                className="flex items-center justify-center gap-1 cursor-pointer "
+                className="flex cursor-pointer items-center justify-center gap-1"
               >
-                <div className="rounded-full  hover:bg-red-50 p-1">
+                <div className="rounded-full p-1 hover:bg-red-50">
                   <img
-                    src={msg}
+                    src={comment_icon}
                     alt="comment "
                     className="w-6"
                     draggable="false"
@@ -112,7 +112,7 @@ const Post = ({ id }) => {
               </Link>
             </div>
             <div className="flex gap-6">
-              <div className="flex items-center gap-2 cursor-pointer">
+              <div className="flex cursor-pointer items-center gap-2">
                 <img
                   src={view}
                   alt="view icon"
@@ -121,7 +121,7 @@ const Post = ({ id }) => {
                 />
                 270
               </div>
-              <div className="flex items-center gap-2 cursor-pointer">
+              <div className="flex cursor-pointer items-center gap-2">
                 <img
                   src={send}
                   alt="send message"
@@ -129,7 +129,7 @@ const Post = ({ id }) => {
                   draggable="false"
                 />
               </div>
-              <div className="flex items-center gap-2 cursor-pointer">
+              <div className="flex cursor-pointer items-center gap-2">
                 <img
                   src={save}
                   className="w-8"

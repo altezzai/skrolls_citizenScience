@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { cn } from '../../utils/utils';
 
 import { LikeIcon } from '../../assets/component/LikeIcon';
-import {useModal } from "../../context/ModalContext";
-import { modals } from "../../data/constants";
-import { LikedList } from "../Post/LikedList";
+import { useModal } from '../../context/ModalContext';
+import { modals } from '../../data/constants';
+import { LikedList } from '../Post/LikedList';
 
 export const Heart = ({ className, textclr, id, disableClick = false }) => {
   const [likeCount, setLikeCount] = useState(200);
@@ -12,7 +12,6 @@ export const Heart = ({ className, textclr, id, disableClick = false }) => {
   const { openModal, isModalOpen } = useModal();
   const MODAL_NAME = modals.LIKED_LIST + id;
   const handleLikeClick = () => {
-    if (disableClick) return;
     if (liked) {
       setLikeCount(likeCount - 1);
       setLiked(false);
@@ -23,7 +22,7 @@ export const Heart = ({ className, textclr, id, disableClick = false }) => {
   };
 
   return (
-    <div className="flex items-center gap-1 select-none cursor-pointer">
+    <div className="flex cursor-pointer select-none items-center gap-1">
       <div onClick={handleLikeClick}>
         <LikeIcon
           className={cn(
