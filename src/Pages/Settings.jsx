@@ -5,7 +5,7 @@ import next from "../assets/next.svg";
 import mention from "../assets/mention.svg";
 import communtiy from "../assets/community.svg";
 
-import settings from "../assets/settings_gray.svg";
+import settings_icon from "../assets/settings-gray.svg";
 import { SettingsItem } from "../Components/SettingsItem/SettingsItem";
 
 export const Settings = () => {
@@ -14,10 +14,10 @@ export const Settings = () => {
       <div className="flex w-full items-center justify-center relative text-xl text-text-secondary font-medium">
         Settings
         <div className="absolute right-0">
-          <img
-            src={settings}
-            className="w-6"
+        <img
+            src={settings_icon}
             alt="settings"
+            className="h-7 w-7 cursor-pointer p-1 hover:bg-secondary rounded-full"
             draggable="false"
           />
         </div>

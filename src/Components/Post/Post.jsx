@@ -28,13 +28,12 @@ const Post = ({ id }) => {
           className="flex gap-2 h-12 items-center border-b-2 rounded-t-2xl text-base px-6 font-medium select-none bg-bg-secondary hover:bg-slate-50"
         >
           <img src={back} className="w-4" alt="previous" draggable="false" />
-          <img src={back} className="w-4" alt="previous" draggable="false" />
           Back
         </Link>
       )}
 
       <div
-        className={clsx(
+        className={cn(
           "post flex w-full px-5 py-6 rounded-2xl bg-bg-secondary gap-3",
           {
             'mb-2 rounded-t-none': inPostPage,
@@ -104,7 +103,7 @@ const Post = ({ id }) => {
               >
                 <div className="rounded-full  hover:bg-red-50 p-1">
                   <img
-                    src={msg}
+                    src={comment_icon}
                     alt="comment "
                     className="w-6"
                     draggable="false"

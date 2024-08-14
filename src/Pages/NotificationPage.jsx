@@ -16,7 +16,7 @@ const NotificationPage = () => {
           <img
             src={settings_icon}
             alt="settings"
-            className="h-7 w-7 cursor-pointer p-1 hover:bg-secondary"
+            className="h-7 w-7 cursor-pointer p-1 hover:bg-secondary rounded-full"
           />
         </IconBadge>
       </div>

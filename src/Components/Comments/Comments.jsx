@@ -114,7 +114,7 @@ export const Comments = () => {
                     draggable="false"
                   />
                 </div>
-                {/* 6 reply */}
+                
               </div>
             </div>
           </div>

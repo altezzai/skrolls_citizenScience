@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { cn } from '../../utils/utils';
 
 import { LikeIcon } from "../../assets/component/LikeIcon";
-import { ModalProvider, useModal } from "../../context/ModalContext";
+import {useModal } from "../../context/ModalContext";
 import { modals } from "../../data/constants";
 import { LikedList } from "../Post/LikedList";
 
@@ -12,7 +12,7 @@ export const Heart = ({ className, textclr, id, disableClick = false }) => {
   const { openModal, isModalOpen } = useModal();
   const MODAL_NAME = modals.LIKED_LIST + id;
   const handleLikeClick = () => {
-    if (disableClick) return;
+    
     if (liked) {
       setLikeCount(likeCount - 1);
       setLiked(false);
@@ -31,7 +31,7 @@ export const Heart = ({ className, textclr, id, disableClick = false }) => {
             className,
             {
               'fill-red-500 text-red-500': liked,
-              textclr: !liked,
+             [textclr]: !liked,
             }
           )}
         />
@@ -46,6 +46,7 @@ export const Heart = ({ className, textclr, id, disableClick = false }) => {
         {likeCount}
       </div>
       {isModalOpen(MODAL_NAME) && <LikedList id={id} />}
+     
     </div>
   );
 };
