@@ -1,4 +1,3 @@
-import React from 'react';
 import './DetailBox.css';
 
 const DetailBox = ({ children, heading }) => {

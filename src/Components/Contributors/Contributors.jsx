@@ -1,4 +1,3 @@
-import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';
 import profile from '../../assets/profile.png';
 import { Photogroup } from '../Photogroup/Photogroup';
 import { PhotowithName } from '../PhotowithName/PhotowithName';
@@ -25,7 +24,9 @@ export const Contributors = () => {
     <>
       <Dot />
       <Photogroup images={[profile, profile, profile]} />
-      <span className="uname">+ {count} Others</span>
+      <span className="cursor-pointer text-xs text-text-secondary">
+        + {count} Others
+      </span>
     </>
   );
 

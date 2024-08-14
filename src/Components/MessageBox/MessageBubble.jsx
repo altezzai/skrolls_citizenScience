@@ -1,36 +1,34 @@
-import React from "react";
-
 const MessageBubble = ({ message, type, isSentByMe, timestamp }) => {
   const formattedTime = new Date(timestamp).toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
+    hour: '2-digit',
+    minute: '2-digit',
   });
 
   const renderMessageContent = () => {
     switch (type) {
-      case "text":
-        return message.split("\n").map((line, index) => (
+      case 'text':
+        return message.split('\n').map((line, index) => (
           <span key={index}>
             {line}
             <br />
           </span>
         ));
-      case "image":
+      case 'image':
         return (
           <img
             src={message.data}
-            alt={message.name || "Image"}
+            alt={message.name || 'Image'}
             className="max-w-96 rounded-lg"
           />
         );
-      case "video":
+      case 'video':
         return (
           <video controls className="max-w-96 rounded-lg">
             <source src={message.data} type={message.type} />
             Your browser does not support the video tag.
           </video>
         );
-      case "file":
+      case 'file':
         return (
           <a
             href={message.data}
@@ -47,22 +45,20 @@ const MessageBubble = ({ message, type, isSentByMe, timestamp }) => {
 
   return (
     <div
-      className={`w-full flex ${
-        isSentByMe ? " justify-end " : "justify-start"
-      }`}
+      className={`flex w-full ${isSentByMe ? 'justify-end' : 'justify-start'}`}
     >
       <div
-        className={`p-2 rounded-lg mb-2 w-fit max-w-lg ${
+        className={`mb-2 w-fit max-w-lg rounded-lg p-2 ${
           isSentByMe
-            ? "pr-5 bg-primary text-bg-secondary self-end"
-            : "pl-5 bg-secondary self-start"
+            ? 'self-end bg-primary pr-5 text-bg-secondary'
+            : 'self-start bg-secondary pl-5'
         } `}
       >
         <div className="message-text">{renderMessageContent()}</div>
 
         <div
-          className={`text-[0.6rem] text-right pt-1 ${
-            isSentByMe ? "text-border-muted" : "text-text-secondary"
+          className={`pt-1 text-right text-[0.6rem] ${
+            isSentByMe ? 'text-border-muted' : 'text-text-secondary'
           }`}
         >
           {formattedTime}

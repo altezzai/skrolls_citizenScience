@@ -1,4 +1,4 @@
-import React, { lazy, useState } from 'react';
+import { lazy, useState } from 'react';
 import TabButtons from '../Tabs/TabButtons';
 import TabContent from '../Tabs/TabContent';
 import { modals } from '../../data/constants.js';
@@ -16,7 +16,7 @@ const FollowList = ({ defaultActiveTab }) => {
     closeModal(modals.FOLLOW_LIST);
   });
   const renderUserList = (count) => (
-    <div className="overflow-y-scroll h-[500px] py-4 px-7 pr-0 flex flex-col gap-4">
+    <div className="flex h-[500px] flex-col gap-4 overflow-y-scroll px-7 py-4 pr-0">
       {[...Array(count)].map((_, index) => (
         <UserFollowListItem
           key={index}

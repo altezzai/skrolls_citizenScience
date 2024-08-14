@@ -1,4 +1,3 @@
-import React from 'react';
 import Post from '../Components/Post/Post';
 import { AddMyComment } from '../Components/AddMyComment/AddMyComment';
 import { Comments } from '../Components/Comments/Comments';

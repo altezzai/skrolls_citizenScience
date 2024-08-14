@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import photo from '../../assets/profile.png';
 import more from '../../assets/vertical_dots.svg';
@@ -44,7 +44,7 @@ const MessageBox = () => {
     setInputStr((prevInput) => prevInput + emojiObject.emoji);
   };
 
-  const handleSendMessage = (type = "text", content = inputStr) => {
+  const handleSendMessage = (type = 'text', content = inputStr) => {
     if (content.trim() !== '') {
       const newMessage = {
         id: messages.length + 1,
@@ -55,7 +55,7 @@ const MessageBox = () => {
         sender: 'Me',
       };
       setMessages((prevMessages) => [...prevMessages, newMessage]);
-      setInputStr(""); // Clear the input after sending
+      setInputStr(''); // Clear the input after sending
     }
   };
 
@@ -64,11 +64,11 @@ const MessageBox = () => {
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        const fileType = file.type.startsWith("image/")
-          ? "image"
-          : file.type.startsWith("video/")
-          ? "video"
-          : "file";
+        const fileType = file.type.startsWith('image/')
+          ? 'image'
+          : file.type.startsWith('video/')
+            ? 'video'
+            : 'file';
         handleSendMessage(fileType, {
           name: file.name,
           data: reader.result,
@@ -132,7 +132,7 @@ const MessageBox = () => {
         ))}
       </div>
 
-      <div className="relative flex h-16 w-full items-center gap-3 justify-self-end rounded-2xl border-4 border-bg-primary py-1 bg-bg-secondary px-5">
+      <div className="relative flex h-16 w-full items-center gap-3 justify-self-end rounded-2xl border-4 border-bg-primary bg-bg-secondary px-5 py-1">
         <div
           className="relative cursor-pointer rounded-full p-2 transition-all delay-0 ease-in-out hover:bg-secondary"
           ref={emojiPickerRef}
@@ -157,7 +157,7 @@ const MessageBox = () => {
         </div>
 
         <div
-          className="cursor-pointer rounded-full p-2 transition-all ease-in-out delay-0 outline-2  hover:bg-secondary"
+          className="cursor-pointer rounded-full p-2 outline-2 transition-all delay-0 ease-in-out hover:bg-secondary"
           onClick={handleAttachment}
           ref={attachmentRef}
         >
@@ -203,8 +203,8 @@ const MessageBox = () => {
           rows={3}
         />
         <div
-          className="cursor-pointer transition-all ease-in-out delay-0 px-5 py-2 rounded-lg hover:bg-secondary"
-          onClick={() => handleSendMessage("text", inputStr)}
+          className="cursor-pointer rounded-lg px-5 py-2 transition-all delay-0 ease-in-out hover:bg-secondary"
+          onClick={() => handleSendMessage('text', inputStr)}
         >
           <img
             src={send}

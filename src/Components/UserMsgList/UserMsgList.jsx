@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 
 import UserMsgListItem from '../UserMsgListItem/UserMsgListItem';
 import search from '../../assets/search.svg';

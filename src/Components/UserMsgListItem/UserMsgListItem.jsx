@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import './UserMsgListItem.css';
 import photo from '../../assets/profile.png';
 import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';

@@ -1,4 +1,3 @@
-import React from 'react';
 import './IdBox.css';
 import internet from '../../assets/internet.svg';
 
@@ -6,7 +5,7 @@ export const IdBox = () => {
   return (
     <div className="idBox">
       <div className="other">
-        <span>Other id's</span>
+        <span>Other id&apos;s</span>
       </div>
       <div className="idlinks">
         <img src={internet} className="inlogo" />

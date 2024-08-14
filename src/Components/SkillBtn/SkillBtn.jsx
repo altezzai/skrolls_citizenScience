@@ -1,4 +1,3 @@
-import React from 'react';
 import './SkillBtn.css';
 
 const SkillBtn = ({ children }) => {

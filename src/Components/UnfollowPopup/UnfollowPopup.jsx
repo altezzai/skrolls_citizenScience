@@ -1,16 +1,15 @@
-import React from 'react';
 import './UnfollowPopup.css';
 import photo from '../../assets/profile.png';
 import useClickOutside from '../../hooks/useClickOutside';
 
 const UnfollowPopup = ({ onUnfollow, isModalOpen, setIsModalOpen }) => {
-  if (!isModalOpen) return null;
-
   const closePopup = () => {
     setIsModalOpen(false);
   };
 
   const unfollowPopupRef = useClickOutside(isModalOpen, closePopup);
+
+  if (!isModalOpen) return null;
 
   return (
     <div className="absolute left-0 top-0 grid h-full w-full place-items-center bg-black/30">

@@ -1,4 +1,3 @@
-import React from 'react';
 import Profile from '../Components/Profile/Profile';
 import ProfileNavContainer from '../Components/ProfileNavContainer/ProfileNavContainer';
 

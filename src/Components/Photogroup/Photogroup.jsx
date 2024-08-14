@@ -1,7 +1,7 @@
 import { cn } from '../../utils/utils';
 
 export const Photogroup = ({ images }) => {
-  const width = Math.max(24, images.length * 15) + 'px';
+  const width = Math.max(24, images.length * 17) + 'px';
 
   return (
     <div className="relative" style={{ width }}>

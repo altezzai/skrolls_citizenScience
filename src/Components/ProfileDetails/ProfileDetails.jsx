@@ -1,4 +1,3 @@
-import React from 'react';
 import './ProfileDetails.css';
 import DetailBox from '../DetailBox/DetailBox';
 import SkillBtn from '../SkillBtn/SkillBtn';

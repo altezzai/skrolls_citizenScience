@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useState } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import photo from '../../assets/profile.png';
 import './Profile.css';
 import ReadMore from '../ReadMore/ReadMore';
@@ -12,7 +12,7 @@ import SkillBtn from '../SkillBtn/SkillBtn';
 const FollowList = lazy(() => import('../FollowList/FollowList'));
 import { useModal } from '../../context/ModalContext';
 import { modals } from '../../data/constants';
-import { ShareProfile } from "./ShareProfile";
+import { ShareProfile } from './ShareProfile';
 
 const Profile = () => {
   const { openModal, isModalOpen } = useModal();
@@ -60,7 +60,7 @@ const Profile = () => {
       <div className="description">
         <ReadMore sliceLength={135}>
           Dive inot the digital realm with me! As a computer science student.
-          I'm on a quest to conquer bugs, craft elegant code, and shape the
+          I&apos;m on a quest to conquer bugs, craft elegant code, and shape the
           future of the web designing
         </ReadMore>
       </div>
@@ -94,7 +94,7 @@ const Profile = () => {
       </div>
 
       <div className="flex gap-5">
-        <button className="w-36 py-2 text-sm text-bg-secondary bg-text-primary font-semibold cursor-pointer select-none rounded-full border-2 border-solid hover:bg-slate-950">
+        <button className="w-36 cursor-pointer select-none rounded-full border-2 border-solid bg-text-primary py-2 text-sm font-semibold text-bg-secondary hover:bg-slate-950">
           {myProfile ? 'Edit Profile' : 'Follow'}
         </button>
 
@@ -103,13 +103,13 @@ const Profile = () => {
             onClick={() => {
               openModal(modals.SHARE_MODAL);
             }}
-            className="w-36 py-2 text-sm text-text-primary font-semibold cursor-pointer select-none rounded-full border-2 border-solid border-black hover:bg-gray-200"
+            className="w-36 cursor-pointer select-none rounded-full border-2 border-solid border-black py-2 text-sm font-semibold text-text-primary hover:bg-gray-200"
           >
             Share Profile
           </button>
         ) : (
-          <button className="w-36 py-2 text-sm text-text-primary font-semibold cursor-pointer select-none rounded-full border-2 border-solid border-black">
-            Message{" "}
+          <button className="w-36 cursor-pointer select-none rounded-full border-2 border-solid border-black py-2 text-sm font-semibold text-text-primary">
+            Message{' '}
           </button>
         )}
       </div>

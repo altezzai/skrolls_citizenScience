@@ -1,4 +1,3 @@
-import React from 'react';
 import UserMsgList from '../Components/UserMsgList/UserMsgList';
 import MessageBox from '../Components/MessageBox/MessageBox';
 

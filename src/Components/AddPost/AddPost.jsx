@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import './AddPost.css';
 import PostButton from '../PostButton/PostButton';
 import photo from '../../assets/profile.png';
@@ -8,6 +7,7 @@ import doc from '../../assets/document.svg';
 import uploadfile from '../../assets/upload_doc.svg';
 
 import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';
+import { useState } from 'react';
 
 const AddPost = ({ show, handleClose }) => {
   const [imagePreviews, setImagePreviews] = useState([]);

@@ -1,4 +1,3 @@
-import React from 'react';
 import './FollowButton.css';
 import { cn } from '../../utils/utils';
 

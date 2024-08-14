@@ -1,5 +1,4 @@
 import { cn } from '../../utils/utils';
-import React from 'react';
 
 const TabButton = ({ id, label, active, onClick }) => (
   <button

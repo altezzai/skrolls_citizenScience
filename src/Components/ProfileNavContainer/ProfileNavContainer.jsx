@@ -1,4 +1,4 @@
-import React, { lazy, useState } from 'react';
+import { lazy, useState } from 'react';
 import TabContent from '../Tabs/TabContent';
 import TabButtons from '../Tabs/TabButtons';
 

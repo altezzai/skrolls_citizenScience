@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';
 
 import photo from '../../assets/profile.png';
@@ -51,7 +51,11 @@ export const Comments = () => {
 
           <div className="flex select-none items-center justify-between text-sm text-text-secondary">
             <div className="flex items-center gap-8">
-              <Heart className={'h-5 w-5'} textclr={'text-text-secondary'} disableClick={true}/>
+              <Heart
+                className={'h-5 w-5'}
+                textclr={'text-text-secondary'}
+                disableClick={true}
+              />
               <img
                 src={reply_icon}
                 className="w-5 cursor-pointer"

@@ -1,4 +1,3 @@
-import React from 'react';
 import './PostButton.css';
 import pencil from '../../assets/pencil.svg';
 

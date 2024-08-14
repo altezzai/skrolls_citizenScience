@@ -1,4 +1,3 @@
-import React from 'react';
 import { cn } from '../../utils/utils';
 
 import photo from '../../assets/profile.png';
@@ -54,9 +53,9 @@ const Post = ({ id }) => {
           </div>
           <div className="text-lg font-normal">
             🚀 Excited to dive into the world of computer science! 💻 Just
-            started my journey as a CS student, and I'm already fascinated by
+            started my journey as a CS student, and I&apos;m already fascinated by
             the endless possibilities of coding. From unraveling algorithms to
-            crafting innovative solutions, every day is an adventure! 🌟 Can't
+            crafting innovative solutions, every day is an adventure! 🌟 Can&apos;t
             wait to see where this path takes me! #CSStudent #CodingAdventure
             #TechJourney 🌐✨:
           </div>

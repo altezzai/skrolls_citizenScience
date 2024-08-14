@@ -1,4 +1,3 @@
-import React from 'react';
 import photo from '../assets/profile.png';
 import authors from '../assets/auther.svg';
 import next from '../assets/next.svg';
@@ -14,10 +13,10 @@ export const Settings = () => {
       <div className="relative flex w-full items-center justify-center text-xl font-medium text-text-secondary">
         Settings
         <div className="absolute right-0">
-        <img
+          <img
             src={settings_icon}
             alt="settings"
-            className="h-7 w-7 cursor-pointer p-1 hover:bg-secondary rounded-full"
+            className="h-7 w-7 cursor-pointer rounded-full p-1 hover:bg-secondary"
             draggable="false"
           />
         </div>

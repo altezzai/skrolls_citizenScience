@@ -1,4 +1,3 @@
-import React from "react";
 import UserFollowListItem from "../UserFollowListItem/UserFollowListItem";
 import { useModal } from "../../context/ModalContext";
 import { modals } from "../../data/constants";

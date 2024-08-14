@@ -1,4 +1,3 @@
-import React from 'react';
 import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';
 
 import photo from '../../assets/profile.png';

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './ResearchActivities.css';
 import docimage from '../../assets/profile.png';
 import PostButton from '../PostButton/PostButton';

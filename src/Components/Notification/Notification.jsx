@@ -1,7 +1,4 @@
-import React from 'react';
 import './Notification.css';
-// import profilePic from "../../assets/profile.png";
-// import postpic from "../../assets/post-img.png";
 import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';
 
 export const Notification = ({

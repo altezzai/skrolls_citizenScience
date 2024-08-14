@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import whatsapp from "../../assets/whatsapp.svg";
 import facebook from "../../assets/facebook_color.svg";

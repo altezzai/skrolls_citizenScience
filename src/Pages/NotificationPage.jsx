@@ -1,4 +1,3 @@
-import React from 'react';
 import { Notification } from '../Components/Notification/Notification';
 import postpic from '../assets/post-img.png';
 import profilePic from '../assets/profile.png';

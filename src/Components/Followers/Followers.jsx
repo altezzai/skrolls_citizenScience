@@ -1,7 +1,4 @@
-import React from 'react';
 import './Followers.css';
-import photo from '../../assets/profile.png';
-import FollowButton from '../FollowButton/FollowButton';
 import UserFollowListItem from '../UserFollowListItem/UserFollowListItem';
 
 export const Followers = ({

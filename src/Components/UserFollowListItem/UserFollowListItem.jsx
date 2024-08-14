@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './UserFollowListItem.css';
 import photo from '../../assets/profile.png';
 import FollowButton from '../FollowButton/FollowButton';
@@ -27,7 +27,7 @@ const UserFollowListItem = ({
   };
 
   return (
-    <div className="flex gap-16 items-center justify-between">
+    <div className="flex items-center justify-between gap-16">
       <div className="flex gap-2">
         <img src={photo} alt="" className="h-10 w-10 rounded-full" />
         <div className="">

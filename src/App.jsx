@@ -14,7 +14,7 @@ const NotificationPage = lazy(() => import('./Pages/NotificationPage'));
 const Communities = lazy(() => import('./Pages/Communities'));
 import MessagePage from './Pages/MessagePage';
 import { PostPage } from './Pages/PostPage';
-import { Settings } from "./Pages/Settings";
+import { Settings } from './Pages/Settings';
 
 function App() {
   const location = useLocation();

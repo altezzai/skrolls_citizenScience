@@ -1,8 +1,8 @@
-import React, { useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import icon from '../../assets/icon.png';
 import search from '../../assets/search.svg';
+import { useRef } from 'react';
 
 const Header = () => {
   const inputRef = useRef(null);

@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import { Suspense } from 'react';
 
 const TabContent = ({ tabs, activeTab }) => {
   const activeTabContent = tabs.find((tab) => tab.id === activeTab)?.content;
