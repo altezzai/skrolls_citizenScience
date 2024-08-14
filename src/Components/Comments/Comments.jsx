@@ -54,7 +54,7 @@ export const Comments = () => {
 
           <div className="flex justify-between items-center text-text-secondary text-sm select-none">
             <div className="flex gap-8 items-center">
-              <Heart className={"w-5 h-5"} textclr={"text-text-secondary"} />
+              <Heart className={"w-5 h-5"} textclr={"text-text-secondary"} disableClick={true}/>
               <img
                 src={reply_icon}
                 className="w-5 cursor-pointer"
@@ -107,6 +107,7 @@ export const Comments = () => {
                   <Heart
                     className={"w-5 h-5"}
                     textclr={"text-text-secondary"}
+                    disableClick={true}
                   />
 
                   <img
@@ -149,6 +150,7 @@ export const Comments = () => {
                   <Heart
                     className={"w-5 h-5"}
                     textclr={"text-text-secondary"}
+                    disableClick={true}
                   />
                   <img
                     src={reply_icon}
