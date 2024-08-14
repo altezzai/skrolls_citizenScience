@@ -10,8 +10,17 @@ export function ModalProvider({ children }) {
     setModals((prev) => ({ ...prev, [modalName]: true }));
   };
 
+  // const closeModal = (modalName) => {
+  //   setModals((prev) => Object.omit(prev, modalName));
+  // };
+  // const closeModal = (modalName) => {
+  //   setModals((prev) => ({ ...prev, [modalName]: false }));
+  // };
+
   const closeModal = (modalName) => {
-    setModals((prev) => ({ ...prev, [modalName]: false }));
+    const newModals = { ...modals };
+    delete newModals[modalName];
+    setModals(newModals);
   };
 
   const isModalOpen = (modalName) => !!modals[modalName];

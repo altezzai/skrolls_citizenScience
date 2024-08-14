@@ -23,7 +23,7 @@ const UserFollowListItem = ({ user, confirmUnfollow = false }) => {
   };
 
   return (
-    <div className="flex gap-16 my-3 first:mt-0 mx-4">
+    <div className="flex gap-16 items-center justify-between">
       <div className="flex gap-2">
         <img src={photo} alt="" className=" w-10 h-10 rounded-full" />
         <div className="">
