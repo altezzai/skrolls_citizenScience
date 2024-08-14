@@ -49,9 +49,9 @@ export const Comments = () => {
             Okay thats all information I need to know
           </div>
 
-          <div className="flex select-none items-center justify-between text-sm text-text-secondary">
-            <div className="flex items-center gap-8">
-              <Heart className={'h-5 w-5'} textclr={'text-text-secondary'} />
+          <div className="flex justify-between items-center text-text-secondary text-sm select-none">
+            <div className="flex gap-8 items-center">
+              <Heart className={"w-5 h-5"} textclr={"text-text-secondary"} disableClick={true}/>
               <img
                 src={reply_icon}
                 className="w-5 cursor-pointer"
@@ -102,8 +102,9 @@ export const Comments = () => {
               <div className="flex select-none items-center justify-between text-sm text-text-secondary">
                 <div className="flex items-center gap-8">
                   <Heart
-                    className={'h-5 w-5'}
-                    textclr={'text-text-secondary'}
+                    className={"w-5 h-5"}
+                    textclr={"text-text-secondary"}
+                    disableClick={true}
                   />
 
                   <img
@@ -144,8 +145,9 @@ export const Comments = () => {
               <div className="flex select-none items-center justify-between text-sm text-text-secondary">
                 <div className="flex items-center gap-8">
                   <Heart
-                    className={'h-5 w-5'}
-                    textclr={'text-text-secondary'}
+                    className={"w-5 h-5"}
+                    textclr={"text-text-secondary"}
+                    disableClick={true}
                   />
                   <img
                     src={reply_icon}
