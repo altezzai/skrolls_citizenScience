@@ -6,10 +6,10 @@ const Home = () => {
   return (
     <div className="home">
       <NewPost />
-      <Post />
-      <Post />
-      <Post />
-      <Post />
+      <Post id={2} />
+      <Post id={3} />
+      <Post id={4} />
+      <Post id={5} />
     </div>
   );
 };
