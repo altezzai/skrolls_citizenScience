@@ -16,7 +16,7 @@ const FollowList = ({ defaultActiveTab }) => {
     closeModal(modals.FOLLOW_LIST);
   });
   const renderUserList = (count) => (
-    <div className="h-[500px] overflow-y-scroll p-4 pr-0">
+    <div className="overflow-y-scroll h-[500px] py-4 px-7 pr-0 flex flex-col gap-4">
       {[...Array(count)].map((_, index) => (
         <UserFollowListItem
           key={index}
