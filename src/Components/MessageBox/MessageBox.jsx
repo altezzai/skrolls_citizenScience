@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 import photo from '../../assets/profile.png';
 import more from '../../assets/vertical_dots.svg';
@@ -86,11 +86,46 @@ const MessageBox = () => {
     }
   };
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   if (messageBoxRef.current) {
+  //     messageBoxRef.current.scrollTop = messageBoxRef.current.scrollHeight;
+  //   }
+  // }, [messages]);
+
+  const scrollToBottom = useCallback(() => {
     if (messageBoxRef.current) {
       messageBoxRef.current.scrollTop = messageBoxRef.current.scrollHeight;
     }
-  }, [messages]);
+  }, []);
+
+  // Scroll to bottom when new messages are added
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, scrollToBottom]);
+
+  // Scroll to bottom on initial render
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      scrollToBottom();
+    }, 100);
+
+    // Optional: Use MutationObserver to detect when content has finished loading
+    const observer = new MutationObserver(() => {
+      scrollToBottom();
+    });
+
+    if (messageBoxRef.current) {
+      observer.observe(messageBoxRef.current, {
+        childList: true,
+        subtree: true,
+      });
+    }
+
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+    };
+  }, [scrollToBottom]);
 
   const groupedMessages = groupMessagesByDate(messages);
 
@@ -194,7 +229,7 @@ const MessageBox = () => {
         </div>
 
         <textarea
-          className="h-12 w-full select-none resize-none p-3 text-base text-text-secondary outline-none placeholder:text-base"
+          className="h-12 w-full select-none resize-none p-3 text-base outline-none placeholder:text-base placeholder:text-text-secondary"
           placeholder="Your Message!"
           value={inputStr}
           onChange={(e) => setInputStr(e.target.value)}

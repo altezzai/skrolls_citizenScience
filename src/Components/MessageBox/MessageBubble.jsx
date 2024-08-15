@@ -8,7 +8,7 @@ const MessageBubble = ({ message, type, isSentByMe, timestamp }) => {
     switch (type) {
       case 'text':
         return message.split('\n').map((line, index) => (
-          <span key={index}>
+          <span key={index} className="whitespace-pre-wrap">
             {line}
             <br />
           </span>
