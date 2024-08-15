@@ -57,7 +57,7 @@ const MessageBubble = ({ message, type, isSentByMe, timestamp }) => {
         <div className="message-text">{renderMessageContent()}</div>
 
         <div
-          className={`pt-1 text-right text-[0.6rem] ${
+          className={`pt-1 text-right text-[0.6rem] select-none ${
             isSentByMe ? 'text-border-muted' : 'text-text-secondary'
           }`}
         >

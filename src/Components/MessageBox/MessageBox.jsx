@@ -151,7 +151,7 @@ const MessageBox = () => {
       >
         {Object.keys(groupedMessages).map((date) => (
           <div key={date}>
-            <div className="my-2 text-center text-xs text-text-secondary">
+            <div className="my-2 text-center text-xs text-text-secondary select-none">
               {date}
             </div>
             {groupedMessages[date].map((message) => (
