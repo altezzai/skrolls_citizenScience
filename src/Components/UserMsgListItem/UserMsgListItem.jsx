@@ -13,8 +13,8 @@ const UserMsgListItem = ({ user, isActive, onClick }) => {
       <div className="user-msg-details flex items-center gap-3">
         <ProfilePhoto img={photo} size={'55px'} />
         <div className="user-msg-name flex flex-col">
-          <div className="user-name">{user.name}</div>
-          <div className="user-final-msg h-5 flex-nowrap overflow-hidden">
+          <div className="user-name min-w-0 truncate">{user.name}</div>
+          <div className="user-final-msg h-5 flex-nowrap overflow-hidden truncate">
             {user.lastMessage}
           </div>
         </div>

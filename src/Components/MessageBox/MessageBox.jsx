@@ -55,7 +55,7 @@ const MessageBox = () => {
         sender: 'Me',
       };
       setMessages((prevMessages) => [...prevMessages, newMessage]);
-      setInputStr(''); // Clear the input after sending
+      setInputStr('');
     }
   };
 

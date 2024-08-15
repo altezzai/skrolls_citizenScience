@@ -1,16 +1,27 @@
 import UserMsgList from '../Components/UserMsgList/UserMsgList';
 import MessageBox from '../Components/MessageBox/MessageBox';
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from '../Components/ui/resizable';
 
 const MessagePage = () => {
   return (
-    <div className="flex w-full overflow-hidden">
-      <div className="w-1/4 min-w-80">
+    <ResizablePanelGroup direction="horizontal" className="rounded-lg border">
+      <ResizablePanel
+        defaultSize={25}
+        maxSize={50}
+        minSize={25}
+        className="max-md:mr-5"
+      >
         <UserMsgList />
-      </div>
-      <div className="w-3/4 max-md:hidden">
+      </ResizablePanel>
+      <ResizableHandle />
+      <ResizablePanel className="max-md:hidden">
         <MessageBox />
-      </div>
-    </div>
+      </ResizablePanel>
+    </ResizablePanelGroup>
   );
 };
 

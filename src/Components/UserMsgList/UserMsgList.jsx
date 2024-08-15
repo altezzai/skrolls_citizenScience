@@ -64,7 +64,7 @@ const UserMsgList = () => {
   ];
 
   return (
-    <>
+    <div className="min-w-60">
       <div className="mx-4 my-4 flex gap-3 rounded-3xl bg-textarea px-4 py-2">
         <img
           src={search}
@@ -93,7 +93,7 @@ const UserMsgList = () => {
           />
         ))}
       </div>
-    </>
+    </div>
   );
 };
 
