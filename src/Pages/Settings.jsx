@@ -3,6 +3,7 @@ import authors from '../assets/auther.svg';
 import next from '../assets/next.svg';
 import mention from '../assets/mention.svg';
 import communtiy from '../assets/community.svg';
+import deactivate_icon from '../assets/delete_account.svg';
 
 import settings_icon from '../assets/settings-gray.svg';
 import { SettingsItem } from '../Components/SettingsItem/SettingsItem';
@@ -52,7 +53,7 @@ export const Settings = () => {
 
       <div className="flex flex-col gap-4 py-4">
         <div className="pl-4 text-lg font-medium text-text-primary">
-          Profile Settings
+          Account Settings
         </div>
         <div>
           <SettingsItem
@@ -66,7 +67,7 @@ export const Settings = () => {
             }
           />
           <SettingsItem
-            image={authors}
+            image={deactivate_icon}
             className={'p-2'}
             imgClassName={'w-5'}
             label={'Account Deactivation / Deletion'}
@@ -80,7 +81,7 @@ export const Settings = () => {
 
       <div className="flex flex-col gap-4 py-4">
         <div className="pl-4 text-lg font-medium text-text-primary">
-          Profile Settings
+          Notification Settings
         </div>
         <div>
           <SettingsItem
