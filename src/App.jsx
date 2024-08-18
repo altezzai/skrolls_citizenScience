@@ -15,17 +15,21 @@ const Communities = lazy(() => import('./Pages/Communities'));
 import MessagePage from './Pages/MessagePage';
 import { PostPage } from './Pages/PostPage';
 import { Settings } from './Pages/Settings';
+import { Login } from './Pages/Login';
 
 function App() {
   const location = useLocation();
   const inMessagePage = location.pathname.includes('/messages');
+  const inLoginPage = location.pathname.includes('/login');
+
   return (
     <>
-      <Header />
-      <div className={`main-container ${inMessagePage ? 'height-set' : ''}`}>
-        <NavPanel />
+      {!inLoginPage && <Header />}
+      <div className={`main-container ${inMessagePage || inLoginPage ? 'height-set' : ''}`}>
+        {!inLoginPage && <NavPanel />}
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
+            <Route path="/login" element={<Login />} />
             <Route
               path="/"
               element={
@@ -86,18 +90,20 @@ function App() {
           </Routes>
         </Suspense>
 
-        <div
-          className={`${
-            inMessagePage
-              ? 'hidden'
-              : 'info-panel scrollbar-hide mr-12 h-full w-80 shrink-0 overflow-y-scroll pt-10 max-xl:mr-2 max-xl:min-w-60 max-xl:shrink'
-          }`}
-          style={{ scrollbarWidth: 'none' }}
-        >
-          <RoyaltyScore />
-          <IdBox />
-          <Followers title={'Followers'} followbtnflag={true} />
-        </div>
+        {!inLoginPage && (
+          <div
+            className={`${
+              inMessagePage
+                ? 'hidden'
+                : 'info-panel scrollbar-hide mr-12 h-full w-80 shrink-0 overflow-y-scroll pt-10 max-xl:mr-2 max-xl:min-w-60 max-xl:shrink'
+            }`}
+            style={{ scrollbarWidth: 'none' }}
+          >
+            <RoyaltyScore />
+            <IdBox />
+            <Followers title={'Followers'} followbtnflag={true} />
+          </div>
+        )}
       </div>
     </>
   );
