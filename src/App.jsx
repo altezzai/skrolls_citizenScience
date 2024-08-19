@@ -16,11 +16,12 @@ import MessagePage from './Pages/MessagePage';
 import { PostPage } from './Pages/PostPage';
 import { Settings } from './Pages/Settings';
 import { Login } from './Pages/Login';
+import { Register } from './Pages/Register';
 
 function App() {
   const location = useLocation();
   const inMessagePage = location.pathname.includes('/messages');
-  const inLoginPage = location.pathname.includes('/login');
+  const inLoginPage = location.pathname.includes('/login') || location.pathname.includes('/register');
 
   return (
     <>
@@ -30,6 +31,7 @@ function App() {
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route
               path="/"
               element={
