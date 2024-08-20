@@ -19,6 +19,7 @@ import {
 export const ShareProfile = () => {
   const { isModalOpen, closeModal } = useModal();
   const [isPopOpen, setIsPopOpen] = useState(false);
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
   const shareModalRef = useClickOutside(isModalOpen(modals.SHARE_MODAL), () =>
     closeModal(modals.SHARE_MODAL)
   );
@@ -31,7 +32,17 @@ export const ShareProfile = () => {
   const copyToClipboard = () => {
     copy(copyText);
     setIsPopOpen(true);
+    setIsButtonClicked(true);
   };
+
+  useEffect(() => {
+    if (isButtonClicked) {
+      const buttonTimer = setTimeout(() => {
+        setIsButtonClicked(false);
+      }, 200);
+      return () => clearTimeout(buttonTimer);
+    }
+  }, [isButtonClicked]);
 
   useEffect(() => {
     let timer;
@@ -111,7 +122,9 @@ export const ShareProfile = () => {
         <Popover open={isPopOpen} onOpenChange={setIsPopOpen}>
           <PopoverTrigger asChild>
             <div
-              className="cursor-pointer select-none rounded-lg bg-primary px-5 py-2 text-bg-secondary transition-all delay-75 ease-in hover:bg-red-500"
+              className={`cursor-pointer select-none rounded-lg px-5 py-2 text-bg-secondary ${
+                isButtonClicked ? 'bg-red-900' : 'bg-primary hover:bg-red-500'
+              }`}
               onClick={copyToClipboard}
             >
               Copy
