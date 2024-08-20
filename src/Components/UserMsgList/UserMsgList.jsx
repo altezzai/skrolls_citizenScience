@@ -1,9 +1,18 @@
 import { useState, useRef } from 'react';
 
-import UserMsgListItem from '../UserMsgListItem/UserMsgListItem';
-
 import search from '../../assets/search.svg';
 import plus_icon from '../../assets/plus.svg';
+
+import UserMsgListItem from '../UserMsgListItem/UserMsgListItem';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/Components/ui/dialog';
+import { NewGroupForm } from '../NewGroupForm/NewGroupForm';
 
 const UserMsgList = () => {
   const inputRef = useRef(null);
@@ -82,10 +91,25 @@ const UserMsgList = () => {
             ref={inputRef}
           />
         </div>
-        <div className="font-normalnt flex cursor-pointer items-center justify-center gap-2 rounded-3xl bg-textarea px-6 py-2">
-          <img src={plus_icon} className="w-5" alt="plus" draggable="false" />
-          New
-        </div>
+        <Dialog>
+          <DialogTrigger>
+            <div className="font-normalnt flex cursor-pointer items-center justify-center gap-2 rounded-3xl bg-textarea px-6 py-2">
+              <img
+                src={plus_icon}
+                className="w-5"
+                alt="plus"
+                draggable="false"
+              />
+              New
+            </div>
+          </DialogTrigger>
+          <DialogContent className="flex flex-col items-center px-6">
+            <DialogHeader className="self-start">
+              <DialogTitle>Create a Group</DialogTitle>
+            </DialogHeader>
+            <NewGroupForm />
+          </DialogContent>
+        </Dialog>
       </div>
 
       <div
