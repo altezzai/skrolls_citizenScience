@@ -110,7 +110,7 @@ const AddPost = ({ show, handleClose }) => {
           className="add-media"
           style={{ display: isFileUploaded ? 'none' : 'flex' }}
         >
-          <label htmlFor="imgfile" className="icon-post">
+          {/* <label htmlFor="imgfile" className="icon-post">
             <img src={imageico} alt="" />
             <span>Image</span>
           </label>
@@ -132,10 +132,10 @@ const AddPost = ({ show, handleClose }) => {
             accept="video/mp4,video/x-m4v,video/*"
             multiple
             onChange={handleVideoChange}
-          />
+          /> */}
           <label htmlFor="documentfile" className="icon-post">
             <img src={doc} alt="" />
-            <span>Document</span>
+            <span>file</span>
           </label>
           <input
             type="file"

@@ -60,11 +60,12 @@ export const Login = () => {
                   <input
                     type={showPassword ? 'text' : 'password'}
                     name=""
-                    id=""
+                    id="pass"
                     className="w-full bg-bg-primary outline-none"
                   />
+
                   <img
-                    src={showPassword ? visible : invisible}
+                    src={showPassword ? invisible : visible}
                     className="w-5 cursor-pointer select-none"
                     alt="visible"
                     draggable="false"
