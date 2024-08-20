@@ -1,21 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from 'react';
 
-import whatsapp from "../../assets/whatsapp.svg";
-import facebook from "../../assets/facebook_color.svg";
-import mail from "../../assets/mail.svg";
-import twitter from "../../assets/twitter.svg";
-import insta from "../../assets/insta.svg";
-import copy from "copy-to-clipboard";
-import useClickOutside from "../../hooks/useClickOutside";
-import { useModal } from "../../context/ModalContext";
-import { modals } from "../../data/constants";
+import whatsapp from '../../assets/whatsapp.svg';
+import facebook from '../../assets/facebook_color.svg';
+import mail from '../../assets/mail.svg';
+import twitter from '../../assets/twitter.svg';
+import insta from '../../assets/insta.svg';
+
+import copy from 'copy-to-clipboard';
+import useClickOutside from '../../hooks/useClickOutside';
+import { useModal } from '../../context/ModalContext';
+import { modals } from '../../data/constants';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/Components/ui/popover';
 
 export const ShareProfile = () => {
   const { isModalOpen, closeModal } = useModal();
+  const [isPopOpen, setIsPopOpen] = useState(false);
   const shareModalRef = useClickOutside(isModalOpen(modals.SHARE_MODAL), () =>
     closeModal(modals.SHARE_MODAL)
   );
-  const [copyText, setCopyText] = useState("http://hereIamYouSeeMeNow");
+  const [copyText, setCopyText] = useState('http://hereIamYouSeeMeNow');
 
   const handleCopyText = (e) => {
     setCopyText(e.target.value);
@@ -23,16 +30,27 @@ export const ShareProfile = () => {
 
   const copyToClipboard = () => {
     copy(copyText);
+    setIsPopOpen(true);
   };
+
+  useEffect(() => {
+    let timer;
+    if (isPopOpen) {
+      timer = setTimeout(() => {
+        setIsPopOpen(false);
+      }, 700);
+    }
+    return () => clearTimeout(timer);
+  }, [isPopOpen]);
 
   return (
     <div
       ref={shareModalRef}
-      className="bg-bg-secondary flex flex-col rounded-2xl p-3 gap-3 absolute z-50"
+      className="absolute z-50 flex flex-col gap-3 rounded-2xl bg-bg-secondary p-3"
     >
-      <div className="text-sm font-medium select-none">Share</div>
+      <div className="select-none text-sm font-medium">Share</div>
 
-      <div className="flex gap-6 items-end text-xs pb-1 select-none">
+      <div className="flex select-none items-end gap-6 pb-1 text-xs">
         <div className="flex flex-col items-center gap-1">
           <img
             src={facebook}
@@ -44,10 +62,10 @@ export const ShareProfile = () => {
         </div>
 
         <div className="flex flex-col items-center gap-2">
-          <div className="rounded-full p-3 bg-green-500 w-fit cursor-pointer">
+          <div className="w-fit cursor-pointer rounded-full bg-green-500 p-3">
             <img
               src={whatsapp}
-              className="w-8 "
+              className="w-8"
               draggable="false"
               alt="whatsapp"
             />
@@ -66,7 +84,7 @@ export const ShareProfile = () => {
         </div>
 
         <div className="flex flex-col items-center gap-2">
-          <div className="p-4 rounded-full bg-gray-400 w-fit cursor-pointer">
+          <div className="w-fit cursor-pointer rounded-full bg-gray-400 p-4">
             <img src={mail} className="w-7" draggable="false" alt="mail" />
           </div>
           Email
@@ -83,19 +101,26 @@ export const ShareProfile = () => {
         </div>
       </div>
 
-      <div className="flex bg-textarea p-1 rounded-lg text-sm font-medium">
+      <div className="flex rounded-lg bg-textarea p-1 text-sm font-medium">
         <input
           type="text"
-          className="bg-textarea outline-none w-full pl-3"
+          className="w-full bg-textarea pl-3 outline-none"
           value={copyText}
           onChange={handleCopyText}
         />
-        <div
-          className="cursor-pointer bg-primary text-bg-secondary rounded-lg px-5 py-2 select-none hover:bg-red-500 transition-all ease-in delay-75"
-          onClick={copyToClipboard}
-        >
-          Copy
-        </div>
+        <Popover open={isPopOpen} onOpenChange={setIsPopOpen}>
+          <PopoverTrigger asChild>
+            <div
+              className="cursor-pointer select-none rounded-lg bg-primary px-5 py-2 text-bg-secondary transition-all delay-75 ease-in hover:bg-red-500"
+              onClick={copyToClipboard}
+            >
+              Copy
+            </div>
+          </PopoverTrigger>
+          <PopoverContent className="flex h-10 w-fit items-center border-none bg-text-primary text-sm text-bg-secondary">
+            Copied to Clipboard
+          </PopoverContent>
+        </Popover>
       </div>
     </div>
   );
