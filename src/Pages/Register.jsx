@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 export const Register = () => {
   return (
     <div className="flex h-screen w-full items-center gap-10 bg-bg-secondary px-20 max-xl:gap-5 max-xl:px-5">
-      <div className="flex h-4/5 w-5/12 flex-col justify-between gap-10 max-lg:w-1/2 max-md:w-full">
+      <div className="flex h-4/5 w-5/12 flex-col justify-between gap-10 max-xl:gap-5 max-lg:w-1/2 max-md:w-full">
         <div className="flex select-none items-center pl-10 text-xl font-bold text-[#324452] max-lg:text-base">
           <img
             src={skrolls_logo}
@@ -20,14 +20,14 @@ export const Register = () => {
         </div>
 
         <div className="flex flex-col items-center gap-10">
-          <div className="flex w-8/12 flex-col gap-4 max-lg:w-3/4 max-md:w-11/12">
-            <div className="flex select-none flex-col gap-1 max-lg:gap-0">
+          <div className="flex w-8/12 flex-col gap-4 max-xl:gap-1 max-lg:w-3/4 max-md:w-11/12">
+            <div className="flex select-none flex-col gap-1 max-xl:gap-0">
               <div className="text-3xl font-bold max-lg:text-lg">Register </div>
               <div className="text-sm font-medium max-lg:text-sm">
                 Create a new account
               </div>
             </div>
-            <form action="" className="flex flex-col gap-2">
+            <form action="" className="flex flex-col gap-2 max-xl:gap-1">
               <div className="mt-2 flex flex-col">
                 <label
                   htmlFor=""
@@ -116,7 +116,7 @@ export const Register = () => {
           </div>
         </div>
 
-        <div className="flex w-full justify-center gap-1 text-base text-text-secondary">
+        <div className="flex w-full justify-center gap-1 text-base text-text-secondary max-sm:text-sm">
           Already have an account?
           <Link
             to="/login"
