@@ -6,6 +6,8 @@ import orcid from '../assets/orcid_icon.png';
 import visible from '../assets/visible.svg';
 import invisible from '../assets/invisible.svg';
 import { Link } from 'react-router-dom';
+// import { Separator } from '@radix-ui/react-separator';
+import { Separator } from '@/Components/ui/separator';
 
 export const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -71,7 +73,7 @@ export const Login = () => {
                 </div>
               </div>
 
-              <div className="mt-4 flex w-full cursor-pointer select-none justify-center rounded-lg bg-primary py-2 text-bg-secondary transition-all ease-in-out hover:bg-red-500">
+              <div className="mt-5 flex w-full cursor-pointer select-none justify-center rounded-lg bg-primary py-2 text-bg-secondary transition-all ease-in-out hover:bg-red-500">
                 <input
                   className="text-base font-bold"
                   type="submit"
@@ -82,7 +84,12 @@ export const Login = () => {
               </div>
             </form>
 
-            <div className="flex select-none justify-center">or</div>
+            <div className="flex w-full select-none items-center justify-center gap-3 overflow-hidden">
+              <Separator className="bg-border-muted" />
+              <div className="text-base font-light text-text-secondary">or</div>
+              <Separator className="bg-border-muted" />
+            </div>
+
             <div className="relative flex cursor-pointer select-none items-center justify-center rounded-lg border-2 border-text-primary py-2 text-base font-bold text-text-primary transition-all delay-100 ease-in-out hover:bg-bg-primary">
               <img
                 src={orcid}
@@ -95,7 +102,7 @@ export const Login = () => {
           </div>
         </div>
 
-        <div className="flex w-full justify-center gap-1 text-base text-text-secondary">
+        <div className="flex w-full justify-center gap-1 text-base text-text-secondary max-sm:text-sm">
           Need an account?
           <Link
             to="/register"
