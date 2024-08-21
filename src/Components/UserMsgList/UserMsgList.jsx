@@ -103,8 +103,8 @@ const UserMsgList = () => {
               New
             </div>
           </DialogTrigger>
-          <DialogContent className="flex flex-col items-center px-6">
-            <DialogHeader className="self-start">
+          <DialogContent className="flex flex-col items-center px-2 max-xl:py-4 max-xl:w-[440px]">
+            <DialogHeader className="self-start pl-4">
               <DialogTitle>Create a Group</DialogTitle>
             </DialogHeader>
             <NewGroupForm />
