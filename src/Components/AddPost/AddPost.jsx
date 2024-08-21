@@ -1,74 +1,39 @@
-import './AddPost.css';
 import PostButton from '../PostButton/PostButton';
 import photo from '../../assets/profile.png';
-import imageico from '../../assets/img.svg';
-import video from '../../assets/video.svg';
 import doc from '../../assets/document.svg';
 import uploadfile from '../../assets/upload_doc.svg';
+import url_icon from '../../assets/link_grey.svg';
 
 import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';
 import { useState } from 'react';
 
 const AddPost = ({ show, handleClose }) => {
-  const [imagePreviews, setImagePreviews] = useState([]);
-  const [videoPreviews, setVideoPreviews] = useState([]);
-  const [documentPreviews, setDocumentPreviews] = useState([]);
+  const [filePreviews, setFilePreviews] = useState([]);
+  const isFileUploaded = filePreviews.length > 0;
   const [postContent, setPostContent] = useState('');
 
-  const handleImageChange = (e) => {
+  const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
-    const newImagePreviews = files.map((file) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      return new Promise((resolve) => {
-        reader.onloadend = () => {
-          resolve(reader.result);
-        };
-      });
+    const newFilePreviews = files.map((file) => {
+      if (file.type.startsWith('image/')) {
+        return URL.createObjectURL(file);
+      } else if (file.type.startsWith('video/')) {
+        return URL.createObjectURL(file);
+      } else {
+        return file.name;
+      }
     });
-
-    Promise.all(newImagePreviews).then((previews) => {
-      setImagePreviews((prevPreviews) => [...prevPreviews, ...previews]);
-    });
+    setFilePreviews((prevPreviews) => [...prevPreviews, ...newFilePreviews]);
   };
 
-  const handleVideoChange = (e) => {
-    const files = Array.from(e.target.files);
-    const newVideoPreviews = files.map((file) => URL.createObjectURL(file));
-    setVideoPreviews((prevPreviews) => [...prevPreviews, ...newVideoPreviews]);
-  };
-
-  const handleDocumentChange = (e) => {
-    const files = Array.from(e.target.files);
-    const newDocumentPreviews = files.map((file) => file.name);
-    setDocumentPreviews((prevPreviews) => [
-      ...prevPreviews,
-      ...newDocumentPreviews,
-    ]);
-  };
-
-  const removeImagePreview = (index) => {
-    setImagePreviews((prevPreviews) =>
-      prevPreviews.filter((_, i) => i !== index)
-    );
-  };
-
-  const removeVideoPreview = (index) => {
-    setVideoPreviews((prevPreviews) =>
-      prevPreviews.filter((_, i) => i !== index)
-    );
-  };
-
-  const removeDocumentPreview = (index) => {
-    setDocumentPreviews((prevPreviews) =>
+  const removeFilePreview = (index) => {
+    setFilePreviews((prevPreviews) =>
       prevPreviews.filter((_, i) => i !== index)
     );
   };
 
   const resetForm = () => {
-    setImagePreviews([]);
-    setVideoPreviews([]);
-    setDocumentPreviews([]);
+    setFilePreviews([]);
     setPostContent('');
   };
 
@@ -77,141 +42,119 @@ const AddPost = ({ show, handleClose }) => {
     handleClose();
   };
 
-  const isFileUploaded =
-    imagePreviews.length > 0 ||
-    videoPreviews.length > 0 ||
-    documentPreviews.length > 0;
-
   return (
-    <div className={`addpost ${show ? 'show' : ''}`} onClick={handleModalClose}>
-      <div
-        className="addpost-content"
+    <div
+      className={`fixed bottom-0 left-0 right-0 top-0 z-10 h-full w-full overflow-auto bg-bg-transparent-muted backdrop-blur-sm ${show ? 'block' : 'hidden'}`}
+      onClick={handleModalClose}
+    >
+      <form
+        className="relative left-1/2 top-[15%] w-1/2 -translate-x-1/2 rounded-2xl border-2 border-solid border-border-primary bg-bg-secondary p-5"
         onClick={(e) => {
           e.stopPropagation();
         }}
       >
-        <span className="close" onClick={handleModalClose}>
+        <span
+          className="float-right cursor-pointer pr-2 text-4xl font-bold text-text-secondary transition-all duration-300 ease-in-out hover:scale-110 hover:text-text-primary"
+          onClick={handleModalClose}
+        >
           &times;
         </span>
-        <div className="postman-details gap-3">
+        <div className="mb-3 flex items-center gap-3">
           <ProfilePhoto img={photo} size={'2.5rem'} />
-          <div className="my-name">Manu P</div>
+          <div className="text-lg font-medium text-text-hard">Manu P</div>
         </div>
 
         <textarea
           name=""
           id=""
           placeholder="What is new, Rafsal?"
-          style={{ height: isFileUploaded ? '150px' : '250px' }}
+          className="w-full resize-none rounded-2xl bg-textarea p-4 text-sm outline-none transition-all duration-300 ease-in-out placeholder:text-text-muted placeholder:select-none"
+          style={{ height: isFileUploaded ? '100px' : '170px' }}
           value={postContent}
           onChange={(e) => setPostContent(e.target.value)}
+          required
         ></textarea>
-        <div
-          className="add-media"
-          style={{ display: isFileUploaded ? 'none' : 'flex' }}
-        >
-          {/* <label htmlFor="imgfile" className="icon-post">
-            <img src={imageico} alt="" />
-            <span>Image</span>
-          </label>
+
+        <div className="w-full rounded-2xl bg-textarea p-4 flex items-center gap-2">
+          <img src={url_icon} alt="url link" draggable="false" className='w-4'/>
           <input
-            type="file"
-            name="myImage"
-            id="imgfile"
-            accept="image/png, image/gif, image/jpeg"
-            multiple
-            onChange={handleImageChange}
+            type="url"
+            placeholder="url (optional)"
+            className="w-full bg-inherit text-sm outline-none placeholder:text-text-muted placeholder:select-none"
           />
-          <label htmlFor="videofile" className="icon-post">
-            <img src={video} alt="" />
-            <span>Video</span>
+        </div>
+
+        <div className={`py-3 ${isFileUploaded ? 'hidden' : 'flex'}`}>
+          <label
+            htmlFor="documentfile"
+            className="flex cursor-pointer items-center gap-2 rounded-full border-[1px] border-border-muted bg-bg-primary px-4 py-2 text-sm font-semibold text-text-secondary"
+          >
+            <img src={doc} alt="document" className="w-4" draggable="false" />
+            <span>File</span>
           </label>
           <input
             type="file"
-            id="videofile"
-            accept="video/mp4,video/x-m4v,video/*"
-            multiple
-            onChange={handleVideoChange}
-          /> */}
-          <label htmlFor="documentfile" className="icon-post">
-            <img src={doc} alt="" />
-            <span>file</span>
-          </label>
-          <input
-            type="file"
+            className="hidden"
             id="documentfile"
             multiple
-            onChange={handleDocumentChange}
+            onChange={handleFileChange}
           />
         </div>
 
-        <div className="preview-container">
-          {imagePreviews.map((preview, index) => (
-            <div className="thumbnail-container" key={index}>
-              <img
-                src={preview}
-                alt={`Image Preview ${index}`}
-                className="thumbnail"
+        {filePreviews.length > 0 && (
+          <div className="flex flex-wrap gap-4 py-3 select-none">
+            {filePreviews.map((preview, index) => (
+              <div key={index} className="relative">
+                {preview.startsWith('blob:') ? (
+                  preview.includes('video') ? (
+                    <video
+                      src={preview}
+                      controls
+                      className="h-36 w-36 rounded-lg object-cover"
+                    />
+                  ) : (
+                    <img
+                      src={preview}
+                      alt={`Preview ${index}`}
+                      className="h-36 w-36 rounded-lg object-cover"
+                    />
+                  )
+                ) : (
+                  <div className="flex h-36 w-36 items-center justify-center break-all rounded-lg bg-gray-200 p-2">
+                    {preview}
+                  </div>
+                )}
+                <span
+                  className="absolute right-1 top-1 flex h-5 w-5 cursor-pointer justify-center rounded-full bg-gray-700 align-middle text-lg leading-none text-white hover:bg-gray-900"
+                  onClick={() => removeFilePreview(index)}
+                >
+                  &times;
+                </span>
+              </div>
+            ))}
+            <label
+              htmlFor="uploadfile"
+              className={`cursor-pointer rounded-xl bg-textarea px-14 py-5 select-none ${isFileUploaded ? 'flex' : 'hidden'}`}
+            >
+              <img src={uploadfile} className="w-8" alt="Add more files" draggable="false" />
+              <input
+                type="file"
+                id="uploadfile"
+                multiple
+                style={{ display: 'none' }}
+                onChange={(e) => {
+                  const files = Array.from(e.target.files);
+                  files.forEach((file) => {
+                    handleFileChange(e);
+                  });
+                }}
               />
-              <span
-                className="close-thumbnail"
-                onClick={() => removeImagePreview(index)}
-              >
-                &times;
-              </span>
-            </div>
-          ))}
-          {videoPreviews.map((preview, index) => (
-            <div className="thumbnail-container" key={index}>
-              <video src={preview} controls className="thumbnail" />
-              <span
-                className="close-thumbnail"
-                onClick={() => removeVideoPreview(index)}
-              >
-                &times;
-              </span>
-            </div>
-          ))}
-          {documentPreviews.map((preview, index) => (
-            <div className="thumbnail-container document-thumbnail" key={index}>
-              {preview}
-              <span
-                className="close-thumbnail"
-                onClick={() => removeDocumentPreview(index)}
-              >
-                &times;
-              </span>
-            </div>
-          ))}
-          <label
-            htmlFor="uploadfile"
-            className="upload"
-            style={{ display: isFileUploaded ? 'flex' : 'none' }}
-          >
-            <img src={uploadfile} alt="Add more files" />
-            <input
-              type="file"
-              id="uploadfile"
-              multiple
-              style={{ display: 'none' }}
-              onChange={(e) => {
-                const files = Array.from(e.target.files);
-                files.forEach((file) => {
-                  if (file.type.startsWith('image/')) {
-                    handleImageChange(e);
-                  } else if (file.type.startsWith('video/')) {
-                    handleVideoChange(e);
-                  } else {
-                    handleDocumentChange(e);
-                  }
-                });
-              }}
-            />
-          </label>
-        </div>
+            </label>
+          </div>
+        )}
 
         <PostButton text={'Post it!'} />
-      </div>
+      </form>
     </div>
   );
 };

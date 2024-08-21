@@ -9,7 +9,7 @@ import insta from '../../assets/insta.svg';
 import copy from 'copy-to-clipboard';
 import useClickOutside from '../../hooks/useClickOutside';
 import { useModal } from '../../context/ModalContext';
-import { modals } from '../../data/constants';
+import { modals } from '../../utils/constants';
 import {
   Popover,
   PopoverContent,

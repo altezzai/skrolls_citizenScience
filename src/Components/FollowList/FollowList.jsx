@@ -1,7 +1,7 @@
 import { lazy, useState } from 'react';
 import TabButtons from '../Tabs/TabButtons';
 import TabContent from '../Tabs/TabContent';
-import { modals } from '../../data/constants.js';
+import { modals } from '../../utils/constants.js';
 import useClickOutside from '../../hooks/useClickOutside.js';
 import { useModal } from '../../context/ModalContext.jsx';
 

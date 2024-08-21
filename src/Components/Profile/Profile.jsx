@@ -11,7 +11,7 @@ import SkillBtn from '../SkillBtn/SkillBtn';
 // import FollowList from "../FollowList/FollowList";
 const FollowList = lazy(() => import('../FollowList/FollowList'));
 import { useModal } from '../../context/ModalContext';
-import { modals } from '../../data/constants';
+import { modals } from '../../utils/constants';
 import { ShareProfile } from './ShareProfile';
 
 const Profile = () => {

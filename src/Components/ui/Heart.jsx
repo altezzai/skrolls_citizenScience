@@ -3,7 +3,7 @@ import { cn } from '../../utils/utils';
 
 import { LikeIcon } from '../../assets/component/LikeIcon';
 import { useModal } from '../../context/ModalContext';
-import { modals } from '../../data/constants';
+import { modals } from '../../utils/constants';
 import { LikedList } from '../Post/LikedList';
 
 export const Heart = ({ className, textclr, id, disableClick = false }) => {
