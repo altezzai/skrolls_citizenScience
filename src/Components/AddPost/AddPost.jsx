@@ -5,7 +5,8 @@ import uploadfile from '../../assets/upload_doc.svg';
 import url_icon from '../../assets/link_grey.svg';
 
 import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { apiClient } from '@/lib/api_client';
 
 const AddPost = ({ show, handleClose }) => {
   const [filePreviews, setFilePreviews] = useState([]);
@@ -42,6 +43,7 @@ const AddPost = ({ show, handleClose }) => {
     handleClose();
   };
 
+
   return (
     <div
       className={`fixed bottom-0 left-0 right-0 top-0 z-10 h-full w-full overflow-auto bg-bg-transparent-muted backdrop-blur-sm ${show ? 'block' : 'hidden'}`}
@@ -68,19 +70,24 @@ const AddPost = ({ show, handleClose }) => {
           name=""
           id=""
           placeholder="What is new, Rafsal?"
-          className="w-full resize-none rounded-2xl bg-textarea p-4 text-sm outline-none transition-all duration-300 ease-in-out placeholder:text-text-muted placeholder:select-none"
+          className="w-full resize-none rounded-2xl bg-textarea p-4 text-sm outline-none transition-all duration-300 ease-in-out placeholder:select-none placeholder:text-text-muted"
           style={{ height: isFileUploaded ? '100px' : '170px' }}
           value={postContent}
           onChange={(e) => setPostContent(e.target.value)}
           required
         ></textarea>
 
-        <div className="w-full rounded-2xl bg-textarea p-4 flex items-center gap-2">
-          <img src={url_icon} alt="url link" draggable="false" className='w-4'/>
+        <div className="flex w-full items-center gap-2 rounded-2xl bg-textarea p-4">
+          <img
+            src={url_icon}
+            alt="url link"
+            draggable="false"
+            className="w-4"
+          />
           <input
             type="url"
             placeholder="url (optional)"
-            className="w-full bg-inherit text-sm outline-none placeholder:text-text-muted placeholder:select-none"
+            className="w-full bg-inherit text-sm outline-none placeholder:select-none placeholder:text-text-muted"
           />
         </div>
 
@@ -102,7 +109,7 @@ const AddPost = ({ show, handleClose }) => {
         </div>
 
         {filePreviews.length > 0 && (
-          <div className="flex flex-wrap gap-4 py-3 select-none">
+          <div className="flex select-none flex-wrap gap-4 py-3">
             {filePreviews.map((preview, index) => (
               <div key={index} className="relative">
                 {preview.startsWith('blob:') ? (
@@ -134,9 +141,14 @@ const AddPost = ({ show, handleClose }) => {
             ))}
             <label
               htmlFor="uploadfile"
-              className={`cursor-pointer rounded-xl bg-textarea px-14 py-5 select-none ${isFileUploaded ? 'flex' : 'hidden'}`}
+              className={`cursor-pointer select-none rounded-xl bg-textarea px-14 py-5 ${isFileUploaded ? 'flex' : 'hidden'}`}
             >
-              <img src={uploadfile} className="w-8" alt="Add more files" draggable="false" />
+              <img
+                src={uploadfile}
+                className="w-8"
+                alt="Add more files"
+                draggable="false"
+              />
               <input
                 type="file"
                 id="uploadfile"
@@ -153,7 +165,7 @@ const AddPost = ({ show, handleClose }) => {
           </div>
         )}
 
-        <PostButton text={'Post it!'} />
+        <PostButton text={'Post it!'}/>
       </form>
     </div>
   );
