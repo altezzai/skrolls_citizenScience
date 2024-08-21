@@ -1,4 +1,3 @@
-import './PostButton.css';
 import pencil from '../../assets/pencil.svg';
 
 const PostButton = ({
@@ -12,10 +11,11 @@ const PostButton = ({
 }) => {
   return (
     <div
-      className="postbutton"
+      className="flex items-center justify-center w-full h-full gap-2 rounded-xl bg-primary text-bg-secondary text-lg font-semibold cursor-pointer hover:bg-red-500 select-none px-3 active:bg-red-900"
       style={{ height: height, borderRadius: radius }}
     >
-      <img src={image} style={{ height: iconHeight }} />
+      <img src={image} style={{ height: iconHeight }} draggable="false" 
+      className='w-6 '/>
       {flag ? (
         <span
           style={{
