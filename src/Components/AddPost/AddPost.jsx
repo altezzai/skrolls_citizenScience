@@ -15,9 +15,13 @@ const AddPost = ({ show, handleClose }) => {
   const [postContent, setPostContent] = useState('');
   const [link, setLink] = useState('');
   const [users, setUsers] = useState([]); // List of users for mentions
+  const [hashTagList, setHashTagList] = useState([]);
   const [mentionSearchTerm, setMentionSearchTerm] = useState('');
   const [showMentionList, setShowMentionList] = useState(false);
   const [selectedUserIndex, setSelectedUserIndex] = useState(0);
+  const [showTagList, setShowTagList] = useState(false);
+  const [selectedTagIndex, setSelectedTagIndex] = useState(0);
+  const [filteredTags, setFilteredTags] = useState([]);
   const textareaRef = useRef(null);
 
   useEffect(() => {
@@ -31,7 +35,6 @@ const AddPost = ({ show, handleClose }) => {
           },
         });
         setUsers(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error('Failed to fetch users:', error);
       }
@@ -39,37 +42,80 @@ const AddPost = ({ show, handleClose }) => {
     fetchUsers();
   }, []);
 
-    // Handle keydown events for arrow keys and Enter key
-    const handleKeyDown = (e) => {
-      if (showMentionList) {
-        switch (e.key) {
-          case 'ArrowDown':
-            e.preventDefault();
-            setSelectedUserIndex((prevIndex) =>
-              (prevIndex + 1) % filteredUsers.length
-            );
-            break;
-          case 'ArrowUp':
-            e.preventDefault();
-            setSelectedUserIndex((prevIndex) =>
-              (prevIndex - 1 + filteredUsers.length) % filteredUsers.length
-            );
-            break;
-          case 'Enter':
-            e.preventDefault();
-            if (filteredUsers.length > 0) {
-              handleMentionSelect(filteredUsers[selectedUserIndex]);
-            }
-            break;
-          case 'Escape':
-            setShowMentionList(false);
-            break;
-          default:
-            break;
-        }
+  //fetch hashtags
+  useEffect(() => {
+    const fetchTags = async () => {
+      try {
+        const res = await apiClient.get('users/search/hashtag', {
+          params: {
+            userId: 1,
+          },
+        });
+        setHashTagList(res.data);
+        console.log(res.data);
+      } catch (error) {
+        console.error('failed to fetch users:', error);
       }
     };
-  
+    fetchTags();
+  }, []);
+
+  // Handle keydown events for arrow keys and Enter key
+  const handleKeyDown = (e) => {
+    if (showMentionList && filteredUsers.length > 0) {
+      switch (e.key) {
+        case 'ArrowDown':
+          e.preventDefault();
+          setSelectedUserIndex(
+            (prevIndex) => (prevIndex + 1) % filteredUsers.length
+          );
+          break;
+        case 'ArrowUp':
+          e.preventDefault();
+          setSelectedUserIndex(
+            (prevIndex) =>
+              (prevIndex - 1 + filteredUsers.length) % filteredUsers.length
+          );
+          break;
+        case 'Enter':
+          e.preventDefault();
+          handleMentionSelect(filteredUsers[selectedUserIndex]);
+          break;
+        case 'Escape':
+          e.preventDefault();
+          setShowMentionList(false);
+          break;
+        default:
+          break;
+      }
+    } else if (showTagList && filteredTags.length > 0) {
+      switch (e.key) {
+        case 'ArrowDown':
+          e.preventDefault();
+          setSelectedTagIndex(
+            (prevIndex) => (prevIndex + 1) % filteredTags.length
+          );
+          break;
+        case 'ArrowUp':
+          e.preventDefault();
+          setSelectedTagIndex(
+            (prevIndex) =>
+              (prevIndex - 1 + filteredTags.length) % filteredTags.length
+          );
+          break;
+        case 'Enter':
+          e.preventDefault();
+          handleTagSelect(filteredTags[selectedTagIndex]);
+          break;
+        case 'Escape':
+          e.preventDefault();
+          setShowTagList(false);
+          break;
+        default:
+          break;
+      }
+    }
+  };
 
   const handleFileChange = (e) => {
     const selectedFiles = Array.from(e.target.files);
@@ -107,35 +153,48 @@ const AddPost = ({ show, handleClose }) => {
   const handleTextareaChange = (e) => {
     const newContent = e.target.value;
     setPostContent(newContent);
+    // setCursorPosition(e.target.selectionStart);
   
-    const lastChar = newContent[newContent.length - 1];
+    // Detect if we're typing a mention (@) or a tag (#)
+    const currentWordMatch = newContent
+      .slice(0, e.target.selectionStart)
+      .match(/\S+$/); // Get the current word
+    const currentWord = currentWordMatch ? currentWordMatch[0] : '';
   
-    // Check if '@' is typed at the start of a new line or preceded by a whitespace
-    const lines = newContent.split('\n');
-    const currentLine = lines[lines.length - 1];
+    if (currentWord.startsWith('@')) {
+      const mentionSearch = currentWord.slice(1); // Extract search term after "@"
+      const filteredUsersList = users.filter((user) =>
+        user.username.toLowerCase().includes(mentionSearch.toLowerCase())
+      );
   
-    if (lastChar === '@' && (currentLine === '@' || currentLine.endsWith(' @'))) {
-      setShowMentionList(true);
-      setMentionSearchTerm('');
-    } else if (showMentionList) {
-      const matches = newContent.match(/(?:\s|^)@(\w*)$/); // Ensure '@' is preceded by a whitespace or is at the beginning
-  
-      if (matches) {
-        const query = matches[1];
-        setMentionSearchTerm(query);
-  
-        // If no matching user is found, close the mention list
-        const mentionFound = users.some(user => user.username.startsWith(query));
-        if (!mentionFound) {
-          setShowMentionList(false);
-        }
+      if (filteredUsersList.length > 0) {
+        setShowMentionList(true);
+        setMentionSearchTerm(mentionSearch);
       } else {
-        setShowMentionList(false);
+        setShowMentionList(false); // Hide mention list if no matches
       }
+  
+      setShowTagList(false); // Hide tag list when typing @
+    } else if (currentWord.startsWith('#')) {
+      const tagSearch = currentWord.slice(1); // Extract search term after "#"
+      const filteredTagsList = hashTagList.filter((tag) =>
+        tag.hashtag.toLowerCase().includes(tagSearch.toLowerCase())
+      );
+  
+      if (filteredTagsList.length > 0) {
+        setShowTagList(true);
+        setFilteredTags(filteredTagsList);
+      } else {
+        setShowTagList(false); // Hide tag list if no matches
+      }
+  
+      setShowMentionList(false); // Hide mention list when typing #
+    } else {
+      setShowMentionList(false);
+      setShowTagList(false);
     }
   };
-  
-  
+
   const filteredUsers = users.filter((user) =>
     user.username.toLowerCase().includes(mentionSearchTerm.toLowerCase())
   );
@@ -151,58 +210,85 @@ const AddPost = ({ show, handleClose }) => {
       `@${user.username}` +
       textAfterCursor;
     setPostContent(newContent);
-    
+
     // Store the user id in a data attribute
     textarea.dataset.lastMentionId = user.id;
-    
+
     setShowMentionList(false);
     textarea.focus();
     const newCursorPosition = lastAtSymbolIndex + user.username.length + 1;
     textarea.setSelectionRange(newCursorPosition, newCursorPosition);
   };
 
+  const handleTagSelect = (tag) => {
+    const textarea = textareaRef.current;
+    const cursorPosition = textarea.selectionStart;
+    const textBeforeCursor = postContent.slice(0, cursorPosition);
+    const textAfterCursor = postContent.slice(cursorPosition);
+    const lastHashSymbolIndex = textBeforeCursor.lastIndexOf('#');
+    const newContent =
+      textBeforeCursor.slice(0, lastHashSymbolIndex) +
+      `#${tag.hashtag} ` +
+      textAfterCursor;
+
+    setPostContent(newContent);
+    setShowTagList(false);
+
+    const newCursorPosition = lastHashSymbolIndex + tag.length + 2;
+    // setCursorPosition(newCursorPosition);
+
+    // Use setTimeout to ensure the DOM has updated
+    setTimeout(() => {
+      textareaRef.current.focus();
+      textareaRef.current.setSelectionRange(
+        newCursorPosition,
+        newCursorPosition
+      );
+    }, 0);
+  };
+
   const submit = async (e) => {
     e.preventDefault();
-  
+
     // Create form data
     const formData = new FormData();
     formData.append('description', postContent);
     formData.append('link', link);
     formData.append('userId', '1');
-  
+
     // Append files
     files.forEach((file, index) => {
       formData.append(`files`, file);
     });
-  
+
     // Extract mentions and hashtags from the post content
     const mentionRegex = /@(\w+)/g;
     const hashtagRegex = /#(\w+)/g;
-  
+
     const mentions = [];
     const mentionMatches = postContent.matchAll(mentionRegex);
     for (const match of mentionMatches) {
       const username = match[1];
-      const mentionedUser = users.find(user => user.username === username);
+      const mentionedUser = users.find((user) => user.username === username);
       if (mentionedUser) {
         mentions.push(mentionedUser.id);
       }
     }
-  
+
     const hashtags = [...postContent.matchAll(hashtagRegex)].map(
       (match) => match[1]
     );
-  
+
     formData.append('mentionIds', JSON.stringify(mentions));
     formData.append('hashTags', JSON.stringify(hashtags));
-  
+
     try {
       const response = await apiClient.post('users/feeds', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-  
+
       console.log('Post successful:', response.data);
       // Handle success
       resetForm();
@@ -249,23 +335,44 @@ const AddPost = ({ show, handleClose }) => {
           required
         ></textarea>
         {showMentionList && (
-          <div className="absolute left-1/2 top-[20%] z-10 mt-1 h-60 w-40 -translate-x-1/2 rounded-md border-2 bg-bg-secondary"
-          onKeyDown={handleKeyDown}>
+          <div
+            className="absolute left-1/2 top-[20%] z-10 mt-1 h-60 w-40 -translate-x-1/2 rounded-md border-2 bg-bg-secondary"
+            onKeyDown={handleKeyDown}
+          >
             {filteredUsers.map((user, index) => (
               <div
                 key={user.id}
-                className={`px-4 py-2 cursor-pointer ${
-                  index === selectedUserIndex ? 'bg-blue-100' : 'hover:bg-gray-100'
+                className={`cursor-pointer px-4 py-2 ${
+                  index === selectedUserIndex
+                    ? 'bg-blue-100'
+                    : 'hover:bg-gray-100'
                 }`}
                 onClick={() => handleMentionSelect(user)}
- 
               >
                 {/* <img
                   src={user.profilePhoto}
                   className="w-4"
                   alt="profile photo"
                 /> */}
-                {user.username} 
+                {user.username}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {showTagList && (
+          <div className="absolute left-1/2 top-[30%] z-10 mt-1 h-60 w-40 -translate-x-1/2 rounded-md border-2 bg-bg-secondary">
+            {filteredTags.map((tag, index) => (
+              <div
+                key={index}
+                className={`cursor-pointer px-4 py-2 ${
+                  index === selectedTagIndex
+                    ? 'bg-blue-100'
+                    : 'hover:bg-gray-100'
+                }`}
+                onClick={() => handleTagSelect(tag)}
+              >
+                #{tag.hashtag}
               </div>
             ))}
           </div>
