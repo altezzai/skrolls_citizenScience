@@ -17,6 +17,7 @@ const AddPost = ({ show, handleClose }) => {
   const [users, setUsers] = useState([]); // List of users for mentions
   const [mentionSearchTerm, setMentionSearchTerm] = useState('');
   const [showMentionList, setShowMentionList] = useState(false);
+  const [selectedUserIndex, setSelectedUserIndex] = useState(0);
   const textareaRef = useRef(null);
 
   useEffect(() => {
@@ -37,6 +38,38 @@ const AddPost = ({ show, handleClose }) => {
     };
     fetchUsers();
   }, []);
+
+    // Handle keydown events for arrow keys and Enter key
+    const handleKeyDown = (e) => {
+      if (showMentionList) {
+        switch (e.key) {
+          case 'ArrowDown':
+            e.preventDefault();
+            setSelectedUserIndex((prevIndex) =>
+              (prevIndex + 1) % filteredUsers.length
+            );
+            break;
+          case 'ArrowUp':
+            e.preventDefault();
+            setSelectedUserIndex((prevIndex) =>
+              (prevIndex - 1 + filteredUsers.length) % filteredUsers.length
+            );
+            break;
+          case 'Enter':
+            e.preventDefault();
+            if (filteredUsers.length > 0) {
+              handleMentionSelect(filteredUsers[selectedUserIndex]);
+            }
+            break;
+          case 'Escape':
+            setShowMentionList(false);
+            break;
+          default:
+            break;
+        }
+      }
+    };
+  
 
   const handleFileChange = (e) => {
     const selectedFiles = Array.from(e.target.files);
@@ -115,50 +148,61 @@ const AddPost = ({ show, handleClose }) => {
     const lastAtSymbolIndex = textBeforeCursor.lastIndexOf('@');
     const newContent =
       textBeforeCursor.slice(0, lastAtSymbolIndex) +
-      `@${user.username} ` +
+      `@${user.username}` +
       textAfterCursor;
     setPostContent(newContent);
+    
+    // Store the user id in a data attribute
+    textarea.dataset.lastMentionId = user.id;
+    
     setShowMentionList(false);
     textarea.focus();
-    const newCursorPosition = lastAtSymbolIndex + user.username.length + 2;
+    const newCursorPosition = lastAtSymbolIndex + user.username.length + 1;
     textarea.setSelectionRange(newCursorPosition, newCursorPosition);
   };
 
   const submit = async (e) => {
     e.preventDefault();
-
+  
     // Create form data
     const formData = new FormData();
     formData.append('description', postContent);
-    formData.append('link', e.target.link.value);
+    formData.append('link', link);
     formData.append('userId', '1');
-
+  
     // Append files
     files.forEach((file, index) => {
       formData.append(`files`, file);
     });
-
+  
     // Extract mentions and hashtags from the post content
     const mentionRegex = /@(\w+)/g;
     const hashtagRegex = /#(\w+)/g;
-
-    const mentions = [...postContent.matchAll(mentionRegex)].map(
-      (match) => match[1]
-    );
+  
+    const mentions = [];
+    const mentionMatches = postContent.matchAll(mentionRegex);
+    for (const match of mentionMatches) {
+      const username = match[1];
+      const mentionedUser = users.find(user => user.username === username);
+      if (mentionedUser) {
+        mentions.push(mentionedUser.id);
+      }
+    }
+  
     const hashtags = [...postContent.matchAll(hashtagRegex)].map(
       (match) => match[1]
     );
-
+  
     formData.append('mentionIds', JSON.stringify(mentions));
     formData.append('hashTags', JSON.stringify(hashtags));
-
+  
     try {
       const response = await apiClient.post('users/feeds', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-
+  
       console.log('Post successful:', response.data);
       // Handle success
       resetForm();
@@ -201,15 +245,20 @@ const AddPost = ({ show, handleClose }) => {
           value={postContent}
           onChange={handleTextareaChange}
           ref={textareaRef}
+          onKeyDown={handleKeyDown}
           required
         ></textarea>
         {showMentionList && (
-          <div className="absolute left-1/2 top-[20%] z-10 mt-1 h-60 w-40 -translate-x-1/2 rounded-md border-2 bg-bg-secondary">
-            {filteredUsers.map((user) => (
+          <div className="absolute left-1/2 top-[20%] z-10 mt-1 h-60 w-40 -translate-x-1/2 rounded-md border-2 bg-bg-secondary"
+          onKeyDown={handleKeyDown}>
+            {filteredUsers.map((user, index) => (
               <div
                 key={user.id}
-                className="flex cursor-pointer px-4 py-2 text-sm hover:bg-gray-100"
+                className={`px-4 py-2 cursor-pointer ${
+                  index === selectedUserIndex ? 'bg-blue-100' : 'hover:bg-gray-100'
+                }`}
                 onClick={() => handleMentionSelect(user)}
+ 
               >
                 {/* <img
                   src={user.profilePhoto}
