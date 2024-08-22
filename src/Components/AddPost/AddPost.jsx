@@ -5,7 +5,7 @@ import uploadfile from '../../assets/upload_doc.svg';
 import url_icon from '../../assets/link_grey.svg';
 
 import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { apiClient } from '@/lib/api_client';
 
 const AddPost = ({ show, handleClose }) => {
@@ -14,6 +14,29 @@ const AddPost = ({ show, handleClose }) => {
   const isFileUploaded = filePreviews.length > 0;
   const [postContent, setPostContent] = useState('');
   const [link, setLink] = useState('');
+  const [users, setUsers] = useState([]); // List of users for mentions
+  const [mentionSearchTerm, setMentionSearchTerm] = useState('');
+  const [showMentionList, setShowMentionList] = useState(false);
+  const textareaRef = useRef(null);
+
+  useEffect(() => {
+    // Fetch users for mentions
+    const fetchUsers = async () => {
+      try {
+        const response = await apiClient.get('users/search/user', {
+          params: {
+            userId: 1,
+            search: mentionSearchTerm,
+          },
+        });
+        setUsers(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error('Failed to fetch users:', error);
+      }
+    };
+    fetchUsers();
+  }, []);
 
   const handleFileChange = (e) => {
     const selectedFiles = Array.from(e.target.files);
@@ -48,37 +71,94 @@ const AddPost = ({ show, handleClose }) => {
     handleClose();
   };
 
+  const handleTextareaChange = (e) => {
+    const newContent = e.target.value;
+    setPostContent(newContent);
+  
+    const lastChar = newContent[newContent.length - 1];
+  
+    // Check if '@' is typed at the start of a new line or preceded by a whitespace
+    const lines = newContent.split('\n');
+    const currentLine = lines[lines.length - 1];
+  
+    if (lastChar === '@' && (currentLine === '@' || currentLine.endsWith(' @'))) {
+      setShowMentionList(true);
+      setMentionSearchTerm('');
+    } else if (showMentionList) {
+      const matches = newContent.match(/(?:\s|^)@(\w*)$/); // Ensure '@' is preceded by a whitespace or is at the beginning
+  
+      if (matches) {
+        const query = matches[1];
+        setMentionSearchTerm(query);
+  
+        // If no matching user is found, close the mention list
+        const mentionFound = users.some(user => user.username.startsWith(query));
+        if (!mentionFound) {
+          setShowMentionList(false);
+        }
+      } else {
+        setShowMentionList(false);
+      }
+    }
+  };
+  
+  
+  const filteredUsers = users.filter((user) =>
+    user.username.toLowerCase().includes(mentionSearchTerm.toLowerCase())
+  );
+
+  const handleMentionSelect = (user) => {
+    const textarea = textareaRef.current;
+    const cursorPosition = textarea.selectionStart;
+    const textBeforeCursor = postContent.slice(0, cursorPosition);
+    const textAfterCursor = postContent.slice(cursorPosition);
+    const lastAtSymbolIndex = textBeforeCursor.lastIndexOf('@');
+    const newContent =
+      textBeforeCursor.slice(0, lastAtSymbolIndex) +
+      `@${user.username} ` +
+      textAfterCursor;
+    setPostContent(newContent);
+    setShowMentionList(false);
+    textarea.focus();
+    const newCursorPosition = lastAtSymbolIndex + user.username.length + 2;
+    textarea.setSelectionRange(newCursorPosition, newCursorPosition);
+  };
+
   const submit = async (e) => {
     e.preventDefault();
-  
+
     // Create form data
     const formData = new FormData();
     formData.append('description', postContent);
     formData.append('link', e.target.link.value);
     formData.append('userId', '1');
-  
+
     // Append files
     files.forEach((file, index) => {
       formData.append(`files`, file);
     });
-  
+
     // Extract mentions and hashtags from the post content
     const mentionRegex = /@(\w+)/g;
     const hashtagRegex = /#(\w+)/g;
-    
-    const mentions = [...postContent.matchAll(mentionRegex)].map(match => match[1]);
-    const hashtags = [...postContent.matchAll(hashtagRegex)].map(match => match[1]);
-  
+
+    const mentions = [...postContent.matchAll(mentionRegex)].map(
+      (match) => match[1]
+    );
+    const hashtags = [...postContent.matchAll(hashtagRegex)].map(
+      (match) => match[1]
+    );
+
     formData.append('mentionIds', JSON.stringify(mentions));
     formData.append('hashTags', JSON.stringify(hashtags));
-  
+
     try {
       const response = await apiClient.post('users/feeds', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-  
+
       console.log('Post successful:', response.data);
       // Handle success
       resetForm();
@@ -119,9 +199,28 @@ const AddPost = ({ show, handleClose }) => {
           className="w-full resize-none rounded-2xl bg-textarea p-4 text-sm outline-none transition-all duration-300 ease-in-out placeholder:select-none placeholder:text-text-muted"
           style={{ height: isFileUploaded ? '100px' : '170px' }}
           value={postContent}
-          onChange={(e) => setPostContent(e.target.value)}
+          onChange={handleTextareaChange}
+          ref={textareaRef}
           required
         ></textarea>
+        {showMentionList && (
+          <div className="absolute left-1/2 top-[20%] z-10 mt-1 h-60 w-40 -translate-x-1/2 rounded-md border-2 bg-bg-secondary">
+            {filteredUsers.map((user) => (
+              <div
+                key={user.id}
+                className="flex cursor-pointer px-4 py-2 text-sm hover:bg-gray-100"
+                onClick={() => handleMentionSelect(user)}
+              >
+                {/* <img
+                  src={user.profilePhoto}
+                  className="w-4"
+                  alt="profile photo"
+                /> */}
+                {user.username} 
+              </div>
+            ))}
+          </div>
+        )}
 
         <div className="flex w-full items-center gap-2 rounded-2xl bg-textarea p-4">
           <img
