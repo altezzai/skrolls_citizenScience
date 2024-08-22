@@ -10,32 +10,37 @@ import { apiClient } from '@/lib/api_client';
 
 const AddPost = ({ show, handleClose }) => {
   const [filePreviews, setFilePreviews] = useState([]);
+  const [files, setFiles] = useState([]); // store actual file objects
   const isFileUploaded = filePreviews.length > 0;
   const [postContent, setPostContent] = useState('');
+  const [link, setLink] = useState('');
 
   const handleFileChange = (e) => {
-    const files = Array.from(e.target.files);
-    const newFilePreviews = files.map((file) => {
-      if (file.type.startsWith('image/')) {
-        return URL.createObjectURL(file);
-      } else if (file.type.startsWith('video/')) {
+    const selectedFiles = Array.from(e.target.files);
+    const newFilePreviews = selectedFiles.map((file) => {
+      if (file.type.startsWith('image/') || file.type.startsWith('video/')) {
         return URL.createObjectURL(file);
       } else {
         return file.name;
       }
     });
+
     setFilePreviews((prevPreviews) => [...prevPreviews, ...newFilePreviews]);
+    setFiles((prevFiles) => [...prevFiles, ...selectedFiles]); // add files
   };
 
   const removeFilePreview = (index) => {
     setFilePreviews((prevPreviews) =>
       prevPreviews.filter((_, i) => i !== index)
     );
+    setFiles((prevFiles) => prevFiles.filter((_, i) => i !== index)); // remove corresponding file
   };
 
   const resetForm = () => {
     setFilePreviews([]);
+    setFiles([]); // reset file array
     setPostContent('');
+    setLink('');
   };
 
   const handleModalClose = () => {
@@ -43,6 +48,46 @@ const AddPost = ({ show, handleClose }) => {
     handleClose();
   };
 
+  const submit = async (e) => {
+    e.preventDefault();
+  
+    // Create form data
+    const formData = new FormData();
+    formData.append('description', postContent);
+    formData.append('link', e.target.link.value);
+    formData.append('userId', '1');
+  
+    // Append files
+    files.forEach((file, index) => {
+      formData.append(`files`, file);
+    });
+  
+    // Extract mentions and hashtags from the post content
+    const mentionRegex = /@(\w+)/g;
+    const hashtagRegex = /#(\w+)/g;
+    
+    const mentions = [...postContent.matchAll(mentionRegex)].map(match => match[1]);
+    const hashtags = [...postContent.matchAll(hashtagRegex)].map(match => match[1]);
+  
+    formData.append('mentionIds', JSON.stringify(mentions));
+    formData.append('hashTags', JSON.stringify(hashtags));
+  
+    try {
+      const response = await apiClient.post('users/feeds', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+  
+      console.log('Post successful:', response.data);
+      // Handle success
+      resetForm();
+      handleClose();
+    } catch (error) {
+      console.error('Post failed:', error.message);
+      alert('There was an error posting your content.');
+    }
+  };
 
   return (
     <div
@@ -50,6 +95,7 @@ const AddPost = ({ show, handleClose }) => {
       onClick={handleModalClose}
     >
       <form
+        onSubmit={submit}
         className="relative left-1/2 top-[15%] w-1/2 -translate-x-1/2 rounded-2xl border-2 border-solid border-border-primary bg-bg-secondary p-5"
         onClick={(e) => {
           e.stopPropagation();
@@ -67,8 +113,8 @@ const AddPost = ({ show, handleClose }) => {
         </div>
 
         <textarea
-          name=""
-          id=""
+          name="description"
+          id="description"
           placeholder="What is new, Rafsal?"
           className="w-full resize-none rounded-2xl bg-textarea p-4 text-sm outline-none transition-all duration-300 ease-in-out placeholder:select-none placeholder:text-text-muted"
           style={{ height: isFileUploaded ? '100px' : '170px' }}
@@ -86,8 +132,12 @@ const AddPost = ({ show, handleClose }) => {
           />
           <input
             type="url"
+            id="link"
+            name="link"
             placeholder="url (optional)"
             className="w-full bg-inherit text-sm outline-none placeholder:select-none placeholder:text-text-muted"
+            value={link}
+            onChange={(e) => setLink(e.target.value)}
           />
         </div>
 
@@ -154,18 +204,13 @@ const AddPost = ({ show, handleClose }) => {
                 id="uploadfile"
                 multiple
                 style={{ display: 'none' }}
-                onChange={(e) => {
-                  const files = Array.from(e.target.files);
-                  files.forEach((file) => {
-                    handleFileChange(e);
-                  });
-                }}
+                onChange={handleFileChange}
               />
             </label>
           </div>
         )}
 
-        <PostButton text={'Post it!'}/>
+        <PostButton text={'Post it!'} />
       </form>
     </div>
   );
