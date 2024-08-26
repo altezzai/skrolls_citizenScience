@@ -10,7 +10,7 @@ const PostButton = ({
   textsize = '15px',
 }) => {
   return (
-    <div
+    <button type='submit'
       className="flex items-center justify-center w-full h-full gap-2 rounded-xl bg-primary text-bg-secondary text-lg font-semibold cursor-pointer hover:bg-red-500 select-none px-3 active:bg-red-900"
       style={{ height: height, borderRadius: radius }}
     >
@@ -31,7 +31,7 @@ const PostButton = ({
       ) : (
         <span>{text}</span>
       )}
-    </div>
+    </button>
   );
 };
 

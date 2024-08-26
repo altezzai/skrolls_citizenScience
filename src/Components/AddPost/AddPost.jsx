@@ -52,7 +52,6 @@ const AddPost = ({ show, handleClose }) => {
           },
         });
         setHashTagList(res.data);
-        console.log(res.data);
       } catch (error) {
         console.error('failed to fetch users:', error);
       }
@@ -154,40 +153,40 @@ const AddPost = ({ show, handleClose }) => {
     const newContent = e.target.value;
     setPostContent(newContent);
     // setCursorPosition(e.target.selectionStart);
-  
+
     // Detect if we're typing a mention (@) or a tag (#)
     const currentWordMatch = newContent
       .slice(0, e.target.selectionStart)
       .match(/\S+$/); // Get the current word
     const currentWord = currentWordMatch ? currentWordMatch[0] : '';
-  
+
     if (currentWord.startsWith('@')) {
       const mentionSearch = currentWord.slice(1); // Extract search term after "@"
       const filteredUsersList = users.filter((user) =>
         user.username.toLowerCase().includes(mentionSearch.toLowerCase())
       );
-  
+
       if (filteredUsersList.length > 0) {
         setShowMentionList(true);
         setMentionSearchTerm(mentionSearch);
       } else {
         setShowMentionList(false); // Hide mention list if no matches
       }
-  
+
       setShowTagList(false); // Hide tag list when typing @
     } else if (currentWord.startsWith('#')) {
       const tagSearch = currentWord.slice(1); // Extract search term after "#"
       const filteredTagsList = hashTagList.filter((tag) =>
         tag.hashtag.toLowerCase().includes(tagSearch.toLowerCase())
       );
-  
+
       if (filteredTagsList.length > 0) {
         setShowTagList(true);
         setFilteredTags(filteredTagsList);
       } else {
         setShowTagList(false); // Hide tag list if no matches
       }
-  
+
       setShowMentionList(false); // Hide mention list when typing #
     } else {
       setShowMentionList(false);
@@ -234,7 +233,7 @@ const AddPost = ({ show, handleClose }) => {
     setPostContent(newContent);
     setShowTagList(false);
 
-    const newCursorPosition = lastHashSymbolIndex + tag.length + 2;
+    const newCursorPosition = lastHashSymbolIndex + tag.hashtag.length + 2;
     // setCursorPosition(newCursorPosition);
 
     // Use setTimeout to ensure the DOM has updated
@@ -383,7 +382,7 @@ const AddPost = ({ show, handleClose }) => {
             src={url_icon}
             alt="url link"
             draggable="false"
-            className="w-4"
+            className="w-4 select-none"
           />
           <input
             type="url"
@@ -399,7 +398,7 @@ const AddPost = ({ show, handleClose }) => {
         <div className={`py-3 ${isFileUploaded ? 'hidden' : 'flex'}`}>
           <label
             htmlFor="documentfile"
-            className="flex cursor-pointer items-center gap-2 rounded-full border-[1px] border-border-muted bg-bg-primary px-4 py-2 text-sm font-semibold text-text-secondary"
+            className="flex cursor-pointer select-none items-center gap-2 rounded-full border-[1px] border-border-muted bg-bg-primary px-4 py-2 text-sm font-semibold text-text-secondary"
           >
             <img src={doc} alt="document" className="w-4" draggable="false" />
             <span>File</span>
@@ -408,6 +407,7 @@ const AddPost = ({ show, handleClose }) => {
             type="file"
             className="hidden"
             id="documentfile"
+            accept="image/*,video/*"
             multiple
             onChange={handleFileChange}
           />
@@ -429,6 +429,7 @@ const AddPost = ({ show, handleClose }) => {
                       src={preview}
                       alt={`Preview ${index}`}
                       className="h-36 w-36 rounded-lg object-cover"
+                      draggable="false"
                     />
                   )
                 ) : (
@@ -457,6 +458,7 @@ const AddPost = ({ show, handleClose }) => {
               <input
                 type="file"
                 id="uploadfile"
+                accept="image/*,video/*"
                 multiple
                 style={{ display: 'none' }}
                 onChange={handleFileChange}

@@ -17,11 +17,11 @@ const NewPost = () => {
   };
 
   return (
-    <div className="my-4 flex w-full items-center gap-5 rounded-2xl bg-bg-secondary px-4 py-3">
-      <ProfilePhoto img={photo} size={'3rem'} />
+    <div className="my-3 flex w-full items-center gap-5 rounded-2xl bg-bg-secondary p-2">
+      <ProfilePhoto img={photo} size={'2.5rem'} />
 
       <div
-        className="flex w-full cursor-pointer items-center justify-between text-xl text-text-muted"
+        className="flex w-full cursor-pointer items-center justify-between text-base text-text-muted"
         onClick={handlePostClick}
       >
         What is new. Rafsal?
