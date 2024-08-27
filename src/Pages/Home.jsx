@@ -33,7 +33,7 @@ const Home = () => {
 
       {loading && (
         <>
-          <div className="flex flex-col space-y-3 border-2 p-2 mb-3">
+          <div className="mb-3 flex flex-col space-y-3 border-2 p-2">
             <div className="flex items-center gap-5">
               <Skeleton className="h-8 w-8 rounded-full bg-text-hard" />
               <Skeleton className="h-4 w-40 bg-text-hard" />
@@ -67,7 +67,9 @@ const Home = () => {
       )}
 
       {feeds.map((feed) => (
-        <Post key={feed.id} feed={feed} />
+        <div key={feed.id}>
+          <Post feed={feed} />
+        </div>
       ))}
     </div>
   );

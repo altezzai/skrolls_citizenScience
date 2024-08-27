@@ -11,14 +11,19 @@ import internet from '../../assets/internet.svg';
 import translate from '../../assets/translate.svg';
 
 import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Heart } from '../ui/Heart';
 
 import { formatDate } from '@/utils/formatDate';
 
 const Post = ({ key, feed }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const inPostPage = location.pathname.includes('/post');
+
+  const handleCommentClick = (postId) => {
+    navigate(`/post/${postId}`);
+  };
 
   return (
     <>
@@ -33,7 +38,7 @@ const Post = ({ key, feed }) => {
       )}
 
       <div
-        key={key}
+        key={feed.id}
         className={cn(
           'post flex w-full gap-3 rounded-2xl bg-bg-secondary px-5 py-6',
           {
@@ -117,9 +122,9 @@ const Post = ({ key, feed }) => {
                 id={feed.id}
               />
 
-              <Link
-                to="/post"
+              <div
                 className="flex cursor-pointer items-center justify-center gap-1"
+                onClick={() => handleCommentClick(feed.id)}
               >
                 <div className="rounded-full p-1 hover:bg-red-50">
                   <img
@@ -130,7 +135,7 @@ const Post = ({ key, feed }) => {
                   />
                 </div>
                 56
-              </Link>
+              </div>
             </div>
             <div className="flex gap-6">
               <div className="flex cursor-pointer items-center gap-2">

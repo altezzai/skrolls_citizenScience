@@ -41,7 +41,7 @@ function App() {
               }
             />
             <Route
-              path="/post"
+              path="/post/:postId"
               element={
                 <div className="center-container mx-12 max-xl:mx-3">
                   <PostPage />
