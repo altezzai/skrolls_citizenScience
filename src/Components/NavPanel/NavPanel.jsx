@@ -21,14 +21,14 @@ import AddPost from '../AddPost/AddPost';
 export const NavPanel = () => {
   const location = useLocation();
   const inMessagePage = location.pathname.includes('/messages');
-  const [showAddPost, setShowAddPost] = useState(false);
+  const [addPost, setAddPost] = useState(false);
 
-  const handlePostClick = () => {
-    setShowAddPost(true);
+  const handleAddPost = () => {
+    setAddPost(true);
   };
 
-  const handleCloseClick = () => {
-    setShowAddPost(false);
+  const ClosePost = () => {
+    setAddPost(false);
   };
 
   return (
@@ -49,7 +49,7 @@ export const NavPanel = () => {
 
       <div>
         <div className="flex w-full cursor-pointer select-none justify-center gap-2 rounded-2xl bg-primary py-3 text-sm text-bg-secondary transition-all duration-100 ease-in-out hover:bg-red-500 active:bg-red-800 mb-3"
-        onClick={handlePostClick}>
+        onClick={handleAddPost}>
           <img
             src={plus_icon}
             alt="add post"
@@ -58,7 +58,7 @@ export const NavPanel = () => {
           />
           {!inMessagePage && 'Create Post'}
         </div>
-        <AddPost show={showAddPost} handleClose={handleCloseClick}></AddPost>
+        <AddPost show={addPost} handleClose={ClosePost}></AddPost>
 
         <div className="rounded-2xl bg-bg-secondary">
           <NavPanelItem

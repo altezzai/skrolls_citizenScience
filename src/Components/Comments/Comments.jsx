@@ -6,8 +6,9 @@ import more from '../../assets/vertical_dots.svg';
 import reply_icon from '../../assets/reply.svg';
 import send from '../../assets/send_white.svg';
 import { Heart } from '../ui/Heart';
+import { timeAgo } from '@/utils/timeAgo';
 
-export const Comments = () => {
+export const Comments = ({ comments }) => {
   const [reply, setReply] = useState(false);
   const inputRef = useRef(null);
 
@@ -19,6 +20,7 @@ export const Comments = () => {
       }
     }, 0);
   };
+  console.log('this is the comment table', comments);
 
   return (
     <>
@@ -34,7 +36,7 @@ export const Comments = () => {
             <div className="flex gap-6">
               <div className="text-lg font-medium">rafsal</div>
               <div className="select-none text-base font-normal text-text-muted">
-                5h ago
+                {timeAgo(comments.createdAt)}
               </div>
             </div>
             <img
@@ -45,9 +47,7 @@ export const Comments = () => {
             />
           </div>
 
-          <div className="py-4 text-base font-normal">
-            Okay thats all information I need to know
-          </div>
+          <div className="py-4 text-base font-normal">{comments.comment}</div>
 
           <div className="flex select-none items-center justify-between text-sm text-text-secondary">
             <div className="flex items-center gap-8">
@@ -55,6 +55,7 @@ export const Comments = () => {
                 className={'h-5 w-5'}
                 textclr={'text-text-secondary'}
                 disableClick={true}
+                likes={comments.likeCount}
               />
               <img
                 src={reply_icon}
@@ -79,7 +80,7 @@ export const Comments = () => {
       </div>
 
       {reply && (
-        <div className="mb-2 flex w-full flex-col rounded-b-xl bg-textarea pl-10 transition-all duration-200 ease-in-out delay-100">
+        <div className="mb-2 flex w-full flex-col rounded-b-xl bg-textarea pl-10 transition-all delay-100 duration-200 ease-in-out">
           <div className="flex w-full gap-2 border-l-2 bg-textarea px-5 py-3">
             <ProfilePhoto img={photo} size={'2rem'} />
 

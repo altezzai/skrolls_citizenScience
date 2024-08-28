@@ -90,16 +90,19 @@ const Post = ({ key, feed }) => {
           </div>
 
           {feed.fileName && feed.fileName.length > 0 && (
-            <div className="mb-3 flex w-full justify-center rounded-2xl">
+            <div className="mb-3 flex w-full select-none justify-center rounded-2xl">
               <Carousel className="w-11/12 rounded-2xl">
-                <CarouselContent>
+                <CarouselContent className="w-full">
                   {feed.fileName &&
                     feed.fileName.map((imageUrl, index) => (
-                      <CarouselItem key={index}>
+                      <CarouselItem
+                        key={index}
+                        className="flex max-h-[400px] w-full justify-center"
+                      >
                         <img
                           src={`http://localhost:3000/uploads/${imageUrl}`}
                           alt={`post image ${index + 1}`}
-                          className="max-h-[500px] rounded-2xl"
+                          className="max-h-[400px] rounded-2xl object-cover"
                           draggable="false"
                         />
                       </CarouselItem>

@@ -38,11 +38,11 @@ const Home = () => {
               <Skeleton className="h-8 w-8 rounded-full bg-text-secondary" />
               <Skeleton className="h-4 w-40 bg-text-secondary" />
             </div>
-            <div className="flex flex-col items-center gap-3">
-              <Skeleton className="h-4 w-full bg-text-secondary" />
-              <Skeleton className="h-4 w-full bg-text-secondary" />
-              <Skeleton className="h-4 w-full bg-text-secondary" />
-              <Skeleton className="h-4 w-full bg-text-secondary" />
+            <div className="flex flex-col gap-3">
+              <Skeleton className="h-4 w-full bg-text-secondary " />
+              <Skeleton className="h-4 w-full bg-text-secondary " />
+              <Skeleton className="h-4 w-1/2 bg-text-secondary" />
+              <Skeleton className="h-4 w-1/4 bg-text-secondary" />
             </div>
             <div>
               <Skeleton className="h-80 w-full bg-text-secondary" />
