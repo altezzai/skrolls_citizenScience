@@ -29,11 +29,12 @@ export const PostPage = () => {
     };
     fetchpost();
   }, []);
+
   return (
     <div className="mt-5">
       
       <Post feed={post}/>
-      <AddMyComment />
+      <AddMyComment feedId={post.id}/>
       <Comments />
       <Comments />
       <Comments />

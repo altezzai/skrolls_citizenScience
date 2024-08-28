@@ -23,7 +23,7 @@ export const Comments = () => {
   return (
     <>
       <div
-        className={`flex gap-2 rounded-xl bg-bg-secondary px-5 py-3 ${
+        className={`flex gap-2 rounded-xl bg-bg-secondary px-5 py-3 transition-all duration-500 ease-in-out ${
           reply ? 'mb-0 rounded-b-none' : 'mb-2'
         }`}
       >
@@ -79,7 +79,7 @@ export const Comments = () => {
       </div>
 
       {reply && (
-        <div className="mb-2 flex w-full flex-col rounded-b-xl bg-textarea pl-10">
+        <div className="mb-2 flex w-full flex-col rounded-b-xl bg-textarea pl-10 transition-all duration-200 ease-in-out delay-100">
           <div className="flex w-full gap-2 border-l-2 bg-textarea px-5 py-3">
             <ProfilePhoto img={photo} size={'2rem'} />
 

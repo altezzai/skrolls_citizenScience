@@ -6,8 +6,14 @@ import { useModal } from '../../context/ModalContext';
 import { modals } from '../../utils/constants';
 import { LikedList } from '../Post/LikedList';
 
-export const Heart = ({ className, textclr, id, disableClick = false }) => {
-  const [likeCount, setLikeCount] = useState(200);
+export const Heart = ({
+  className,
+  textclr,
+  id,
+  likes,
+  disableClick = false,
+}) => {
+  const [likeCount, setLikeCount] = useState(likes);
   const [liked, setLiked] = useState(false);
   const { openModal, isModalOpen } = useModal();
   const MODAL_NAME = modals.LIKED_LIST + id;
