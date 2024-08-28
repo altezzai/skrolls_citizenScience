@@ -15,6 +15,13 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Heart } from '../ui/Heart';
 
 import { formatDate } from '@/utils/formatDate';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/Components/ui/carousel';
 
 const Post = ({ key, feed }) => {
   const location = useLocation();
@@ -81,45 +88,41 @@ const Post = ({ key, feed }) => {
               See Translation
             </div>
           </div>
-          <div className="mb-3 w-full rounded-2xl">
-            <div className="grid grid-cols-2 gap-1">
-              {/* <img
-                  src={image}
-                  alt="post"
-                  className="max-h-[600px] rounded-2xl"
-                  draggable="false"
-                />
-                <img
-                  src={image}
-                  alt="post"
-                  className="max-h-[600px] rounded-2xl"
-                  draggable="false"
-                />
-                <img
-                  src={image}
-                  alt="post"
-                  className="max-h-[600px] rounded-2xl"
-                  draggable="false"
-                /> */}
 
-              {feed.fileName &&
-                feed.fileName.map((imageUrl, index) => (
-                  <img
-                    key={index}
-                    src={imageUrl}
-                    alt={`post image ${index + 1}`}
-                    className="max-h-[600px] rounded-2xl"
-                    draggable="false"
-                  />
-                ))}
+          {feed.fileName && feed.fileName.length > 0 && (
+            <div className="mb-3 flex w-full justify-center rounded-2xl">
+              <Carousel className="w-11/12 rounded-2xl">
+                <CarouselContent>
+                  {feed.fileName &&
+                    feed.fileName.map((imageUrl, index) => (
+                      <CarouselItem key={index}>
+                        <img
+                          src={`http://localhost:3000/uploads/${imageUrl}`}
+                          alt={`post image ${index + 1}`}
+                          className="max-h-[500px] rounded-2xl"
+                          draggable="false"
+                        />
+                      </CarouselItem>
+                    ))}
+                </CarouselContent>
+
+                {feed.fileName.length > 1 && (
+                  <>
+                    <CarouselPrevious className="ml-16" />
+                    <CarouselNext className="mr-16" />
+                  </>
+                )}
+              </Carousel>
             </div>
-          </div>
+          )}
+
           <div className="flex w-11/12 justify-between">
             <div className="flex gap-6">
               <Heart
                 className={'h-8 w-8 p-1 hover:bg-red-50'}
                 textclr={'text-black'}
                 id={feed.id}
+                likes={feed.likeCount}
               />
 
               <div
@@ -134,28 +137,30 @@ const Post = ({ key, feed }) => {
                     draggable="false"
                   />
                 </div>
-                56
+                {feed.commentCount}
               </div>
             </div>
-            <div className="flex gap-6">
+            <div className="flex items-center gap-6">
               <div className="flex cursor-pointer items-center gap-2">
-                <img
-                  src={view}
-                  alt="view icon"
-                  className="w-6"
-                  draggable="false"
-                />
-                270
+                <div className="rounded-full p-1 hover:bg-red-50">
+                  <img
+                    src={view}
+                    alt="view icon"
+                    className="w-6"
+                    draggable="false"
+                  />
+                </div>
+                {feed.viewsCount}
               </div>
-              <div className="flex cursor-pointer items-center gap-2">
+              <div className="flex h-8 w-8 cursor-pointer items-center rounded-full p-1 hover:bg-red-50">
                 <img
                   src={send}
                   alt="send message"
-                  className="w-6"
+                  className="w-7"
                   draggable="false"
                 />
               </div>
-              <div className="flex cursor-pointer items-center gap-2">
+              <div className="flex cursor-pointer items-center rounded-full p-1 hover:bg-red-50">
                 <img
                   src={save}
                   className="w-8"

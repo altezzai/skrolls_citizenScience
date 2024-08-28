@@ -2,19 +2,60 @@ import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';
 
 import photo from '../../assets/profile.png';
 import send from '../../assets/send_white.svg';
+import PostButton from '../PostButton/PostButton';
+import { apiClient } from '@/lib/api_client';
+import { useState } from 'react';
 
-export const AddMyComment = () => {
+export const AddMyComment = ({ feedId, onCommentAdded }) => {
+  const [comment, setComment] = useState('');
+
+  const submit = async (e) => {
+    e.preventDefault();
+
+    const commentData = new FormData();
+    commentData.append('comment', comment);
+    commentData.append('userId', 1);
+    // commentData.append('mentionIds', JSON.stringify([]));
+    // commentData.append('parentId', null);
+
+    try {
+      const res = await apiClient.post(
+        `users/feeds/${feedId}/comments`,
+        commentData
+      );
+      console.log('Comment added successfully:', res.data);
+      setComment('');
+      if (onCommentAdded) {
+        onCommentAdded(res.data);
+      }
+    } catch (error) {
+      console.log('Error adding comment:', error);
+    }
+  };
+
   return (
-    <div className="mb-2 flex h-14 w-full items-center gap-3 rounded-xl bg-bg-secondary px-4 py-4">
-      <ProfilePhoto img={photo} size={'2rem'} />
-      <input
-        type="text"
-        placeholder="Enter your Comment"
-        className="w-full outline-none"
-      />
-      <div className=" flex items-center py-2 px-5 rounded-md bg-primary select-none hover:bg-red-500 cursor-pointer transition-all duration-100">
-        <img src={send} className="w-6" alt="send button" draggable="false" />
+    <form
+      onSubmit={submit}
+      onClick={(e) => e.stopPropagation()}
+      className="mb-2 flex h-14 w-full items-center justify-between rounded-xl bg-bg-secondary px-4 py-4"
+    >
+      <div className="flex w-full gap-3">
+        <ProfilePhoto img={photo} size={'2rem'} />
+        <input
+          type="text"
+          placeholder="Enter your Comment"
+          className="w-full outline-none"
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+        />
       </div>
-    </div>
+      <button
+        type="submit"
+        className="flex cursor-pointer select-none items-center rounded-md bg-primary px-5 py-2 transition-all duration-100 hover:bg-red-500 active:bg-red-800"
+      >
+        <img src={send} className="w-6" alt="send button" draggable="false" />
+      </button>
+      {/* <PostButton image={send}/> */}
+    </form>
   );
 };

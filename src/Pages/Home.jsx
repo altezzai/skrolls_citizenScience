@@ -35,32 +35,32 @@ const Home = () => {
         <>
           <div className="mb-3 flex flex-col space-y-3 border-2 p-2">
             <div className="flex items-center gap-5">
-              <Skeleton className="h-8 w-8 rounded-full bg-text-hard" />
-              <Skeleton className="h-4 w-40 bg-text-hard" />
+              <Skeleton className="h-8 w-8 rounded-full bg-text-secondary" />
+              <Skeleton className="h-4 w-40 bg-text-secondary" />
             </div>
             <div className="flex flex-col items-center gap-3">
-              <Skeleton className="h-4 w-full bg-text-hard" />
-              <Skeleton className="h-4 w-full bg-text-hard" />
-              <Skeleton className="h-4 w-full bg-text-hard" />
-              <Skeleton className="h-4 w-full bg-text-hard" />
+              <Skeleton className="h-4 w-full bg-text-secondary" />
+              <Skeleton className="h-4 w-full bg-text-secondary" />
+              <Skeleton className="h-4 w-full bg-text-secondary" />
+              <Skeleton className="h-4 w-full bg-text-secondary" />
             </div>
             <div>
-              <Skeleton className="h-80 w-full bg-text-hard" />
+              <Skeleton className="h-80 w-full bg-text-secondary" />
             </div>
           </div>
           <div className="flex flex-col space-y-3 border-2 p-2">
             <div className="flex items-center gap-5">
-              <Skeleton className="h-8 w-8 rounded-full bg-text-hard" />
-              <Skeleton className="h-4 w-40 bg-text-hard" />
+              <Skeleton className="h-8 w-8 rounded-full bg-text-secondary" />
+              <Skeleton className="h-4 w-40 bg-text-secondary" />
             </div>
             <div className="flex flex-col items-center gap-3">
-              <Skeleton className="h-4 w-full bg-text-hard" />
-              <Skeleton className="h-4 w-full bg-text-hard" />
-              <Skeleton className="h-4 w-full bg-text-hard" />
-              <Skeleton className="h-4 w-full bg-text-hard" />
+              <Skeleton className="h-4 w-full bg-text-secondary" />
+              <Skeleton className="h-4 w-full bg-text-secondary" />
+              <Skeleton className="h-4 w-full bg-text-secondary" />
+              <Skeleton className="h-4 w-full bg-text-secondary" />
             </div>
             <div>
-              <Skeleton className="h-80 w-full bg-text-hard" />
+              <Skeleton className="h-80 w-full bg-text-secondary" />
             </div>
           </div>
         </>
