@@ -40,7 +40,6 @@ const MessageBox = () => {
   };
 
   const onEmojiClick = (emojiObject) => {
-    console.log(emojiObject);
     setInputStr((prevInput) => prevInput + emojiObject.emoji);
   };
 

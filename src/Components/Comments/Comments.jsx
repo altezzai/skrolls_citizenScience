@@ -1,12 +1,12 @@
 import { useRef, useState } from 'react';
 import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';
-
 import photo from '../../assets/profile.png';
 import more from '../../assets/vertical_dots.svg';
 import reply_icon from '../../assets/reply.svg';
 import send from '../../assets/send_white.svg';
 import { Heart } from '../ui/Heart';
 import { timeAgo } from '@/utils/timeAgo';
+import { Replies } from './Replies';
 
 export const Comments = ({ comments }) => {
   const [reply, setReply] = useState(false);
@@ -20,7 +20,6 @@ export const Comments = ({ comments }) => {
       }
     }, 0);
   };
-  console.log('this is the comment table', comments);
 
   return (
     <>
@@ -77,96 +76,14 @@ export const Comments = ({ comments }) => {
             </div>
           </div>
         </div>
+
+        {/* {reply && <Replies commentId={comments.id} />} */}
       </div>
 
       {reply && (
         <div className="mb-2 flex w-full flex-col rounded-b-xl bg-textarea pl-10 transition-all delay-100 duration-200 ease-in-out">
-          <div className="flex w-full gap-2 border-l-2 bg-textarea px-5 py-3">
-            <ProfilePhoto img={photo} size={'2rem'} />
-
-            <div className="flex w-full flex-col">
-              <div className="flex justify-between">
-                <div className="flex gap-6">
-                  <div className="text-lg font-medium">rafsal</div>
-                  <div className="select-none text-base font-normal text-text-muted">
-                    5h ago
-                  </div>
-                </div>
-                <img
-                  src={more}
-                  className="w-5 select-none"
-                  alt="more"
-                  draggable="false"
-                />
-              </div>
-
-              <div className="py-3 text-base font-normal">
-                Okay thats all information I need to know
-              </div>
-
-              <div className="flex select-none items-center justify-between text-sm text-text-secondary">
-                <div className="flex items-center gap-8">
-                  <Heart
-                    className={'h-5 w-5'}
-                    textclr={'text-text-secondary'}
-                    disableClick={true}
-                  />
-
-                  <img
-                    src={reply_icon}
-                    className="w-5"
-                    alt="reply"
-                    draggable="false"
-                  />
-                </div>
-                {/* 6 reply */}
-              </div>
-            </div>
-          </div>
-
-          <div className="flex w-full gap-2 border-l-2 bg-textarea px-5 py-3">
-            <ProfilePhoto img={photo} size={'2rem'} />
-
-            <div className="flex w-full flex-col">
-              <div className="flex justify-between">
-                <div className="flex gap-6">
-                  <div className="text-lg font-medium">rafsal</div>
-                  <div className="select-none text-base font-normal text-text-muted">
-                    5h ago
-                  </div>
-                </div>
-                <img
-                  src={more}
-                  className="w-5 select-none"
-                  alt="more"
-                  draggable="false"
-                />
-              </div>
-
-              <div className="py-3 text-base font-normal">
-                Okay thats all information I need to know
-              </div>
-
-              <div className="flex select-none items-center justify-between text-sm text-text-secondary">
-                <div className="flex items-center gap-8">
-                  <Heart
-                    className={'h-5 w-5'}
-                    textclr={'text-text-secondary'}
-                    disableClick={true}
-                  />
-                  <img
-                    src={reply_icon}
-                    className="w-5"
-                    alt="reply"
-                    draggable="false"
-                  />
-                </div>
-                {/* 6 reply */}
-              </div>
-            </div>
-          </div>
-
-          <div className="-ml-4 mb-2 flex w-full items-center gap-5">
+          <Replies commentId={comments.id} />
+          <div className="my-2 flex w-full items-center gap-5">
             <ProfilePhoto img={photo} size={'2rem'} />
             <div className="flex w-full rounded-lg bg-bg-secondary p-2">
               <input

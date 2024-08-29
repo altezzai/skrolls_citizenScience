@@ -288,7 +288,6 @@ const AddPost = ({ show, handleClose }) => {
         },
       });
 
-      console.log('Post successful:', response.data);
       // Handle success
       resetForm();
       handleClose();

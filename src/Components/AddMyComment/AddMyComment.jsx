@@ -23,13 +23,13 @@ export const AddMyComment = ({ feedId, onCommentAdded }) => {
         `users/feeds/${feedId}/comments`,
         commentData
       );
-      console.log('Comment added successfully:', res.data);
+      
       setComment('');
       if (onCommentAdded) {
         onCommentAdded(res.data);
       }
     } catch (error) {
-      console.log('Error adding comment:', error);
+      console.error('failed to add comment:', error);
     }
   };
 

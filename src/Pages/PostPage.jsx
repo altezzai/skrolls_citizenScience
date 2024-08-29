@@ -21,7 +21,6 @@ export const PostPage = () => {
           },
         });
         setPost(res.data);
-        console.log(res.data);
       } catch (error) {
         console.error('failed to fetch feeds:', error);
       } finally {
