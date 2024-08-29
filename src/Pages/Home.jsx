@@ -7,26 +7,42 @@ import { Skeleton } from '@/Components/ui/skeleton';
 const Home = () => {
   const [loading, setLoading] = useState(true);
   const [feeds, setFeeds] = useState([]);
+  const [page, setPage] = useState(1); // Pagination state
+  const limit = 10; // Limit of posts per page
 
   useEffect(() => {
-    const fetchfeed = async () => {
-      setLoading(true);
+    const fetchFeeds = async () => {
+      setLoading(true); // Set loading to true when fetching
       try {
-        const res = await apiClient.get('users/feeds', {
+        // Fetch feeds from the API (without userId to get all posts)
+        const res = await apiClient.get(`users/feeds`, {
           params: {
             userId: 1,
+            page, // Current page for pagination
+            limit, // Number of items per page
           },
         });
-        setFeeds(res.data);
-        console.log(res.data);
+        setFeeds(res.data); // Assuming `res.data` contains the feeds
       } catch (error) {
-        console.error('failed to fetch feeds:', error);
+        console.error('Error fetching feeds:', error);
       } finally {
-        setLoading(false);
+        setLoading(false); // Stop loading after data is fetched
       }
     };
-    fetchfeed();
-  }, []);
+
+    fetchFeeds();
+  }, [page]); // Re-fetch when `page` changes
+
+  const handleNextPage = () => {
+    setPage((prevPage) => prevPage + 1);
+  };
+
+  const handlePrevPage = () => {
+    if (page > 1) {
+      setPage((prevPage) => prevPage - 1);
+    }
+  }
+
   return (
     <div className="home">
       <NewPost />

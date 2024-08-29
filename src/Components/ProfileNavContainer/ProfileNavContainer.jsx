@@ -1,7 +1,9 @@
 import { lazy, useState } from 'react';
 import TabContent from '../Tabs/TabContent';
 import TabButtons from '../Tabs/TabButtons';
+import { MyPost } from './MyPost';
 
+// const MyPost = lazy(() => import('./MyPost'));
 const ProfileDetails = lazy(() => import('../ProfileDetails/ProfileDetails'));
 const ResearchActivities = lazy(
   () => import('../ResearchActivities/ResearchActivities')
@@ -21,7 +23,7 @@ const ProfileNavContainer = () => {
     {
       id: 'post',
       label: 'Post',
-      content: <div className="mt-4">POST SECTION</div>,
+      content: <div className="mt-4"><MyPost userId={2}/></div>,
     },
     {
       id: 'research',
