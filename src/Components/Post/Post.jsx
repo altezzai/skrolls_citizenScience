@@ -1,11 +1,9 @@
 import { cn } from '../../utils/utils';
 
 import photo from '../../assets/profile.png';
-import image from '../../assets/post-img.png';
 import comment_icon from '../../assets/comments.svg';
 import view from '../../assets/view.svg';
 import send from '../../assets/send.svg';
-import save from '../../assets/save.svg';
 import back from '../../assets/previous.svg';
 import internet from '../../assets/internet.svg';
 import translate from '../../assets/translate.svg';
@@ -13,6 +11,7 @@ import translate from '../../assets/translate.svg';
 import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Heart } from '../ui/Heart';
+import { Saved } from '../ui/Saved';
 
 import { formatDate } from '@/utils/formatDate';
 import {
@@ -23,7 +22,8 @@ import {
   CarouselPrevious,
 } from '@/Components/ui/carousel';
 
-const Post = ({ key, feed }) => {
+
+const Post = ({ feed }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const inPostPage = location.pathname.includes('/post');
@@ -136,7 +136,7 @@ const Post = ({ key, feed }) => {
                   <img
                     src={comment_icon}
                     alt="comment "
-                    className="w-6"
+                    className="w-6 select-none"
                     draggable="false"
                   />
                 </div>
@@ -149,13 +149,13 @@ const Post = ({ key, feed }) => {
                   <img
                     src={view}
                     alt="view icon"
-                    className="w-6"
+                    className="w-6 select-none"
                     draggable="false"
                   />
                 </div>
                 {feed.viewsCount}
               </div>
-              <div className="flex h-8 w-8 cursor-pointer items-center rounded-full p-1 hover:bg-red-50">
+              <div className="flex h-8 w-8 cursor-pointer select-none items-center rounded-full p-1 hover:bg-red-50">
                 <img
                   src={send}
                   alt="send message"
@@ -163,14 +163,8 @@ const Post = ({ key, feed }) => {
                   draggable="false"
                 />
               </div>
-              <div className="flex cursor-pointer items-center rounded-full p-1 hover:bg-red-50">
-                <img
-                  src={save}
-                  className="w-8"
-                  alt="save message"
-                  draggable="false"
-                />
-              </div>
+
+              <Saved />
             </div>
           </div>
         </div>
