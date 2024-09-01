@@ -124,7 +124,8 @@ const Post = ({ feed }) => {
               <Heart
                 className={'h-8 w-8 p-1 hover:bg-red-50'}
                 textclr={'text-black'}
-                id={feed.id}
+                userId={1}
+                feedId={feed.id}
                 likes={feed.likeCount}
               />
 
@@ -164,7 +165,7 @@ const Post = ({ feed }) => {
                 />
               </div>
 
-              <Saved />
+              <Saved userId={1} feedId={feed.id} />
             </div>
           </div>
         </div>
