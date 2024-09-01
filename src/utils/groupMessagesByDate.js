@@ -13,7 +13,7 @@ export const groupMessagesByDate = (messages) => {
   };
 
   return messages.reduce((groups, message) => {
-    const messageDate = new Date(message.timestamp);
+    const messageDate = new Date(message.createdAt);
     let dateKey = formatDate(messageDate);
 
     if (messageDate.toDateString() === today.toDateString()) {

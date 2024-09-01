@@ -9,7 +9,7 @@ const sampleMessages = [
       type: "text",
       content: "Hello, how are you?",
       sentByMe: false,
-      timestamp: "2023-08-09T10:15:30Z",
+      createdAt: "2023-08-09T10:15:30Z",
       sender: "Alice",
     },
     {
@@ -17,7 +17,7 @@ const sampleMessages = [
       type: "text",
       content: "I'm good, thank you! How about you?",
       sentByMe: true,
-      timestamp: "2024-08-09T10:16:00Z",
+      createdAt: "2024-08-09T10:16:00Z",
       sender: "Me",
     },
     {
@@ -29,7 +29,7 @@ const sampleMessages = [
         type: "image/jpeg",
       },
       sentByMe: false,
-      timestamp: "2024-08-09T10:17:00Z",
+      createdAt: "2024-08-09T10:17:00Z",
       sender: "Alice",
     },
     {
@@ -41,7 +41,7 @@ const sampleMessages = [
         type: "video/mp4",
       },
       sentByMe: true,
-      timestamp: "2024-08-09T10:18:00Z",
+      createdAt: "2024-08-09T10:18:00Z",
       sender: "Me",
     },
     {
@@ -53,7 +53,7 @@ const sampleMessages = [
         type: "application/pdf",
       },
       sentByMe: false,
-      timestamp: "2024-08-09T10:19:00Z",
+      createdAt: "2024-08-09T10:19:00Z",
       sender: "Alice",
     },
   ];
