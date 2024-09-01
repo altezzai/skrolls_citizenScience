@@ -20,7 +20,6 @@ export const Saved = ({ userId, feedId }) => {
         const isFeedSaved = response.data.feeds.some(
           (savedFeed) => savedFeed.Feed.id === feedId
         );
-        console.log(isFeedSaved);
         setSaved(isFeedSaved); // Set the saved state based on the presence of feedId
       } catch (error) {
         console.error('Error checking if feed is saved:', error);
