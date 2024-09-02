@@ -12,7 +12,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchFeeds = async () => {
-      setLoading(true); // Set loading to true when fetching
+      setLoading(true); 
       try {
         // Fetch feeds from the API (without userId to get all posts)
         const res = await apiClient.get(`users/feeds`, {
@@ -22,11 +22,11 @@ const Home = () => {
             limit, // Number of items per page
           },
         });
-        setFeeds(res.data); // Assuming `res.data` contains the feeds
+        setFeeds(res.data); 
       } catch (error) {
         console.error('Error fetching feeds:', error);
       } finally {
-        setLoading(false); // Stop loading after data is fetched
+        setLoading(false); 
       }
     };
 

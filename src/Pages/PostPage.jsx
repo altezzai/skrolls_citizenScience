@@ -1,5 +1,5 @@
 import Post from '../Components/Post/Post';
-import { AddMyComment } from '../Components/AddMyComment/AddMyComment';
+import { AddMyComment } from '../Components/Post/AddMyComment';
 import { Comments } from '../Components/Comments/Comments';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';

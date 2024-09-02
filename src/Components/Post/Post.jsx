@@ -22,7 +22,6 @@ import {
   CarouselPrevious,
 } from '@/Components/ui/carousel';
 
-
 const Post = ({ feed }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -54,11 +53,13 @@ const Post = ({ feed }) => {
           }
         )}
       >
-        <ProfilePhoto img={photo} size={'2.6rem'} />
+        <ProfilePhoto img={feed.User?.profilePhoto} size={'2.6rem'} />
 
         <div className="w-full pr-3">
           <div className="flex select-none items-center gap-3">
-            <div className="text-xl font-bold text-text-primary">Manu P</div>
+            <div className="text-xl font-bold text-text-primary">
+              {feed.User?.username}
+            </div>
             <div className="flex items-center rounded-full pb-2 text-xl text-text-muted"></div>
             <div className="text-[0.9rem] font-bold text-text-muted">
               {formatDate(feed.createdAt)}

@@ -24,8 +24,6 @@ const NotificationPage = () => {
             limit: 20,
           },
         });
-        console.log(response.data);
-        // const data = await response.json();
         setNotifications(response.data);
       } catch (error) {
         console.error('Error fetching notifications:', error);
@@ -54,25 +52,24 @@ const NotificationPage = () => {
       </div>
 
       {loading && (
-  <div className='w-full mt-5'>
-    {Array.from({ length: 10 }).map((_, index) => (
-      <div
-        key={index}
-        className="mb-5 flex items-center justify-between border-2 border-text-secondary p-2 rounded-xl"
-      >
-        <div className="flex items-center gap-3">
-          <Skeleton className="h-7 w-7 rounded-full bg-text-secondary" />
-          <Skeleton className="h-3 w-20 bg-text-secondary" />
-          <Skeleton className="h-3 w-40 bg-text-secondary" />
+        <div className="mt-5 w-full">
+          {Array.from({ length: 10 }).map((_, index) => (
+            <div
+              key={index}
+              className="mb-5 flex items-center justify-between rounded-xl border-2 border-text-secondary p-2"
+            >
+              <div className="flex items-center gap-3">
+                <Skeleton className="h-7 w-7 rounded-full bg-text-secondary" />
+                <Skeleton className="h-3 w-20 bg-text-secondary" />
+                <Skeleton className="h-3 w-40 bg-text-secondary" />
+              </div>
+              <div>
+                <Skeleton className="h-10 w-20 bg-text-secondary" />
+              </div>
+            </div>
+          ))}
         </div>
-        <div>
-          <Skeleton className="h-10 w-20 bg-text-secondary" />
-        </div>
-      </div>
-    ))}
-  </div>
-)}
-
+      )}
 
       {Object.keys(messagedate).map((date) => (
         <div
