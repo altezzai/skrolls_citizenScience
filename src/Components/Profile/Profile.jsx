@@ -150,7 +150,7 @@ const Profile = () => {
           </button>
         ) : (
           <button className="w-36 cursor-pointer select-none rounded-full border-2 border-solid border-black py-2 text-sm font-semibold text-text-primary">
-            Message{' '}
+            Message
           </button>
         )}
       </div>
