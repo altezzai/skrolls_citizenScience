@@ -21,12 +21,16 @@ import { Register } from './Pages/Register';
 function App() {
   const location = useLocation();
   const inMessagePage = location.pathname.includes('/messages');
-  const inLoginPage = location.pathname.includes('/login') || location.pathname.includes('/register');
+  const inLoginPage =
+    location.pathname.includes('/login') ||
+    location.pathname.includes('/register');
 
   return (
     <>
       {!inLoginPage && <Header />}
-      <div className={`main-container ${inMessagePage || inLoginPage ? 'height-set' : ''}`}>
+      <div
+        className={`main-container ${inMessagePage || inLoginPage ? 'height-set' : ''}`}
+      >
         {!inLoginPage && <NavPanel />}
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
@@ -97,7 +101,7 @@ function App() {
             className={`${
               inMessagePage
                 ? 'hidden'
-                : 'info-panel scrollbar-hide mr-12 h-full w-80 shrink-0 overflow-y-scroll pt-10 max-xl:mr-2 max-xl:min-w-60 max-xl:shrink'
+                : 'flex flex-col justify-start scrollbar-hide mr-12 h-full w-80 shrink-0 overflow-y-scroll pt-10 max-xl:mr-2 max-xl:min-w-60 max-xl:shrink max-xl:pt-2 max-lg:hidden'
             }`}
             style={{ scrollbarWidth: 'none' }}
           >

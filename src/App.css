@@ -71,8 +71,7 @@ body {
   margin-left: 10px;
 }
 
-.main-container .center-container,
-.main-container .info-panel {
+.main-container .center-container{
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

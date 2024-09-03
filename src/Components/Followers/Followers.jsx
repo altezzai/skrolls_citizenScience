@@ -1,4 +1,4 @@
-import './Followers.css';
+import { Link } from 'react-router-dom';
 import UserFollowListItem from '../UserFollowListItem/UserFollowListItem';
 
 export const Followers = ({
@@ -8,28 +8,26 @@ export const Followers = ({
   countflag = false,
 }) => {
   return (
-    <div className="followersBox">
-      <div className="titlespace">
-        <span>{title}</span>
-        {countflag ? <div className="countcircle">12</div> : undefined}
+    <div className="my-2 w-full rounded-3xl border-[1px] border-solid border-border-muted bg-bg-secondary px-5 py-5 max-xl:px-2">
+      <div className="flex items-center justify-between">
+        <span className="pb-2 text-lg font-semibold">{title}</span>
+        {countflag ? (
+          <div className="bg-bg-text-muted flex h-5 w-5 items-center justify-center rounded-full border-2 border-solid border-bg-secondary text-xs text-bg-secondary">
+            12
+          </div>
+        ) : undefined}
       </div>
 
-      {/* <div className="followerlist">
-        <div className="userdetls">
-          <img src={photo} className="userpic"></img>
-          <div className="userName">
-            <h4>Manuprasad</h4>
-            <h4 className="uname">@manu</h4>
-          </div>
-          <FollowButton follow={true} />
-        </div>
-      </div> */}
       <UserFollowListItem
         user={{ name: 'Manuprasad', username: 'manu' }}
         btnClassName={'w-fit'}
       />
-      <div className="viewmore">
-        <a href="">View more</a>
+      <div className="cursor-pointe items-center pt-5 text-center">
+        <Link
+          className="r border-b-[1px] border-solid border-text-primary text-sm text-text-primary max-xl:text-xs"
+        >
+          View more
+        </Link>
       </div>
     </div>
   );

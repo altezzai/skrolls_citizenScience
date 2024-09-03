@@ -12,7 +12,7 @@ const ReadMore = ({ children, sliceLength }) => {
     <p className="text">
       {isReadMore ? text.slice(0, sliceLength) : text}
       {text.length > sliceLength && (
-        <span onClick={toggleReadMore} className="read-or-hide">
+        <span onClick={toggleReadMore} className="cursor-pointer text-primary">
           {isReadMore ? ' more...' : ' less'}
         </span>
       )}

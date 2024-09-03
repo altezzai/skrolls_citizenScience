@@ -34,7 +34,7 @@ export const NavPanel = () => {
   return (
     <div
       className={cn(
-        'ml-12 flex h-full flex-col items-center justify-between py-14 transition-margin',
+        'ml-12 flex h-full flex-col items-center justify-between py-14 transition-margin max-xl:ml-5 max-xl:py-3',
         { 'ml-3 pt-[136px]': inMessagePage }
       )}
     >
