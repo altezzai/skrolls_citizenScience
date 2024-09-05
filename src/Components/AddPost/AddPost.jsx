@@ -1,21 +1,21 @@
 import PostButton from '../PostButton/PostButton';
-import photo from '../../assets/profile.png';
-import doc from '../../assets/document.svg';
-import uploadfile from '../../assets/upload_doc.svg';
-import url_icon from '../../assets/link_grey.svg';
-
 import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';
-import { useEffect, useState, useRef } from 'react';
+import { useState, useRef } from 'react';
+import MentionList from './MentionList';
+import TagList from './TagList';
+import FileUpload from './FileUpload';
 import { apiClient } from '@/lib/api_client';
+
+import photo from '../../assets/profile.png';
+import url_icon from '../../assets/link_grey.svg'
 
 const AddPost = ({ show, handleClose }) => {
   const [filePreviews, setFilePreviews] = useState([]);
-  const [files, setFiles] = useState([]); // store actual file objects
   const isFileUploaded = filePreviews.length > 0;
+  const [files, setFiles] = useState([]);
   const [postContent, setPostContent] = useState('');
   const [link, setLink] = useState('');
-  const [users, setUsers] = useState([]); // List of users for mentions
-  const [hashTagList, setHashTagList] = useState([]);
+  const [users, setUsers] = useState([]);
   const [mentionSearchTerm, setMentionSearchTerm] = useState('');
   const [showMentionList, setShowMentionList] = useState(false);
   const [selectedUserIndex, setSelectedUserIndex] = useState(0);
@@ -24,9 +24,9 @@ const AddPost = ({ show, handleClose }) => {
   const [filteredTags, setFilteredTags] = useState([]);
   const textareaRef = useRef(null);
 
-  useEffect(() => {
-    // Fetch users for mentions
-    const fetchUsers = async () => {
+  // Fetch users for mentions when @ and a character is typed
+  const fetchUsers = async (mentionSearchTerm) => {
+    if (mentionSearchTerm.length >= 1) {
       try {
         const response = await apiClient.get('users/search/user', {
           params: {
@@ -35,29 +35,38 @@ const AddPost = ({ show, handleClose }) => {
           },
         });
         setUsers(response.data);
+        console.log(users);
+        setShowMentionList(true);
       } catch (error) {
         console.error('Failed to fetch users:', error);
+        setShowMentionList(false);
       }
-    };
-    fetchUsers();
-  }, []);
+    } else {
+      setShowMentionList(false); // hide if no valid term
+    }
+  };
 
-  //fetch hashtags
-  useEffect(() => {
-    const fetchTags = async () => {
+  const fetchTags = async (tagSearchTerm) => {
+    if (tagSearchTerm.length >= 1) {
       try {
-        const res = await apiClient.get('users/search/hashtag', {
+        const response = await apiClient.get('users/feed/search/hashtag', {
           params: {
             userId: 1,
+            q: tagSearchTerm,
           },
         });
-        setHashTagList(res.data);
+        const fetchedTags = response.data.hashtags;
+        setFilteredTags(fetchedTags); // Update filteredTags here
+        console.log(fetchedTags);
+        setShowTagList(true);
       } catch (error) {
-        console.error('failed to fetch users:', error);
+        console.error('Failed to fetch hashtags:', error);
+        setShowTagList(false);
       }
-    };
-    fetchTags();
-  }, []);
+    } else {
+      setShowTagList(false); // hide if no valid term
+    }
+  };
 
   // Handle keydown events for arrow keys and Enter key
   const handleKeyDown = (e) => {
@@ -116,27 +125,6 @@ const AddPost = ({ show, handleClose }) => {
     }
   };
 
-  const handleFileChange = (e) => {
-    const selectedFiles = Array.from(e.target.files);
-    const newFilePreviews = selectedFiles.map((file) => {
-      if (file.type.startsWith('image/') || file.type.startsWith('video/')) {
-        return URL.createObjectURL(file);
-      } else {
-        return file.name;
-      }
-    });
-
-    setFilePreviews((prevPreviews) => [...prevPreviews, ...newFilePreviews]);
-    setFiles((prevFiles) => [...prevFiles, ...selectedFiles]); // add files
-  };
-
-  const removeFilePreview = (index) => {
-    setFilePreviews((prevPreviews) =>
-      prevPreviews.filter((_, i) => i !== index)
-    );
-    setFiles((prevFiles) => prevFiles.filter((_, i) => i !== index)); // remove corresponding file
-  };
-
   const resetForm = () => {
     setFilePreviews([]);
     setFiles([]); // reset file array
@@ -144,15 +132,9 @@ const AddPost = ({ show, handleClose }) => {
     setLink('');
   };
 
-  const handleModalClose = () => {
-    resetForm();
-    handleClose();
-  };
-
   const handleTextareaChange = (e) => {
     const newContent = e.target.value;
     setPostContent(newContent);
-    // setCursorPosition(e.target.selectionStart);
 
     // Detect if we're typing a mention (@) or a tag (#)
     const currentWordMatch = newContent
@@ -162,31 +144,12 @@ const AddPost = ({ show, handleClose }) => {
 
     if (currentWord.startsWith('@')) {
       const mentionSearch = currentWord.slice(1); // Extract search term after "@"
-      const filteredUsersList = users.filter((user) =>
-        user.username.toLowerCase().includes(mentionSearch.toLowerCase())
-      );
-
-      if (filteredUsersList.length > 0) {
-        setShowMentionList(true);
-        setMentionSearchTerm(mentionSearch);
-      } else {
-        setShowMentionList(false); // Hide mention list if no matches
-      }
-
+      setMentionSearchTerm(mentionSearch);
+      fetchUsers(mentionSearch); // Fetch users only when @ and at least one character
       setShowTagList(false); // Hide tag list when typing @
     } else if (currentWord.startsWith('#')) {
       const tagSearch = currentWord.slice(1); // Extract search term after "#"
-      const filteredTagsList = hashTagList.filter((tag) =>
-        tag.hashtag.toLowerCase().includes(tagSearch.toLowerCase())
-      );
-
-      if (filteredTagsList.length > 0) {
-        setShowTagList(true);
-        setFilteredTags(filteredTagsList);
-      } else {
-        setShowTagList(false); // Hide tag list if no matches
-      }
-
+      fetchTags(tagSearch); // Fetch hashtags only when # and at least one character
       setShowMentionList(false); // Hide mention list when typing #
     } else {
       setShowMentionList(false);
@@ -208,12 +171,12 @@ const AddPost = ({ show, handleClose }) => {
       textBeforeCursor.slice(0, lastAtSymbolIndex) +
       `@${user.username}` +
       textAfterCursor;
-    setPostContent(newContent);
 
+    setPostContent(newContent);
     // Store the user id in a data attribute
     textarea.dataset.lastMentionId = user.id;
-
     setShowMentionList(false);
+
     textarea.focus();
     const newCursorPosition = lastAtSymbolIndex + user.username.length + 1;
     textarea.setSelectionRange(newCursorPosition, newCursorPosition);
@@ -231,19 +194,11 @@ const AddPost = ({ show, handleClose }) => {
       textAfterCursor;
 
     setPostContent(newContent);
+    textarea.dataset.lastTagId = tag.id;
     setShowTagList(false);
 
-    const newCursorPosition = lastHashSymbolIndex + tag.hashtag.length + 2;
-    // setCursorPosition(newCursorPosition);
-
-    // Use setTimeout to ensure the DOM has updated
-    setTimeout(() => {
-      textareaRef.current.focus();
-      textareaRef.current.setSelectionRange(
-        newCursorPosition,
-        newCursorPosition
-      );
-    }, 0);
+    const newCursorPosition = lastHashSymbolIndex + tag.hashtag.length + 1;
+    textarea.setSelectionRange(newCursorPosition, newCursorPosition);
   };
 
   const submit = async (e) => {
@@ -300,18 +255,16 @@ const AddPost = ({ show, handleClose }) => {
   return (
     <div
       className={`fixed bottom-0 left-0 right-0 top-0 z-10 h-full w-full overflow-auto bg-bg-transparent-muted backdrop-blur-sm ${show ? 'block' : 'hidden'}`}
-      onClick={handleModalClose}
+      onClick={handleClose}
     >
       <form
         onSubmit={submit}
         className="relative left-1/2 top-[15%] w-1/2 -translate-x-1/2 rounded-2xl border-2 border-solid border-border-primary bg-bg-secondary p-5"
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
+        onClick={(e) => e.stopPropagation()}
       >
         <span
-          className="float-right cursor-pointer pr-2 text-4xl font-bold text-text-secondary transition-all duration-300 ease-in-out hover:scale-110 hover:text-text-primary"
-          onClick={handleModalClose}
+          className="float-right cursor-pointer pr-2 text-4xl font-bold text-text-secondary"
+          onClick={handleClose}
         >
           &times;
         </span>
@@ -322,9 +275,8 @@ const AddPost = ({ show, handleClose }) => {
 
         <textarea
           name="description"
-          id="description"
-          placeholder="What is new, Rafsal?"
-          className="w-full resize-none rounded-2xl bg-textarea p-4 text-sm outline-none transition-all duration-300 ease-in-out placeholder:select-none placeholder:text-text-muted"
+          placeholder="What is new?"
+          className="w-full resize-none rounded-2xl bg-textarea p-4 text-sm outline-none"
           style={{ height: isFileUploaded ? '100px' : '170px' }}
           value={postContent}
           onChange={handleTextareaChange}
@@ -332,48 +284,21 @@ const AddPost = ({ show, handleClose }) => {
           onKeyDown={handleKeyDown}
           required
         ></textarea>
+
         {showMentionList && (
-          <div
-            className="absolute left-1/2 top-[20%] z-10 mt-1 h-60 w-40 -translate-x-1/2 rounded-md border-2 bg-bg-secondary"
-            onKeyDown={handleKeyDown}
-          >
-            {filteredUsers.map((user, index) => (
-              <div
-                key={user.id}
-                className={`cursor-pointer px-4 py-2 ${
-                  index === selectedUserIndex
-                    ? 'bg-blue-100'
-                    : 'hover:bg-gray-100'
-                }`}
-                onClick={() => handleMentionSelect(user)}
-              >
-                {/* <img
-                  src={user.profilePhoto}
-                  className="w-4"
-                  alt="profile photo"
-                /> */}
-                {user.username}
-              </div>
-            ))}
-          </div>
+          <MentionList
+            filteredUsers={filteredUsers}
+            selectedUserIndex={selectedUserIndex}
+            handleMentionSelect={handleMentionSelect}
+          />
         )}
 
         {showTagList && (
-          <div className="absolute left-1/2 top-[30%] z-10 mt-1 h-60 w-40 -translate-x-1/2 rounded-md border-2 bg-bg-secondary">
-            {filteredTags.map((tag, index) => (
-              <div
-                key={index}
-                className={`cursor-pointer px-4 py-2 ${
-                  index === selectedTagIndex
-                    ? 'bg-blue-100'
-                    : 'hover:bg-gray-100'
-                }`}
-                onClick={() => handleTagSelect(tag)}
-              >
-                #{tag.hashtag}
-              </div>
-            ))}
-          </div>
+          <TagList
+            filteredTags={filteredTags}
+            selectedTagIndex={selectedTagIndex}
+            handleTagSelect={handleTagSelect}
+          />
         )}
 
         <div className="flex w-full items-center gap-2 rounded-2xl bg-textarea p-4">
@@ -394,77 +319,12 @@ const AddPost = ({ show, handleClose }) => {
           />
         </div>
 
-        <div className={`py-3 ${isFileUploaded ? 'hidden' : 'flex'}`}>
-          <label
-            htmlFor="documentfile"
-            className="flex cursor-pointer select-none items-center gap-2 rounded-full border-[1px] border-border-muted bg-bg-primary px-4 py-2 text-sm font-semibold text-text-secondary"
-          >
-            <img src={doc} alt="document" className="w-4" draggable="false" />
-            <span>File</span>
-          </label>
-          <input
-            type="file"
-            className="hidden"
-            id="documentfile"
-            accept="image/*,video/*"
-            multiple
-            onChange={handleFileChange}
-          />
-        </div>
-
-        {filePreviews.length > 0 && (
-          <div className="flex select-none flex-wrap gap-4 py-3">
-            {filePreviews.map((preview, index) => (
-              <div key={index} className="relative">
-                {preview.startsWith('blob:') ? (
-                  preview.includes('video') ? (
-                    <video
-                      src={preview}
-                      controls
-                      className="h-36 w-36 rounded-lg object-cover"
-                    />
-                  ) : (
-                    <img
-                      src={preview}
-                      alt={`Preview ${index}`}
-                      className="h-36 w-36 rounded-lg object-cover"
-                      draggable="false"
-                    />
-                  )
-                ) : (
-                  <div className="flex h-36 w-36 items-center justify-center break-all rounded-lg bg-gray-200 p-2">
-                    {preview}
-                  </div>
-                )}
-                <span
-                  className="absolute right-1 top-1 flex h-5 w-5 cursor-pointer justify-center rounded-full bg-gray-700 align-middle text-lg leading-none text-white hover:bg-gray-900"
-                  onClick={() => removeFilePreview(index)}
-                >
-                  &times;
-                </span>
-              </div>
-            ))}
-            <label
-              htmlFor="uploadfile"
-              className={`cursor-pointer select-none rounded-xl bg-textarea px-14 py-5 ${isFileUploaded ? 'flex' : 'hidden'}`}
-            >
-              <img
-                src={uploadfile}
-                className="w-8"
-                alt="Add more files"
-                draggable="false"
-              />
-              <input
-                type="file"
-                id="uploadfile"
-                accept="image/*,video/*"
-                multiple
-                style={{ display: 'none' }}
-                onChange={handleFileChange}
-              />
-            </label>
-          </div>
-        )}
+        <FileUpload
+          filePreviews={filePreviews}
+          setFilePreviews={setFilePreviews}
+          files={files}
+          setFiles={setFiles}
+        />
 
         <PostButton text={'Post it!'} />
       </form>

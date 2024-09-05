@@ -3,9 +3,9 @@ import { lazy, Suspense } from 'react';
 
 import Header from './Components/Header/Header';
 import { NavPanel } from './Components/NavPanel/NavPanel';
-import { RoyaltyScore } from './Components/RoyaltyScore/RoyaltyScore';
-import { IdBox } from './Components/IdBox/IdBox';
-import { Followers } from './Components/Followers/Followers';
+import { RoyaltyScore } from './Components/BoxElements/RoyaltyScore';
+import { IdBox } from './Components/BoxElements/IdBox';
+import { Followers } from './Components/BoxElements/Followers';
 import { Route, Routes, useLocation } from 'react-router-dom';
 
 const Home = lazy(() => import('./Pages/Home'));
@@ -29,7 +29,7 @@ function App() {
     <>
       {!inLoginPage && <Header />}
       <div
-        className={`main-container ${inMessagePage || inLoginPage ? 'height-set' : ''}`}
+        className={`main-container max-md:relative ${inMessagePage || inLoginPage ? 'height-set' : ''}`}
       >
         {!inLoginPage && <NavPanel />}
         <Suspense fallback={<div>Loading...</div>}>
