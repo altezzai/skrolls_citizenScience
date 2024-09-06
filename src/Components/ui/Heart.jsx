@@ -12,6 +12,7 @@ export const Heart = ({
   textclr,
   feedId,
   userId,
+  commentIds,
   likes,
   disableClick = false,
 }) => {
@@ -28,12 +29,10 @@ export const Heart = ({
         const response = await apiClient.get(`/users/feeds/${feedId}/likes`, {
           params: { userId, feedId },
         });
-
         // Check if the user has liked the post
         const likedByUser = response.data.some(
-          (like) => like.User.id === userId
+          (like) => like.userId === userId
         );
-
         setLiked(likedByUser);
       } catch (error) {
         console.error('Error fetching like status:', error);
@@ -49,6 +48,7 @@ export const Heart = ({
       const response = await apiClient.post('/users/feeds/likes', {
         userId,
         feedIds: [feedId],
+        commentIds: [],
       });
 
       setLiked(!liked); // Toggle the liked state

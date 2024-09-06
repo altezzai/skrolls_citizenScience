@@ -10,12 +10,11 @@ export const Saved = ({ userId, feedId }) => {
     // Check if the feed is saved when the component mounts
     const checkIfSaved = async () => {
       try {
-        const response = await apiClient.get('/users/saved-feeds', {
+        const response = await apiClient.get('/users/savedFeeds', {
           params: {
             userId,
           },
         });
-
         // Check if feedId is present in the list of saved feeds
         const isFeedSaved = response.data.feeds.some(
           (savedFeed) => savedFeed.Feed.id === feedId
@@ -31,7 +30,7 @@ export const Saved = ({ userId, feedId }) => {
 
   const handleSaveClick = async () => {
     try {
-      const response = await apiClient.post('users/saved-feeds', {
+      const response = await apiClient.post('users/savedFeeds', {
         // Backend endpoint
         userId,
         feedId,
