@@ -19,11 +19,16 @@ export const AddMyComment = ({ feedId, onCommentAdded }) => {
     // commentData.append('parentId', null);
 
     try {
-      const res = await apiClient.post(
+      const response = await apiClient.post(
         `users/feeds/${feedId}/comments`,
-        commentData
+        commentData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
       );
-      
+
       setComment('');
       if (onCommentAdded) {
         onCommentAdded(res.data);
@@ -31,6 +36,14 @@ export const AddMyComment = ({ feedId, onCommentAdded }) => {
     } catch (error) {
       console.error('failed to add comment:', error);
     }
+  };
+
+  const handleInvalid = (e) => {
+    e.target.setCustomValidity('Please enter a comment before submitting.');
+  };
+
+  const handleInput = (e) => {
+    e.target.setCustomValidity(''); // Reset custom message on input
   };
 
   return (
@@ -47,6 +60,9 @@ export const AddMyComment = ({ feedId, onCommentAdded }) => {
           className="w-full outline-none"
           value={comment}
           onChange={(e) => setComment(e.target.value)}
+          required
+          onInvalid={handleInvalid}
+          onInput={handleInput}
         />
       </div>
       <button

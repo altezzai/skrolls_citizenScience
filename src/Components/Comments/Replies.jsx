@@ -25,6 +25,7 @@ export const Replies = ({ commentId }) => {
           }
         );
         setReplyData(res.data);
+        console.log(res.data);
       } catch (error) {
         console.error('Failed to fetch replies:', error);
       }
@@ -37,13 +38,13 @@ export const Replies = ({ commentId }) => {
       {replyData.map((reply) => (
         <div key={reply.id} className="">
           <div className="flex w-full gap-2 border-l-2 bg-textarea px-5 py-3">
-            <ProfilePhoto img={photo} size={'2rem'} />
+            <ProfilePhoto img={reply.ProfilePhoto} size={'2rem'} />
 
             <div className="flex w-full flex-col">
               <div className="flex justify-between">
                 <div className="flex gap-6">
                   <div className="text-lg font-medium">
-                    {reply.CommentUser.username}
+                    {reply.username}
                   </div>
                   <div className="select-none text-base font-normal text-text-muted">
                     {timeAgo(reply.createdAt)}
@@ -64,7 +65,7 @@ export const Replies = ({ commentId }) => {
                   <Heart
                     className={'h-5 w-5'}
                     textclr={'text-text-secondary'}
-                    disableClick={true}
+                    // disableClick={true}
                   />
                   <img
                     src={reply_icon}
