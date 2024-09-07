@@ -61,7 +61,7 @@ export const Comments = ({ comments }) => {
     <>
       <div
         className={`flex gap-2 rounded-xl bg-bg-secondary px-5 py-3 transition-all duration-500 ease-in-out ${
-          reply ? 'mb-0 rounded-b-none' : 'mb-2'
+          reply ? 'mb-0 rounded-b-none' : 'mb-1'
         }`}
       >
         <ProfilePhoto img={photo} size={'2rem'} />
@@ -69,7 +69,7 @@ export const Comments = ({ comments }) => {
         <div className="flex w-full flex-col">
           <div className="flex justify-between">
             <div className="flex gap-6">
-              {/* <div className="text-lg font-medium">{comments.username}</div> */}
+              <div className="text-lg font-medium">{comments.username}</div>
               <div className="select-none text-base font-normal text-text-muted">
                 {timeAgo(comments.createdAt)}
               </div>
@@ -82,7 +82,7 @@ export const Comments = ({ comments }) => {
             />
           </div>
 
-          <div className="py-4 text-base font-normal">{comments.comment}</div>
+          <div className="py-2 text-base font-normal">{comments.comment}</div>
 
           <div className="flex select-none items-center justify-between text-sm text-text-secondary">
             <div className="flex items-center gap-8">
@@ -91,7 +91,9 @@ export const Comments = ({ comments }) => {
                 textclr={'text-text-secondary'}
                 // disableClick={true}
                 likes={comments.likeCount}
-                commentIds={comments.id}
+                commentId={comments.id}
+                // feedId={comments.feedId}
+                userId={1}
               />
               <img
                 src={reply_icon}
@@ -137,8 +139,8 @@ export const Comments = ({ comments }) => {
                 value={replyMessage}
                 onChange={(e) => setReplyMessage(e.target.value)}
                 required
-                // onInvalid={handleInvalid}
-                // onInput={handleInput}
+                onInvalid={handleInvalid}
+                onInput={handleInput}
               />
               <button
                 type="submit"

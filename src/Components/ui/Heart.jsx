@@ -12,24 +12,39 @@ export const Heart = ({
   textclr,
   feedId,
   userId,
-  commentIds,
+  commentId,
   likes,
   disableClick = false,
 }) => {
   const [likeCount, setLikeCount] = useState(likes);
   const [liked, setLiked] = useState(false);
+  const [feedIds, setFeedIds] = useState([]);
+  const [commentIds, setCommentIds] = useState([]);
   const { openModal, isModalOpen } = useModal();
   const MODAL_NAME = modals.LIKED_LIST + feedId;
   const { postId } = useParams();
+
+  // Handle like/unlike click
+  const handleLikeClick = () => {
+    if (feedId && !feedIds.includes(feedId)) {
+      setFeedIds((prev) => [...prev, feedId]);
+    }
+
+    if (commentId && !commentIds.includes(commentId)) {
+      setCommentIds((prev) => [...prev, commentId]);
+    }
+
+    setLiked(!liked); // Toggle the liked state
+    setLikeCount((prev) => (liked ? prev - 1 : prev + 1));
+  };
 
   // Fetch like status when component mounts
   useEffect(() => {
     const fetchLikeStatus = async () => {
       try {
         const response = await apiClient.get(`/users/feeds/${feedId}/likes`, {
-          params: { userId, feedId },
+          params: { userId, feedId, commentId },
         });
-        // Check if the user has liked the post
         const likedByUser = response.data.some(
           (like) => like.userId === userId
         );
@@ -42,23 +57,32 @@ export const Heart = ({
     fetchLikeStatus();
   }, [userId, postId]);
 
-  // Handle like/unlike click
-  const handleLikeClick = async () => {
-    try {
-      const response = await apiClient.post('/users/feeds/likes', {
-        userId,
-        feedIds: [feedId],
-        commentIds: [],
-      });
+  useEffect(() => {
+    const timer = setTimeout(async () => {
+      if (feedIds.length > 0 || commentIds.length > 0) {
+        try {
+          console.log('Sending data:', { userId, feedIds, commentIds }); // Debugging log
 
-      setLiked(!liked); // Toggle the liked state
-      setLikeCount((prev) => (liked ? prev - 1 : prev + 1));
+          const response = await apiClient.post('/users/feeds/likes', {
+            userId,
+            feedIds,
+            commentIds,
+          });
 
-      console.log(response.data.message);
-    } catch (error) {
-      console.error('Error updating like status:', error);
-    }
-  };
+          // Clear the batched ids after submission
+          setFeedIds([]);
+          setCommentIds([]);
+        } catch (error) {
+          console.error(
+            'Error posting batched like status:',
+            error.response?.data || error.message
+          ); // Log more detailed error
+        }
+      }
+    }, 3000);
+
+    return () => clearTimeout(timer); // Clean up the timer
+  }, [feedIds, commentIds, userId]);
 
   return (
     <div className="flex cursor-pointer select-none items-center gap-1">

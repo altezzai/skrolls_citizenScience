@@ -90,7 +90,7 @@ const NotificationPage = () => {
                   username={notification.actors[0]?.username}
                   text={notification.content}
                   time={notification.createdAt}
-                  postpic={notification.relatedFeed.fileName[0]}
+                  postpic={notification.relatedFeed?.fileName[0]}
                 />
               </div>
             ))}
