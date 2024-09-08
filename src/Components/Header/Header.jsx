@@ -32,7 +32,6 @@ const Header = () => {
             alt="search"
             className="w-7 cursor-pointer"
             onClick={handleSearchClick}
-            style={{ cursor: 'pointer' }}
             draggable="false"
           />
           <input

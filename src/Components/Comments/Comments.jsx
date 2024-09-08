@@ -89,10 +89,9 @@ export const Comments = ({ comments }) => {
               <Heart
                 className={'h-5 w-5'}
                 textclr={'text-text-secondary'}
-                // disableClick={true}
                 likes={comments.likeCount}
                 commentId={comments.id}
-                // feedId={comments.feedId}
+                feedId={comments.feedId}
                 userId={1}
               />
               <img

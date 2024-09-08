@@ -25,7 +25,6 @@ export const Replies = ({ commentId }) => {
           }
         );
         setReplyData(res.data);
-        console.log(res.data);
       } catch (error) {
         console.error('Failed to fetch replies:', error);
       }
@@ -36,44 +35,46 @@ export const Replies = ({ commentId }) => {
   return (
     <>
       {replyData.map((reply) => (
-        <div key={reply.id} className="">
-          <div className="flex w-full gap-2 border-l-2 bg-textarea px-5 py-3">
-            <ProfilePhoto img={reply.ProfilePhoto} size={'2rem'} />
+        <div
+          className="flex w-full gap-2 border-l-2 bg-textarea px-5 py-3"
+          key={reply.id}
+        >
+          <ProfilePhoto img={reply.ProfilePhoto} size={'2rem'} />
 
-            <div className="flex w-full flex-col">
-              <div className="flex justify-between">
-                <div className="flex gap-6">
-                  <div className="text-lg font-medium">
-                    {reply.username}
-                  </div>
-                  <div className="select-none text-base font-normal text-text-muted">
-                    {timeAgo(reply.createdAt)}
-                  </div>
+          <div className="flex w-full flex-col">
+            <div className="flex justify-between">
+              <div className="flex gap-6">
+                <div className="text-lg font-medium">{reply.username}</div>
+                <div className="select-none text-base font-normal text-text-muted">
+                  {timeAgo(reply.createdAt)}
                 </div>
+              </div>
+              <img
+                src={more}
+                className="w-5 select-none"
+                alt="more"
+                draggable="false"
+              />
+            </div>
+
+            <div className="py-2 text-base font-normal">{reply.comment}</div>
+
+            <div className="flex select-none items-center justify-between text-sm text-text-secondary">
+              <div className="flex items-center gap-8">
+                <Heart
+                  className={'h-5 w-5'}
+                  textclr={'text-text-secondary'}
+                  userId={1}
+                  likes={reply.likeCount}
+                  feedId={postId}
+                  commentId={reply.id}
+                />
                 <img
-                  src={more}
-                  className="w-5 select-none"
-                  alt="more"
+                  src={reply_icon}
+                  className="w-5"
+                  alt="reply"
                   draggable="false"
                 />
-              </div>
-
-              <div className="py-2 text-base font-normal">{reply.comment}</div>
-
-              <div className="flex select-none items-center justify-between text-sm text-text-secondary">
-                <div className="flex items-center gap-8">
-                  <Heart
-                    className={'h-5 w-5'}
-                    textclr={'text-text-secondary'}
-                    userId={1}
-                  />
-                  <img
-                    src={reply_icon}
-                    className="w-5"
-                    alt="reply"
-                    draggable="false"
-                  />
-                </div>
               </div>
             </div>
           </div>
