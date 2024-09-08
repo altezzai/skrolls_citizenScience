@@ -21,6 +21,15 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/Components/ui/carousel';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/Components/ui/dialog';
+import { SharePost } from './SharePost';
+import { Description } from '@radix-ui/react-dialog';
 
 const Post = ({ feed }) => {
   const location = useLocation();
@@ -157,14 +166,26 @@ const Post = ({ feed }) => {
                 </div>
                 {feed.viewsCount}
               </div>
-              <div className="flex h-8 w-8 cursor-pointer select-none items-center rounded-full p-1 hover:bg-red-50">
-                <img
-                  src={send}
-                  alt="send message"
-                  className="w-7"
-                  draggable="false"
-                />
-              </div>
+
+              <Dialog>
+                <DialogTrigger>
+                  <div className="flex h-8 w-8 cursor-pointer select-none items-center rounded-full p-1 hover:bg-red-50">
+                    <img
+                      src={send}
+                      alt="send message"
+                      className="w-7"
+                      draggable="false"
+                    />
+                  </div>
+                </DialogTrigger>
+                <DialogContent className="flex h-fit w-fit">
+                  <DialogHeader className="hidden">
+                    <DialogTitle>Share</DialogTitle>
+                  </DialogHeader>
+                  <Description className="hidden">hi </Description>
+                  <SharePost />
+                </DialogContent>
+              </Dialog>
 
               <Saved userId={1} feedId={feed.id} />
             </div>
