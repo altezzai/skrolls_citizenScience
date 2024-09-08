@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { apiClient } from '@/lib/api_client';
 import { useParams } from 'react-router-dom';
 
-export const LikedList = ({ id }) => {
+export const LikedList = ({ id, userId }) => {
   const { isModalOpen, closeModal } = useModal();
   // const { postId } = useParams();
   const [likedList, setLikedList] = useState([]);
@@ -21,7 +21,7 @@ export const LikedList = ({ id }) => {
     const fetchLikeList = async () => {
       try {
         const response = await apiClient.get(`/users/feeds/${id}/likes`, {
-          params: { userId: 1, feedId: id, commentId: null },
+          params: { userId, feedId: id, commentId: null },
         });
         setLikedList(response.data);
 
@@ -30,7 +30,9 @@ export const LikedList = ({ id }) => {
         console.error('Error fetching like list:', error);
       }
     };
-  });
+    fetchLikeList();
+
+  }, [userId, id]);
 
   return (
     <div
@@ -41,7 +43,7 @@ export const LikedList = ({ id }) => {
         Liked By
       </div>
       <div className="flex h-[500px] max-w-md flex-col gap-3 rounded-b-3xl bg-bg-secondary px-8 py-5">
-        <UserFollowListItem user={{ name: 'Manuprasad', username: 'manu' }} />
+        <UserFollowListItem user={{ name: likedList.username, username: 'manu' }} />
         <UserFollowListItem user={{ name: 'Lively', username: 'lv' }} />
         <UserFollowListItem user={{ name: 'Jishnu', username: 'jish' }} />
         <UserFollowListItem user={{ name: 'Manu', username: 'manooo' }} />

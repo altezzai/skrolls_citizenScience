@@ -55,10 +55,10 @@ const Post = ({ feed }) => {
       <div
         key={feed.id}
         className={cn(
-          'post flex w-full gap-3 rounded-2xl bg-bg-secondary px-5 py-6',
+          'post flex w-full gap-3 rounded-2xl bg-bg-secondary px-5 py-6 max-md:p-2 max-md:rounded-lg',
           {
             'mb-2 rounded-t-none': inPostPage,
-            'mb-5': !inPostPage,
+            'mb-5 max-md:mb-2': !inPostPage,
           }
         )}
       >
@@ -66,15 +66,15 @@ const Post = ({ feed }) => {
 
         <div className="w-full pr-3">
           <div className="flex select-none items-center gap-3">
-            <div className="text-xl font-bold text-text-primary">
-              {feed.User?.username}
+            <div className="text-xl font-bold text-text-primary max-lg:text-lg max-md:text-base">
+              {feed.username}
             </div>
-            <div className="flex items-center rounded-full pb-2 text-xl text-text-muted"></div>
+            <div className="rounded-full bg-text-muted w-1 "></div>
             <div className="text-[0.9rem] font-bold text-text-muted">
               {formatDate(feed.createdAt)}
             </div>
           </div>
-          <div className="text-lg font-normal"> {feed.description}</div>
+          <Link to={`/post/${feed.id}`} className="text-lg font-normal"> {feed.description}</Link>
           <div className="my-4 flex flex-wrap gap-5 text-sm font-semibold text-text-secondary">
             {feed.link && (
               <div className="flex cursor-pointer gap-2 rounded-full bg-bg-muted px-4 py-2">

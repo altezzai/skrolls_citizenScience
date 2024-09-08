@@ -107,7 +107,7 @@ export const Heart = ({
       >
         {likeCount}
       </div>
-      {isModalOpen(MODAL_NAME) && <LikedList id={feedId} />}
+      {isModalOpen(MODAL_NAME) && <LikedList id={feedId} userId={userId}/>}
     </div>
   );
 };

@@ -7,7 +7,7 @@ import FileUpload from './FileUpload';
 import { apiClient } from '@/lib/api_client';
 
 import photo from '../../assets/profile.png';
-import url_icon from '../../assets/link_grey.svg'
+import url_icon from '../../assets/link_grey.svg';
 
 const AddPost = ({ show, handleClose }) => {
   const [filePreviews, setFilePreviews] = useState([]);
@@ -259,7 +259,7 @@ const AddPost = ({ show, handleClose }) => {
     >
       <form
         onSubmit={submit}
-        className="relative left-1/2 top-[15%] w-1/2 -translate-x-1/2 rounded-2xl border-2 border-solid border-border-primary bg-bg-secondary p-5"
+        className="relative left-1/2 top-[15%] w-1/2 -translate-x-1/2 rounded-2xl border-2 border-solid border-border-primary bg-bg-secondary p-5 max-lg:w-2/3 max-md:w-11/12"
         onClick={(e) => e.stopPropagation()}
       >
         <span
@@ -313,7 +313,7 @@ const AddPost = ({ show, handleClose }) => {
             id="link"
             name="link"
             placeholder="url (optional)"
-            className="w-full bg-inherit text-sm outline-none placeholder:select-none placeholder:text-text-muted"
+            className="w-full bg-inherit text-sm outline-none placeholder:select-none"
             value={link}
             onChange={(e) => setLink(e.target.value)}
           />
@@ -325,7 +325,7 @@ const AddPost = ({ show, handleClose }) => {
           files={files}
           setFiles={setFiles}
         />
-
+        
         <PostButton text={'Post it!'} />
       </form>
     </div>

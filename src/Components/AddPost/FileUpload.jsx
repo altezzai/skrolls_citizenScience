@@ -60,25 +60,28 @@ const FileUpload = ({ filePreviews, setFilePreviews, files, setFiles }) => {
               </span>
             </div>
           ))}
-          <label
-            htmlFor="uploadfile"
-            className={`cursor-pointer select-none rounded-xl bg-textarea px-14 py-5 ${isFileUploaded ? 'flex' : 'hidden'}`}
-          >
-            <img
-              src={uploadfile}
-              className="w-8"
-              alt="Add more files"
-              draggable="false"
-            />
-            <input
-              type="file"
-              id="uploadfile"
-              accept="image/*,video/*"
-              multiple
-              style={{ display: 'none' }}
-              onChange={handleFileChange}
-            />
-          </label>
+
+          {filePreviews.length < 3 && (
+            <label
+              htmlFor="uploadfile"
+              className={`cursor-pointer select-none rounded-xl bg-textarea px-14 py-5 ${isFileUploaded ? 'flex' : 'hidden'}`}
+            >
+              <img
+                src={uploadfile}
+                className="w-8"
+                alt="Add more files"
+                draggable="false"
+              />
+              <input
+                type="file"
+                id="uploadfile"
+                accept="image/*,video/*"
+                multiple
+                style={{ display: 'none' }}
+                onChange={handleFileChange}
+              />
+            </label>
+          )}
         </div>
       )}
 

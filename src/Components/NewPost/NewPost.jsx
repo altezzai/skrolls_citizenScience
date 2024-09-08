@@ -17,15 +17,15 @@ const NewPost = () => {
   };
 
   return (
-    <div className="my-3 flex w-full items-center gap-5 rounded-2xl bg-bg-secondary p-2">
+    <div className="my-3 flex w-full items-center gap-5 rounded-2xl bg-bg-secondary p-2 max-md:my-2 max-md:gap-3 max-md:rounded-lg">
       <ProfilePhoto img={photo} size={'2.5rem'} />
 
       <div
-        className="flex w-full cursor-pointer items-center justify-between text-base text-text-muted"
+        className="flex w-full cursor-pointer items-center justify-between text-base text-text-muted max-md:text-sm"
         onClick={handlePostClick}
       >
         What is new. Rafsal?
-        <div className="px-2">
+        <div className="px-2 max-md:px-1">
           <PostButton text={'Add Post!'} />
         </div>
       </div>
