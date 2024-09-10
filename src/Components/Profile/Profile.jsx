@@ -2,12 +2,12 @@ import { lazy, Suspense, useState } from 'react';
 
 import photo from '../../assets/profile.png';
 import ReadMore from '../ReadMore/ReadMore';
-import instagram from '../../assets/instagram.svg';
-import facebook from '../../assets/facebook.svg';
-import twitter from '../../assets/x.svg';
-import more from '../../assets/more.svg';
-import link from '../../assets/link.svg';
-import SkillBtn from '../SkillBtn/SkillBtn';
+import facebook_icon from '../../assets/facebook.svg';
+import twitter_icon from '../../assets/x.svg';
+import link_icon from '../../assets/link.svg';
+import github_icon from '../../assets/github.svg';
+import linkedin_icon from '../../assets/linkedin.svg';
+// import SkillBtn from '../SkillBtn/SkillBtn';
 
 const FollowList = lazy(() => import('../FollowList/FollowList'));
 
@@ -18,7 +18,7 @@ import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';
 import { Separator } from '@/Components/ui/separator';
 import { Link } from 'react-router-dom';
 
-const Profile = () => {
+const Profile = ({ userDetails }) => {
   const { openModal, isModalOpen } = useModal();
   const [selected, setSelected] = useState('followers');
   const [myProfile, setMyProfile] = useState(true);
@@ -32,15 +32,16 @@ const Profile = () => {
     <div className="mb-5 mt-6 flex w-full flex-col items-center justify-center gap-3 bg-bg-primary">
       <div className="relative">
         <ProfilePhoto img={photo} size={'8rem'} />
+
         <div className="absolute right-[10%] top-[77%] z-10 h-5 w-5 rounded-full border-[3px] border-bg-secondary bg-primary max-xl:h-4 max-xl:w-4"></div>
       </div>
 
       <div className="flex flex-col items-center justify-center">
         <div className="text-2xl font-semibold text-text-primary max-xl:text-xl">
-          Ishaque Risan
+          {userDetails.first_name}
         </div>
         <div className="text-xl text-text-secondary max-xl:text-lg">
-          @ishaque.risan
+          {'@' + userDetails.username}
         </div>
       </div>
 
@@ -68,12 +69,8 @@ const Profile = () => {
         )}
       </Suspense>
 
-      <div className="w-3/4 text-justify text-base text-text-hard max-xl:w-11/12">
-        <ReadMore sliceLength={135}>
-          Dive inot the digital realm with me! As a computer science student.
-          I&apos;m on a quest to conquer bugs, craft elegant code, and shape the
-          future of the web designing
-        </ReadMore>
+      <div className="w-3/4 flex justify-center items-center text-base text-text-hard max-xl:w-11/12 text-center">
+        <ReadMore sliceLength={135}>{userDetails.biography}</ReadMore>
       </div>
 
       {/* <div className="flex items-center gap-3">
@@ -85,53 +82,84 @@ const Profile = () => {
 
       <div className="flex items-center justify-center gap-5 py-3 max-xl:py-2">
         <div className="flex select-none gap-5 max-xl:gap-3">
-          <div className="flex cursor-pointer items-center justify-center rounded-full border-[1px] border-solid border-border-muted">
-            <img
-              src={instagram}
-              className="w-9 max-xl:w-8"
-              alt="instagram logo"
-              draggable="false"
-            />
-          </div>
-          <div className="flex w-9 cursor-pointer items-center justify-center rounded-full border-[1px] border-solid border-border-muted">
-            <img
-              src={twitter}
-              alt="x logo"
-              className="w-5 max-xl:w-4"
-              draggable="false"
-            />
-          </div>
-          <div className="flex cursor-pointer items-center justify-center rounded-full border-[1px] border-solid border-border-muted">
-            <img
-              src={facebook}
-              className="w-9 max-xl:w-8"
-              alt="facebook logo"
-              draggable="false"
-            />
-          </div>
-          <div className="flex w-9 cursor-pointer items-center justify-center rounded-full border-[1px] border-solid border-border-muted max-xl:w-8">
-            <img
-              src={more}
-              alt="more"
-              draggable="false"
-              className="w-5 max-xl:w-4"
-            />
-          </div>
+          {userDetails.linkedin && (
+            <Link
+              to={userDetails.linkedin}
+              target="_blank"
+              className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border-[1px] border-solid border-border-muted"
+            >
+              <img
+                src={linkedin_icon}
+                className="w-4 max-xl:w-8"
+                alt="instagram logo"
+                draggable="false"
+              />
+            </Link>
+          )}
+
+          {userDetails.twitter && (
+            <Link
+              to={userDetails.twitter}
+              target="_blank"
+              className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border-[1px] border-solid border-border-muted"
+            >
+              <img
+                src={twitter_icon}
+                alt="x logo"
+                className="w-5 max-xl:w-4"
+                draggable="false"
+              />
+            </Link>
+          )}
+
+          {userDetails.facebook && (
+            <Link
+              to={userDetails.facebook}
+              target="_blank"
+              className="flex cursor-pointer items-center justify-center rounded-full border-[1px] border-solid border-border-muted"
+            >
+              <img
+                src={facebook_icon}
+                className="w-9 max-xl:w-8"
+                alt="facebook logo"
+                draggable="false"
+              />
+            </Link>
+          )}
+
+          {userDetails.github && (
+            <Link
+              to={userDetails.github}
+              target="_blank"
+              className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border-[1px] border-solid border-border-muted max-xl:w-8"
+            >
+              <img
+                src={github_icon}
+                alt="more"
+                draggable="false"
+                className="w-5 max-xl:w-4"
+              />
+            </Link>
+          )}
         </div>
 
         <Separator orientation="vertical" className="h-5 bg-border-primary" />
 
-        <div className="flex cursor-pointer gap-3 rounded-full border-[1px] border-solid border-border-muted bg-text-primary px-5 py-2">
+        <Link
+          to={userDetails.website}
+          target="_blank"
+          className="flex cursor-pointer gap-3 rounded-full border-[1px] border-solid border-border-muted bg-text-primary px-5 py-2"
+        >
           <img
-            src={link}
+            src={link_icon}
             alt="link icon"
             draggable="false"
             className="w-6 select-none invert"
           />
-          <Link className="text-sm font-semibold text-bg-secondary">
-            www.mywebsite.com
-          </Link>
-        </div>
+          <div className="text-sm font-semibold text-bg-secondary">
+            {userDetails.website}
+          </div>
+        </Link>
       </div>
 
       <div className="flex gap-5">

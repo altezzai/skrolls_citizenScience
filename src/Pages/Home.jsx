@@ -40,6 +40,7 @@ const Home = () => {
   const updateViewCounts = async (viewList) => {
     try {
       const response = await apiClient.post('users/feeds/updateCounts', {
+        userId: 1,
         viewList,
         shareList: [], // You can pass shareList when needed
       });
@@ -138,7 +139,7 @@ const VisiblePost = ({ feed, onView }) => {
 
   useEffect(() => {
     if (isVisible) {
-      console.log(`Post ${feed.id} is visible`);
+      // console.log(`Post ${feed.id} is visible`);
       onView(feed.id); // Call onView when the post is visible
     }
   }, [isVisible, feed.id, onView]);
