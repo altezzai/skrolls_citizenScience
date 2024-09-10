@@ -23,7 +23,7 @@ const ProfileNavContainer = () => {
     {
       id: 'post',
       label: 'Post',
-      content: <div className="mt-4"><MyPost userId={2}/></div>,
+      content: <div className="mt-4"><MyPost userId={1}/></div>,
     },
     {
       id: 'research',
