@@ -11,7 +11,7 @@ export const Notification = ({
   return (
     <>
       <div className="flex items-center justify-center gap-3 text-sm font-medium">
-        <ProfilePhoto img={profilePic} size={'2rem'} />
+        <ProfilePhoto img={profilePic} className={'h-10 w-10'} />
         <span className="text-primary">{username}</span>
         <span className="text-text-primary">{text}</span>
         <div className="h-1 w-1 rounded-full bg-text-muted"></div>

@@ -31,7 +31,6 @@ export const LikedList = ({ id, userId }) => {
       }
     };
     fetchLikeList();
-
   }, [userId, id]);
 
   return (
@@ -42,12 +41,20 @@ export const LikedList = ({ id, userId }) => {
       <div className="flex max-w-md items-center rounded-t-3xl border-b-2 border-text-primary bg-bg-secondary py-2 pl-8 text-base font-semibold">
         Liked By
       </div>
+
       <div className="flex h-[500px] max-w-md flex-col gap-3 rounded-b-3xl bg-bg-secondary px-8 py-5">
-        <UserFollowListItem user={{ name: likedList.username, username: 'manu' }} />
+        {likedList.map((like) => (
+          <div key={like.id}>
+            <UserFollowListItem
+              user={{ name: like.username, username: like.username }}
+            />
+          </div>
+        ))}
+        {/* <UserFollowListItem user={{ name: likedList.username, username: 'manu' }} />
         <UserFollowListItem user={{ name: 'Lively', username: 'lv' }} />
         <UserFollowListItem user={{ name: 'Jishnu', username: 'jish' }} />
         <UserFollowListItem user={{ name: 'Manu', username: 'manooo' }} />
-        <UserFollowListItem user={{ name: 'William', username: 'will' }} />
+        <UserFollowListItem user={{ name: 'William', username: 'will' }} /> */}
       </div>
     </div>
   );

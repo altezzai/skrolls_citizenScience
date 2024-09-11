@@ -53,7 +53,7 @@ export const AddMyComment = ({ feedId, onCommentAdded }) => {
       className="mb-2 flex h-14 w-full items-center justify-between rounded-xl bg-bg-secondary px-4 py-4"
     >
       <div className="flex w-full gap-3">
-        <ProfilePhoto img={photo} size={'2rem'} />
+        <ProfilePhoto img={photo} className={'h-10 w-10'} />
         <input
           type="text"
           placeholder="Enter your Comment"

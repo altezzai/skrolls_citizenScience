@@ -11,7 +11,7 @@ const UserMsgListItem = ({ user, isActive, onClick }) => {
       onClick={onClick}
     >
       <div className="user-msg-details flex items-center gap-3">
-        <ProfilePhoto img={photo} size={'55px'} />
+        <ProfilePhoto img={photo} className={'h-10 w-10'} />
         <div className="user-msg-name flex flex-col">
           <div className="user-name min-w-0 truncate">{user.name}</div>
           <div className="user-final-msg h-5 flex-nowrap overflow-hidden truncate">

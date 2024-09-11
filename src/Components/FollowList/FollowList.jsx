@@ -9,7 +9,7 @@ const UserFollowListItem = lazy(
   () => import('../UserFollowListItem/UserFollowListItem')
 );
 
-const FollowList = ({ defaultActiveTab }) => {
+const FollowList = ({ defaultActiveTab, followers, following }) => {
   const { isModalOpen, closeModal } = useModal();
 
   const followListRef = useClickOutside(isModalOpen(modals.FOLLOW_LIST), () => {

@@ -62,7 +62,7 @@ const Post = ({ feed }) => {
           }
         )}
       >
-        <ProfilePhoto img={feed.User?.profilePhoto} size={'2.6rem'} />
+        <ProfilePhoto img={feed.User?.profilePhoto} className={'h-10 w-10'} />
 
         <div className="w-full pr-3">
           <div className="flex select-none items-center gap-3">

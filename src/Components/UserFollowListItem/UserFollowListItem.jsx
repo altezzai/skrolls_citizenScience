@@ -29,11 +29,15 @@ const UserFollowListItem = ({
 
   return (
     <div className="flex items-center justify-between gap-16 max-xl:gap-10">
-      <div className="flex gap-2 items-center">
-        <ProfilePhoto img={photo} size={'2rem'} />
+      <div className="flex items-center gap-2">
+        <ProfilePhoto img={photo} className={'h-10 w-10'} />
         <div className="flex flex-col">
-          <div className="text-base font-medium max-xl:text-sm">{user.name}</div>
-          <div className="text-sm max-xl:text-xs text-text-secondary">@{user.username}</div>
+          <div className="text-base font-medium max-xl:text-sm">
+            {user.name}
+          </div>
+          <div className="text-sm text-text-secondary max-xl:text-xs">
+            @{user.username}
+          </div>
         </div>
       </div>
       <div className="max-lg:hidden">

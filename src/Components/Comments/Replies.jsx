@@ -39,11 +39,11 @@ export const Replies = ({ commentId }) => {
           className="flex w-full gap-2 border-l-2 bg-textarea px-5 py-3"
           key={reply.id}
         >
-          <ProfilePhoto img={reply.ProfilePhoto} size={'2rem'} />
+          <ProfilePhoto img={reply.ProfilePhoto} className={'h-6 w-6'} />
 
           <div className="flex w-full flex-col">
             <div className="flex justify-between">
-              <div className="flex gap-6">
+              <div className="flex gap-6 items-center justify-center">
                 <div className="text-lg font-medium">{reply.username}</div>
                 <div className="select-none text-base font-normal text-text-muted">
                   {timeAgo(reply.createdAt)}

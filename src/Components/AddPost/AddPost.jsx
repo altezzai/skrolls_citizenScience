@@ -269,7 +269,7 @@ const AddPost = ({ show, handleClose }) => {
           &times;
         </span>
         <div className="mb-3 flex items-center gap-3">
-          <ProfilePhoto img={photo} size={'2.5rem'} />
+          <ProfilePhoto img={photo} className={'h-10 w-10'} />
           <div className="text-lg font-medium text-text-hard">Manu P</div>
         </div>
 
@@ -325,7 +325,7 @@ const AddPost = ({ show, handleClose }) => {
           files={files}
           setFiles={setFiles}
         />
-        
+
         <PostButton text={'Post it!'} />
       </form>
     </div>

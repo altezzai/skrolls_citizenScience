@@ -79,19 +79,19 @@ export const SharePost = () => {
 
       <div className="flex items-center justify-around gap-3 rounded-2xl bg-textarea px-1 py-3 text-xs">
         <div className="flex h-20 w-24 flex-col items-center justify-start gap-1">
-          <ProfilePhoto img={photo} size={'2.8rem'} />
+          <ProfilePhoto img={photo} className={'h-10 w-10'} />
           Rafsal
         </div>
         <div className="flex h-20 w-24 flex-col items-center justify-start gap-1 text-center">
-          <ProfilePhoto img={photo} size={'2.7rem'} />
+          <ProfilePhoto img={photo} className={'h-10 w-10'}/>
           Muhammed Rafsal
         </div>
         <div className="flex h-20 w-24 flex-col items-center justify-start gap-1">
-          <ProfilePhoto img={photo} size={'2.7rem'} />
+          <ProfilePhoto img={photo} className={'h-10 w-10'} />
           Rafsal N
         </div>
         <div className="flex h-20 w-24 flex-col items-center justify-start gap-1">
-          <ProfilePhoto img={photo} size={'2.7rem'} />
+          <ProfilePhoto img={photo} className={'h-10 w-10'} />
           Rafsal who
         </div>
       </div>

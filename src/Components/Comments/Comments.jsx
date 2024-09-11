@@ -64,11 +64,11 @@ export const Comments = ({ comments }) => {
           reply ? 'mb-0 rounded-b-none' : 'mb-1'
         }`}
       >
-        <ProfilePhoto img={photo} size={'2rem'} />
+        <ProfilePhoto img={photo} className={'h-8 w-8'} />
 
         <div className="flex w-full flex-col">
           <div className="flex justify-between">
-            <div className="flex gap-6">
+            <div className="flex gap-6 items-center justify-center">
               <div className="text-lg font-medium">{comments.username}</div>
               <div className="select-none text-base font-normal text-text-muted">
                 {timeAgo(comments.createdAt)}
@@ -128,7 +128,7 @@ export const Comments = ({ comments }) => {
             onClick={(e) => e.stopPropagation()}
             className="my-2 flex w-full items-center gap-5"
           >
-            <ProfilePhoto img={photo} size={'2rem'} />
+            <ProfilePhoto img={photo} className={'h-6 w-6'} />
             <div className="flex w-full rounded-lg bg-bg-secondary p-2">
               <input
                 type="text"

@@ -1,9 +1,10 @@
-export const ProfilePhoto = ({ img, size }) => {
+import { cn } from '@/lib/utils';
+
+export const ProfilePhoto = ({ img, className }) => {
   return (
     <img
       src={img}
-      className="select-none rounded-full"
-      style={{ height: size, width: size }}
+      className={cn('select-none rounded-full', className)}
       draggable="false"
     />
   );
