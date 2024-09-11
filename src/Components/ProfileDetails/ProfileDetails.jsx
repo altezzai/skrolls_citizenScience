@@ -1,8 +1,26 @@
 import './ProfileDetails.css';
 import DetailBox from '../DetailBox/DetailBox';
 import SkillBtn from '../SkillBtn/SkillBtn';
+import { useEffect } from 'react';
+import { apiClient } from '@/lib/api_client';
 
-const ProfileDetails = () => {
+const ProfileDetails = ({ userId }) => {
+  // useEffect(() => {
+  //   const fetchSkills = async () => {
+  //     try {
+  //       const response = await apiClient.get(`users/profile/${userId}/skill`, {
+  //         params: { userId },
+  //       });
+
+  //       console.log('Response', response.data);
+  //     } catch (error) {
+  //       console.error('Error fetching skills:', error);
+  //     }
+  //   };
+
+  //   fetchSkills();
+  // } , [userId]);
+
   return (
     <div className="profile-details">
       <DetailBox heading={'Personal Details'}>

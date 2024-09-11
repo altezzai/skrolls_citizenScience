@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 
 import photo from '../../assets/profile.png';
 import ReadMore from '../ReadMore/ReadMore';
@@ -17,21 +17,55 @@ import { ShareProfile } from './ShareProfile';
 import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';
 import { Separator } from '@/Components/ui/separator';
 import { Link } from 'react-router-dom';
+import { apiClient } from '@/lib/api_client';
 
-const Profile = ({ userDetails }) => {
+const Profile = ({ userDetails, userId }) => {
   const { openModal, isModalOpen } = useModal();
   const [selected, setSelected] = useState('followers');
   const [myProfile, setMyProfile] = useState(true);
+  const [followers, setFollowers] = useState([]);
+  const [following, setFollowing] = useState([]);
 
   const handleShowFollow = (selected) => {
     setSelected(selected);
     openModal(modals.FOLLOW_LIST);
   };
 
+  useEffect(() => {
+    const fetchFollowers = async () => {
+      try {
+        const response = await apiClient.get('/users/followers', {
+          params: { userId: userId },
+        });
+        setFollowers(response.data);
+      } catch (error) {
+        console.error('Error fetching followers List:', error);
+      }
+    };
+    fetchFollowers();
+  }, [userId]);
+
+  useEffect(() => {
+    const fetchFollowing = async () => {
+      try {
+        const response = await apiClient.get('users/followings', {
+          params: { userId: userId },
+        });
+        setFollowing(response.data);
+      } catch (error) {
+        console.error('Error fetching following List:', error);
+      }
+    };
+    fetchFollowing();
+  }, [userId]);
+
   return (
     <div className="mb-5 mt-6 flex w-full flex-col items-center justify-center gap-3 bg-bg-primary">
       <div className="relative">
-        <ProfilePhoto img={photo} size={'8rem'} />
+        <ProfilePhoto
+          img={photo}
+          className={'h-28 w-28 max-md:h-20 max-md:w-20'}
+        />
 
         <div className="absolute right-[10%] top-[77%] z-10 h-5 w-5 rounded-full border-[3px] border-bg-secondary bg-primary max-xl:h-4 max-xl:w-4"></div>
       </div>
@@ -48,28 +82,32 @@ const Profile = ({ userDetails }) => {
       <div className="flex items-center justify-center gap-5 text-2xl font-semibold text-text-primary max-xl:text-lg">
         <div
           className="cursor-pointer"
-          onClick={() => handleShowFollow('following')}
+          onClick={() => handleShowFollow('followers')}
         >
-          200 following
+          {followers.length + ' ' + 'followers'}
         </div>
 
         <Separator orientation="vertical" className="h-5 bg-border-primary" />
 
         <div
           className="cursor-pointer"
-          onClick={() => handleShowFollow('followers')}
+          onClick={() => handleShowFollow('following')}
         >
-          20k followers
+          {following.length + ' ' + 'following'}
         </div>
       </div>
 
       <Suspense fallback={<div>Loading...</div>}>
         {isModalOpen(modals.FOLLOW_LIST) && (
-          <FollowList defaultActiveTab={selected}></FollowList>
+          <FollowList
+            defaultActiveTab={selected}
+            followers={followers}
+            following={following}
+          ></FollowList>
         )}
       </Suspense>
 
-      <div className="w-3/4 flex justify-center items-center text-base text-text-hard max-xl:w-11/12 text-center">
+      <div className="flex w-3/4 items-center justify-center text-center text-base text-text-hard max-xl:w-11/12">
         <ReadMore sliceLength={135}>{userDetails.biography}</ReadMore>
       </div>
 
@@ -90,7 +128,7 @@ const Profile = ({ userDetails }) => {
             >
               <img
                 src={linkedin_icon}
-                className="w-4 max-xl:w-8"
+                className="w-4 max-md:w-3"
                 alt="instagram logo"
                 draggable="false"
               />
