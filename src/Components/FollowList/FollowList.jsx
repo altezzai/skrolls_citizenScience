@@ -1,4 +1,4 @@
-import { lazy, useState } from 'react';
+import { lazy, useState, useEffect } from 'react';
 import TabButtons from '../Tabs/TabButtons';
 import TabContent from '../Tabs/TabContent';
 import { modals } from '../../utils/constants.js';
@@ -15,27 +15,36 @@ const FollowList = ({ defaultActiveTab, followers, following }) => {
   const followListRef = useClickOutside(isModalOpen(modals.FOLLOW_LIST), () => {
     closeModal(modals.FOLLOW_LIST);
   });
-  const renderUserList = (count) => (
+
+
+  console.log('Followers', followers);
+  console.log('Following', following);
+
+  // Render user list based on the array of users
+  const renderUserList = (users, isFollowing) => (
     <div className="flex h-[500px] flex-col gap-4 overflow-y-scroll px-7 py-4 pr-0">
-      {[...Array(count)].map((_, index) => (
+      {users.map((user, index) => (
         <UserFollowListItem
           key={index}
-          user={{ name: 'Manuprasad', username: 'manu' }}
+          user={user}
+          isFollowing={isFollowing}
           confirmUnfollow={true}
         />
       ))}
     </div>
   );
+
+  // Define the tabs for followers and following lists
   const tabs = [
     {
       id: 'followers',
       label: 'Followers',
-      content: renderUserList(3),
+      content: renderUserList(followers, false),
     },
     {
       id: 'following',
       label: 'Following',
-      content: renderUserList(5),
+      content: renderUserList(following, true),
     },
   ];
 

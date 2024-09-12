@@ -10,6 +10,7 @@ export const LikedList = ({ id, userId }) => {
   const { isModalOpen, closeModal } = useModal();
   // const { postId } = useParams();
   const [likedList, setLikedList] = useState([]);
+  // const [followingList, setFollowingList] = useState([]);
   const LikedListRef = useClickOutside(
     isModalOpen(modals.LIKED_LIST + id),
     () => {
@@ -21,11 +22,11 @@ export const LikedList = ({ id, userId }) => {
     const fetchLikeList = async () => {
       try {
         const response = await apiClient.get(`/users/feeds/${id}/likes`, {
-          params: { userId, feedId: id, commentId: null },
+          params: { userId, feedId: id },
         });
         setLikedList(response.data);
 
-        console.log('Response', response.data);
+        console.log('Liked List', response.data);
       } catch (error) {
         console.error('Error fetching like list:', error);
       }
@@ -44,17 +45,14 @@ export const LikedList = ({ id, userId }) => {
 
       <div className="flex h-[500px] max-w-md flex-col gap-3 rounded-b-3xl bg-bg-secondary px-8 py-5">
         {likedList.map((like) => (
-          <div key={like.id}>
+          <div key={like.userId}>
             <UserFollowListItem
-              user={{ name: like.username, username: like.username }}
+              user={like}
+              isFollowing={like.isFollowing === 1 ? true : false}
+              isFollower={like.isFollower === 1 ? true : false}
             />
           </div>
         ))}
-        {/* <UserFollowListItem user={{ name: likedList.username, username: 'manu' }} />
-        <UserFollowListItem user={{ name: 'Lively', username: 'lv' }} />
-        <UserFollowListItem user={{ name: 'Jishnu', username: 'jish' }} />
-        <UserFollowListItem user={{ name: 'Manu', username: 'manooo' }} />
-        <UserFollowListItem user={{ name: 'William', username: 'will' }} /> */}
       </div>
     </div>
   );

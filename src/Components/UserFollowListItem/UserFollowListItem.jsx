@@ -6,11 +6,14 @@ import UnfollowPopup from '../UnfollowPopup/UnfollowPopup';
 import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';
 
 const UserFollowListItem = ({
+  userId = 1,
   user,
   confirmUnfollow = false,
   btnClassName,
+  isFollowing,
+  isFollower,
 }) => {
-  const [following, setFollowing] = useState(false);
+  const [following, setFollowing] = useState(isFollowing);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleClick = () => {
@@ -33,28 +36,32 @@ const UserFollowListItem = ({
         <ProfilePhoto img={photo} className={'h-10 w-10'} />
         <div className="flex flex-col">
           <div className="text-base font-medium max-xl:text-sm">
-            {user.name}
+            {user.first_name}
           </div>
           <div className="text-sm text-text-secondary max-xl:text-xs">
             @{user.username}
           </div>
         </div>
       </div>
-      <div className="max-lg:hidden">
-        <FollowButton
-          follow={following}
-          onClick={handleClick}
-          className={btnClassName}
-        />
-        {isModalOpen && (
-          <UnfollowPopup
-            setFollowing={setFollowing}
-            onUnfollow={handleUnfollow}
-            isModalOpen={isModalOpen}
-            setIsModalOpen={setIsModalOpen}
+      {userId != user.userId && (
+        <div className="max-lg:hidden">
+          <FollowButton
+            following={following}
+            follower={isFollower}
+            onClick={handleClick}
+            className={btnClassName}
           />
-        )}
-      </div>
+
+          {isModalOpen && (
+            <UnfollowPopup
+              setFollowing={setFollowing}
+              onUnfollow={handleUnfollow}
+              isModalOpen={isModalOpen}
+              setIsModalOpen={setIsModalOpen}
+            />
+          )}
+        </div>
+      )}
     </div>
   );
 };
