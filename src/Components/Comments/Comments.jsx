@@ -91,7 +91,6 @@ export const Comments = ({ comments }) => {
                 textclr={'text-text-secondary'}
                 likes={comments.likeCount}
                 commentId={comments.id}
-                feedId={comments.feedId}
                 userId={1}
               />
               <img

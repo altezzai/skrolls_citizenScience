@@ -37,7 +37,7 @@ export const LikedList = ({ id, userId }) => {
   return (
     <div
       ref={LikedListRef}
-      className="absolute left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2"
+      className="absolute left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 w-fit"
     >
       <div className="flex max-w-md items-center rounded-t-3xl border-b-2 border-text-primary bg-bg-secondary py-2 pl-8 text-base font-semibold">
         Liked By

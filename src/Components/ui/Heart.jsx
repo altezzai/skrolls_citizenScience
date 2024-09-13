@@ -42,10 +42,21 @@ export const Heart = ({
   useEffect(() => {
     const fetchLikeStatus = async () => {
       try {
-        const response = await apiClient.get(`/users/feeds/${feedId}/likes`, {
-          params: { userId, feedId, commentId },
-        });
-        const likedByUser = response.data.some(
+        let response;
+        if (feedId) {
+          response = await apiClient.get(`/users/feeds/${feedId}/likes`, {
+            params: { userId },
+          });
+        } else if (commentId) {
+          response = await apiClient.get(
+            `/users/feeds/comments/${commentId}/likes`,
+            {
+              params: { userId },
+            }
+          );
+        }
+
+        const likedByUser = response?.data?.some(
           (like) => like.userId === userId
         );
         setLiked(likedByUser);
@@ -55,7 +66,7 @@ export const Heart = ({
     };
 
     fetchLikeStatus();
-  }, [userId, postId]);
+  }, [userId, feedId, commentId]);
 
   useEffect(() => {
     const timer = setTimeout(async () => {
@@ -100,14 +111,16 @@ export const Heart = ({
       </div>
       <div
         onClick={() => {
-          if (!disableClick) {
-            openModal(MODAL_NAME);
+          if (!disableClick && feedId) {
+            openModal(MODAL_NAME); // Only open modal for feed likes
           }
         }}
       >
-        {likeCount}
+        {likeCount > 0 && <p>{likeCount}</p>}
       </div>
-      {isModalOpen(MODAL_NAME) && <LikedList id={feedId} userId={userId}/>}
+      {feedId && isModalOpen(MODAL_NAME) && (
+        <LikedList id={feedId} userId={userId} />
+      )}
     </div>
   );
 };

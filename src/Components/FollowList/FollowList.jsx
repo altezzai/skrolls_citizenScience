@@ -57,14 +57,14 @@ const FollowList = ({ defaultActiveTab, userId }) => {
   console.log('Following', following);
 
   // Render user list based on the array of users
-  const renderUserList = (users, isFollowing) => (
+  const renderUserList = (users) => (
     <div className="flex h-[500px] flex-col gap-4 overflow-y-scroll px-7 py-4 pr-0">
       {users.map((user, index) => (
         <UserFollowListItem
           key={index}
           user={user}
-          isFollowing={isFollowing}
           confirmUnfollow={true}
+          isFollowing={user.isFollowing === 1 ? true : false}
         />
       ))}
     </div>
@@ -75,12 +75,12 @@ const FollowList = ({ defaultActiveTab, userId }) => {
     {
       id: 'followers',
       label: 'Followers',
-      content: renderUserList(followers, false),
+      content: renderUserList(followers),
     },
     {
       id: 'following',
       label: 'Following',
-      content: renderUserList(following, true),
+      content: renderUserList(following),
     },
   ];
 

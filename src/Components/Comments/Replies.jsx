@@ -43,7 +43,7 @@ export const Replies = ({ commentId }) => {
 
           <div className="flex w-full flex-col">
             <div className="flex justify-between">
-              <div className="flex gap-6 items-center justify-center">
+              <div className="flex items-center justify-center gap-6">
                 <div className="text-lg font-medium">{reply.username}</div>
                 <div className="select-none text-base font-normal text-text-muted">
                   {timeAgo(reply.createdAt)}
@@ -66,7 +66,6 @@ export const Replies = ({ commentId }) => {
                   textclr={'text-text-secondary'}
                   userId={1}
                   likes={reply.likeCount}
-                  feedId={postId}
                   commentId={reply.id}
                 />
                 <img
