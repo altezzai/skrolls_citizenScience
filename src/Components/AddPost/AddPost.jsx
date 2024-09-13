@@ -31,7 +31,7 @@ const AddPost = ({ show, handleClose }) => {
         const response = await apiClient.get('users/search/user', {
           params: {
             userId: 1,
-            search: mentionSearchTerm,
+            q: mentionSearchTerm,
           },
         });
         setUsers(response.data);
