@@ -19,14 +19,14 @@ const Home = () => {
       setLoading(true);
       try {
         // Fetch feeds from the API (without userId to get all posts)
-        const res = await apiClient.get(`users/feeds`, {
+        const response = await apiClient.get(`users/feeds`, {
           params: {
             userId: 1,
             page, // Current page for pagination
             limit, // Number of items per page
           },
         });
-        setFeeds(res.data);
+        setFeeds((prevFeeds) => [...prevFeeds, ...response.data]);
       } catch (error) {
         console.error('Error fetching feeds:', error);
       } finally {
@@ -120,14 +120,12 @@ const Home = () => {
         </>
       )}
 
-      {feeds.map((feed) => (
-        <div key={feed.id}>
-          <VisiblePost
-            key={feed.id}
-            feed={feed}
-            onView={handleFeedVisibility}
-          />
-        </div>
+      {feeds.map((feed, index) => (
+        <VisiblePost
+          key={`${feed.id}-${index}`}
+          feed={feed}
+          onView={handleFeedVisibility}
+        />
       ))}
     </div>
   );
@@ -146,7 +144,7 @@ const VisiblePost = ({ feed, onView }) => {
 
   return (
     <div ref={postRef}>
-      <Post feed={feed} isVisible={isVisible} />
+      <Post key={feed.id} feed={feed} isVisible={isVisible} />
     </div>
   );
 };

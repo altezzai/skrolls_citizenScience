@@ -33,7 +33,7 @@ const UserFollowListItem = ({
   return (
     <div className="flex items-center justify-between gap-16 max-xl:gap-10">
       <div className="flex items-center gap-2">
-        <ProfilePhoto img={photo} className={'h-10 w-10'} />
+        <ProfilePhoto img={photo} className={'h-9 w-9'} />
         <div className="flex flex-col">
           <div className="text-base font-medium max-xl:text-sm">
             {user.first_name}

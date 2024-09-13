@@ -4,18 +4,54 @@ import TabContent from '../Tabs/TabContent';
 import { modals } from '../../utils/constants.js';
 import useClickOutside from '../../hooks/useClickOutside.js';
 import { useModal } from '../../context/ModalContext.jsx';
+import { apiClient } from '@/lib/api_client';
 
 const UserFollowListItem = lazy(
   () => import('../UserFollowListItem/UserFollowListItem')
 );
 
-const FollowList = ({ defaultActiveTab, followers, following }) => {
+const FollowList = ({ defaultActiveTab, userId }) => {
   const { isModalOpen, closeModal } = useModal();
+  const [followers, setFollowers] = useState([]);
+  const [following, setFollowing] = useState([]);
 
   const followListRef = useClickOutside(isModalOpen(modals.FOLLOW_LIST), () => {
     closeModal(modals.FOLLOW_LIST);
   });
 
+  useEffect(() => {
+    const fetchFollowers = async () => {
+      try {
+        const response = await apiClient.get('users/followers', {
+          params: {
+            userId: userId,
+            currentUserId: userId,
+          },
+        });
+        setFollowers(response.data);
+      } catch (error) {
+        console.error('Error fetching followers list:', error);
+      }
+    };
+    fetchFollowers();
+  }, [userId]);
+
+  useEffect(() => {
+    const fetchFollowing = async () => {
+      try {
+        const response = await apiClient.get('users/followings', {
+          params: {
+            userId: userId,
+            currentUserId: userId,
+          },
+        });
+        setFollowing(response.data);
+      } catch (error) {
+        console.error('Error fetching following List:', error);
+      }
+    };
+    fetchFollowing();
+  }, [userId]);
 
   console.log('Followers', followers);
   console.log('Following', following);

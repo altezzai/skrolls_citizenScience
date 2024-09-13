@@ -17,8 +17,8 @@ export const Followers = ({
   useEffect(() => {
     const fetchFollowers = async () => {
       try {
-        const response = await apiClient.get('/users/followers', {
-          params: { userId: userId },
+        const response = await apiClient.get('users/followers', {
+          params: { userId: userId, currentUserId: userId },
         });
         setFollowers(response.data);
       } catch (error) {
@@ -32,7 +32,7 @@ export const Followers = ({
     const fetchFollowing = async () => {
       try {
         const response = await apiClient.get('users/followings', {
-          params: { userId: userId },
+          params: { userId: userId, currentUserId: userId },
         });
         setFollowing(response.data);
       } catch (error) {
@@ -58,16 +58,18 @@ export const Followers = ({
         ) : undefined}
       </div>
 
-      {followers.map((follower) => (
-        <UserFollowListItem
-          key={follower.followerId}
-          user={follower}
-          isFollowing={followingIds.has(follower.followerId)} // Check if the follower is also being followed
-          btnClassName={'w-fit'}
-        />
-      ))}
+      <div className='flex flex-col gap-2'>
+        {followers.map((follower) => (
+          <UserFollowListItem
+            key={follower.followerId}
+            user={follower}
+            isFollowing={followingIds.has(follower.followerId)}
+            btnClassName={'w-fit'}
+          />
+        ))}
+      </div>
 
-{followers.length > 5 && (
+      {followers.length > 5 && (
         <div className="cursor-pointer items-center pt-5 text-center">
           <button
             className="border-b-[1px] border-solid border-text-primary text-sm text-text-primary max-xl:text-xs"

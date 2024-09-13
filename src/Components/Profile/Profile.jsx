@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { lazy, Suspense, useState } from 'react';
 
 import photo from '../../assets/profile.png';
 import ReadMore from '../ReadMore/ReadMore';
@@ -17,47 +17,16 @@ import { ShareProfile } from './ShareProfile';
 import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';
 import { Separator } from '@/Components/ui/separator';
 import { Link } from 'react-router-dom';
-import { apiClient } from '@/lib/api_client';
 
 const Profile = ({ userDetails, userId }) => {
   const { openModal, isModalOpen } = useModal();
   const [selected, setSelected] = useState('followers');
   const [myProfile, setMyProfile] = useState(true);
-  const [followers, setFollowers] = useState([]);
-  const [following, setFollowing] = useState([]);
 
   const handleShowFollow = (selected) => {
     setSelected(selected);
     openModal(modals.FOLLOW_LIST);
   };
-
-  useEffect(() => {
-    const fetchFollowers = async () => {
-      try {
-        const response = await apiClient.get('/users/followers', {
-          params: { userId: userId },
-        });
-        setFollowers(response.data);
-      } catch (error) {
-        console.error('Error fetching followers List:', error);
-      }
-    };
-    fetchFollowers();
-  }, [userId]);
-
-  useEffect(() => {
-    const fetchFollowing = async () => {
-      try {
-        const response = await apiClient.get('users/followings', {
-          params: { userId: userId },
-        });
-        setFollowing(response.data);
-      } catch (error) {
-        console.error('Error fetching following List:', error);
-      }
-    };
-    fetchFollowing();
-  }, [userId]);
 
   return (
     <div className="mb-5 mt-6 flex w-full flex-col items-center justify-center gap-3 bg-bg-primary">
@@ -84,7 +53,7 @@ const Profile = ({ userDetails, userId }) => {
           className="cursor-pointer"
           onClick={() => handleShowFollow('followers')}
         >
-          {followers.length + ' ' + 'followers'}
+          {userDetails.followersCount + ' ' + 'followers'}
         </div>
 
         <Separator orientation="vertical" className="h-5 bg-border-primary" />
@@ -93,17 +62,13 @@ const Profile = ({ userDetails, userId }) => {
           className="cursor-pointer"
           onClick={() => handleShowFollow('following')}
         >
-          {following.length + ' ' + 'following'}
+          {userDetails.followingCount + ' ' + 'following'}
         </div>
       </div>
 
       <Suspense fallback={<div>Loading...</div>}>
         {isModalOpen(modals.FOLLOW_LIST) && (
-          <FollowList
-            defaultActiveTab={selected}
-            followers={followers}
-            following={following}
-          ></FollowList>
+          <FollowList defaultActiveTab={selected} userId={userId}></FollowList>
         )}
       </Suspense>
 
