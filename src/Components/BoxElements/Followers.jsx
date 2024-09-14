@@ -11,7 +11,6 @@ export const Followers = ({
   userId = 1,
 }) => {
   const [followers, setFollowers] = useState([]);
-  const [following, setFollowing] = useState([]);
   const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
@@ -28,23 +27,6 @@ export const Followers = ({
     fetchFollowers();
   }, [userId]);
 
-  useEffect(() => {
-    const fetchFollowing = async () => {
-      try {
-        const response = await apiClient.get('users/followings', {
-          params: { userId: userId, currentUserId: userId },
-        });
-        setFollowing(response.data);
-      } catch (error) {
-        console.error('Error fetching following List:', error);
-      }
-    };
-    fetchFollowing();
-  }, [userId]);
-
-  // Create a set of following IDs for quick lookup
-  const followingIds = new Set(following.map((user) => user.followingId));
-
   const followersToDisplay = showAll ? followers : followers.slice(0, 5);
 
   return (
@@ -58,12 +40,13 @@ export const Followers = ({
         ) : undefined}
       </div>
 
-      <div className='flex flex-col gap-2'>
+      <div className="flex flex-col gap-2">
         {followers.map((follower) => (
           <UserFollowListItem
             key={follower.followerId}
+            targetUserId={follower.followerId}
             user={follower}
-            isFollowing={followingIds.has(follower.followerId)}
+            isFollowing={follower.isFollowing === 1 ? true : false}
             btnClassName={'w-fit'}
           />
         ))}

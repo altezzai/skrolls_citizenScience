@@ -53,15 +53,13 @@ const FollowList = ({ defaultActiveTab, userId }) => {
     fetchFollowing();
   }, [userId]);
 
-  console.log('Followers', followers);
-  console.log('Following', following);
-
   // Render user list based on the array of users
-  const renderUserList = (users) => (
+  const renderUserList = (users, isFollowerList) => (
     <div className="flex h-[500px] flex-col gap-4 overflow-y-scroll px-7 py-4 pr-0">
       {users.map((user, index) => (
         <UserFollowListItem
           key={index}
+          targetUserId={isFollowerList ? user.followerId : user.followingId}
           user={user}
           confirmUnfollow={true}
           isFollowing={user.isFollowing === 1 ? true : false}
@@ -75,12 +73,12 @@ const FollowList = ({ defaultActiveTab, userId }) => {
     {
       id: 'followers',
       label: 'Followers',
-      content: renderUserList(followers),
+      content: renderUserList(followers, true),
     },
     {
       id: 'following',
       label: 'Following',
-      content: renderUserList(following),
+      content: renderUserList(following, false),
     },
   ];
 

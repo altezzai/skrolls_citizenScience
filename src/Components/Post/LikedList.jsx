@@ -25,8 +25,6 @@ export const LikedList = ({ id, userId }) => {
           params: { userId, feedId: id },
         });
         setLikedList(response.data);
-
-        console.log('Liked List', response.data);
       } catch (error) {
         console.error('Error fetching like list:', error);
       }
@@ -37,7 +35,7 @@ export const LikedList = ({ id, userId }) => {
   return (
     <div
       ref={LikedListRef}
-      className="absolute left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 w-fit"
+      className="absolute left-1/2 top-1/2 z-50 min-w-80 -translate-x-1/2 -translate-y-1/2"
     >
       <div className="flex max-w-md items-center rounded-t-3xl border-b-2 border-text-primary bg-bg-secondary py-2 pl-8 text-base font-semibold">
         Liked By
