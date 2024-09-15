@@ -46,6 +46,7 @@ export const LikedList = ({ id, userId }) => {
           <div key={like.userId}>
             <UserFollowListItem
               user={like}
+              targetUserId={like.userId}
               isFollowing={like.isFollowing === 1 ? true : false}
               isFollower={like.isFollower === 1 ? true : false}
             />

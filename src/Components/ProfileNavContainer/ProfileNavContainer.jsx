@@ -13,6 +13,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/Components/ui/sheet';
+import { Overlay } from './Overlay';
 
 // const MyPost = lazy(() => import('./MyPost'));
 const ProfileDetails = lazy(() => import('../ProfileDetails/ProfileDetails'));
@@ -60,13 +61,12 @@ const ProfileNavContainer = () => {
                 Add Research Activity
               </div>
             </SheetTrigger>
-            <SheetContent className="">
+            <SheetContent className="p-0">
               <SheetHeader>
                 <SheetTitle></SheetTitle>
-                <SheetDescription>
-
-                </SheetDescription>
               </SheetHeader>
+              <SheetDescription></SheetDescription>
+              <Overlay />
             </SheetContent>
           </Sheet>
         </div>

@@ -69,7 +69,7 @@ const Post = ({ feed }) => {
             <div className="text-xl font-bold text-text-primary max-lg:text-lg max-md:text-base">
               {feed.username}
             </div>
-            <div className="rounded-full bg-text-muted w-1 "></div>
+            <div className="h-1 w-1 rounded-full bg-text-muted"></div>
             <div className="text-[0.9rem] font-bold text-text-muted">
               {formatDate(feed.createdAt)}
             </div>
