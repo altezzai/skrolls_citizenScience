@@ -17,6 +17,7 @@ import { PostPage } from './Pages/PostPage';
 import { Settings } from './Pages/Settings';
 import { Login } from './Pages/Login';
 import { Register } from './Pages/Register';
+import { UserProfile } from './Pages/UserProfile';
 
 function App() {
   const location = useLocation();
@@ -69,6 +70,14 @@ function App() {
               }
             />
             <Route
+              path="/usersprofile/:targetUserId"
+              element={
+                <div className="center-container mx-12 max-xl:mx-3">
+                  <UserProfile />
+                </div>
+              }
+            />
+            <Route
               path="/notifications"
               element={
                 <div className="center-container mx-12 max-xl:mx-3">
@@ -101,7 +110,7 @@ function App() {
             className={`${
               inMessagePage
                 ? 'hidden'
-                : 'flex flex-col justify-start scrollbar-hide mr-12 h-full w-80 shrink-0 overflow-y-scroll pt-10 max-xl:mr-2 max-xl:min-w-60 max-xl:shrink max-xl:pt-2 max-lg:hidden'
+                : 'scrollbar-hide mr-12 flex h-full w-80 shrink-0 flex-col justify-start overflow-y-scroll pt-10 max-xl:mr-2 max-xl:min-w-60 max-xl:shrink max-xl:pt-2 max-lg:hidden'
             }`}
             style={{ scrollbarWidth: 'none' }}
           >

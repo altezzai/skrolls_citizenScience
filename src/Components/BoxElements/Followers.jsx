@@ -47,7 +47,7 @@ export const Followers = ({
             targetUserId={follower.followerId}
             user={follower}
             isFollowing={follower.isFollowing === 1 ? true : false}
-            btnClassName={'w-fit'}
+            btnClassName={'w-24 max-xl:w-20 max-xl:text-xs'}
           />
         ))}
       </div>

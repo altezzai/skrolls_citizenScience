@@ -31,13 +31,21 @@ import {
 import { SharePost } from './SharePost';
 import { Description } from '@radix-ui/react-dialog';
 
-const Post = ({ feed }) => {
+const Post = ({ feed, userId = 1 }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const inPostPage = location.pathname.includes('/post');
 
   const handleCommentClick = (postId) => {
     navigate(`/post/${postId}`);
+  };
+
+  const handleUserProfile = (targetUserId) => {
+    if (userId === targetUserId) {
+      navigate('/profile');
+    } else {
+      navigate(`/userprofile/${targetUserId}`);
+    }
   };
 
   return (
@@ -55,15 +63,19 @@ const Post = ({ feed }) => {
       <div
         key={feed.id}
         className={cn(
-          'post flex w-full gap-3 rounded-2xl bg-bg-secondary px-5 py-6 max-md:p-2 max-md:rounded-lg',
+          'post flex w-full gap-3 rounded-2xl bg-bg-secondary px-5 py-6 max-md:rounded-lg max-md:p-2',
           {
             'mb-2 rounded-t-none': inPostPage,
             'mb-5 max-md:mb-2': !inPostPage,
           }
         )}
       >
-        <ProfilePhoto img={feed.User?.profilePhoto} className={'h-10 w-10'} />
-
+        <div
+          onClick={() => handleUserProfile(feed.userId)}
+          className="cursor-pointer"
+        >
+          <ProfilePhoto img={feed.User?.profilePhoto} className={'h-10 w-10'} />
+        </div>
         <div className="w-full pr-3">
           <div className="flex select-none items-center gap-3">
             <div className="text-xl font-bold text-text-primary max-lg:text-lg max-md:text-base">
@@ -74,7 +86,9 @@ const Post = ({ feed }) => {
               {formatDate(feed.createdAt)}
             </div>
           </div>
-          <Link to={`/post/${feed.id}`} className="text-lg font-normal"> {feed.description}</Link>
+          <Link to={`/post/${feed.id}`} className="text-lg font-normal">
+            {feed.description}
+          </Link>
           <div className="my-4 flex flex-wrap gap-5 text-sm font-semibold text-text-secondary">
             {feed.link && (
               <div className="flex cursor-pointer gap-2 rounded-full bg-bg-muted px-4 py-2">
