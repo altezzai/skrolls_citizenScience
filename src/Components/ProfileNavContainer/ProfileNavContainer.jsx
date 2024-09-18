@@ -21,14 +21,14 @@ const ResearchActivities = lazy(
   () => import('../ResearchActivities/ResearchActivities')
 );
 
-const ProfileNavContainer = () => {
+const ProfileNavContainer = ({ userDetails, userId }) => {
   const tabs = [
     {
       id: 'profile',
       label: 'Profile',
       content: (
         <div className="mt-4">
-          <ProfileDetails userId={1} />
+          <ProfileDetails userDetails={userDetails} userId={userId} />
         </div>
       ),
     },
@@ -37,7 +37,7 @@ const ProfileNavContainer = () => {
       label: 'Post',
       content: (
         <div className="mt-4">
-          <MyPost userId={1} />
+          <MyPost userId={userId} />
         </div>
       ),
     },

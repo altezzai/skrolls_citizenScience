@@ -26,7 +26,7 @@ const ProfileContainer = () => {
   return (
     <div className="Profile-container">
       <Profile userDetails={userDetails} userId={userId}/>
-      <ProfileNavContainer />
+      <ProfileNavContainer userDetails={userDetails} userId={userId}/>
     </div>
   );
 };

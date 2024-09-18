@@ -29,7 +29,7 @@ export const UserProfile = () => {
   return (
     <div>
       <Profile userDetails={userDetails} userId={targetUserId} />
-      <ProfileNavContainer />
+      <ProfileNavContainer userDetails={userDetails} userId={targetUserId} />
     </div>
   );
 };
