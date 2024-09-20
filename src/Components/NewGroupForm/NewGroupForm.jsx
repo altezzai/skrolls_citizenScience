@@ -121,7 +121,7 @@ export const NewGroupForm = () => {
         <input
           type="submit"
           value="Create Group"
-          className="cursor-pointer select-none rounded-md px-4 py-2 text-bg-secondary bg-primary hover:bg-red-500 active:bg-red-900"
+          className="cursor-pointer select-none rounded-md bg-primary px-4 py-2 text-bg-secondary hover:bg-red-500 active:bg-red-900"
         />
       </div>
     </form>
