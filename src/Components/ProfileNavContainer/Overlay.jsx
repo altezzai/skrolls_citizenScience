@@ -70,10 +70,7 @@ export const Overlay = () => {
             </div>
           ))}
         </DialogTrigger>
-        <DialogContent
-          className="px-2 py-3"
-          t
-        >
+        <DialogContent className="px-2 py-3">
           <DialogHeader>
             <DialogTitle></DialogTitle>
             <DialogDescription></DialogDescription>

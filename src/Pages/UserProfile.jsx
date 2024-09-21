@@ -8,7 +8,7 @@ export const UserProfile = () => {
   const [userDetails, setUserDetails] = useState([]);
   const { targetUserId } = useParams();
 
-  console.log(targetUserId);
+  console.log('Target user ID:', targetUserId);
 
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -24,7 +24,7 @@ export const UserProfile = () => {
       }
     };
     fetchUserDetails();
-  }, []);
+  }, [targetUserId]);
 
   return (
     <div>
