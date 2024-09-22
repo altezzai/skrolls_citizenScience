@@ -2,6 +2,7 @@ import DetailBox from '../DetailBox/DetailBox';
 import SkillBtn from '../SkillBtn/SkillBtn';
 import { useEffect, useState } from 'react';
 import { apiClient } from '@/lib/api_client';
+import getFullName from '@/utils/getFullName';
 
 const ProfileDetails = ({ userDetails, userId }) => {
   const [experiences, setExperiences] = useState([]);
@@ -88,11 +89,7 @@ const ProfileDetails = ({ userDetails, userId }) => {
                 Name
               </div>
               <div className="text-left text-xs font-bold text-text-primary">
-                {userDetails.first_name +
-                  ' ' +
-                  userDetails.middle_name +
-                  ' ' +
-                  userDetails.last_name}
+                {getFullName(userDetails)}
               </div>
             </div>
             <div className="mb-1 flex w-48 flex-col">
@@ -138,11 +135,11 @@ const ProfileDetails = ({ userDetails, userId }) => {
               <tbody>
                 {experiences.map((experience) => (
                   <tr
-                    className="text-left text-xs font-bold text-text-primary border-b-[1px] border-solid border-border-muted p-2 last:border-b-0"
+                    className="border-b-[1px] border-solid border-border-muted p-2 text-left text-xs font-bold text-text-primary last:border-b-0"
                     key={experience.id}
                   >
-                    <td className='py-2'>{experience.workspace}</td>
-                    <td className='py-2'>{experience.position}</td>
+                    <td className="py-2">{experience.workspace}</td>
+                    <td className="py-2">{experience.position}</td>
                   </tr>
                 ))}
               </tbody>
@@ -166,7 +163,7 @@ const ProfileDetails = ({ userDetails, userId }) => {
               <tbody>
                 {Educations.map((education, index) => (
                   <tr
-                    className="text-left text-xs font-bold text-text-primary border-b-[1px] border-solid border-border-muted p-2 last:border-b-0"
+                    className="border-b-[1px] border-solid border-border-muted p-2 text-left text-xs font-bold text-text-primary last:border-b-0"
                     key={education.id}
                   >
                     <td className="py-2">{index + 1}</td>
