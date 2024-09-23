@@ -7,6 +7,7 @@ import { GroupMemberAdd } from './GroupMemberAdd';
 import { DialogClose } from '@/Components/ui/dialog';
 
 export const NewGroupForm = () => {
+
   const [imagePreview, setImagePreview] = useState(null);
   const [authorList, setAuthorList] = useState([
     'Manu',
@@ -27,6 +28,7 @@ export const NewGroupForm = () => {
       reader.readAsDataURL(file);
     }
   };
+
 
   return (
     <form className="flex w-full flex-col gap-4 px-5 max-xl:gap-2">
@@ -121,7 +123,9 @@ export const NewGroupForm = () => {
         <input
           type="submit"
           value="Create Group"
+
           className="cursor-pointer select-none rounded-md bg-primary px-4 py-2 text-bg-secondary hover:bg-red-500 active:bg-red-900"
+
         />
       </div>
     </form>

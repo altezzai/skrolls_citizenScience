@@ -13,7 +13,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/Components/ui/dialog';
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/Components/ui/tabs';
+
 
 const UserMsgList = () => {
   const inputRef = useRef(null);
@@ -104,7 +106,9 @@ const UserMsgList = () => {
               New
             </div>
           </DialogTrigger>
+
           <DialogContent className="flex flex-col items-center px-2 max-xl:w-[440px] max-xl:py-4">
+
             <DialogHeader className="self-start pl-4">
               <DialogTitle>Create a Group</DialogTitle>
             </DialogHeader>
