@@ -15,8 +15,9 @@ import communities_icon from '../../assets/community.svg';
 import settings_icon from '../../assets/settings.svg';
 import profile_icon from '../../assets/profile.png';
 import IconBadge from '../IconBadge/IconBadge';
-import { useState } from 'react';
-import AddPost from '../AddPost/AddPost';
+import { useState, lazy } from 'react';
+const AddPost = lazy(() => import('../AddPost/AddPost'));
+// import AddPost from '../AddPost/AddPost';
 
 export const NavPanel = () => {
   const location = useLocation();
@@ -34,7 +35,7 @@ export const NavPanel = () => {
   return (
     <div
       className={cn(
-        'ml-12 flex h-full flex-col items-center justify-between py-14 transition-margin max-xl:ml-5 max-xl:py-3 max-md:absolute max-md:bottom-0 max-md:ml-0 max-md:flex-row max-md:gap-3 max-md:py-0 max-md:hidden',
+        'ml-12 flex h-full flex-col items-center justify-between py-14 transition-margin max-xl:ml-5 max-xl:py-3 max-md:absolute max-md:bottom-0 max-md:ml-0 max-md:hidden max-md:flex-row max-md:gap-3 max-md:py-0',
         { 'ml-3 pt-[136px]': inMessagePage }
       )}
     >

@@ -30,12 +30,10 @@ const AddPost = ({ show, handleClose }) => {
       try {
         const response = await apiClient.get('users/search/user', {
           params: {
-            userId: 1,
             q: mentionSearchTerm,
           },
         });
         setUsers(response.data);
-        console.log(users);
         setShowMentionList(true);
       } catch (error) {
         console.error('Failed to fetch users:', error);
@@ -51,13 +49,12 @@ const AddPost = ({ show, handleClose }) => {
       try {
         const response = await apiClient.get('users/feed/search/hashtag', {
           params: {
-            userId: 1,
             q: tagSearchTerm,
           },
         });
         const fetchedTags = response.data.hashtags;
         setFilteredTags(fetchedTags); // Update filteredTags here
-        console.log(fetchedTags);
+
         setShowTagList(true);
       } catch (error) {
         console.error('Failed to fetch hashtags:', error);

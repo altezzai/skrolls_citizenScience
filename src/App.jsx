@@ -70,7 +70,7 @@ function App() {
               }
             />
             <Route
-              path="/usersprofile/:targetUserId"
+              path="/userprofile/:targetUserId"
               element={
                 <div className="center-container mx-12 max-xl:mx-3">
                   <UserProfile />

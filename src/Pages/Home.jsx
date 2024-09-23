@@ -21,7 +21,6 @@ const Home = () => {
         // Fetch feeds from the API (without userId to get all posts)
         const response = await apiClient.get(`users/feeds`, {
           params: {
-            userId: 1,
             page, // Current page for pagination
             limit, // Number of items per page
           },
@@ -40,11 +39,9 @@ const Home = () => {
   const updateViewCounts = async (viewList) => {
     try {
       const response = await apiClient.post('users/feeds/updateCounts', {
-        userId: 1,
         viewList,
         shareList: [], // You can pass shareList when needed
       });
-      console.log('View counts updated:', response.data);
     } catch (error) {
       console.error('Error updating view counts:', error);
     }

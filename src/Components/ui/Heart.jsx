@@ -44,15 +44,10 @@ export const Heart = ({
       try {
         let response;
         if (feedId) {
-          response = await apiClient.get(`/users/feeds/${feedId}/likes`, {
-            params: { userId },
-          });
+          response = await apiClient.get(`/users/feeds/${feedId}/likes`);
         } else if (commentId) {
           response = await apiClient.get(
-            `/users/feeds/comments/${commentId}/likes`,
-            {
-              params: { userId },
-            }
+            `/users/feeds/comments/${commentId}/likes`
           );
         }
 
@@ -75,7 +70,6 @@ export const Heart = ({
           console.log('Sending data:', { userId, feedIds, commentIds }); // Debugging log
 
           const response = await apiClient.post('/users/feeds/likes', {
-            userId,
             feedIds,
             commentIds,
           });

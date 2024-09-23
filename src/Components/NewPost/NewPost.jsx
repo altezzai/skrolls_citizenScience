@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, lazy } from 'react';
 
 import photo from '../../assets/profile.png';
 import PostButton from '../PostButton/PostButton';
-import AddPost from '../AddPost/AddPost';
+// import AddPost from '../AddPost/AddPost';
+const AddPost = lazy(() => import('../AddPost/AddPost'));
 import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';
 
 const NewPost = () => {
