@@ -2,7 +2,7 @@ import './UnfollowPopup.css';
 import photo from '../../assets/profile.png';
 import useClickOutside from '../../hooks/useClickOutside';
 
-const UnfollowPopup = ({ onUnfollow, isModalOpen, setIsModalOpen }) => {
+const UnfollowPopup = ({ username, onUnfollow, isModalOpen, setIsModalOpen }) => {
   const closePopup = () => {
     setIsModalOpen(false);
   };
@@ -17,7 +17,7 @@ const UnfollowPopup = ({ onUnfollow, isModalOpen, setIsModalOpen }) => {
         <div className="mb-9 flex flex-col items-center gap-8">
           <img src={photo} alt="" className="h-20 w-20 rounded-full" />
           <div className="text-lg">
-            Unfollow <span>@ishaque</span>?
+            Unfollow <span>@{username}</span>?
           </div>
         </div>
         <div className="flex flex-col items-center">

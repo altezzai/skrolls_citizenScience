@@ -19,7 +19,7 @@ const TabButton = ({ id, label, active, onClick }) => (
 );
 
 const TabButtons = ({ tabs, activeTab, setActiveTab, className }) => (
-  <div className="mb-1 border-b border-gray-200 pt-1 dark:border-gray-700">
+  <div className="mb-1 border-b border-gray-200 pt-1 dark:border-gray-700 sticky top-0 bg-bg-primary z-10">
     <ul
       className={cn('-mb-px flex text-center text-sm font-medium', className)}
       role="tablist"

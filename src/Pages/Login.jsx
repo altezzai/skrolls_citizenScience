@@ -6,7 +6,6 @@ import orcid from '../assets/orcid_icon.png';
 import visible from '../assets/visible.svg';
 import invisible from '../assets/invisible.svg';
 import { Link } from 'react-router-dom';
-// import { Separator } from '@radix-ui/react-separator';
 import { Separator } from '@/Components/ui/separator';
 
 export const Login = () => {

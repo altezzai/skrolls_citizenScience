@@ -4,6 +4,7 @@ import search from '../../assets/search.svg';
 import plus_icon from '../../assets/plus.svg';
 
 import UserMsgListItem from '../UserMsgListItem/UserMsgListItem';
+import { NewGroupForm } from '../NewGroupForm/NewGroupForm';
 import {
   Dialog,
   DialogContent,
@@ -12,7 +13,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/Components/ui/dialog';
-import { NewGroupForm } from '../NewGroupForm/NewGroupForm';
+
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/Components/ui/tabs';
+
 
 const UserMsgList = () => {
   const inputRef = useRef(null);
@@ -103,7 +106,9 @@ const UserMsgList = () => {
               New
             </div>
           </DialogTrigger>
-          <DialogContent className="flex flex-col items-center px-2 max-xl:py-4 max-xl:w-[440px]">
+
+          <DialogContent className="flex flex-col items-center px-2 max-xl:w-[440px] max-xl:py-4">
+
             <DialogHeader className="self-start pl-4">
               <DialogTitle>Create a Group</DialogTitle>
             </DialogHeader>
@@ -112,19 +117,38 @@ const UserMsgList = () => {
         </Dialog>
       </div>
 
-      <div
-        className="h-full w-full overflow-y-scroll rounded-t-2xl bg-bg-secondary"
-        style={{ scrollbarWidth: 'none' }}
-      >
-        {users.map((user, index) => (
-          <UserMsgListItem
-            key={index}
-            user={user}
-            isActive={activeIndex === index}
-            onClick={() => handleItemClick(index)}
-          />
-        ))}
-      </div>
+      <Tabs defaultValue="chat">
+        <TabsList className="w-full justify-between rounded-none bg-bg-primary">
+          <TabsTrigger
+            value="chat"
+            className="w-1/2 !bg-inherit data-[state=active]:border-b-2 data-[state=active]:border-black"
+          >
+            Chat
+          </TabsTrigger>
+          <TabsTrigger
+            value="group"
+            className="w-1/2 !bg-inherit data-[state=active]:border-b-2 data-[state=active]:border-black"
+          >
+            Group
+          </TabsTrigger>
+        </TabsList>
+        <TabsContent value="chat">
+          <div
+            className="flex h-full w-full flex-col overflow-y-scroll rounded-t-2xl bg-bg-secondary"
+            style={{ scrollbarWidth: 'none' }}
+          >
+            {users.map((user, index) => (
+              <UserMsgListItem
+                key={index}
+                user={user}
+                isActive={activeIndex === index}
+                onClick={() => handleItemClick(index)}
+              />
+            ))}
+          </div>
+        </TabsContent>
+        <TabsContent value="group">hi</TabsContent>
+      </Tabs>
     </div>
   );
 };

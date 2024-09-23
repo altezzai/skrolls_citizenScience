@@ -40,7 +40,6 @@ const MessageBox = () => {
   };
 
   const onEmojiClick = (emojiObject) => {
-    console.log(emojiObject);
     setInputStr((prevInput) => prevInput + emojiObject.emoji);
   };
 
@@ -133,7 +132,7 @@ const MessageBox = () => {
     <div className="flex h-full flex-col">
       <div className="flex h-16 select-none items-center justify-between bg-bg-secondary px-5 py-2">
         <div className="flex items-center gap-3 text-lg font-medium">
-          <ProfilePhoto img={photo} size={'3rem'} />
+          <ProfilePhoto img={photo} className={'h-10 w-10'} />
           Manuprasad
         </div>
         <img

@@ -1,10 +1,16 @@
-import UserFollowListItem from "../UserFollowListItem/UserFollowListItem";
-import { useModal } from "../../context/ModalContext";
-import { modals } from "../../data/constants";
-import useClickOutside from "../../hooks/useClickOutside";
+import UserFollowListItem from '../UserFollowListItem/UserFollowListItem';
+import { useModal } from '../../context/ModalContext';
+import { modals } from '../../utils/constants';
+import useClickOutside from '../../hooks/useClickOutside';
+import { useEffect, useState } from 'react';
+import { apiClient } from '@/lib/api_client';
+import { useParams } from 'react-router-dom';
 
-export const LikedList = ({ id }) => {
+export const LikedList = ({ id, userId }) => {
   const { isModalOpen, closeModal } = useModal();
+  // const { postId } = useParams();
+  const [likedList, setLikedList] = useState([]);
+  // const [followingList, setFollowingList] = useState([]);
   const LikedListRef = useClickOutside(
     isModalOpen(modals.LIKED_LIST + id),
     () => {
@@ -12,20 +18,40 @@ export const LikedList = ({ id }) => {
     }
   );
 
+  useEffect(() => {
+    const fetchLikeList = async () => {
+      try {
+        const response = await apiClient.get(`/users/feeds/${id}/likes`, {
+          params: { userId, feedId: id },
+        });
+        setLikedList(response.data);
+      } catch (error) {
+        console.error('Error fetching like list:', error);
+      }
+    };
+    fetchLikeList();
+  }, [userId, id]);
+
   return (
     <div
       ref={LikedListRef}
-      className="absolute z-50 top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
+      className="absolute left-1/2 top-1/2 z-50 min-w-80 -translate-x-1/2 -translate-y-1/2"
     >
-      <div className="flex items-center pl-8 max-w-md bg-bg-secondary border-b-2 border-text-primary py-2 rounded-t-3xl text-base font-semibold">
+      <div className="flex max-w-md items-center rounded-t-3xl border-b-2 border-text-primary bg-bg-secondary py-2 pl-8 text-base font-semibold">
         Liked By
       </div>
-      <div className="flex flex-col bg-bg-secondary rounded-b-3xl px-8 py-5 max-w-md gap-3 h-[500px]">
-        <UserFollowListItem user={{ name: "Manuprasad", username: "manu" }} />
-        <UserFollowListItem user={{ name: "Lively", username: "lv" }} />
-        <UserFollowListItem user={{ name: "Jishnu", username: "jish" }} />
-        <UserFollowListItem user={{ name: "Manu", username: "manooo" }} />
-        <UserFollowListItem user={{ name: "William", username: "will" }} />
+
+      <div className="flex h-[500px] max-w-md flex-col gap-3 rounded-b-3xl bg-bg-secondary px-8 py-5">
+        {likedList.map((like) => (
+          <div key={like.userId}>
+            <UserFollowListItem
+              user={like}
+              targetUserId={like.userId}
+              isFollowing={like.isFollowing === 1 ? true : false}
+              isFollower={like.isFollower === 1 ? true : false}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );
