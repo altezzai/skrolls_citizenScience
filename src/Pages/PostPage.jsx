@@ -15,11 +15,7 @@ export const PostPage = () => {
     const fetchpost = async () => {
       setLoading(true);
       try {
-        const res = await apiClient.get(`users/feeds/${postId}`, {
-          params: {
-            userId: 1,
-          },
-        });
+        const res = await apiClient.get(`users/feeds/${postId}`);
         setPost(res.data);
       } catch (error) {
         console.error('failed to fetch feeds:', error);
@@ -33,11 +29,7 @@ export const PostPage = () => {
   useEffect(() => {
     const fetchcomments = async () => {
       try {
-        const res = await apiClient.get(`users/feeds/${postId}/comments`, {
-          params: {
-            userId: 1,
-          },
-        });
+        const res = await apiClient.get(`users/feeds/${postId}/comments`);
         setCommentData(res.data);
       } catch (error) {
         console.error('failed to fetch comments:', error);

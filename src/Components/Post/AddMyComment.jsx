@@ -14,7 +14,6 @@ export const AddMyComment = ({ feedId, onCommentAdded }) => {
 
     const commentData = new FormData();
     commentData.append('comment', comment);
-    commentData.append('userId', 1);
     // commentData.append('mentionIds', JSON.stringify([]));
     // commentData.append('parentId', null);
 

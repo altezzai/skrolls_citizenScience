@@ -34,7 +34,6 @@ export const Saved = ({ userId, feedId }) => {
 
       // Toggle saved state based on response
       setSaved(!saved);
-      console.log(response.data.message); // Success message from server
     } catch (error) {
       console.error('Error saving feed:', error);
     }

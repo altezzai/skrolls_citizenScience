@@ -29,7 +29,6 @@ export const Comments = ({ comments }) => {
 
     const replyData = new FormData();
     replyData.append('comment', replyMessage);
-    replyData.append('userId', 1);
     // commentData.append('mentionIds', JSON.stringify([]));
     replyData.append('parentId', comments.id);
 
