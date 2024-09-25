@@ -22,5 +22,3 @@ export const timeAgo = (timestamp) => {
   }
 };
 
-// Example usage
-const messageTimestamp = '2024-08-28T12:00:00Z';

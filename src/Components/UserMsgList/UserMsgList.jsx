@@ -1,8 +1,9 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 import search from '../../assets/search.svg';
 import plus_icon from '../../assets/plus.svg';
 
+import socket from '@/context/socket';
 import UserMsgListItem from '../UserMsgListItem/UserMsgListItem';
 import { NewGroupForm } from '../NewGroupForm/NewGroupForm';
 import {
@@ -15,11 +16,44 @@ import {
 } from '@/Components/ui/dialog';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/Components/ui/tabs';
-
+import { SortAsc } from 'lucide-react';
 
 const UserMsgList = () => {
+  const [members, setMembers] = useState([]);
+  const [error, setError] = useState(null);
   const inputRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(null);
+
+  // const [conversations, setConversations] = useState([]);
+
+  useEffect(() => {
+    // Send a request to get conversations on component mount
+    socket.emit('getUserConversations', { type: 'personal' });
+    console.log(socket);
+
+    // Listen for the 'userConversations' event from the server
+    socket.on('userConversations', (data) => {
+      setMembers(data.conversations);
+    });
+
+    // Handle error from the server
+    socket.on('error', (errMsg) => {
+      setError(errMsg);
+      console.error(errMsg);
+    });
+
+    // Cleanup on unmount
+    return () => {
+      socket.off('userConversations');
+      socket.off('error');
+    };
+  }, []);
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  console.log('Members List', members);
 
   const handleItemClick = (index) => {
     setActiveIndex(index);
@@ -31,51 +65,8 @@ const UserMsgList = () => {
     }
   };
 
-  const users = [
-    { name: 'Manuprasad', lastMessage: 'hello', time: '10:28 am', count: 10 },
-    {
-      name: 'John Doe',
-      lastMessage: 'how are you?',
-      time: '9:15 am',
-      count: 5,
-    },
-    {
-      name: 'John Doe',
-      lastMessage: 'how are you?',
-      time: '9:15 am',
-      count: 5,
-    },
-    {
-      name: 'John Doe',
-      lastMessage: 'how are you?',
-      time: '9:15 am',
-      count: 5,
-    },
-    { name: 'Manuprasad', lastMessage: 'hello', time: '10:28 am', count: 10 },
-    { name: 'Manuprasad', lastMessage: 'hello', time: '10:28 am', count: 10 },
-    { name: 'Manuprasad', lastMessage: 'hello', time: '10:28 am', count: 10 },
-
-    { name: 'Manuprasad', lastMessage: 'hello', time: '10:28 am', count: 10 },
-    { name: 'Manuprasad', lastMessage: 'hello', time: '10:28 am', count: 10 },
-    {
-      name: 'John Doe',
-      lastMessage: 'how are you?',
-      time: '9:15 am',
-      count: 5,
-    },
-    {
-      name: 'John Doe',
-      lastMessage: 'how are you?',
-      time: '9:15 am',
-      count: 5,
-    },
-    {
-      name: 'John Doe',
-      lastMessage: 'how are you?',
-      time: '9:15 am',
-      count: 5,
-    },
-  ];
+  // if (loading) return <p>Loading chat members...</p>;
+  // if (error) return <p className="error">{error}</p>;
 
   return (
     <div className="min-w-60">
@@ -108,7 +99,6 @@ const UserMsgList = () => {
           </DialogTrigger>
 
           <DialogContent className="flex flex-col items-center px-2 max-xl:w-[440px] max-xl:py-4">
-
             <DialogHeader className="self-start pl-4">
               <DialogTitle>Create a Group</DialogTitle>
             </DialogHeader>
@@ -137,10 +127,10 @@ const UserMsgList = () => {
             className="flex h-full w-full flex-col overflow-y-scroll rounded-t-2xl bg-bg-secondary"
             style={{ scrollbarWidth: 'none' }}
           >
-            {users.map((user, index) => (
+            {members.map((member, index) => (
               <UserMsgListItem
                 key={index}
-                user={user}
+                user={member}
                 isActive={activeIndex === index}
                 onClick={() => handleItemClick(index)}
               />
