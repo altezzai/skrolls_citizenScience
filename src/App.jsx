@@ -18,16 +18,20 @@ import { Settings } from './Pages/Settings';
 import { Login } from './Pages/Login';
 import { Register } from './Pages/Register';
 import { UserProfile } from './Pages/UserProfile';
+import { ForgotPassword } from './Components/ForgotPassword/ForgotPassword';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   const location = useLocation();
   const inMessagePage = location.pathname.includes('/messages');
   const inLoginPage =
     location.pathname.includes('/login') ||
-    location.pathname.includes('/register');
+    location.pathname.includes('/register') ||
+    location.pathname.includes('/forgot-password');
 
   return (
     <>
+      <Toaster />
       {!inLoginPage && <Header />}
       <div
         className={`main-container max-md:relative ${inMessagePage || inLoginPage ? 'height-set' : ''}`}
@@ -36,7 +40,9 @@ function App() {
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route path="/login" element={<Login />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/register" element={<Register />} />
+
             <Route
               path="/"
               element={
