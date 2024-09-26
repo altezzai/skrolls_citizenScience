@@ -26,6 +26,8 @@ module.exports = {
         'bg-muted-transparent': '#e7e7e740',
         'bg-transparent': '#000000b8',
         'bg-transparent-muted': '#00000066',
+        'bg-hover': '#fff8f8',
+        'bg-active': '#fddfdf',
         textarea: '#f6f6ff',
         'border-primary': '#a3a3a3',
         'border-muted': '#dddddd',
