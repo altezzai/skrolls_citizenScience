@@ -7,6 +7,7 @@ import send from '../../assets/send.svg';
 import smily from '../../assets/smily.svg';
 import upload from '../../assets/upload.svg';
 
+import socket from '@/context/socket';
 import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';
 import EmojiPicker from 'emoji-picker-react';
 import MessageBubble from './MessageBubble';
@@ -18,8 +19,76 @@ const MessageBox = () => {
   const [open, setOpen] = useState(false);
   const [openAttach, setOpenAttach] = useState(false);
   const [inputStr, setInputStr] = useState('');
-  const [messages, setMessages] = useState(sampleMessage);
+  const [messages, setMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState('');
   const messageBoxRef = useRef(null);
+
+  const chatId = 4;
+  const userId = 1;
+
+  useEffect(() => {
+    socket.emit('getMessages', { chatId, page: 1, limit: 20 });
+
+    socket.on('messages', (data) => {
+      setMessages((prevMessages) => {
+        // Prevent adding the same messages again
+        const newMessageIds = data.messages.map((msg) => msg.id);
+        const existingMessageIds = prevMessages.map((msg) => msg.id);
+
+        const newMessages = data.messages.filter(
+          (msg) => !existingMessageIds.includes(msg.id)
+        );
+
+        return [...newMessages, ...prevMessages];
+      });
+    });
+
+    socket.on('error', (error) => {
+      console.error(error);
+    });
+
+    return () => {
+      socket.off('messages');
+      socket.off('error');
+    };
+  }, []);
+
+  // console.log('Messages', messages);
+
+  //   const handleSendMessage = (type = 'text', content = inputStr) => {
+  //   if (content.trim() !== '') {
+  //     const newMessage = {
+  //       id: messages.length + 1,
+  //       type: type,
+  //       content: content,
+  //       sentByMe: true,
+  //       timestamp: new Date().toISOString(),
+  //       sender: 'Me',
+  //     };
+  //     setMessages((prevMessages) => [...prevMessages, newMessage]);
+  //     setInputStr('');
+  //   }
+  // };
+  const handleSendMessage = () => {
+    if (inputStr.trim() !== '') {
+      // Emit the message to the backend via socket
+      socket.emit('sendMessage', {
+        chatId,
+        content: inputStr,
+        mediaUrl: null,
+        replyToId: null,
+        sentAt: new Date(),
+      });
+
+      // Handle the new message received from the backend
+      socket.on('newMessage', (message) => {
+        setMessages((prevMessages) => [...prevMessages, message]);
+      });
+
+      // Clear the input after sending the message
+      setInputStr('');
+    }
+  };
 
   // Hook to close emoji picker when clicking outside
   const emojiPickerRef = useClickOutside(open, () => {
@@ -41,21 +110,6 @@ const MessageBox = () => {
 
   const onEmojiClick = (emojiObject) => {
     setInputStr((prevInput) => prevInput + emojiObject.emoji);
-  };
-
-  const handleSendMessage = (type = 'text', content = inputStr) => {
-    if (content.trim() !== '') {
-      const newMessage = {
-        id: messages.length + 1,
-        type: type,
-        content: content,
-        sentByMe: true,
-        timestamp: new Date().toISOString(),
-        sender: 'Me',
-      };
-      setMessages((prevMessages) => [...prevMessages, newMessage]);
-      setInputStr('');
-    }
   };
 
   const handleFileChange = (event) => {
@@ -148,22 +202,26 @@ const MessageBox = () => {
         ref={messageBoxRef}
         style={{ scrollbarWidth: 'none' }}
       >
-        {Object.keys(groupedMessages).map((date) => (
-          <div key={date}>
-            <div className="my-2 text-center text-xs text-text-secondary select-none">
-              {date}
+        {Object.keys(groupedMessages)
+          .slice()
+          .reverse()
+          .map((date) => (
+            <div key={date}>
+              <div className="my-2 select-none text-center text-xs text-text-secondary">
+                {date}
+              </div>
+              {groupedMessages[date]
+                .slice()
+                .reverse()
+                .map((message) => (
+                  <MessageBubble
+                    key={message.id}
+                    message={message}
+                    isSentByMe={message.senderId === userId}
+                  />
+                ))}
             </div>
-            {groupedMessages[date].map((message) => (
-              <MessageBubble
-                key={message.id}
-                message={message.content}
-                type={message.type}
-                isSentByMe={message.sentByMe}
-                timestamp={message.timestamp}
-              />
-            ))}
-          </div>
-        ))}
+          ))}
       </div>
 
       <div className="relative flex h-16 w-full items-center gap-3 justify-self-end rounded-2xl border-4 border-bg-primary bg-bg-secondary px-5 py-1">
@@ -238,7 +296,8 @@ const MessageBox = () => {
         />
         <div
           className="cursor-pointer rounded-lg px-5 py-2 transition-all delay-0 ease-in-out hover:bg-secondary"
-          onClick={() => handleSendMessage('text', inputStr)}
+          // onClick={() => handleSendMessage('text', inputStr)}
+          onClick={handleSendMessage}
         >
           <img
             src={send}
