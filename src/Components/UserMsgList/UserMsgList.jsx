@@ -4,7 +4,7 @@ import search from '../../assets/search.svg';
 import plus_icon from '../../assets/plus.svg';
 
 import socket from '@/context/socket';
-import UserMsgListItem from '../UserMsgListItem/UserMsgListItem';
+import UserMsgListItem from './UserMsgListItem';
 import { NewGroupForm } from '../NewGroupForm/NewGroupForm';
 import {
   Dialog,
@@ -14,9 +14,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/Components/ui/dialog';
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/Components/ui/tabs';
-import { SortAsc } from 'lucide-react';
+
 
 const UserMsgList = () => {
   const [members, setMembers] = useState([]);
@@ -24,12 +23,9 @@ const UserMsgList = () => {
   const inputRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(null);
 
-  // const [conversations, setConversations] = useState([]);
-
   useEffect(() => {
     // Send a request to get conversations on component mount
     socket.emit('getUserConversations', { type: 'personal' });
-    console.log(socket);
 
     // Listen for the 'userConversations' event from the server
     socket.on('userConversations', (data) => {
@@ -39,7 +35,7 @@ const UserMsgList = () => {
     // Handle error from the server
     socket.on('error', (errMsg) => {
       setError(errMsg);
-      console.error(errMsg);
+      console.error(error);
     });
 
     // Cleanup on unmount
@@ -49,11 +45,6 @@ const UserMsgList = () => {
     };
   }, []);
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
-  console.log('Members List', members);
 
   const handleItemClick = (index) => {
     setActiveIndex(index);
@@ -64,9 +55,6 @@ const UserMsgList = () => {
       inputRef.current.focus();
     }
   };
-
-  // if (loading) return <p>Loading chat members...</p>;
-  // if (error) return <p className="error">{error}</p>;
 
   return (
     <div className="min-w-60">
@@ -124,7 +112,7 @@ const UserMsgList = () => {
         </TabsList>
         <TabsContent value="chat">
           <div
-            className="flex h-full w-full flex-col overflow-y-scroll rounded-t-2xl bg-bg-secondary"
+            className="flex h-full w-full flex-col overflow-y-scroll rounded-xl bg-bg-secondary"
             style={{ scrollbarWidth: 'none' }}
           >
             {members.map((member, index) => (
