@@ -24,8 +24,8 @@ const Home = () => {
             page, // Current page for pagination
             limit, // Number of items per page
           },
-        });
-        setFeeds((prevFeeds) => [...prevFeeds, ...response.data]);
+        })
+        setFeeds((prevFeeds) => [...prevFeeds, ...response.data.feeds]);
       } catch (error) {
         console.error('Error fetching feeds:', error);
       } finally {
@@ -34,7 +34,8 @@ const Home = () => {
     };
 
     fetchFeeds();
-  }, [page]); // Re-fetch when `page` changes
+  }, []); // Re-fetch when `page` changes
+
 
   const updateViewCounts = async (viewList) => {
     try {

@@ -205,7 +205,6 @@ const AddPost = ({ show, handleClose }) => {
     const formData = new FormData();
     formData.append('description', postContent);
     formData.append('link', link);
-    formData.append('userId', '1');
 
     // Append files
     files.forEach((file, index) => {
