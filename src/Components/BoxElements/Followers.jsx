@@ -19,7 +19,8 @@ export const Followers = ({
         const response = await apiClient.get('users/followers', {
           params: { userId: userId, currentUserId: userId },
         });
-        setFollowers(response.data);
+
+        setFollowers(response.data.followers);
       } catch (error) {
         console.error('Error fetching followers List:', error);
       }

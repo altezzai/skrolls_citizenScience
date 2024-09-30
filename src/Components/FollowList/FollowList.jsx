@@ -28,7 +28,7 @@ const FollowList = ({ defaultActiveTab, userId }) => {
             currentUserId: userId,
           },
         });
-        setFollowers(response.data);
+        setFollowers(response.data.followers);
       } catch (error) {
         console.error('Error fetching followers list:', error);
       }
@@ -45,7 +45,7 @@ const FollowList = ({ defaultActiveTab, userId }) => {
             currentUserId: userId,
           },
         });
-        setFollowing(response.data);
+        setFollowing(response.data.followings);
       } catch (error) {
         console.error('Error fetching following List:', error);
       }
