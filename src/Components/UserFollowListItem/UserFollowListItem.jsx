@@ -18,7 +18,6 @@ const UserFollowListItem = ({
   const [following, setFollowing] = useState(isFollowing);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-
   const handleClick = async () => {
     if (following) {
       if (confirmUnfollow) {

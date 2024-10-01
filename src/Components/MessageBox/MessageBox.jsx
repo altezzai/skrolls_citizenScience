@@ -15,19 +15,23 @@ import sampleMessage from '../../data/image_send';
 import { groupMessagesByDate } from '../../utils/groupMessagesByDate';
 import useClickOutside from '../../hooks/useClickOutside';
 
-const MessageBox = () => {
+const MessageBox = ({ selectedUser }) => {
   const [open, setOpen] = useState(false);
   const [openAttach, setOpenAttach] = useState(false);
   const [inputStr, setInputStr] = useState('');
   const [messages, setMessages] = useState([]);
-  const [newMessage, setNewMessage] = useState('');
   const messageBoxRef = useRef(null);
 
-  const chatId = 4;
   const userId = 1;
+  console.log('Selected User', selectedUser);
 
   useEffect(() => {
-    socket.emit('getMessages', { chatId, page: 1, limit: 20 });
+    setMessages([]);
+    socket.emit('getMessages', {
+      chatId: selectedUser.chatId,
+      page: 1,
+      limit: 20,
+    });
 
     socket.on('messages', (data) => {
       setMessages((prevMessages) => {
@@ -39,7 +43,7 @@ const MessageBox = () => {
           (msg) => !existingMessageIds.includes(msg.id)
         );
 
-        return [...newMessages, ...prevMessages];
+        return [...newMessages.reverse(), ...prevMessages];
       });
     });
 
@@ -51,41 +55,28 @@ const MessageBox = () => {
       socket.off('messages');
       socket.off('error');
     };
-  }, []);
+  }, [selectedUser.chatId]);
 
-  // console.log('Messages', messages);
+  useEffect(() => {
+    socket.on('newMessage', (message) => {
+      setMessages((prevMessages) => [...prevMessages, message]);
+    });
 
-  //   const handleSendMessage = (type = 'text', content = inputStr) => {
-  //   if (content.trim() !== '') {
-  //     const newMessage = {
-  //       id: messages.length + 1,
-  //       type: type,
-  //       content: content,
-  //       sentByMe: true,
-  //       timestamp: new Date().toISOString(),
-  //       sender: 'Me',
-  //     };
-  //     setMessages((prevMessages) => [...prevMessages, newMessage]);
-  //     setInputStr('');
-  //   }
-  // };
+    return () => {
+      socket.off('newMessage');
+    };
+  }, []); // Register once on mount
+
   const handleSendMessage = () => {
     if (inputStr.trim() !== '') {
       // Emit the message to the backend via socket
       socket.emit('sendMessage', {
-        chatId,
+        chatId: selectedUser.chatId,
         content: inputStr,
         mediaUrl: null,
         replyToId: null,
         sentAt: new Date(),
       });
-
-      // Handle the new message received from the backend
-      socket.on('newMessage', (message) => {
-        setMessages((prevMessages) => [...prevMessages, message]);
-      });
-
-      // Clear the input after sending the message
       setInputStr('');
     }
   };
@@ -139,12 +130,6 @@ const MessageBox = () => {
     }
   };
 
-  // useEffect(() => {
-  //   if (messageBoxRef.current) {
-  //     messageBoxRef.current.scrollTop = messageBoxRef.current.scrollHeight;
-  //   }
-  // }, [messages]);
-
   const scrollToBottom = useCallback(() => {
     if (messageBoxRef.current) {
       messageBoxRef.current.scrollTop = messageBoxRef.current.scrollHeight;
@@ -187,7 +172,7 @@ const MessageBox = () => {
       <div className="flex h-16 select-none items-center justify-between bg-bg-secondary px-5 py-2">
         <div className="flex items-center gap-3 text-lg font-medium">
           <ProfilePhoto img={photo} className={'h-10 w-10'} />
-          Manuprasad
+          {selectedUser.name}
         </div>
         <img
           className="w-7 cursor-pointer"
@@ -202,26 +187,20 @@ const MessageBox = () => {
         ref={messageBoxRef}
         style={{ scrollbarWidth: 'none' }}
       >
-        {Object.keys(groupedMessages)
-          .slice()
-          .reverse()
-          .map((date) => (
-            <div key={date}>
-              <div className="my-2 select-none text-center text-xs text-text-secondary">
-                {date}
-              </div>
-              {groupedMessages[date]
-                .slice()
-                .reverse()
-                .map((message) => (
-                  <MessageBubble
-                    key={message.id}
-                    message={message}
-                    isSentByMe={message.senderId === userId}
-                  />
-                ))}
+        {Object.keys(groupedMessages).map((date) => (
+          <div key={date}>
+            <div className="my-2 select-none text-center text-xs text-text-secondary">
+              {date}
             </div>
-          ))}
+            {groupedMessages[date].map((message) => (
+              <MessageBubble
+                key={message.id}
+                message={message}
+                isSentByMe={message.senderId === userId}
+              />
+            ))}
+          </div>
+        ))}
       </div>
 
       <div className="relative flex h-16 w-full items-center gap-3 justify-self-end rounded-2xl border-4 border-bg-primary bg-bg-secondary px-5 py-1">
@@ -296,7 +275,6 @@ const MessageBox = () => {
         />
         <div
           className="cursor-pointer rounded-lg px-5 py-2 transition-all delay-0 ease-in-out hover:bg-secondary"
-          // onClick={() => handleSendMessage('text', inputStr)}
           onClick={handleSendMessage}
         >
           <img

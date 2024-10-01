@@ -5,8 +5,11 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from '../Components/ui/resizable';
+import { useState } from 'react';
 
 const MessagePage = () => {
+  const [selectedUser, setSelectedUser] = useState(null);
+
   return (
     <ResizablePanelGroup direction="horizontal" className="rounded-lg border">
       <ResizablePanel
@@ -15,11 +18,17 @@ const MessagePage = () => {
         minSize={25}
         className="max-md:mr-5"
       >
-        <UserMsgList />
+        <UserMsgList onUserSelect={setSelectedUser} />
       </ResizablePanel>
       <ResizableHandle />
       <ResizablePanel className="max-md:hidden">
-        <MessageBox />
+        {selectedUser ? (
+          <MessageBox selectedUser={selectedUser} />
+        ) : (
+          <div className="flex h-full items-center justify-center">
+            Select a user to start chatting
+          </div>
+        )}
       </ResizablePanel>
     </ResizablePanelGroup>
   );

@@ -17,7 +17,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/Components/ui/tabs';
 
 
-const UserMsgList = () => {
+const UserMsgList = ({ onUserSelect }) => {
   const [members, setMembers] = useState([]);
   const [error, setError] = useState(null);
   const inputRef = useRef(null);
@@ -46,8 +46,9 @@ const UserMsgList = () => {
   }, []);
 
 
-  const handleItemClick = (index) => {
+  const handleItemClick = (index, user) => {
     setActiveIndex(index);
+    onUserSelect(user);
   };
 
   const handleSearchClick = () => {
@@ -120,7 +121,7 @@ const UserMsgList = () => {
                 key={index}
                 user={member}
                 isActive={activeIndex === index}
-                onClick={() => handleItemClick(index)}
+                onClick={() => handleItemClick(index, member)}
               />
             ))}
           </div>
