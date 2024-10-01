@@ -12,7 +12,7 @@ export const MyPost = ({ userId }) => {
         const res = await apiClient.get('users/feeds', {
           params: { userId },
         });
-        setMyPost(res.data);
+        setMyPost(res.data?.feeds);
       } catch (error) {
         console.error('failed to fetch feeds:', error);
       } finally {

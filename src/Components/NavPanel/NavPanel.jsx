@@ -17,7 +17,6 @@ import profile_icon from '../../assets/profile.png';
 import IconBadge from '../IconBadge/IconBadge';
 import { useState, lazy } from 'react';
 const AddPost = lazy(() => import('../AddPost/AddPost'));
-// import AddPost from '../AddPost/AddPost';
 
 export const NavPanel = () => {
   const location = useLocation();
@@ -35,8 +34,12 @@ export const NavPanel = () => {
   return (
     <div
       className={cn(
-        'ml-12 flex h-full flex-col items-center justify-between py-14 transition-margin max-xl:ml-5 max-xl:py-3 max-md:absolute max-md:bottom-0 max-md:ml-0 max-md:hidden max-md:flex-row max-md:gap-3 max-md:py-0',
-        { 'ml-3 pt-[136px]': inMessagePage }
+        'ml-12 flex h-full flex-col items-center justify-between py-14 transition-margin',
+        { 'ml-3 pt-[136px]': inMessagePage },
+        {
+          'max-xl:ml-5 max-xl:py-3 max-md:absolute max-md:bottom-0 max-md:ml-0 max-md:hidden max-md:flex-row max-md:gap-3 max-md:py-0':
+            !inMessagePage,
+        }
       )}
     >
       <Link
@@ -51,9 +54,9 @@ export const NavPanel = () => {
         <img src={skrolls_logo} alt="icon" />
       </Link>
 
-      <div className="flex flex-col max-md:flex-row">
+      <div className={`flex flex-col max-md:flex-row`}>
         <div
-          className="mb-3 flex w-full cursor-pointer select-none justify-center gap-2 rounded-2xl bg-primary py-3 text-sm text-bg-secondary transition-all duration-100 ease-in-out hover:bg-red-500 active:bg-red-800 max-md:hidden"
+          className="mb-3 flex cursor-pointer select-none justify-center gap-2 rounded-2xl bg-primary py-3 text-sm text-bg-secondary transition-all duration-100 ease-in-out hover:bg-red-500 active:bg-red-800 max-md:hidden"
           onClick={handleAddPost}
         >
           <img

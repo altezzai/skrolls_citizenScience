@@ -11,7 +11,6 @@ import socket from '@/context/socket';
 import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';
 import EmojiPicker from 'emoji-picker-react';
 import MessageBubble from './MessageBubble';
-import sampleMessage from '../../data/image_send';
 import { groupMessagesByDate } from '../../utils/groupMessagesByDate';
 import useClickOutside from '../../hooks/useClickOutside';
 
@@ -23,7 +22,6 @@ const MessageBox = ({ selectedUser }) => {
   const messageBoxRef = useRef(null);
 
   const userId = 1;
-  console.log('Selected User', selectedUser);
 
   useEffect(() => {
     setMessages([]);
@@ -59,13 +57,19 @@ const MessageBox = ({ selectedUser }) => {
 
   useEffect(() => {
     socket.on('newMessage', (message) => {
-      setMessages((prevMessages) => [...prevMessages, message]);
+      setMessages((prevMessages) => {
+        // Prevent adding the same message multiple times
+        if (!prevMessages.some((msg) => msg.id === message.id)) {
+          return [...prevMessages, message];
+        }
+        return prevMessages;
+      });
     });
 
     return () => {
       socket.off('newMessage');
     };
-  }, []); // Register once on mount
+  }, []);
 
   const handleSendMessage = () => {
     if (inputStr.trim() !== '') {
