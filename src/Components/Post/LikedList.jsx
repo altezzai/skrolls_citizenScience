@@ -6,31 +6,29 @@ import { useEffect, useState } from 'react';
 import { apiClient } from '@/lib/api_client';
 import { useParams } from 'react-router-dom';
 
-export const LikedList = ({ id, userId }) => {
+export const LikedList = ({ feedId }) => {
   const { isModalOpen, closeModal } = useModal();
-  // const { postId } = useParams();
   const [likedList, setLikedList] = useState([]);
-  // const [followingList, setFollowingList] = useState([]);
   const LikedListRef = useClickOutside(
-    isModalOpen(modals.LIKED_LIST + id),
+    isModalOpen(modals.LIKED_LIST + feedId),
     () => {
-      closeModal(modals.LIKED_LIST + id);
+      closeModal(modals.LIKED_LIST + feedId);
     }
   );
 
   useEffect(() => {
     const fetchLikeList = async () => {
       try {
-        const response = await apiClient.get(`/users/feeds/${id}/likes`, {
-          params: { userId, feedId: id },
+        const response = await apiClient.get(`/users/feeds/${feedId}/likes`, {
+          params: { feedId: feedId },
         });
-        setLikedList(response.data);
+        setLikedList(response.data?.likes);
       } catch (error) {
         console.error('Error fetching like list:', error);
       }
     };
     fetchLikeList();
-  }, [userId, id]);
+  }, [feedId]);
 
   return (
     <div

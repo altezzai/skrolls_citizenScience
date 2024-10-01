@@ -5,7 +5,6 @@ import { useModal } from '../../context/ModalContext';
 import { modals } from '../../utils/constants';
 import { LikedList } from '../Post/LikedList';
 import { apiClient } from '@/lib/api_client';
-import { useParams } from 'react-router-dom';
 
 export const Heart = ({
   className,
@@ -22,7 +21,6 @@ export const Heart = ({
   const [commentIds, setCommentIds] = useState([]);
   const { openModal, isModalOpen } = useModal();
   const MODAL_NAME = modals.LIKED_LIST + feedId;
-  const { postId } = useParams();
 
   // Handle like/unlike click
   const handleLikeClick = () => {
@@ -50,8 +48,7 @@ export const Heart = ({
             `/users/feeds/comments/${commentId}/likes`
           );
         }
-
-        const likedByUser = response?.data?.some(
+        const likedByUser = response.data.likes?.some(
           (like) => like.userId === userId
         );
         setLiked(likedByUser);
@@ -113,7 +110,7 @@ export const Heart = ({
         {likeCount > 0 && <p>{likeCount}</p>}
       </div>
       {feedId && isModalOpen(MODAL_NAME) && (
-        <LikedList id={feedId} userId={userId} />
+        <LikedList feedId={feedId} />
       )}
     </div>
   );
