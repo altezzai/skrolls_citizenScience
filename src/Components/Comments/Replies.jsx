@@ -17,14 +17,9 @@ export const Replies = ({ commentId }) => {
     const fetchReplies = async () => {
       try {
         const res = await apiClient.get(
-          `users/feeds/${postId}/comments/${commentId}`,
-          {
-            params: {
-              userId: 1,
-            },
-          }
+          `users/feeds/${postId}/comments/${commentId}`
         );
-        setReplyData(res.data);
+        setReplyData(res.data?.replies);
       } catch (error) {
         console.error('Failed to fetch replies:', error);
       }

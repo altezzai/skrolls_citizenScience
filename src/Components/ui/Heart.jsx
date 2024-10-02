@@ -22,6 +22,8 @@ export const Heart = ({
   const { openModal, isModalOpen } = useModal();
   const MODAL_NAME = modals.LIKED_LIST + feedId;
 
+  console.log('Comment id', commentId);
+
   // Handle like/unlike click
   const handleLikeClick = () => {
     if (feedId && !feedIds.includes(feedId)) {
@@ -43,12 +45,15 @@ export const Heart = ({
         let response;
         if (feedId) {
           response = await apiClient.get(`/users/feeds/${feedId}/likes`);
+          console.log('Post Liked by', response.data?.likes);
         } else if (commentId) {
           response = await apiClient.get(
             `/users/feeds/comments/${commentId}/likes`
           );
+          console.log('Comment Liked by', response.data?.likes);
         }
-        const likedByUser = response.data.likes?.some(
+
+        const likedByUser = response.data?.likes?.some(
           (like) => like.userId === userId
         );
         setLiked(likedByUser);
@@ -109,9 +114,7 @@ export const Heart = ({
       >
         {likeCount > 0 && <p>{likeCount}</p>}
       </div>
-      {feedId && isModalOpen(MODAL_NAME) && (
-        <LikedList feedId={feedId} />
-      )}
+      {feedId && isModalOpen(MODAL_NAME) && <LikedList feedId={feedId} />}
     </div>
   );
 };

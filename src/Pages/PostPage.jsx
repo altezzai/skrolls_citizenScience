@@ -16,7 +16,7 @@ export const PostPage = () => {
       setLoading(true);
       try {
         const res = await apiClient.get(`users/feeds/${postId}`);
-        setPost(res.data);
+        setPost(res.data.feeds);
       } catch (error) {
         console.error('failed to fetch feeds:', error);
       } finally {
@@ -30,7 +30,7 @@ export const PostPage = () => {
     const fetchcomments = async () => {
       try {
         const res = await apiClient.get(`users/feeds/${postId}/comments`);
-        setCommentData(res.data);
+        setCommentData(res.data?.comments);
       } catch (error) {
         console.error('failed to fetch comments:', error);
       }
