@@ -6,7 +6,6 @@ import warning_icon from '../../assets/warning.svg';
 
 import { DialogClose } from '@/Components/ui/dialog';
 import { GroupMemberAdd } from '../NewGroupForm/GroupMemberAdd';
-import { warning } from 'framer-motion';
 
 export const PublicationForm = ({ selection }) => {
   const [selected, setSelected] = useState(selection);

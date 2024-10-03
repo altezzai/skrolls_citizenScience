@@ -1,5 +1,23 @@
+import delete_icon from '../../assets/delete.svg';
+import copy_icon from '../../assets/copy.svg';
+import reply_icon from '../../assets/reply_msg.svg';
+import report_icon from '../../assets/report_warning.svg';
+
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+} from '@/Components/ui/context-menu';
+import DeleteConfirmationModal from './DeleteConfirmationModal';
+import { useState } from 'react';
+import { useModal } from '@/context/ModalContext';
+import { modals } from '@/utils/constants';
+
+
 const MessageBubble = ({ message, isSentByMe }) => {
-  // Formatting the timestamp
+  const { openModal, isModalOpen, closeModal } = useModal();
+  const [selectedMessageId, setSelectedMessageId] = useState(null);
   const formattedTime = new Date(message.createdAt).toLocaleTimeString([], {
     hour: '2-digit',
     minute: '2-digit',
@@ -58,28 +76,112 @@ const MessageBubble = ({ message, isSentByMe }) => {
     return null;
   };
 
-  return (
-    <div
-      className={`flex w-full ${isSentByMe ? 'justify-end' : 'justify-start'}`}
-    >
-      <div
-        className={`mb-2 w-fit max-w-lg rounded-lg p-2 ${
-          isSentByMe
-            ? 'self-end bg-primary pr-5 text-bg-secondary'
-            : 'self-start bg-secondary pl-5'
-        }`}
-      >
-        <div className="message-text">{renderMessageContent()}</div>
+  const handleCopyText = () => {
+    if (message.content) {
+      navigator.clipboard.writeText(message.content).catch((err) => {
+        console.error('Failed to copy: ', err);
+      });
+    }
+  };
 
+  const handleDeleteClick = () => {
+    // Set selectedMessageId only if it's not already set or if the modal is closed
+    if (!selectedMessageId || !isModalOpen(modals.CONFIRM_DELETE)) {
+      setSelectedMessageId(message.id);
+      openModal(modals.CONFIRM_DELETE);
+    }
+  };
+
+  const handleModalClose = () => {
+    closeModal(modals.CONFIRM_DELETE);
+    setSelectedMessageId(null);
+  };
+
+  return (
+    <>
+      <ContextMenu>
         <div
-          className={`pt-1 text-right text-[0.6rem] select-none ${
-            isSentByMe ? 'text-border-muted' : 'text-text-secondary'
-          }`}
+          className={`flex w-full ${isSentByMe ? 'justify-end' : 'justify-start'}`}
         >
-          {formattedTime}
+          <ContextMenuTrigger>
+            <div
+              className={`mb-2 w-fit max-w-lg rounded-lg p-2 ${
+                isSentByMe
+                  ? 'self-end bg-primary pr-5 text-bg-secondary'
+                  : 'self-start bg-secondary pl-5'
+              }`}
+            >
+              <div className="message-text">{renderMessageContent()}</div>
+
+              <div
+                className={`select-none pt-1 text-right text-[0.6rem] ${
+                  isSentByMe ? 'text-border-muted' : 'text-text-secondary'
+                }`}
+              >
+                {formattedTime}
+              </div>
+            </div>
+          </ContextMenuTrigger>
         </div>
-      </div>
-    </div>
+
+        <ContextMenuContent className="m-0 rounded-xl p-0">
+          <ContextMenuItem className="flex w-full gap-2 border-b-2 border-border-muted py-2">
+            <img
+              src={reply_icon}
+              alt="reply icon"
+              draggable="false"
+              className="w-5"
+            />
+            Reply
+          </ContextMenuItem>
+          <ContextMenuItem
+            onClick={handleCopyText}
+            className="flex w-full gap-2 border-b-2 border-border-muted py-2"
+          >
+            <img
+              src={copy_icon}
+              className="w-6"
+              alt="copy icon"
+              draggable="false"
+            />
+            Copy
+          </ContextMenuItem>
+          {!isSentByMe && (
+            <ContextMenuItem className="flex w-full gap-2 border-b-2 border-border-muted py-2">
+              <img
+                src={report_icon}
+                alt="report icon"
+                draggable="false"
+                className="w-5"
+              />
+              Report
+            </ContextMenuItem>
+          )}
+
+          <ContextMenuItem
+            onClick={handleDeleteClick}
+            className="flex w-full gap-2 py-2"
+          >
+            <img
+              src={delete_icon}
+              className="w-5"
+              alt="delete icon"
+              draggable="false"
+            />
+            Delete
+          </ContextMenuItem>
+        </ContextMenuContent>
+      </ContextMenu>
+
+      {isModalOpen(modals.CONFIRM_DELETE) &&
+        selectedMessageId === message.id && (
+          <DeleteConfirmationModal
+            id={selectedMessageId}
+            onClose={handleModalClose}
+            isSentByMe={isSentByMe}
+          />
+        )}
+    </>
   );
 };
 

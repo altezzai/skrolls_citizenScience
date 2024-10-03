@@ -4,7 +4,6 @@ import { modals } from '../../utils/constants';
 import useClickOutside from '../../hooks/useClickOutside';
 import { useEffect, useState } from 'react';
 import { apiClient } from '@/lib/api_client';
-import { useParams } from 'react-router-dom';
 
 export const LikedList = ({ feedId }) => {
   const { isModalOpen, closeModal } = useModal();
