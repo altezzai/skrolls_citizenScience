@@ -10,6 +10,7 @@ import {
   Dialog,
   DialogContent,
   DialogHeader,
+  DialogDescription,
   DialogTitle,
   DialogTrigger,
 } from '@/Components/ui/dialog';
@@ -120,6 +121,7 @@ const UserMsgList = ({ onUserSelect }) => {
           <DialogContent className="flex flex-col items-center px-2 max-xl:w-[440px] max-xl:py-4">
             <DialogHeader className="self-start pl-4">
               <DialogTitle>Create a Group</DialogTitle>
+              <DialogDescription></DialogDescription>
             </DialogHeader>
             <NewGroupForm />
           </DialogContent>
