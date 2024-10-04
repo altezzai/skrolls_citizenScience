@@ -1,4 +1,6 @@
-import photo from '../../assets/profile.png';
+import user_icon from '../../assets/default_user.svg';
+import group_icon from '../../assets/default_group.svg';
+
 import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';
 import { formatTimestamp } from '../../utils/formatTimestamp';
 import {
@@ -22,7 +24,16 @@ const UserMsgListItem = ({ user, isActive, onClick }) => {
             onClick={onClick}
           >
             <div className="flex items-center gap-3">
-              <ProfilePhoto img={user?.icon} className={'h-10 w-10'} />
+              <ProfilePhoto
+                img={
+                  user?.icon
+                    ? `http://localhost:3000/uploads/${encodeURIComponent(user.icon)}`
+                    : user?.type === 'group'
+                      ? group_icon
+                      : user_icon
+                }
+                className={'h-10 w-10'}
+              />
               <div className="flex flex-col">
                 <div className="min-w-0 truncate text-base font-medium">
                   {user.name}

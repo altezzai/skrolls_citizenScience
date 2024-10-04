@@ -1,12 +1,12 @@
 import { cn } from '../../utils/utils';
 
-import photo from '../../assets/profile.png';
 import comment_icon from '../../assets/comments.svg';
 import view from '../../assets/view.svg';
 import send from '../../assets/send.svg';
 import back from '../../assets/previous.svg';
 import internet from '../../assets/internet.svg';
 import translate from '../../assets/translate.svg';
+import user_icon from '../../assets/default_user.svg';
 
 import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -74,7 +74,14 @@ const Post = ({ feed, userId = 1 }) => {
           onClick={() => handleUserProfile(feed.userId)}
           className="cursor-pointer"
         >
-          <ProfilePhoto img={feed.User?.profilePhoto} className={'h-10 w-10'} />
+          <ProfilePhoto
+            img={
+              feed.profilePhoto
+                ? `http://localhost:3000/uploads/${encodeURIComponent(feed.profilePhoto)}`
+                : user_icon
+            }
+            className={'h-10 w-10'}
+          />
         </div>
         <div className="w-full pr-3">
           <div className="flex select-none items-center gap-3">

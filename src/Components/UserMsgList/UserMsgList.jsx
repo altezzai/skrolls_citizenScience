@@ -130,7 +130,7 @@ const UserMsgList = ({ onUserSelect }) => {
 
       {searchQuery.length > 0 ? (
         <div
-          className="flex h-full w-full flex-col overflow-y-scroll rounded-xl bg-bg-secondary"
+          className="flex max-h-[610px] w-full flex-col overflow-y-scroll rounded-xl bg-bg-secondary"
           style={{ scrollbarWidth: 'none' }}
         >
           {searchResults.map((member, index) => (
@@ -160,7 +160,7 @@ const UserMsgList = ({ onUserSelect }) => {
           </TabsList>
           <TabsContent value="chat">
             <div
-              className="flex h-full w-full flex-col overflow-y-scroll rounded-xl bg-bg-secondary"
+              className="flex max-h-[610px] w-full flex-col overflow-y-scroll rounded-xl bg-bg-secondary"
               style={{ scrollbarWidth: 'none' }}
             >
               {members.map((member, index) => (
@@ -175,7 +175,7 @@ const UserMsgList = ({ onUserSelect }) => {
           </TabsContent>
           <TabsContent value="group">
             <div
-              className="flex h-full w-full flex-col overflow-y-scroll rounded-xl bg-bg-secondary"
+              className="flex max-h-[610px] w-full flex-col overflow-y-scroll rounded-xl bg-bg-secondary"
               style={{ scrollbarWidth: 'none' }}
             >
               {groups.map((member, index) => (

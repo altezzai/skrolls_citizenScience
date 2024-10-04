@@ -1,18 +1,17 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 
-import photo from '../../assets/profile.png';
-import more from '../../assets/vertical_dots.svg';
 import attach from '../../assets/attach.svg';
 import send from '../../assets/send.svg';
 import smily from '../../assets/smily.svg';
 import upload from '../../assets/upload.svg';
 
 import socket from '@/context/socket';
-import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';
 import EmojiPicker from 'emoji-picker-react';
 import MessageBubble from './MessageBubble';
 import { groupMessagesByDate } from '../../utils/groupMessagesByDate';
 import useClickOutside from '../../hooks/useClickOutside';
+import { PersonalHeader } from './PersonalHeader';
+import { GroupHeader } from './GroupHeader';
 
 const MessageBox = ({ selectedUser }) => {
   const [open, setOpen] = useState(false);
@@ -173,18 +172,11 @@ const MessageBox = ({ selectedUser }) => {
 
   return (
     <div className="flex h-full flex-col">
-      <div className="flex h-16 select-none items-center justify-between bg-bg-secondary px-5 py-2">
-        <div className="flex items-center gap-3 text-lg font-medium">
-          <ProfilePhoto img={photo} className={'h-10 w-10'} />
-          {selectedUser.name}
-        </div>
-        <img
-          className="w-7 cursor-pointer"
-          src={more}
-          alt="More options"
-          draggable="false"
-        />
-      </div>
+      {selectedUser?.type === 'group' ? (
+        <GroupHeader selectedUser={selectedUser} />
+      ) : (
+        <PersonalHeader selectedUser={selectedUser} />
+      )}
 
       <div
         className="flex h-full flex-col gap-2 overflow-y-scroll px-4 py-2"
