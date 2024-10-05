@@ -45,7 +45,7 @@ export const GroupHeader = ({ selectedUser }) => {
             <DialogTitle>Group info</DialogTitle>
             <DialogDescription></DialogDescription>
           </DialogHeader>
-          <GroupInfo selectedUser />
+          <GroupInfo chatId={selectedUser.chatId} />
         </DialogContent>
       </Dialog>
     </>
