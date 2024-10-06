@@ -20,6 +20,7 @@ import { Register } from './Pages/Register';
 import { UserProfile } from './Pages/UserProfile';
 import { ForgotPassword } from './Components/ForgotPassword/ForgotPassword';
 import { Toaster } from 'react-hot-toast';
+import { EditProfilePage } from './Pages/EditProfilePage';
 
 function App() {
   const location = useLocation();
@@ -105,6 +106,14 @@ function App() {
               element={
                 <div className="center-container mx-12 max-xl:mx-3">
                   <Settings />
+                </div>
+              }
+            />
+            <Route
+              path="/settings/edit_profile"
+              element={
+                <div className="center-container mx-12 max-xl:mx-3">
+                  <EditProfilePage />
                 </div>
               }
             />

@@ -29,6 +29,7 @@ export const Settings = () => {
         </div>
         <div>
           <SettingsItem
+            nav={'/settings/edit_profile'}
             image={photo}
             className={''}
             imgClassName={'w-8'}
