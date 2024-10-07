@@ -1,5 +1,3 @@
-import postpic from '../assets/post-img.png';
-import profilePic from '../assets/profile.png';
 import IconBadge from '../Components/IconBadge/IconBadge';
 import settings_icon from '../assets/settings-gray.svg';
 

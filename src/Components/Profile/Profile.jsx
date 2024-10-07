@@ -1,12 +1,12 @@
 import { lazy, Suspense, useState } from 'react';
 
-import photo from '../../assets/profile.png';
 import ReadMore from '../ReadMore/ReadMore';
 import facebook_icon from '../../assets/facebook.svg';
 import twitter_icon from '../../assets/x.svg';
 import link_icon from '../../assets/link.svg';
 import github_icon from '../../assets/github.svg';
 import linkedin_icon from '../../assets/linkedin.svg';
+import user_icon from '../../assets/default_user.svg';
 // import SkillBtn from '../SkillBtn/SkillBtn';
 
 const FollowList = lazy(() => import('../FollowList/FollowList'));
@@ -32,7 +32,11 @@ const Profile = ({ userDetails, userId }) => {
     <div className="mb-5 mt-6 flex w-full flex-col items-center justify-center gap-3 bg-bg-primary">
       <div className="relative">
         <ProfilePhoto
-          img={photo}
+          img={
+            userDetails.profilePhoto
+              ? `http://localhost:3000/uploads/${encodeURIComponent(userDetails.profilePhoto)}`
+              : user_icon
+          }
           className={'h-28 w-28 max-md:h-20 max-md:w-20'}
         />
 
@@ -72,9 +76,11 @@ const Profile = ({ userDetails, userId }) => {
         )}
       </Suspense>
 
-      <div className="flex w-3/4 items-center justify-center text-center text-base text-text-hard max-xl:w-11/12">
-        <ReadMore sliceLength={135}>{userDetails.biography}</ReadMore>
-      </div>
+      {userDetails.biography && (
+        <div className="flex w-3/4 items-center justify-center text-center text-base text-text-hard max-xl:w-11/12">
+          <ReadMore sliceLength={135}>{userDetails.biography}</ReadMore>
+        </div>
+      )}
 
       {/* <div className="flex items-center gap-3">
         <SkillBtn> Machine Learning</SkillBtn>
@@ -146,23 +152,34 @@ const Profile = ({ userDetails, userId }) => {
           )}
         </div>
 
-        <Separator orientation="vertical" className="h-5 bg-border-primary" />
+        {userDetails.website &&
+          (userDetails.linkedin ||
+            userDetails.twitter ||
+            userDetails.facebook ||
+            userDetails.github) && (
+            <Separator
+              orientation="vertical"
+              className="h-5 bg-border-primary"
+            />
+          )}
 
-        <Link
-          to={userDetails.website}
-          target="_blank"
-          className="flex cursor-pointer gap-3 rounded-full border-[1px] border-solid border-border-muted bg-text-primary px-5 py-2"
-        >
-          <img
-            src={link_icon}
-            alt="link icon"
-            draggable="false"
-            className="w-6 select-none invert"
-          />
-          <div className="text-sm font-semibold text-bg-secondary">
-            {userDetails.website}
-          </div>
-        </Link>
+        {userDetails.website && (
+          <Link
+            to={userDetails.website}
+            target="_blank"
+            className="flex cursor-pointer gap-3 rounded-full border-[1px] border-solid border-border-muted bg-text-primary px-5 py-2"
+          >
+            <img
+              src={link_icon}
+              alt="link icon"
+              draggable="false"
+              className="w-6 select-none invert"
+            />
+            <div className="text-sm font-semibold text-bg-secondary">
+              {userDetails.website}
+            </div>
+          </Link>
+        )}
       </div>
 
       <div className="flex gap-5">

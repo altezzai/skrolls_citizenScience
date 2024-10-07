@@ -8,6 +8,7 @@ import { Heart } from '../ui/Heart';
 import { timeAgo } from '@/utils/timeAgo';
 import { Replies } from './Replies';
 import { apiClient } from '@/lib/api_client';
+import user_icon from '../../assets/default_user.svg';
 
 export const Comments = ({ comments }) => {
   const [reply, setReply] = useState(false);
@@ -63,11 +64,18 @@ export const Comments = ({ comments }) => {
           reply ? 'mb-0 rounded-b-none' : 'mb-1'
         }`}
       >
-        <ProfilePhoto img={photo} className={'h-8 w-8'} />
+        <ProfilePhoto
+          img={
+            comments.profilePhoto
+              ? `http://localhost:3000/uploads/${encodeURIComponent(comments.profilePhoto)}`
+              : user_icon
+          }
+          className={'h-8 w-8'}
+        />
 
         <div className="flex w-full flex-col">
           <div className="flex justify-between">
-            <div className="flex gap-6 items-center justify-center">
+            <div className="flex items-center justify-center gap-6">
               <div className="text-lg font-medium">{comments.username}</div>
               <div className="select-none text-base font-normal text-text-muted">
                 {timeAgo(comments.createdAt)}
@@ -126,7 +134,14 @@ export const Comments = ({ comments }) => {
             onClick={(e) => e.stopPropagation()}
             className="my-2 flex w-full items-center gap-5"
           >
-            <ProfilePhoto img={photo} className={'h-6 w-6'} />
+            <ProfilePhoto
+              img={
+                comments.profilePhoto
+                  ? `http://localhost:3000/uploads/${encodeURIComponent(comments.profilePhoto)}`
+                  : user_icon
+              }
+              className={'h-6 w-6'}
+            />
             <div className="flex w-full rounded-lg bg-bg-secondary p-2">
               <input
                 type="text"
