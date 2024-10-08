@@ -1,7 +1,29 @@
 import React from 'react';
 import { EditButton } from '../ui/EditButton';
+import { useEffect, useState } from 'react';
+import { apiClient } from '@/lib/api_client';
 
-export const EditEducationalDetails = () => {
+export const EditEducationalDetails = ({ userId }) => {
+  const [educations, setEducations] = useState([]);
+
+  useEffect(() => {
+    const fetchEducations = async () => {
+      try {
+        const response = await apiClient.get(
+          `users/profile/${userId}/education`,
+          {
+            params: { userId },
+          }
+        );
+        setEducations(response.data);
+      } catch (error) {
+        console.error('Error fetching educations:', error);
+      }
+    };
+
+    fetchEducations();
+  }, [userId]);
+
   return (
     <div className="mt-4 flex flex-col rounded-xl bg-bg-secondary px-5 py-5 max-md:px-2 max-md:py-2">
       <h2 className="pl-2 text-lg font-medium text-text-primary">
@@ -19,17 +41,17 @@ export const EditEducationalDetails = () => {
               </tr>
             </thead>
             <tbody>
-              {/* {Educations.map((education, index) => ( */}
-              <tr
-                className="p-2 text-left text-xs font-bold text-text-primary"
-                // key={education.id}
-              >
-                <td className="py-2">1</td>
-                <td>Kannur University</td>
-                <td>Bachelor of Technology</td>
-                <td>2012</td>
-              </tr>
-              {/* ))} */}
+              {educations.map((education, index) => (
+                <tr
+                  className="p-2 text-left text-xs font-bold text-text-primary"
+                  key={education.id}
+                >
+                  <td className="py-2">{index + 1}</td>
+                  <td>{education.institution}</td>
+                  <td>{education.course}</td>
+                  <td>{education.startYear}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
