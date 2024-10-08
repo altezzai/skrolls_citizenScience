@@ -28,6 +28,7 @@ module.exports = {
         'bg-transparent-muted': '#00000066',
         'bg-hover': '#fff8f8',
         'bg-active': '#fddfdf',
+        'bg-system': '#F9FAFB',
         textarea: '#f6f6ff',
         'border-primary': '#a3a3a3',
         'border-muted': '#dddddd',

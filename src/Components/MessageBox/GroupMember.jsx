@@ -1,13 +1,4 @@
-import React, { useRef } from 'react';
-
-import user_icon from '../../assets/default_user.svg';
-import more from '../../assets/vertical_dots.svg';
-import admin_icon from '../../assets/admin.svg';
-import message_icon from '../../assets/message.svg';
-import delete_icon from '../../assets/delete.svg';
-import view_icon from '../../assets/view.svg';
-import red_admin_icon from '../../assets/red_admin.svg';
-
+import React, { useRef, useState } from 'react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,14 +10,31 @@ import {
 import { MenuButton } from '../ui/MenuButton';
 import socket from '@/context/socket';
 import { useNavigate } from 'react-router-dom';
-import { DialogClose } from '@/Components/ui/dialog';
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogClose,
+} from '@/Components/ui/dialog';
+import { Button } from '@/Components/ui/button';
+
+import user_icon from '../../assets/default_user.svg';
+import more from '../../assets/vertical_dots.svg';
+import admin_icon from '../../assets/admin.svg';
+import message_icon from '../../assets/message.svg';
+import delete_icon from '../../assets/delete.svg';
+import view_icon from '../../assets/view.svg';
+import red_admin_icon from '../../assets/red_admin.svg';
 
 export const GroupMember = ({ chatId, member }) => {
   const navigate = useNavigate();
   const dialogCloseRef = useRef(null);
   const userId = 1;
-  console.log('chatId', chatId);
-  console.log('member', member);
+  const [isRemoveMemberOpen, setIsRemoveMemberOpen] = useState(false);
+  const [isRemoveAdminOpen, setIsRemoveAdminOpen] = useState(false);
 
   const makeAdminClick = () => {
     console.log('make admin');
@@ -37,25 +45,35 @@ export const GroupMember = ({ chatId, member }) => {
   };
 
   const removeAdminClick = () => {
-    console.log('remove admin');
+    setIsRemoveAdminOpen(true);
   };
 
-  const viewUserProfile = (targetUserId) => {
+  const confirmRemoveAdmin = () => {
+    console.log('remove admin');
+    setIsRemoveAdminOpen(false);
+  };
+
+  const viewUserProfile = () => {
     if (dialogCloseRef.current) {
       dialogCloseRef.current.click();
     }
-    if (userId === targetUserId) {
+    if (userId === member?.userId) {
       navigate('/profile');
     } else {
-      navigate(`/userprofile/${targetUserId}`);
+      navigate(`/userprofile/${member?.userId}`);
     }
   };
 
   const removeMemberClick = () => {
+    setIsRemoveMemberOpen(true);
+  };
+
+  const confirmRemoveMember = () => {
     socket.emit('removeMemberFromChat', {
       chatId: chatId,
       userId: member?.userId,
     });
+    setIsRemoveMemberOpen(false);
   };
 
   return (
@@ -97,26 +115,85 @@ export const GroupMember = ({ chatId, member }) => {
             onClick={member?.isAdmin === 1 ? removeAdminClick : makeAdminClick}
           >
             {member?.isAdmin === 1 ? (
-              <MenuButton label={'Dismiss Admin'} icon={admin_icon} />
+              <MenuButton
+                label={'Dismiss Admin'}
+                icon={admin_icon}
+                className={'text-text-secondary'}
+              />
             ) : (
               <MenuButton
                 onClick={makeAdminClick}
                 label={'Make Admin'}
                 icon={admin_icon}
+                className={'text-text-secondary'}
               />
             )}
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <MenuButton label="Message" icon={message_icon} />
+            <MenuButton
+              label="Message"
+              icon={message_icon}
+              className={'text-text-secondary'}
+            />
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => viewUserProfile(member?.userId)}>
-            <MenuButton label="View" icon={view_icon} />
+          <DropdownMenuItem onClick={() => viewUserProfile()}>
+            <MenuButton
+              label="View"
+              icon={view_icon}
+              className={'text-text-secondary'}
+            />
           </DropdownMenuItem>
           <DropdownMenuItem onClick={removeMemberClick}>
-            <MenuButton label="Remove" icon={delete_icon} />
+            <MenuButton
+              label="Remove"
+              icon={delete_icon}
+              className={'text-text-secondary'}
+            />
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+
+      {/* Confirm Remove Member Dialog */}
+      <Dialog open={isRemoveMemberOpen} onOpenChange={setIsRemoveMemberOpen}>
+        <DialogContent>
+          <DialogTitle>Confirm Removal</DialogTitle>
+          <DialogDescription>
+            Are you sure you want to remove {member?.username} from the group?
+          </DialogDescription>
+          <DialogFooter>
+            <Button
+              variant="outline"
+              onClick={() => setIsRemoveMemberOpen(false)}
+            >
+              Cancel
+            </Button>
+            <Button variant="destructive" onClick={confirmRemoveMember}>
+              Remove
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Confirm Remove Admin Dialog */}
+      <Dialog open={isRemoveAdminOpen} onOpenChange={setIsRemoveAdminOpen}>
+        <DialogContent className="w-[400px]">
+          <DialogTitle>Confirm Dismissal</DialogTitle>
+          <DialogDescription>
+            Are you sure you want to dismiss {member?.username} as an admin?
+          </DialogDescription>
+          <DialogFooter>
+            <Button
+              variant="outline"
+              onClick={() => setIsRemoveAdminOpen(false)}
+            >
+              Cancel
+            </Button>
+            <Button variant="destructive" onClick={confirmRemoveAdmin}>
+              Dismiss Admin
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

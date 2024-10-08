@@ -44,6 +44,22 @@ const MessageBox = ({ selectedUser }) => {
       });
     });
 
+    socket.on('message deleted', () => {
+      socket.emit('getMessages', {
+        chatId: selectedUser.chatId,
+        page: 1,
+        limit: 20,
+      });
+    });
+
+    socket.on('message deleted for everyone', () => {
+      socket.emit('getMessages', {
+        chatId: selectedUser.chatId,
+        page: 1,
+        limit: 20,
+      });
+    });
+
     socket.on('error', (error) => {
       console.error(error);
     });
@@ -184,8 +200,8 @@ const MessageBox = ({ selectedUser }) => {
         style={{ scrollbarWidth: 'none' }}
       >
         {Object.keys(groupedMessages).map((date) => (
-          <div key={date}>
-            <div className="my-2 select-none text-center text-xs text-text-secondary">
+          <div key={date} className="flex flex-col items-center">
+            <div className="bg-bg-system my-2 w-fit select-none rounded-lg p-2 text-center text-xs text-text-secondary">
               {date}
             </div>
             {groupedMessages[date].map((message) => (

@@ -11,6 +11,7 @@ import { EditSkill } from '@/Components/EditProfile/EditSkill';
 import { EditInterest } from '@/Components/EditProfile/EditInterest';
 
 export const EditProfilePage = () => {
+  const userId = 1;
   return (
     <>
       <div className="sticky top-0 flex items-center justify-center bg-bg-primary p-3">
@@ -27,12 +28,12 @@ export const EditProfilePage = () => {
         </h2>
       </div>
 
-      <EditProfile />
-      <EditPersonalDetails />
-      <EditProfessionalDetails />
-      <EditEducationalDetails />
-      <EditSkill />
-      <EditInterest />
+      <EditProfile userId={userId} />
+      <EditPersonalDetails userId={userId} />
+      <EditProfessionalDetails userId={userId} />
+      <EditEducationalDetails userId={userId} />
+      <EditSkill userId={userId} />
+      <EditInterest userId={userId} />
     </>
   );
 };

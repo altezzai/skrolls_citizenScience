@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { cn } from '../../utils/utils';
 
 export const SettingsItem = ({
@@ -7,7 +8,14 @@ export const SettingsItem = ({
   label,
   next,
   nextClassName,
+  nav,
 }) => {
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate(nav);
+  };
+  
   return (
     <div className="flex items-center justify-between bg-bg-secondary p-4 first:rounded-t-2xl first:border-b-2 last:rounded-b-2xl only:rounded-2xl">
       <div className="flex items-center gap-4">
@@ -26,7 +34,10 @@ export const SettingsItem = ({
         </div>
         <div className="text-sm">{label}</div>
       </div>
-      <div className={cn('cursor-pointer', nextClassName)}>
+      <div
+        onClick={handleNavigate}
+        className={cn('cursor-pointer', nextClassName)}
+      >
         <img src={next} className="w-4" alt="next icon" draggable="false" />
       </div>
     </div>

@@ -10,9 +10,6 @@ const DeleteConfirmationModal = ({
 }) => {
   const { isModalOpen, closeModal } = useModal();
 
-  console.log('ID', id);
-  console.log('isSentByMe', isSentByMe);
-
   const DeleteRef = useClickOutside(
     isModalOpen(modals.CONFIRM_DELETE + id),
     () => {
