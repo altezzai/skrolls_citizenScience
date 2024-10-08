@@ -131,6 +131,7 @@ const Post = ({ feed, userId = 1 }) => {
                         className="flex max-h-[400px] w-full justify-center"
                       >
                         <img
+                          crossorigin="anonymous"
                           src={`http://localhost:3000/uploads/${encodeURIComponent(imageUrl)}`}
                           alt={`post image ${index + 1}`}
                           className="max-h-[400px] rounded-2xl object-cover"

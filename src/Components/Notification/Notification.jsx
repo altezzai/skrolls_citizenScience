@@ -27,6 +27,7 @@ export const Notification = ({
       </div>
       {postpic === '' ? undefined : (
         <img
+          crossorigin="anonymous"
           src={`http://localhost:3000/uploads/${postpic}`}
           className="h-11 w-14 select-none rounded-lg object-cover"
           draggable="false"
