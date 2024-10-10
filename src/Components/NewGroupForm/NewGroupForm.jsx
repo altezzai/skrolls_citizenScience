@@ -10,79 +10,113 @@ import { apiClient } from '@/lib/api_client';
 
 export const NewGroupForm = () => {
   const [imagePreview, setImagePreview] = useState(null);
-  const [selectedMembers, setSelectedMembers] = useState([5]);
+  const [selectedMembers, setSelectedMembers] = useState([]);
   const [groupName, setGroupName] = useState('');
   const [groupDescription, setGroupDescription] = useState('');
-  const [fileName, setFileName] = useState();
+  const [fileName, setFileName] = useState('');
+  const [error, setError] = useState();
+  const [searchResults, setSearchResults] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
   const dialogCloseRef = useRef(null);
+  const [memberDetail, setMemberDetail] = useState([]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        // Set the preview URL
         setImagePreview(reader.result);
       };
-      // Read the file as a data URL
       reader.readAsDataURL(file);
     }
+  };
+
+  const handleSearch = async (event) => {
+    const query = event.target.value;
+    setSearchQuery(query);
+
+    if (query.trim() === ' ') {
+      setSearchResults([]);
+      return;
+    }
+
+    try {
+      const response = await apiClient.get('users/chat/members', {
+        params: { q: query },
+      });
+      setSearchResults(response.data);
+    } catch (err) {
+      console.error('Error searching users:', err);
+    }
+  };
+
+  const handleMemberSelect = (user) => {
+    setSelectedMembers((prevSelectedMembers) => [
+      ...prevSelectedMembers,
+      user.id,
+    ]);
+    setMemberDetail((prevDetails) => [...prevDetails, user]);
+    setSearchQuery('');
+  };
+
+  const removeMember = (id) => {
+    setSelectedMembers((prevSelectedMembers) =>
+      prevSelectedMembers.filter((memberId) => memberId !== id)
+    );
+    setMemberDetail((prevDetails) =>
+      prevDetails.filter((member) => member.id !== id)
+    );
   };
 
   const submit = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append('file', e.target.groupdp.files[0]);
+    const file = e.target.groupdp.files[0];
+    console.log('file', !!file);
 
-    if (formData) {
-      console.log('file', formData);
+    if (!!file) {
       try {
-        const response = await apiClient.post('users/chat/icon', formData, {
+        const response = await apiClient.post('users/chat/icon', file, {
           headers: {
-            'Content-Type': 'multipart/form-data',
+            'Content-Type': file.type,
           },
         });
-        console.log('file', response.data);
+        console.log('Response', response.data['fileName']);
         setFileName(response.data['fileName']);
       } catch (err) {
         console.log('Error', err);
       }
-      console.log(fileName);
     }
 
-    console.log('submit');
-    console.log(groupName, groupDescription, selectedMembers, fileName);
-
+    console.log('fileName', fileName);
     socket.emit('createChat', {
       type: 'group',
       name: groupName.trim(),
       icon: fileName,
       description: groupDescription.trim(),
       members: selectedMembers,
-      initialMessage: `Welcome to ${groupName}!`,
-      mediaUrl: null,
       sentAt: new Date(),
     });
 
-    setGroupName('');
-    setGroupDescription('');
-    // setSelectedMembers([]);
-    setImagePreview(null);
+    socket.on('error', (error) => {
+      setError(error);
+    });
 
     socket.on('chatCreated', (response) => {
-      console.log('Group created successfully:', response);
       if (dialogCloseRef.current) {
         dialogCloseRef.current.click();
       }
     });
   };
 
+  console.log('error', error);
+  console.log('memberDetail', memberDetail);
   return (
     <form
       onSubmit={submit}
       className="flex w-full flex-col gap-4 px-5 max-xl:gap-2"
     >
+      {/* Image Input */}
       <div className="flex select-none items-center justify-center">
         <label
           htmlFor="groupdp"
@@ -104,6 +138,7 @@ export const NewGroupForm = () => {
         />
       </div>
 
+      {/* Group Name and Description */}
       <div className="flex flex-col gap-2 max-xl:gap-1">
         <label htmlFor="groupName" className="select-none text-sm font-bold">
           Group Name
@@ -133,6 +168,7 @@ export const NewGroupForm = () => {
         />
       </div>
 
+      {/* Search Members */}
       <div className="flex flex-col gap-2 max-xl:gap-1">
         <label
           htmlFor="searchmembers"
@@ -150,24 +186,49 @@ export const NewGroupForm = () => {
             />
             <input
               type="text"
+              value={searchQuery}
+              onChange={handleSearch}
               className="w-full bg-bg-primary outline-none placeholder:text-text-secondary"
               placeholder="Search users"
             />
           </div>
 
+          {/* Search Results - Exclude already selected members */}
           <div className="flex h-40 w-full flex-col gap-1 overflow-y-scroll max-xl:h-36">
-            <GroupMemberAdd />
-            <GroupMemberAdd />
-            <GroupMemberAdd />
-            <GroupMemberAdd />
-            <GroupMemberAdd />
-            <GroupMemberAdd />
-            <GroupMemberAdd />
-            <GroupMemberAdd />
+            {searchQuery.length > 0 ? (
+              <>
+                {searchResults
+                  .filter((user) => !selectedMembers.includes(user.id)) // Filter out selected members
+                  .map((user) => (
+                    <GroupMemberAdd
+                      add={true}
+                      key={user.id}
+                      UserId={user.id}
+                      username={user.username}
+                      profilePic={user.profile_image}
+                      OnMemberSelect={() => handleMemberSelect(user)}
+                    />
+                  ))}
+              </>
+            ) : (
+              <>
+                {memberDetail.length > 0 &&
+                  memberDetail.map((user) => (
+                    <GroupMemberAdd
+                      add={false}
+                      key={user.id}
+                      UserId={user.id}
+                      username={user.username}
+                      profilePic={user.profile_image}
+                      onRemove={() => removeMember(user.id)}
+                    />
+                  ))}
+              </>
+            )}
           </div>
         </div>
       </div>
-
+      {/* Submit and Cancel Buttons */}
       <div className="flex justify-end gap-2 text-sm font-bold">
         <DialogClose asChild>
           <div
