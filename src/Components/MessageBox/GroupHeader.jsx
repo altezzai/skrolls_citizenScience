@@ -27,8 +27,6 @@ import { GroupInfo } from './GroupInfo';
 import { MenuButton } from '../ui/MenuButton';
 
 export const GroupHeader = ({ selectedUser }) => {
-
-  console.log('selectedUser', selectedUser);
   return (
     <>
       <Dialog>

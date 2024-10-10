@@ -29,11 +29,19 @@ const UserMsgList = ({ onUserSelect }) => {
   useEffect(() => {
     socket.emit('getUserConversations', { type: 'personal' });
 
+    socket.on('chatCreated', () => {
+      socket.emit('getUserConversations', { type: 'personal' });
+    });
+
     socket.on('personalConversations', (data) => {
       setMembers(data.conversations);
     });
 
     socket.emit('getUserConversations', { type: 'group' });
+    
+    socket.on('chatCreated', () => {
+      socket.emit('getUserConversations', { type: 'group' });
+    });
 
     socket.on('groupConversations', (data) => {
       setGroups(data.conversations);
