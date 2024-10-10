@@ -1,21 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
-
-import search from '../../assets/search.svg';
-import plus_icon from '../../assets/plus.svg';
-
 import socket from '@/context/socket';
 import UserMsgListItem from './UserMsgListItem';
-import { NewGroupForm } from '../NewGroupForm/NewGroupForm';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogDescription,
-  DialogTitle,
-  DialogTrigger,
-} from '@/Components/ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/Components/ui/tabs';
 import { apiClient } from '@/lib/api_client';
+import { CreateGroupTrigger } from './CreateGroupTrigger';
+
+import search from '../../assets/search.svg';
 
 const UserMsgList = ({ onUserSelect }) => {
   const [members, setMembers] = useState([]);
@@ -38,7 +28,7 @@ const UserMsgList = ({ onUserSelect }) => {
     });
 
     socket.emit('getUserConversations', { type: 'group' });
-    
+
     socket.on('chatCreated', () => {
       socket.emit('getUserConversations', { type: 'group' });
     });
@@ -113,27 +103,8 @@ const UserMsgList = ({ onUserSelect }) => {
             onChange={handleSearchChange}
           />
         </div>
-        <Dialog>
-          <DialogTrigger>
-            <div className="flex cursor-pointer items-center justify-center gap-2 rounded-3xl bg-textarea px-6 py-2">
-              <img
-                src={plus_icon}
-                className="w-5"
-                alt="plus"
-                draggable="false"
-              />
-              New
-            </div>
-          </DialogTrigger>
 
-          <DialogContent className="flex flex-col items-center px-2 max-xl:w-[440px] max-xl:py-4">
-            <DialogHeader className="self-start pl-4">
-              <DialogTitle>Create a Group</DialogTitle>
-              <DialogDescription></DialogDescription>
-            </DialogHeader>
-            <NewGroupForm />
-          </DialogContent>
-        </Dialog>
+        <CreateGroupTrigger />
       </div>
 
       {searchQuery.length > 0 ? (

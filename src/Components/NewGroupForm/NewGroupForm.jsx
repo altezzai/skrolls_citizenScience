@@ -32,17 +32,19 @@ export const NewGroupForm = () => {
   };
 
   const handleSearch = async (event) => {
-    const query = event.target.value;
+    const query = event.target.value.trim(); // Trim whitespace
     setSearchQuery(query);
 
-    if (query.trim() === ' ') {
+    if (query === '') {
       setSearchResults([]);
       return;
     }
 
     try {
       const response = await apiClient.get('users/chat/members', {
-        params: { q: query },
+        params: {
+          q: query,
+        },
       });
       setSearchResults(response.data);
     } catch (err) {
@@ -81,14 +83,12 @@ export const NewGroupForm = () => {
             'Content-Type': file.type,
           },
         });
-        console.log('Response', response.data['fileName']);
         setFileName(response.data['fileName']);
       } catch (err) {
         console.log('Error', err);
       }
     }
 
-    console.log('fileName', fileName);
     socket.emit('createChat', {
       type: 'group',
       name: groupName.trim(),

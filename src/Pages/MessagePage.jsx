@@ -13,9 +13,9 @@ const MessagePage = () => {
   return (
     <ResizablePanelGroup direction="horizontal" className="rounded-lg border">
       <ResizablePanel
-        defaultSize={25}
+        defaultSize={30}
         maxSize={50}
-        minSize={25}
+        minSize={30}
         className="max-md:mr-5"
       >
         <UserMsgList onUserSelect={setSelectedUser} />
