@@ -3,31 +3,77 @@ import group_icon from '../../assets/default_group.svg';
 import { GroupMember } from './GroupMember';
 import { useEffect, useState } from 'react';
 import socket from '@/context/socket';
+import { apiClient } from '@/lib/api_client';
+import { GroupMemberAdd } from '../NewGroupForm/GroupMemberAdd';
 
 export const GroupInfo = ({ chatId }) => {
   const [groupInfo, setGroupInfo] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = async (event) => {
+    const query = event.target.value.trim(); // Trim whitespace
+    setSearchQuery(query);
+
+    if (query === '') {
+      setSearchResults([]);
+      return;
+    }
+
+    try {
+      const response = await apiClient.get('users/chat/members', {
+        params: {
+          chatId: chatId,
+          q: query,
+        },
+      });
+      console.log(response.data);
+      setSearchResults(response.data);
+    } catch (err) {
+      console.error('Error searching users:', err);
+    }
+  };
+
+  const handleMemberSelect = (user) => {
+    socket.emit('addMemberToChat', { chatId, userId: user.id });
+    socket
+    setSearchQuery('');
+  };
 
   useEffect(() => {
-    // Fetch initial chat details
-    socket.emit('getChatDetails', { chatId });
+    // Function to refetch chat details
+    const fetchChatDetails = () => {
+      socket.emit('getChatDetails', { chatId });
+    };
 
+    // Fetch chat details when component mounts
+    fetchChatDetails();
+
+    // Set up event listeners
+    socket.on('memberAdded', fetchChatDetails);
+    socket.on('memberRemoved', fetchChatDetails);
+    socket.on('adminMade', fetchChatDetails);
+    socket.on('adminDismissed', fetchChatDetails);
+
+    // Handle the response for chat details
     socket.on('chatDetails', (data) => {
+      console.log(data);
       setGroupInfo(data);
     });
 
-    // Listen for updates when an admin is made
-    socket.on('adminMade', () => {
-      // Refetch group details when an admin is made
-      socket.emit('getChatDetails', { chatId });
+    // Handle errors
+    socket.on('error', (error) => {
+      console.error('Error fetching chat details:', error);
     });
 
-    socket.on('memberRemoved', () => {
-      socket.emit('getChatDetails', { chatId });
-    });
-
+    // Clean up listeners on unmount or when chatId changes
     return () => {
+      socket.off('memberAdded', fetchChatDetails);
+      socket.off('memberRemoved', fetchChatDetails);
+      socket.off('adminMade', fetchChatDetails);
+      socket.off('adminDismissed', fetchChatDetails);
       socket.off('chatDetails');
-      socket.off('adminMade');
+      socket.off('error');
     };
   }, [chatId]);
 
@@ -35,6 +81,8 @@ export const GroupInfo = ({ chatId }) => {
     <div className="flex w-full flex-col items-center justify-center gap-3 px-3">
       <div className="w-fit rounded-full bg-bg-muted p-1">
         <img
+          crossOrigin="anonymous"
+          draggable="false"
           src={
             groupInfo?.chatIcon
               ? `http://localhost:3000/uploads/${encodeURIComponent(groupInfo?.chatIcon)}`
@@ -64,19 +112,38 @@ export const GroupInfo = ({ chatId }) => {
             />
             <input
               type="text"
+              onChange={handleSearch}
+              value={searchQuery}
               className="w-full bg-bg-primary px-2 outline-none placeholder:select-none placeholder:text-text-secondary"
               placeholder="Search users"
             />
           </div>
 
           <div className="flex h-40 w-full flex-col gap-1 overflow-y-scroll max-xl:h-36">
-            {groupInfo?.members?.map((member) => (
-              <GroupMember
-                key={member.userId}
-                member={member}
-                chatId={chatId}
-              />
-            ))}
+            {searchQuery.length > 0 ? (
+              <>
+                {searchResults.map((user) => (
+                  <GroupMemberAdd
+                    add={true}
+                    key={user.id}
+                    UserId={user.id}
+                    username={user.username}
+                    profilePic={user.profile_image}
+                    OnMemberSelect={() => handleMemberSelect(user)}
+                  />
+                ))}
+              </>
+            ) : (
+              <>
+                {groupInfo?.members?.map((member) => (
+                  <GroupMember
+                    key={member.userId}
+                    member={member}
+                    chatId={chatId}
+                  />
+                ))}
+              </>
+            )}
           </div>
         </div>
       </div>

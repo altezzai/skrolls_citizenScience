@@ -50,6 +50,10 @@ export const GroupMember = ({ chatId, member }) => {
 
   const confirmRemoveAdmin = () => {
     console.log('remove admin');
+    socket.emit('dismissAdmin', {
+      chatId: chatId,
+      userId: member?.userId,
+    });
     setIsRemoveAdminOpen(false);
   };
 
@@ -80,6 +84,7 @@ export const GroupMember = ({ chatId, member }) => {
     <div className="flex w-[99%] select-none items-center justify-between rounded-md border-2 border-bg-secondary bg-bg-secondary pr-2">
       <div className="flex items-center gap-2">
         <img
+          crossOrigin="anonymous"
           src={
             member?.profilePhoto
               ? `http://localhost:3000/uploads/${encodeURIComponent(member?.profilePhoto)}`

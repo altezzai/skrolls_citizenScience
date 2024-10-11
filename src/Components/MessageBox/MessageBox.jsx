@@ -23,52 +23,58 @@ const MessageBox = ({ selectedUser }) => {
   const userId = 1;
 
   useEffect(() => {
+    // Fetch initial messages
+    const fetchMessages = () => {
+      socket.emit('getMessages', {
+        chatId: selectedUser.chatId,
+        page: 1,
+        limit: 20,
+      });
+    };
+  
+    // Clear messages when user changes
     setMessages([]);
-    socket.emit('getMessages', {
-      chatId: selectedUser.chatId,
-      page: 1,
-      limit: 20,
-    });
-
+  
+    // Initial fetch
+    fetchMessages();
+  
+    // Handle incoming messages
     socket.on('messages', (data) => {
       setMessages((prevMessages) => {
         // Prevent adding the same messages again
         const newMessageIds = data.messages.map((msg) => msg.id);
         const existingMessageIds = prevMessages.map((msg) => msg.id);
-
+  
         const newMessages = data.messages.filter(
           (msg) => !existingMessageIds.includes(msg.id)
         );
-
+  
         return [...newMessages.reverse(), ...prevMessages];
       });
     });
-
-    socket.on('message deleted', () => {
-      socket.emit('getMessages', {
-        chatId: selectedUser.chatId,
-        page: 1,
-        limit: 20,
-      });
-    });
-
-    socket.on('message deleted for everyone', () => {
-      socket.emit('getMessages', {
-        chatId: selectedUser.chatId,
-        page: 1,
-        limit: 20,
-      });
-    });
-
+  
+    // Handle message deletions (for individual and everyone)
+    const handleMessageDeletion = () => {
+      fetchMessages();
+    };
+  
+    socket.on('message deleted', handleMessageDeletion);
+    socket.on('message deleted for everyone', handleMessageDeletion);
+  
+    // Handle errors
     socket.on('error', (error) => {
       console.error(error);
     });
-
+  
+    // Cleanup all listeners on unmount
     return () => {
       socket.off('messages');
+      socket.off('message deleted', handleMessageDeletion);
+      socket.off('message deleted for everyone', handleMessageDeletion);
       socket.off('error');
     };
   }, [selectedUser.chatId]);
+  
 
   useEffect(() => {
     socket.on('newMessage', (message) => {
