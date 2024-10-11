@@ -17,22 +17,27 @@ const UserMsgList = ({ onUserSelect }) => {
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
+    // Fetch personal conversations
     socket.emit('getUserConversations', { type: 'personal' });
 
-    socket.on('chatCreated', () => {
-      socket.emit('getUserConversations', { type: 'personal' });
-    });
+    // Fetch group conversations
+    socket.emit('getUserConversations', { type: 'group' });
 
+    // Function to refetch personal and group conversations
+    const refetchConversations = () => {
+      socket.emit('getUserConversations', { type: 'personal' });
+      socket.emit('getUserConversations', { type: 'group' });
+    };
+
+    // Listen for new chat creation (either personal or group)
+    socket.on('chatCreated', refetchConversations);
+
+    // Handle personal conversations
     socket.on('personalConversations', (data) => {
       setMembers(data.conversations);
     });
 
-    socket.emit('getUserConversations', { type: 'group' });
-
-    socket.on('chatCreated', () => {
-      socket.emit('getUserConversations', { type: 'group' });
-    });
-
+    // Handle group conversations
     socket.on('groupConversations', (data) => {
       setGroups(data.conversations);
     });
@@ -40,12 +45,14 @@ const UserMsgList = ({ onUserSelect }) => {
     // Handle error from the server
     socket.on('error', (errMsg) => {
       setError(errMsg);
-      console.error(error);
+      console.error('Socket error:', errMsg);
     });
 
-    // Cleanup on unmount
+    // Cleanup all listeners on unmount or update
     return () => {
-      socket.off('userConversations');
+      socket.off('chatCreated', refetchConversations);
+      socket.off('personalConversations');
+      socket.off('groupConversations');
       socket.off('error');
     };
   }, []);
@@ -63,10 +70,10 @@ const UserMsgList = ({ onUserSelect }) => {
   };
 
   const handleSearchChange = async (event) => {
-    const query = event.target.value;
+    const query = event.target.value.trim(); // Trim whitespace
     setSearchQuery(query);
-    console.log(query);
-    if (query.trim() === ' ') {
+
+    if (query === '') {
       setSearchResults([]);
       return;
     }
@@ -77,7 +84,7 @@ const UserMsgList = ({ onUserSelect }) => {
           q: query,
         },
       });
-
+      console.log(response.data);
       setSearchResults(response.data?.searchDetails?.relatedChats);
     } catch (err) {
       console.error('Error searching users:', err);

@@ -20,7 +20,10 @@ const AddPost = lazy(() => import('../AddPost/AddPost'));
 
 export const NavPanel = () => {
   const location = useLocation();
-  const inMessagePage = location.pathname.includes('/messages');
+  const inMessagePage =
+    location.pathname.includes('/messages') ||
+    location.pathname.includes('/communities') ||
+    location.pathname.includes('/groups');
   const [addPost, setAddPost] = useState(false);
 
   const handleAddPost = () => {

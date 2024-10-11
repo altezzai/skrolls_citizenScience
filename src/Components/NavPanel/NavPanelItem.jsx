@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 
 const NavPanelItem = ({ children, isSelected, link, className }) => {
   const location = useLocation();
-  const inMessagePage = location.pathname.includes('/messages');
+  const inMessagePage = location.pathname.includes('/messages')|| location.pathname.includes('/communities') || location.pathname.includes('/groups');
   return (
     <Link
       draggable="false"

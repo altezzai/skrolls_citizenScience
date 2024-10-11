@@ -24,7 +24,10 @@ import { EditProfilePage } from './Pages/EditProfilePage';
 
 function App() {
   const location = useLocation();
-  const inMessagePage = location.pathname.includes('/messages');
+  const inMessagePage =
+    location.pathname.includes('/messages') ||
+    location.pathname.includes('/communities') ||
+    location.pathname.includes('/groups');
   const inLoginPage =
     location.pathname.includes('/login') ||
     location.pathname.includes('/register') ||
