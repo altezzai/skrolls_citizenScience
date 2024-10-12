@@ -4,9 +4,10 @@ import { apiClient } from '@/lib/api_client';
 
 import search from '../../assets/search.svg';
 import UserMsgListItem from '../UserMsgList/UserMsgListItem';
+import { CreateCommunityTrigger } from './CreateCommunityTrigger';
 
-export const CommunityList = () => {
-const [communities, setCommunities] = useState([]);
+export const CommunityList = ({ onUserSelect }) => {
+  const [communities, setCommunities] = useState([]);
   const [error, setError] = useState(null);
   const inputRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(null);
@@ -54,13 +55,13 @@ const [communities, setCommunities] = useState([]);
     }
 
     try {
-      const response = await apiClient.get('users/chat', {
+      const response = await apiClient.get('users/search/communities', {
         params: {
           q: query,
         },
       });
       console.log(response.data);
-      setSearchResults(response.data?.searchDetails?.relatedChats);
+      setSearchResults(response.data);
     } catch (err) {
       console.error('Error searching users:', err);
     }
@@ -86,7 +87,7 @@ const [communities, setCommunities] = useState([]);
           />
         </div>
 
-        {/* <CreateGroupTrigger /> */}
+        <CreateCommunityTrigger />
       </div>
 
       {searchQuery.length > 0 ? (
@@ -94,7 +95,7 @@ const [communities, setCommunities] = useState([]);
           className="flex max-h-[610px] w-full flex-col overflow-y-scroll rounded-xl bg-bg-secondary"
           style={{ scrollbarWidth: 'none' }}
         >
-          {searchResults.map((member, index) => (
+          {searchResults?.map((member, index) => (
             <UserMsgListItem
               key={index}
               user={member}
