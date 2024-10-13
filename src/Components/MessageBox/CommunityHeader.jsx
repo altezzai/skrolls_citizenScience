@@ -27,6 +27,7 @@ import { GroupInfo } from './GroupInfo';
 import { MenuButton } from '../ui/MenuButton';
 
 export const CommunityHeader = ({ selectedUser }) => {
+  console.log(selectedUser);
   return (
     <Dialog>
       <div className="flex h-16 select-none items-center justify-between bg-bg-secondary px-5 py-2">

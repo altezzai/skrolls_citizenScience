@@ -119,7 +119,7 @@ const UserMsgList = ({ onUserSelect }) => {
           className="flex max-h-[610px] w-full flex-col overflow-y-scroll rounded-xl bg-bg-secondary"
           style={{ scrollbarWidth: 'none' }}
         >
-          {searchResults.map((member, index) => (
+          {searchResults?.map((member, index) => (
             <UserMsgListItem
               key={index}
               user={member}
@@ -149,7 +149,7 @@ const UserMsgList = ({ onUserSelect }) => {
               className="flex max-h-[610px] w-full flex-col overflow-y-scroll rounded-xl bg-bg-secondary"
               style={{ scrollbarWidth: 'none' }}
             >
-              {members.map((member, index) => (
+              {members?.map((member, index) => (
                 <UserMsgListItem
                   key={index}
                   user={member}
@@ -164,7 +164,7 @@ const UserMsgList = ({ onUserSelect }) => {
               className="flex max-h-[610px] w-full flex-col overflow-y-scroll rounded-xl bg-bg-secondary"
               style={{ scrollbarWidth: 'none' }}
             >
-              {groups.map((member, index) => (
+              {groups?.map((member, index) => (
                 <UserMsgListItem
                   key={index}
                   user={member}

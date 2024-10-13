@@ -7,8 +7,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/Components/ui/dialog';
-import { NewGroupForm } from '../NewGroupForm/NewGroupForm';
 import plus_icon from '../../assets/plus.svg';
+import { CreateCommunity } from './CreateCommunity';
 
 export const CreateCommunityTrigger = () => {
   return (
@@ -25,7 +25,7 @@ export const CreateCommunityTrigger = () => {
           <DialogTitle>Create a Community</DialogTitle>
           <DialogDescription></DialogDescription>
         </DialogHeader>
-        <NewGroupForm />
+      <CreateCommunity />
       </DialogContent>
     </Dialog>
   );

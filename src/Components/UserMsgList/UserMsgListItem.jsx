@@ -12,6 +12,7 @@ import {
 import { cn } from '@/lib/utils';
 
 const UserMsgListItem = ({ user, isActive, onClick }) => {
+  console.log('user', user);
   return (
     <>
       <ContextMenu>

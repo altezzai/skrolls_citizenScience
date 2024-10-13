@@ -12,6 +12,7 @@ import { groupMessagesByDate } from '../../utils/groupMessagesByDate';
 import useClickOutside from '../../hooks/useClickOutside';
 import { PersonalHeader } from './PersonalHeader';
 import { GroupHeader } from './GroupHeader';
+import { CommunityHeader } from './CommunityHeader';
 
 const MessageBox = ({ selectedUser }) => {
   const [open, setOpen] = useState(false);
@@ -21,6 +22,7 @@ const MessageBox = ({ selectedUser }) => {
   const messageBoxRef = useRef(null);
 
   const userId = 1;
+  console.log('Selected user:', selectedUser);
 
   useEffect(() => {
     // Fetch initial messages
@@ -31,41 +33,41 @@ const MessageBox = ({ selectedUser }) => {
         limit: 20,
       });
     };
-  
+
     // Clear messages when user changes
     setMessages([]);
-  
+
     // Initial fetch
     fetchMessages();
-  
+
     // Handle incoming messages
     socket.on('messages', (data) => {
       setMessages((prevMessages) => {
         // Prevent adding the same messages again
         const newMessageIds = data.messages.map((msg) => msg.id);
         const existingMessageIds = prevMessages.map((msg) => msg.id);
-  
+
         const newMessages = data.messages.filter(
           (msg) => !existingMessageIds.includes(msg.id)
         );
-  
+
         return [...newMessages.reverse(), ...prevMessages];
       });
     });
-  
+
     // Handle message deletions (for individual and everyone)
     const handleMessageDeletion = () => {
       fetchMessages();
     };
-  
+
     socket.on('message deleted', handleMessageDeletion);
     socket.on('message deleted for everyone', handleMessageDeletion);
-  
+
     // Handle errors
     socket.on('error', (error) => {
       console.error(error);
     });
-  
+
     // Cleanup all listeners on unmount
     return () => {
       socket.off('messages');
@@ -74,7 +76,6 @@ const MessageBox = ({ selectedUser }) => {
       socket.off('error');
     };
   }, [selectedUser.chatId]);
-  
 
   useEffect(() => {
     socket.on('newMessage', (message) => {
@@ -196,6 +197,8 @@ const MessageBox = ({ selectedUser }) => {
     <div className="flex h-full flex-col">
       {selectedUser?.type === 'group' ? (
         <GroupHeader selectedUser={selectedUser} />
+      ) : selectedUser?.type === 'community' ? (
+        <CommunityHeader selectedUser={selectedUser} />
       ) : (
         <PersonalHeader selectedUser={selectedUser} />
       )}
@@ -207,7 +210,7 @@ const MessageBox = ({ selectedUser }) => {
       >
         {Object.keys(groupedMessages).map((date) => (
           <div key={date} className="flex flex-col items-center">
-            <div className="bg-bg-system my-2 w-fit select-none rounded-lg p-2 text-center text-xs text-text-secondary">
+            <div className="my-2 w-fit select-none rounded-lg bg-bg-system p-2 text-center text-xs text-text-secondary">
               {date}
             </div>
             {groupedMessages[date].map((message) => (

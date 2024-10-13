@@ -12,7 +12,6 @@ import plus_icon from '../../assets/plus.svg';
 
 export const CreateGroupTrigger = () => {
   return (
-    <div>
       <Dialog>
         <DialogTrigger>
           <div className="flex cursor-pointer items-center justify-center gap-2 rounded-3xl bg-textarea px-6 py-2">
@@ -29,6 +28,5 @@ export const CreateGroupTrigger = () => {
           <NewGroupForm />
         </DialogContent>
       </Dialog>
-    </div>
   );
 };
