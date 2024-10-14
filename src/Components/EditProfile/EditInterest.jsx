@@ -4,6 +4,8 @@ import { EditButton } from '../ui/EditButton';
 import { useEffect, useState } from 'react';
 import { apiClient } from '@/lib/api_client';
 
+import plus_icon from '../../assets/plus.svg';
+
 export const EditInterest = ({ userId }) => {
   const [intrests, setIntrests] = useState([]);
 
@@ -24,8 +26,24 @@ export const EditInterest = ({ userId }) => {
 
     fetchIntrests();
   }, [userId]);
+
+
+
+  if (intrests.length === 0) {
+    return (
+      <div 
+
+      className="my-4 flex cursor-pointer select-none justify-between rounded-xl bg-bg-secondary px-5 py-5 active:bg-bg-hover max-md:px-2 max-md:py-2"
+      >
+        <h2 className="pl-2 text-lg font-medium text-text-primary">
+          Add Interest
+        </h2>
+        <img src={plus_icon} alt="add icon" draggable="false" className="w-6" />
+      </div>
+    );
+  }
   return (
-    <div className="mt-4 flex flex-col rounded-xl bg-bg-secondary px-5 py-5 max-md:px-2 max-md:py-2">
+    <div className="my-4  flex flex-col rounded-xl bg-bg-secondary px-5 py-5 max-md:px-2 max-md:py-2">
       <h2 className="pl-2 text-lg font-medium text-text-primary">Interests</h2>
 
       <div className="flex items-center justify-between">

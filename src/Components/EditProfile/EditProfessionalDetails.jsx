@@ -3,6 +3,8 @@ import { EditButton } from '../ui/EditButton';
 import { useEffect, useState } from 'react';
 import { apiClient } from '@/lib/api_client';
 
+import plus_icon from '../../assets/plus.svg';
+
 export const EditProfessionalDetails = ({ userId }) => {
   const [experiences, setExperiences] = useState([]);
 
@@ -24,6 +26,17 @@ export const EditProfessionalDetails = ({ userId }) => {
     fetchExperiences();
   }, [userId]);
 
+
+  if (experiences.length === 0) {
+    return (
+      <div className="mt-4 flex cursor-pointer select-none justify-between rounded-xl bg-bg-secondary px-5 py-5 active:bg-bg-hover max-md:px-2 max-md:py-2">
+        <h2 className="pl-2 text-lg font-medium text-text-primary">
+          Add Experience
+        </h2>
+        <img src={plus_icon} alt="add icon" draggable="false" className="w-6" />
+      </div>
+    );
+  }
   return (
     <div className="mt-4 flex flex-col rounded-xl bg-bg-secondary px-5 py-5 max-md:px-2 max-md:py-2">
       <h2 className="pl-2 text-lg font-medium text-text-primary">
