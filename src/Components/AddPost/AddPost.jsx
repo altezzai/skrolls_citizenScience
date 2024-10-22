@@ -8,6 +8,7 @@ import { apiClient } from '@/lib/api_client';
 
 import photo from '../../assets/profile.png';
 import url_icon from '../../assets/link_grey.svg';
+import { CommunityList } from './CommunityList';
 
 const AddPost = ({ show, handleClose }) => {
   const [filePreviews, setFilePreviews] = useState([]);
@@ -23,6 +24,10 @@ const AddPost = ({ show, handleClose }) => {
   const [selectedTagIndex, setSelectedTagIndex] = useState(0);
   const [filteredTags, setFilteredTags] = useState([]);
   const textareaRef = useRef(null);
+
+  const [showCommunityList, setShowCommunityList] = useState(false);
+  const [selectedCommunityIndex, setSelectedCommunityIndex] = useState(0);
+  const [filteredCommunities, setFilteredCommunities] = useState([]);
 
   // Fetch users for mentions when @ and a character is typed
   const fetchUsers = async (mentionSearchTerm) => {
@@ -64,6 +69,30 @@ const AddPost = ({ show, handleClose }) => {
       setShowTagList(false); // hide if no valid term
     }
   };
+
+  const fetchCommunity = async (communitySearchTerm) => {
+    console.log('Seaarch Term', communitySearchTerm);
+    if (communitySearchTerm.length >= 1) {
+      try {
+        const response = await apiClient.get('users/search/communities', {
+          params: {
+            q: communitySearchTerm,
+          },
+        });
+        const fetchedCommunities = response.data;
+        setFilteredCommunities(fetchedCommunities); // Update filteredCommunities here
+
+        setShowCommunityList(true);
+      } catch (error) {
+        console.error('Failed to fetch communities:', error);
+        setShowCommunityList(false);
+      }
+    } else {
+      setShowCommunityList(false); // hide if no valid term
+    }
+  };
+  console.log('communities', filteredCommunities);
+  console.log('length', filteredCommunities.length);
 
   // Handle keydown events for arrow keys and Enter key
   const handleKeyDown = (e) => {
@@ -119,6 +148,33 @@ const AddPost = ({ show, handleClose }) => {
         default:
           break;
       }
+    } else if (showCommunityList && filteredCommunities.length > 0) {
+      switch (e.key) {
+        case 'ArrowDown':
+          e.preventDefault();
+          setSelectedCommunityIndex(
+            (prevIndex) => (prevIndex + 1) % filteredCommunities.length
+          );
+          break;
+        case 'ArrowUp':
+          e.preventDefault();
+          setSelectedCommunityIndex(
+            (prevIndex) =>
+              (prevIndex - 1 + filteredCommunities.length) %
+              filteredCommunities.length
+          );
+          break;
+        case 'Enter':
+          e.preventDefault();
+          handleCommunitySelect(filteredCommunities[selectedCommunityIndex]);
+          break;
+        case 'Escape':
+          e.preventDefault();
+          setShowCommunityList(false);
+          break;
+        default:
+          break;
+      }
     }
   };
 
@@ -133,24 +189,32 @@ const AddPost = ({ show, handleClose }) => {
     const newContent = e.target.value;
     setPostContent(newContent);
 
-    // Detect if we're typing a mention (@) or a tag (#)
+    // Detect if we're typing a mention (@), a tag (#), or a community (*)
     const currentWordMatch = newContent
       .slice(0, e.target.selectionStart)
-      .match(/\S+$/); // Get the current word
+      .match(/\S+$/);
     const currentWord = currentWordMatch ? currentWordMatch[0] : '';
 
     if (currentWord.startsWith('@')) {
-      const mentionSearch = currentWord.slice(1); // Extract search term after "@"
-      setMentionSearchTerm(mentionSearch);
-      fetchUsers(mentionSearch); // Fetch users only when @ and at least one character
-      setShowTagList(false); // Hide tag list when typing @
+      const mentionSearch = currentWord.slice(1);
+      // setMentionSearchTerm(mentionSearch);
+      fetchUsers(mentionSearch);
+      setShowTagList(false);
+      setShowCommunityList(false); // Hide the community list
     } else if (currentWord.startsWith('#')) {
-      const tagSearch = currentWord.slice(1); // Extract search term after "#"
-      fetchTags(tagSearch); // Fetch hashtags only when # and at least one character
-      setShowMentionList(false); // Hide mention list when typing #
+      const tagSearch = currentWord.slice(1);
+      fetchTags(tagSearch);
+      setShowMentionList(false); // Hide the mention list
+      setShowCommunityList(false);
+    } else if (currentWord.startsWith('*')) {
+      const communitySearch = currentWord.slice(1);
+      fetchCommunity(communitySearch);
+      setShowMentionList(false);
+      setShowTagList(false); // Fetch communities when * and a character are typed
     } else {
       setShowMentionList(false);
       setShowTagList(false);
+      setShowCommunityList(false); // Hide the community list if no * symbol
     }
   };
 
@@ -198,6 +262,25 @@ const AddPost = ({ show, handleClose }) => {
     textarea.setSelectionRange(newCursorPosition, newCursorPosition);
   };
 
+  const handleCommunitySelect = (community) => {
+    const textarea = textareaRef.current;
+    const cursorPosition = textarea.selectionStart;
+    const textBeforeCursor = postContent.slice(0, cursorPosition);
+    const textAfterCursor = postContent.slice(cursorPosition);
+    const lastStarSymbolIndex = textBeforeCursor.lastIndexOf('*');
+    const newContent =
+      textBeforeCursor.slice(0, lastStarSymbolIndex) +
+      `*${community.name} ` +
+      textAfterCursor;
+
+    setPostContent(newContent);
+    textarea.dataset.lastCommunityId = community.id; 
+    setShowCommunityList(false);
+
+    const newCursorPosition = lastStarSymbolIndex + community.name.length + 1;
+    textarea.setSelectionRange(newCursorPosition, newCursorPosition);
+  };
+
   const submit = async (e) => {
     e.preventDefault();
 
@@ -214,6 +297,7 @@ const AddPost = ({ show, handleClose }) => {
     // Extract mentions and hashtags from the post content
     const mentionRegex = /@(\w+)/g;
     const hashtagRegex = /#(\w+)/g;
+    const communityRegex = /\*(\w+)/g;
 
     const mentions = [];
     const mentionMatches = postContent.matchAll(mentionRegex);
@@ -229,8 +313,21 @@ const AddPost = ({ show, handleClose }) => {
       (match) => match[1]
     );
 
+    const communities = [];
+    const communityMatches = postContent.matchAll(communityRegex);
+    for (const match of communityMatches) {
+      const community = match[1];
+      const mentionedCommunity = communities.find(
+        (community) => community.name === community
+      );
+      if (mentionedCommunity) {
+        communities.push(mentionedCommunity.id);
+      }
+    }
+
     formData.append('mentionIds', JSON.stringify(mentions));
     formData.append('hashTags', JSON.stringify(hashtags));
+    formData.append('communityIds', JSON.stringify(communities));
 
     try {
       const response = await apiClient.post('users/feeds', formData, {
@@ -294,6 +391,14 @@ const AddPost = ({ show, handleClose }) => {
             filteredTags={filteredTags}
             selectedTagIndex={selectedTagIndex}
             handleTagSelect={handleTagSelect}
+          />
+        )}
+
+        {showCommunityList && (
+          <CommunityList
+            filteredCommunities={filteredCommunities}
+            selectedCommunityIndex={selectedCommunityIndex}
+            handleCommunitySelect={handleCommunitySelect}
           />
         )}
 
