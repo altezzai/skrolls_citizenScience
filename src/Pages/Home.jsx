@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import NewPost from '../Components/NewPost/NewPost';
 import Post from '../Components/Post/Post';
 import { apiClient } from '@/lib/api_client';
@@ -24,7 +24,7 @@ const Home = () => {
             page, // Current page for pagination
             limit, // Number of items per page
           },
-        })
+        });
         setFeeds((prevFeeds) => [...prevFeeds, ...response.data.feeds]);
       } catch (error) {
         console.error('Error fetching feeds:', error);
@@ -34,8 +34,7 @@ const Home = () => {
     };
 
     fetchFeeds();
-  }, []); // Re-fetch when `page` changes
-
+  }, [page]); // Re-fetch when `page` changes
 
   const updateViewCounts = async (viewList) => {
     try {
@@ -48,10 +47,8 @@ const Home = () => {
     }
   };
 
-  // Function to handle when a feed becomes visible
   const handleFeedVisibility = (feedId) => {
     if (!viewedFeeds.includes(feedId)) {
-      // Check if feedId is already viewed
       setViewList((prevList) => [...prevList, feedId]);
       setViewedFeeds((prevViewed) => [...prevViewed, feedId]); // Mark as viewed
     }
@@ -69,15 +66,9 @@ const Home = () => {
     return () => clearTimeout(timer.current);
   }, [viewList]);
 
-  const handleNextPage = () => {
+  const handleNextPage = useCallback(() => {
     setPage((prevPage) => prevPage + 1);
-  };
-
-  const handlePrevPage = () => {
-    if (page > 1) {
-      setPage((prevPage) => prevPage - 1);
-    }
-  };
+  }, []);
 
   return (
     <div className="home">
@@ -85,36 +76,7 @@ const Home = () => {
 
       {loading && (
         <>
-          <div className="mb-3 flex flex-col space-y-3 border-2 p-2">
-            <div className="flex items-center gap-5">
-              <Skeleton className="h-8 w-8 rounded-full bg-text-secondary" />
-              <Skeleton className="h-4 w-40 bg-text-secondary" />
-            </div>
-            <div className="flex flex-col gap-3">
-              <Skeleton className="h-4 w-full bg-text-secondary" />
-              <Skeleton className="h-4 w-full bg-text-secondary" />
-              <Skeleton className="h-4 w-1/2 bg-text-secondary" />
-              <Skeleton className="h-4 w-1/4 bg-text-secondary" />
-            </div>
-            <div>
-              <Skeleton className="h-80 w-full bg-text-secondary" />
-            </div>
-          </div>
-          <div className="flex flex-col space-y-3 border-2 p-2">
-            <div className="flex items-center gap-5">
-              <Skeleton className="h-8 w-8 rounded-full bg-text-secondary" />
-              <Skeleton className="h-4 w-40 bg-text-secondary" />
-            </div>
-            <div className="flex flex-col items-center gap-3">
-              <Skeleton className="h-4 w-full bg-text-secondary" />
-              <Skeleton className="h-4 w-full bg-text-secondary" />
-              <Skeleton className="h-4 w-full bg-text-secondary" />
-              <Skeleton className="h-4 w-full bg-text-secondary" />
-            </div>
-            <div>
-              <Skeleton className="h-80 w-full bg-text-secondary" />
-            </div>
-          </div>
+          {/* Skeleton loaders here */}
         </>
       )}
 
@@ -123,22 +85,27 @@ const Home = () => {
           key={`${feed.id}-${index}`}
           feed={feed}
           onView={handleFeedVisibility}
+          isLast={index === feeds.length - 1} 
+          onLoadMore={handleNextPage} // Function to load the next page
         />
       ))}
     </div>
   );
 };
 
-const VisiblePost = ({ feed, onView }) => {
+const VisiblePost = ({ feed, onView, isLast, onLoadMore }) => {
   const postRef = useRef(null); // Create a ref for each post
   const isVisible = useIsVisible(postRef); // Check visibility using the hook
 
   useEffect(() => {
     if (isVisible) {
-      // console.log(`Post ${feed.id} is visible`);
       onView(feed.id); // Call onView when the post is visible
+
+      if (isLast) {
+        onLoadMore(); // Load the next page if this is the last post
+      }
     }
-  }, [isVisible, feed.id, onView]);
+  }, [isVisible, feed.id, isLast,  onView]);
 
   return (
     <div ref={postRef}>

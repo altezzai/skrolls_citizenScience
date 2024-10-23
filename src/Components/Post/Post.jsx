@@ -48,9 +48,7 @@ const Post = ({ feed, userId = 1 }) => {
     }
   };
 
-  const content = feed.description
-    .split('\n')
-    .map((line, index) => <p key={index}>{line}</p>);
+  const content = feed.description?.split('\n').map((line, index) => <p key={index}>{line}</p>) || null;
 
   return (
     <>
@@ -98,7 +96,7 @@ const Post = ({ feed, userId = 1 }) => {
             </div>
           </div>
           <Link to={`/post/${feed.id}`} className="text-lg font-normal">
-            {content}
+          {content}
           </Link>
           <div className="my-4 flex flex-wrap gap-5 text-sm font-semibold text-text-secondary">
             {feed.link && (

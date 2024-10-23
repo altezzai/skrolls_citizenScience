@@ -91,8 +91,6 @@ const AddPost = ({ show, handleClose }) => {
       setShowCommunityList(false); // hide if no valid term
     }
   };
-  console.log('communities', filteredCommunities);
-  console.log('length', filteredCommunities.length);
 
   // Handle keydown events for arrow keys and Enter key
   const handleKeyDown = (e) => {
@@ -274,7 +272,7 @@ const AddPost = ({ show, handleClose }) => {
       textAfterCursor;
 
     setPostContent(newContent);
-    textarea.dataset.lastCommunityId = community.id; 
+    textarea.dataset.lastCommunityId = community.id;
     setShowCommunityList(false);
 
     const newCursorPosition = lastStarSymbolIndex + community.name.length + 1;
@@ -335,7 +333,6 @@ const AddPost = ({ show, handleClose }) => {
           'Content-Type': 'multipart/form-data',
         },
       });
-
       // Handle success
       resetForm();
       handleClose();
