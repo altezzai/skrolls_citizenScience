@@ -22,7 +22,6 @@ const MessageBox = ({ selectedUser }) => {
   const messageBoxRef = useRef(null);
 
   const userId = 1;
-  console.log('Selected user:', selectedUser);
 
   useEffect(() => {
     // Fetch initial messages

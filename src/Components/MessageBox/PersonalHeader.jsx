@@ -17,7 +17,6 @@ import {
 import { MenuButton } from '../ui/MenuButton';
 
 export const PersonalHeader = ({ selectedUser }) => {
-  console.log('selectedUser', selectedUser);
 
   return (
     <div className="flex h-16 select-none items-center justify-between bg-bg-secondary px-5 py-2">
