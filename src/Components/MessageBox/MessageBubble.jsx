@@ -13,14 +13,20 @@ import DeleteConfirmationModal from './DeleteConfirmationModal';
 import { useState } from 'react';
 import { useModal } from '@/context/ModalContext';
 import { modals } from '@/utils/constants';
+import { MsgStatus } from '@/assets/component/MsgStatus';
+import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';
 
 const MessageBubble = ({ message, isSentByMe }) => {
+  const received = message.overallStatus == 'received';
+  const read = message.overallStatus == 'read';
+
   const { openModal, isModalOpen, closeModal } = useModal();
   const [selectedMessageId, setSelectedMessageId] = useState(null);
   const formattedTime = new Date(message.createdAt).toLocaleTimeString([], {
     hour: '2-digit',
     minute: '2-digit',
   });
+  console.log('message', message);
 
   // Render message content based on the presence of mediaUrl or text content
   const renderMessageContent = () => {
@@ -100,15 +106,21 @@ const MessageBubble = ({ message, isSentByMe }) => {
     <>
       {message.messageType === 'system' ? (
         <div className="mb-2 flex justify-center">
-          <div className="bg-bg-system select-none rounded-lg p-2 text-center text-xs">
+          <div className="select-none rounded-lg bg-bg-system p-2 text-center text-xs">
             {renderMessageContent()}
           </div>
         </div>
       ) : (
         <ContextMenu>
           <div
-            className={`flex w-full ${isSentByMe ? 'justify-end' : 'justify-start'}`}
+            className={`flex w-full gap-1 ${isSentByMe ? 'justify-end' : 'justify-start'}`}
           >
+            {!isSentByMe && (
+              <ProfilePhoto
+                img={`http://localhost:3000/uploads/${encodeURIComponent(message.profilePhoto)}`}
+                className={'h-6 w-6'}
+              />
+            )}
             <ContextMenuTrigger>
               <div
                 className={`mb-2 w-fit max-w-lg rounded-lg p-2 ${
@@ -120,11 +132,12 @@ const MessageBubble = ({ message, isSentByMe }) => {
                 <div className="message-text">{renderMessageContent()}</div>
 
                 <div
-                  className={`select-none pt-1 text-right text-[0.6rem] ${
+                  className={`flex select-none items-center justify-end gap-1 pt-1 text-right text-[0.6rem] ${
                     isSentByMe ? 'text-border-muted' : 'text-text-secondary'
                   }`}
                 >
                   {formattedTime}
+                  {isSentByMe && <MsgStatus recieved={received} read={read} />}
                 </div>
               </div>
             </ContextMenuTrigger>
