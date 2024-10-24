@@ -5,7 +5,7 @@ export const ProfilePhoto = ({ img, className }) => {
     <img
       src={img}
       crossOrigin='anonymous'
-      className={cn('select-none rounded-full', className)}
+      className={cn('select-none rounded-full flex-shrink-0', className)}
       draggable="false"
     />
   );

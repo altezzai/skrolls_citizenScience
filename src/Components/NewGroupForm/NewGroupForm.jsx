@@ -110,7 +110,6 @@ export const NewGroupForm = () => {
   };
 
   console.log('error', error);
-  console.log('memberDetail', memberDetail);
   return (
     <form
       onSubmit={submit}
