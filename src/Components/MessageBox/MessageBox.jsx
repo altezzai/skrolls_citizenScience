@@ -25,7 +25,6 @@ const MessageBox = ({ selectedUser }) => {
   const messageBoxRef = useRef(null);
 
   const userId = 1;
-  console.log('ReplyId', replyId);
 
   useEffect(() => {
     // Fetch initial messages
@@ -242,15 +241,24 @@ const MessageBox = ({ selectedUser }) => {
 
       {/* Message input box*/}
       <div
-        className={`relative flex h-16 w-full items-center gap-3 justify-self-end rounded-2xl border-4 border-bg-primary bg-bg-secondary px-5 py-1 ${replyBox ? 'rounded-t-none' : ''}`}
+        className={`relative flex flex-col w-full rounded-2xl border-4 border-bg-primary bg-bg-secondary px-5 py-1 "
+        }`}
       >
         {/*Reply to message - message display  */}
         {replyBox && (
-          <div className="absolute bottom-14 left-0 flex w-full items-center rounded-t-2xl bg-bg-secondary px-3 pt-3 transition-all duration-300 ease-in-out">
-            <div className="flex w-full justify-between rounded-md border-l-[4px] border-primary bg-bg-primary px-5 py-3 text-sm text-text-primary">
-              {messages.find((message) => message.id === replyId)?.content}
+          <div className="flex w-full items-center rounded-t-2xl bg-bg-secondary pt-2 transition-all duration-300 ease-in-out">
+            <div className="flex w-full justify-between rounded-md border-l-[4px] border-primary bg-bg-primary px-5 py-3 text-text-primary">
+              <div className="flex flex-col gap-1">
+                <p className="text-sm font-semibold">
+                  {messages.find((message) => message.id === replyId)?.username}
+                  :
+                </p>
+                <p className="text-sm">
+                  {messages.find((message) => message.id === replyId)?.content}
+                </p>
+              </div>
               <div
-                className="cursor-pointer rounded-full bg-bg-secondary p-1"
+                className="h-fit w-fit cursor-pointer rounded-full bg-bg-secondary p-1"
                 onClick={handleCloseReply}
               >
                 <img
@@ -263,7 +271,7 @@ const MessageBox = ({ selectedUser }) => {
             </div>
           </div>
         )}
-
+<div className='flex w-full items-center gap-3 justify-self-end'>
         <div
           className="relative cursor-pointer rounded-full p-2 transition-all delay-0 ease-in-out hover:bg-secondary"
           ref={emojiPickerRef}
@@ -346,6 +354,7 @@ const MessageBox = ({ selectedUser }) => {
             />
           </div>
         )}
+        </div>
       </div>
     </div>
   );

@@ -129,10 +129,18 @@ const MessageBubble = ({ message, isSentByMe, OnReply, OnReplyId }) => {
               <div
                 className={`mb-2 w-fit max-w-lg rounded-lg p-2 ${
                   isSentByMe
-                    ? 'self-end bg-primary pr-5 text-bg-secondary'
-                    : 'self-start bg-secondary pl-5'
+                    ? 'self-end bg-primary pr-3 text-bg-secondary'
+                    : 'self-start bg-secondary pl-3'
                 }`}
               >
+                {message.replyTo && (
+                  <div className="rounded-lg bg-bg-active px-1 py-2 text-xs text-text-secondary">
+                    <p className="font-bold text-text-hard">
+                      {isSentByMe ? 'You' : message.replyTo.username}:
+                    </p>
+                    <p>{message.replyTo.content} </p>
+                  </div>
+                )}
                 <div className="message-text">{renderMessageContent()}</div>
 
                 <div
