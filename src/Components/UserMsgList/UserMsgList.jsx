@@ -29,9 +29,6 @@ const UserMsgList = ({ onUserSelect }) => {
       socket.emit('getUserConversations', { type: 'group' });
     };
 
-    // Listen for new chat creation (either personal or group)
-    socket.on('chatCreated', refetchConversations);
-
     // Handle personal conversations
     socket.on('personalConversations', (data) => {
       setMembers(data.conversations);
@@ -41,6 +38,11 @@ const UserMsgList = ({ onUserSelect }) => {
     socket.on('groupConversations', (data) => {
       setGroups(data.conversations);
     });
+
+    socket.on('newMessage', refetchConversations);
+    socket.on('messages', refetchConversations);
+    socket.on('deleted', refetchConversations);
+
 
     // Handle error from the server
     socket.on('error', (errMsg) => {

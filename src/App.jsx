@@ -98,7 +98,7 @@ function App() {
             <Route
               path="/communities"
               element={
-                <div className="center-container mx-12 max-xl:mx-3">
+                <div className="center-container">
                   <Communities />
                 </div>
               }

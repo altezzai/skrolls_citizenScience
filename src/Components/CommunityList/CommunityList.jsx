@@ -17,10 +17,19 @@ export const CommunityList = ({ onUserSelect }) => {
   useEffect(() => {
     socket.emit('getUserConversations', { type: 'community' });
 
+    const refetchConversations = () => {
+      console.log('refetching community conversations');
+      socket.emit('getUserConversations', { type: 'community' });
+    };
+
     socket.on('communityConversations', (data) => {
-      console.log(data);
+      console.log('Community convorsations', data);
       setCommunities(data.conversations);
     });
+
+    socket.on('newMessage', refetchConversations);
+    socket.on('messages', refetchConversations);
+    socket.on('deleted', refetchConversations);
 
     socket.on('error', (errMsg) => {
       setError(errMsg);
