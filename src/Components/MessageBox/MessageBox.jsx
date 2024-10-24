@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 
-import attach from '../../assets/attach.svg';
-import send from '../../assets/send.svg';
-import smily from '../../assets/smily.svg';
-import upload from '../../assets/upload.svg';
+import attach from '@/assets/attach.svg';
+import send from '@/assets/send.svg';
+import smily from '@/assets/smily.svg';
+import upload from '@/assets/upload.svg';
+import cross_icon from '@/assets/cross.svg';
 
 import socket from '@/context/socket';
 import EmojiPicker from 'emoji-picker-react';
@@ -15,6 +16,8 @@ import { GroupHeader } from './GroupHeader';
 import { CommunityHeader } from './CommunityHeader';
 
 const MessageBox = ({ selectedUser }) => {
+  const [replyBox, setReplyBox] = useState(false);
+  const [replyId, setReplyId] = useState(null);
   const [open, setOpen] = useState(false);
   const [openAttach, setOpenAttach] = useState(false);
   const [inputStr, setInputStr] = useState('');
@@ -22,6 +25,7 @@ const MessageBox = ({ selectedUser }) => {
   const messageBoxRef = useRef(null);
 
   const userId = 1;
+  console.log('ReplyId', replyId);
 
   useEffect(() => {
     // Fetch initial messages
@@ -55,12 +59,14 @@ const MessageBox = ({ selectedUser }) => {
     });
 
     // Handle message deletions (for individual and everyone)
-    const handleMessageDeletion = () => {
+    const refetchMessages = () => {
       fetchMessages();
     };
 
-    socket.on('message deleted', handleMessageDeletion);
-    socket.on('message deleted for everyone', handleMessageDeletion);
+    socket.on('newMessage', refetchMessages);
+    // socket.on('messages', refetchMessages);
+    socket.on('message deleted', refetchMessages);
+    socket.on('message deleted for everyone', refetchMessages);
 
     // Handle errors
     socket.on('error', (error) => {
@@ -70,8 +76,8 @@ const MessageBox = ({ selectedUser }) => {
     // Cleanup all listeners on unmount
     return () => {
       socket.off('messages');
-      socket.off('message deleted', handleMessageDeletion);
-      socket.off('message deleted for everyone', handleMessageDeletion);
+      socket.off('message deleted', refetchMessages);
+      socket.off('message deleted for everyone', refetchMessages);
       socket.off('error');
     };
   }, [selectedUser.chatId]);
@@ -92,6 +98,11 @@ const MessageBox = ({ selectedUser }) => {
     };
   }, []);
 
+  const handleCloseReply = () => {
+    setReplyBox(false);
+    setReplyId(null);
+  };
+
   const handleSendMessage = () => {
     if (inputStr.trim() !== '') {
       // Emit the message to the backend via socket
@@ -99,10 +110,14 @@ const MessageBox = ({ selectedUser }) => {
         chatId: selectedUser.chatId,
         content: inputStr,
         mediaUrl: null,
-        replyToId: null,
+        replyToId: replyId,
         sentAt: new Date(),
       });
       setInputStr('');
+      if (replyBox) {
+        setReplyBox(false);
+        setReplyId(null);
+      }
     }
   };
 
@@ -217,13 +232,38 @@ const MessageBox = ({ selectedUser }) => {
                 key={message.id}
                 message={message}
                 isSentByMe={message.senderId === userId}
+                OnReply={setReplyBox}
+                OnReplyId={setReplyId}
               />
             ))}
           </div>
         ))}
       </div>
 
-      <div className="relative flex h-16 w-full items-center gap-3 justify-self-end rounded-2xl border-4 border-bg-primary bg-bg-secondary px-5 py-1">
+      {/* Message input box*/}
+      <div
+        className={`relative flex h-16 w-full items-center gap-3 justify-self-end rounded-2xl border-4 border-bg-primary bg-bg-secondary px-5 py-1 ${replyBox ? 'rounded-t-none' : ''}`}
+      >
+        {/*Reply to message - message display  */}
+        {replyBox && (
+          <div className="absolute bottom-14 left-0 flex w-full items-center rounded-t-2xl bg-bg-secondary px-3 pt-3 transition-all duration-300 ease-in-out">
+            <div className="flex w-full justify-between rounded-md border-l-[4px] border-primary bg-bg-primary px-5 py-3 text-sm text-text-primary">
+              {messages.find((message) => message.id === replyId)?.content}
+              <div
+                className="cursor-pointer rounded-full bg-bg-secondary p-1"
+                onClick={handleCloseReply}
+              >
+                <img
+                  src={cross_icon}
+                  alt="close icon"
+                  draggable="false"
+                  className="w-5"
+                />
+              </div>
+            </div>
+          </div>
+        )}
+
         <div
           className="relative cursor-pointer rounded-full p-2 transition-all delay-0 ease-in-out hover:bg-secondary"
           ref={emojiPickerRef}
@@ -293,17 +333,19 @@ const MessageBox = ({ selectedUser }) => {
           style={{ scrollbarWidth: 'none' }}
           rows={3}
         />
-        <div
-          className="cursor-pointer rounded-lg px-5 py-2 transition-all delay-0 ease-in-out hover:bg-secondary"
-          onClick={handleSendMessage}
-        >
-          <img
-            src={send}
-            className="w-8 select-none"
-            draggable="false"
-            alt="Send"
-          />
-        </div>
+        {inputStr.trim(' ').length > 0 && (
+          <div
+            className="cursor-pointer rounded-lg px-5 py-2 transition-all delay-0 ease-in-out hover:bg-secondary"
+            onClick={handleSendMessage}
+          >
+            <img
+              src={send}
+              className="w-8 select-none"
+              draggable="false"
+              alt="Send"
+            />
+          </div>
+        )}
       </div>
     </div>
   );

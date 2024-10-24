@@ -16,7 +16,7 @@ import { modals } from '@/utils/constants';
 import { MsgStatus } from '@/assets/component/MsgStatus';
 import { ProfilePhoto } from '../Profilephoto/ProfilePhoto';
 
-const MessageBubble = ({ message, isSentByMe }) => {
+const MessageBubble = ({ message, isSentByMe, OnReply, OnReplyId }) => {
   const received = message.overallStatus == 'received';
   const read = message.overallStatus == 'read';
 
@@ -26,7 +26,6 @@ const MessageBubble = ({ message, isSentByMe }) => {
     hour: '2-digit',
     minute: '2-digit',
   });
-  console.log('message', message);
 
   // Render message content based on the presence of mediaUrl or text content
   const renderMessageContent = () => {
@@ -102,6 +101,11 @@ const MessageBubble = ({ message, isSentByMe }) => {
     setSelectedMessageId(null);
   };
 
+  const handleReplyClick = () => {
+    OnReply(true);
+    OnReplyId(message.id);
+  };
+
   return (
     <>
       {message.messageType === 'system' ? (
@@ -144,7 +148,10 @@ const MessageBubble = ({ message, isSentByMe }) => {
           </div>
 
           <ContextMenuContent className="m-0 rounded-xl p-0">
-            <ContextMenuItem className="flex w-full gap-2 border-b-2 border-border-muted py-2">
+            <ContextMenuItem
+              className="flex w-full gap-2 border-b-2 border-border-muted py-2"
+              onClick={handleReplyClick}
+            >
               <img
                 src={reply_icon}
                 alt="reply icon"
